@@ -32,12 +32,15 @@ enum class DiceThrowResult {
 
 fun List<Int>.evalThrows(secondPlayerThrow: List<Int>): DiceThrowResult {
     return if (containsAll(`4_5_6`)) diceThrowResultIs456(secondPlayerThrow)
-    else if (containsAll(`1_2_3`) &&
+    else diceThrowResult123(secondPlayerThrow)
+}
+
+private fun List<Int>.diceThrowResult123(secondPlayerThrow: List<Int>) =
+    if (containsAll(`1_2_3`) &&
         !secondPlayerThrow.containsAll(`1_2_3`)
     ) LOOSE else if (containsAll(`1_2_3`) &&
         secondPlayerThrow.containsAll(`1_2_3`)
     ) RETHROW else WIN
-}
 
 private fun List<Int>.diceThrowResultIs456(secondPlayerThrow: List<Int>) =
     if (containsAll(`4_5_6`) &&
