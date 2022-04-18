@@ -39,5 +39,3 @@ fun List<Int>.evalThrows(secondPlayerThrow: List<Int>): DiceThrowResult {
         secondPlayerThrow.containsAll(`4_5_6`)
     ) RETHROW else LOOSE
 }
-
-fun contains456(diceThrow: List<Int>): Boolean = true
