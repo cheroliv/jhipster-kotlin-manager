@@ -1,7 +1,6 @@
 package game.ceelo
 
-import game.ceelo.DiceThrowResult.RETHROW
-import game.ceelo.DiceThrowResult.WIN
+import game.ceelo.DiceThrowResult.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Ignore
@@ -29,15 +28,15 @@ class CeeloUnitTest {
     fun `si mon jet contient 4 5 6 et l'autre aussi alors rejouer`() =
         assertEquals(`4_5_6`.evalThrows(`4_5_6`), RETHROW)
 
-    @Test @Ignore
+    @Test
     fun `si mon jet contient 1 2 3 et l'autre non alors je perds`() =
-        assertEquals(`1_2_3`.evalThrows(`4_5_6`), WIN)
+        assertEquals(`1_2_3`.evalThrows(`4_5_6`), LOOSE)
 
-    @Test @Ignore
+    @Test
     fun `si mon jet contient 1 2 3 non ordonné et l'autre non alors je perds`() =
-        assertEquals(listOf(3, 2, 1).evalThrows(`4_5_6`), WIN)
+        assertEquals(listOf(3, 2, 1).evalThrows(`4_5_6`), LOOSE)
 
-    @Test @Ignore
+    @Test
     fun `si mon jet contient 1 2 3 et l'autre aussi alors rejouer`() =
         assertEquals(`1_2_3`.evalThrows(`1_2_3`), RETHROW)
 }
