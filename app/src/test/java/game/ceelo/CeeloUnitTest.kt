@@ -12,7 +12,7 @@ class CeeloUnitTest {
 
     @Test
     fun `Quand je lance les dés je récupère un triplet d'entier entre 1 et 6`() =
-        throwDices().run {
+        dicesThrow.run {
             assertEquals(size, CEELO_DICE_THROW_SIZE)
             forEach { assertTrue(it in ONE..SIX) }
         }

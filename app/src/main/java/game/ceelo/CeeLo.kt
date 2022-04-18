@@ -22,11 +22,9 @@ fun <T> List<T>.middle(): T {
     return this.elementAt(1)
 }
 
-fun throwDices(): List<Int> = listOf(
-    (ONE..SIX).random(),
-    (ONE..SIX).random(),
-    (ONE..SIX).random()
-)
+val dicesThrow: List<Int>
+    get() = List(size = 3) { (ONE..SIX).random() }
+
 
 enum class DiceThrowResult {
     WIN, LOOSE, RETHROW
