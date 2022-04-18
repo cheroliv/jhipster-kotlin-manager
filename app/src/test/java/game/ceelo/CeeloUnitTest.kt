@@ -39,4 +39,17 @@ class CeeloUnitTest {
     @Test
     fun `si mon jet contient 1 2 3 et l'autre aussi alors rejouer`() =
         assertEquals(`1_2_3`.evalThrows(`1_2_3`), RETHROW)
+
+
+    @Test
+    @Ignore
+    fun `si mon jet est un triplet alors je peux identifer sa valeur`() {
+        assertEquals(NOT_A_TRIPLET, isTriplet(`1_2_3`))
+        assertEquals(ONE, isTriplet(`1_1_1`))
+        assertEquals(TWO, isTriplet(`2_2_2`))
+        assertEquals(THREE, isTriplet(`3_3_3`))
+        assertEquals(FOUR, isTriplet(`4_4_4`))
+        assertEquals(FIVE, isTriplet(`5_5_5`))
+        assertEquals(SIX, isTriplet(`6_6_6`))
+    }
 }

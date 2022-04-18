@@ -1,6 +1,6 @@
 = Jeu de Cee Lo
 
-==== Essayez le cee-lo.
+=== Essayez le cee-lo.
 C'est un jeu populaire lors duquel chaque joueur possède trois dés, +
 en général dans une sorte de verre et chaque joueur lance les dés +
 en même temps après avoir parié. +

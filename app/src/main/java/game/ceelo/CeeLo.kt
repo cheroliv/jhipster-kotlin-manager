@@ -1,3 +1,5 @@
+@file:Suppress("ObjectPropertyName")
+
 package game.ceelo
 
 import game.ceelo.DiceThrowResult.*
@@ -10,16 +12,30 @@ const val FIVE = 5
 const val SIX = 6
 const val CEELO_DICE_THROW_SIZE = 3
 
-@Suppress("ObjectPropertyName")
 val `4_5_6` by lazy { listOf(FOUR, FIVE, SIX) }
-
-@Suppress("ObjectPropertyName")
 val `1_2_3` by lazy { listOf(ONE, TWO, THREE) }
+
+val `1_1_1` by lazy { listOf(ONE, ONE, ONE) }
+val `2_2_2` by lazy { listOf(TWO, TWO, TWO) }
+val `3_3_3` by lazy { listOf(THREE, THREE, THREE) }
+val `4_4_4` by lazy { listOf(FOUR, FOUR, FOUR) }
+val `5_5_5` by lazy { listOf(FIVE, FIVE, FIVE) }
+val `6_6_6` by lazy { listOf(SIX, SIX, SIX) }
+
+val TRIPLETS by lazy {
+    listOf(
+        `1_1_1`, `2_2_2`, `3_3_3`,
+        `4_4_4`, `5_5_5`, `6_6_6`
+    )
+}
+val NOT_A_TRIPLET = -1
+val NOT_A_DOUBLET = 0
+
 
 fun <T> List<T>.middle(): T {
     if (isEmpty())
         throw NoSuchElementException("dice throw is empty.")
-    return this.elementAt(1)
+    return this.elementAt(index = 1)
 }
 
 val dicesThrow: List<Int>
@@ -48,3 +64,7 @@ private fun List<Int>.diceThrowResultIs456(secondPlayerThrow: List<Int>)
 ) WIN else if (containsAll(`4_5_6`) &&
     secondPlayerThrow.containsAll(`4_5_6`)
 ) RETHROW else LOOSE
+
+fun isTriplet(list: List<Int>): Int {
+    TODO("Not yet implemented")
+}
