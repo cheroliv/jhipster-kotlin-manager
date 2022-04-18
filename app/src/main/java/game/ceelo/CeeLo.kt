@@ -28,8 +28,8 @@ val TRIPLETS by lazy {
         `4_4_4`, `5_5_5`, `6_6_6`
     )
 }
-val NOT_A_TRIPLET = -1
-val NOT_A_DOUBLET = 0
+const val NOT_A_TRIPLET = -1
+const val NOT_A_DOUBLET = 0
 
 
 fun <T> List<T>.middle(): T {
@@ -65,6 +65,12 @@ private fun List<Int>.diceThrowResultIs456(secondPlayerThrow: List<Int>)
     secondPlayerThrow.containsAll(`4_5_6`)
 ) RETHROW else LOOSE
 
-fun isTriplet(list: List<Int>): Int {
-    TODO("Not yet implemented")
-}
+fun isTriplet(param: List<Int>): Boolean =
+    TRIPLETS.map { it.containsAll(param) }.contains(true)
+
+fun wichTriplet(currentDiceThrow: List<Int>)
+        : Int = if (!isTriplet(currentDiceThrow))
+    NOT_A_TRIPLET
+else TRIPLETS.find {
+    it.containsAll(currentDiceThrow)
+}!!.first()
