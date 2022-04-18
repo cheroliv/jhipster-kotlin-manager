@@ -10,25 +10,23 @@ import org.junit.Test
 class CeeloUnitTest {
 
     @Test
-    fun `Quand je lance les dés je récupère un triplet d'entier entre 1 et 6`() {
+    fun `Quand je lance les dés je récupère un triplet d'entier entre 1 et 6`() =
         throwDices().run {
             assertEquals(size, CEELO_DICE_THROW_SIZE)
-            forEach { diceValue -> assertTrue(diceValue in ONE..SIX) }
+            forEach { assertTrue(it in ONE..SIX) }
         }
-    }
 
     @Test
-    fun `si mon jet contient 4 5 6 et l'autre non alors je gagne `() {
+    fun `si mon jet contient 4 5 6 et l'autre non alors je gagne `() =
         assertEquals(`4_5_6`.evalThrows(`1_2_3`), WIN)
-    }
 
     @Test
-    fun `si mon jet contient 4 5 6 et l'autre aussi alors rejouer`() {
+    fun `si mon jet contient 4 5 6 et l'autre aussi alors rejouer`() =
         assertEquals(`4_5_6`.evalThrows(`4_5_6`), RETHROW)
-    }
 
     @Test
-    fun `si mon jet contient 4 5 6 non ordonné et l'autre non alors je gagne `() {
-        assertEquals(listOf(5,6,4).evalThrows(`1_2_3`), WIN)
-    }
+    fun `si mon jet contient 4 5 6 non ordonné et l'autre non alors je gagne `() =
+        assertEquals(listOf(5, 6, 4).evalThrows(`1_2_3`), WIN)
+
+
 }
