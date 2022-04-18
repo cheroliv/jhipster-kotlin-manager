@@ -19,6 +19,11 @@ fun throwDices(): List<Int> = listOf(
     (ONE..SIX).random(),
     (ONE..SIX).random()
 )
-fun List<Int>.evalThrows(secondPlayerThrow: List<Int>): Boolean? {
+
+enum class DiceThrowResult {
+    WIN,LOOSE,RETHROW
+}
+
+fun List<Int>.evalThrows(secondPlayerThrow: List<Int>): DiceThrowResult {
     TODO("Not yet implemented")
 }

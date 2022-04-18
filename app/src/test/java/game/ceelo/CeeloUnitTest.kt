@@ -1,6 +1,6 @@
 package game.ceelo
 
-import org.junit.Assert
+import game.ceelo.DiceThrowResult.WIN
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -18,11 +18,12 @@ class CeeloUnitTest {
 
     @Test
     fun `si mon jet contient 4 5 6 alors je gagne`() {
-        val royalFlushThrow = listOf(4,5,6)
+        val royalFlushThrow = listOf(4, 5, 6)
         val otherThrow = throwDices()
         println(royalFlushThrow)
         println(otherThrow)
-        assertTrue(royalFlushThrow.evalThrows(otherThrow)!!)
+        assertEquals(royalFlushThrow.evalThrows(otherThrow), WIN)
     }
 }
+
 
