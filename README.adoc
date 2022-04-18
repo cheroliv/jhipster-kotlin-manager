@@ -1,0 +1,24 @@
+= Jeu de Cee Lo
+
+==== Essayez le cee-lo.
+C'est un jeu populaire lors duquel chaque joueur possède trois dés, +
+en général dans une sorte de verre et chaque joueur lance les dés +
+en même temps après avoir parié. +
+Le but est d'obtenir le score le plus élevé possible, +
+même si le comptage des points fonctionne un peu comme au poker. +
+La combinaison la plus élevée possible et 4, 5 et 6. +
+Cela représente le royal flush du poker. +
+En suivant, la combinaison la plus élevée est un triple. +
+Même si vous n'avez lancé que des 1, +
+un triple 1 représente la catégorie de score le plus élevé qui ne peut être battue +
+que par un triple d'un autre chiffre ou par un 4, un 5 et un 6. +
+La combinaison gagnante suivante est appelée une paire et une réserve, +
+une sorte de full house. +
+Elle est composée d'une paire de dés correspondants + tout autre valeur. +
+Au cas où deux joueurs ont obtenu un double 4, +
+la valeur la plus élevée du troisième dé indiquera qui est le gagnant. +
+Si un joueur a lancé un double 2 et un 6 +
+alors qu'un autre joueur a lancé un double 6 et un 2, le premier joueur gagne. +
+Le gagnant est désigné par rapport à la valeur du troisième dé +
+et non pas par rapport à la valeur de la paire. +
+Si deux joueurs ont obtenu exactement la même combinaison, ils doivent rejouer. +
