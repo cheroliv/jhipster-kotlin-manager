@@ -4,7 +4,6 @@ import game.ceelo.DiceThrowResult.RETHROW
 import game.ceelo.DiceThrowResult.WIN
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
-import org.junit.Ignore
 import org.junit.Test
 
 @Suppress("NonAsciiCharacters")
@@ -20,16 +19,16 @@ class CeeloUnitTest {
 
     @Test
     fun `si mon jet contient 4 5 6 et l'autre non alors je gagne `() {
-        assertEquals(FOUR_FIVE_SIX.evalThrows(ONE_TWO_THREE), WIN)
+        assertEquals(`4_5_6`.evalThrows(`1_2_3`), WIN)
     }
 
     @Test
     fun `si mon jet contient 4 5 6 et l'autre aussi alors rejouer`() {
-        assertEquals(FOUR_FIVE_SIX.evalThrows(FOUR_FIVE_SIX), RETHROW)
+        assertEquals(`4_5_6`.evalThrows(`4_5_6`), RETHROW)
     }
 
     @Test
     fun `si mon jet contient 4 5 6 non ordonné et l'autre non alors je gagne `() {
-        assertEquals(FOUR_FIVE_SIX.evalThrows(ONE_TWO_THREE), WIN)
+        assertEquals(listOf(5,6,4).evalThrows(`1_2_3`), WIN)
     }
 }

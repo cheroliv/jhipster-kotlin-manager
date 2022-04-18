@@ -10,8 +10,11 @@ const val FIVE = 5
 const val SIX = 6
 const val CEELO_DICE_THROW_SIZE = 3
 
-val FOUR_FIVE_SIX = listOf(FOUR, FIVE, SIX)
-val ONE_TWO_THREE = listOf(ONE, TWO, THREE)
+@Suppress("ObjectPropertyName")
+val `4_5_6` by lazy { listOf(FOUR, FIVE, SIX) }
+
+@Suppress("ObjectPropertyName")
+val `1_2_3` by lazy { listOf(ONE, TWO, THREE) }
 
 fun <T> List<T>.middle(): T {
     if (isEmpty())
@@ -30,11 +33,11 @@ enum class DiceThrowResult {
 }
 
 fun List<Int>.evalThrows(secondPlayerThrow: List<Int>): DiceThrowResult {
-    return if (containsAll(FOUR_FIVE_SIX) &&
-        !secondPlayerThrow.containsAll(FOUR_FIVE_SIX)
-    ) WIN else if (containsAll(FOUR_FIVE_SIX) &&
-        secondPlayerThrow.containsAll(FOUR_FIVE_SIX)
+    return if (containsAll(`4_5_6`) &&
+        !secondPlayerThrow.containsAll(`4_5_6`)
+    ) WIN else if (containsAll(`4_5_6`) &&
+        secondPlayerThrow.containsAll(`4_5_6`)
     ) RETHROW else LOOSE
 }
 
-fun containsFourFiveSix(diceThrow: List<Int>): Boolean = true
+fun contains456(diceThrow: List<Int>): Boolean = true
