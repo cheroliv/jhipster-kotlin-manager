@@ -22,3 +22,5 @@ alors qu'un autre joueur a lancé un double 6 et un 2, le premier joueur gagne. 
 Le gagnant est désigné par rapport à la valeur du troisième dé +
 et non pas par rapport à la valeur de la paire. +
 Si deux joueurs ont obtenu exactement la même combinaison, ils doivent rejouer. +
+  +
+voir aussi : https://en.wikipedia.org/wiki/Cee-lo[wiki cee-lo]
