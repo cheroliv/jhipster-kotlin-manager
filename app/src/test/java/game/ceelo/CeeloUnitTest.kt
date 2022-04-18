@@ -20,14 +20,17 @@ class CeeloUnitTest {
 
     @Test
     fun `si mon jet contient 4 5 6 et l'autre non alors je gagne `() {
-        val royalFlushThrow = listOf(4, 5, 6)
-        val otherThrow = listOf(ONE, TWO, THREE)
-        assertEquals(royalFlushThrow.evalThrows(otherThrow), WIN)
+        assertEquals(FOUR_FIVE_SIX.evalThrows(ONE_TWO_THREE), WIN)
     }
 
     @Test
     fun `si mon jet contient 4 5 6 et l'autre aussi alors rejouer`() {
-        val royalFlushThrow = listOf(4, 5, 6)
-        assertEquals(royalFlushThrow.evalThrows(royalFlushThrow), RETHROW)
+        assertEquals(FOUR_FIVE_SIX.evalThrows(FOUR_FIVE_SIX), RETHROW)
+    }
+
+    @Test
+    fun `si mon jet contient 4 5 6 non ordonné et l'autre non alors je gagne `() {
+        val unorderedRoyalFlushThrow = listOf(6, 5, 4)
+        assertEquals(unorderedRoyalFlushThrow.evalThrows(ONE_TWO_THREE), WIN)
     }
 }
