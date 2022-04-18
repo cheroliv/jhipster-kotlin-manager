@@ -30,7 +30,6 @@ class CeeloUnitTest {
 
     @Test
     fun `si mon jet contient 4 5 6 non ordonné et l'autre non alors je gagne `() {
-        val unorderedRoyalFlushThrow = listOf(6, 5, 4)
-        assertEquals(unorderedRoyalFlushThrow.evalThrows(ONE_TWO_THREE), WIN)
+        assertEquals(FOUR_FIVE_SIX.evalThrows(ONE_TWO_THREE), WIN)
     }
 }
