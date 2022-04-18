@@ -1,7 +1,6 @@
 package game.ceelo
 
-import game.ceelo.DiceThrowResult.LOOSE
-import game.ceelo.DiceThrowResult.WIN
+import game.ceelo.DiceThrowResult.*
 
 const val ONE = 1
 const val TWO = 2
@@ -28,13 +27,9 @@ enum class DiceThrowResult {
 }
 
 fun List<Int>.evalThrows(secondPlayerThrow: List<Int>): DiceThrowResult {
-    return if (containsAll(listOf(FOUR, FIVE, SIX)) && !secondPlayerThrow.containsAll(
-            listOf(
-                FOUR,
-                FIVE,
-                SIX
-            )
-        )
-    ) WIN else LOOSE
-
+    return if (containsAll(listOf(FOUR, FIVE, SIX)) &&
+        !secondPlayerThrow.containsAll(listOf(FOUR, FIVE, SIX))
+    ) WIN else if (containsAll(listOf(FOUR, FIVE, SIX)) &&
+        secondPlayerThrow.containsAll(listOf(FOUR, FIVE, SIX))
+    ) RETHROW else LOOSE
 }
