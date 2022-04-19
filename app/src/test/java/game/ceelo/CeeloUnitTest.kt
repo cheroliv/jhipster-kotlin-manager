@@ -17,27 +17,27 @@ class CeeloUnitTest {
 
     @Test
     fun `si mon jet contient 4 5 6 et l'autre non alors je gagne`() =
-        assertEquals(`4_5_6`.evalThrows(`1_2_3`), WIN)
+        assertEquals(`4_5_6`.compareThrows(`1_2_3`), WIN)
 
     @Test
     fun `si mon jet contient 4 5 6 non ordonné et l'autre non alors je gagne`() =
-        assertEquals(listOf(5, 6, 4).evalThrows(`1_2_3`), WIN)
+        assertEquals(listOf(5, 6, 4).compareThrows(`1_2_3`), WIN)
 
     @Test
     fun `si mon jet contient 4 5 6 et l'autre aussi alors rejouer`() =
-        assertEquals(`4_5_6`.evalThrows(`4_5_6`), RETHROW)
+        assertEquals(`4_5_6`.compareThrows(`4_5_6`), RETHROW)
 
     @Test
     fun `si mon jet contient 1 2 3 et l'autre non alors je perds`() =
-        assertEquals(`1_2_3`.evalThrows(`4_5_6`), LOOSE)
+        assertEquals(`1_2_3`.compareThrows(`4_5_6`), LOOSE)
 
     @Test
     fun `si mon jet contient 1 2 3 non ordonné et l'autre non alors je perds`() =
-        assertEquals(listOf(3, 2, 1).evalThrows(`4_5_6`), LOOSE)
+        assertEquals(listOf(3, 2, 1).compareThrows(`4_5_6`), LOOSE)
 
     @Test
     fun `si mon jet contient 1 2 3 et l'autre aussi alors rejouer`() =
-        assertEquals(`1_2_3`.evalThrows(`1_2_3`), RETHROW)
+        assertEquals(`1_2_3`.compareThrows(`1_2_3`), RETHROW)
 
     @Test
     fun `si le jet est un triplet alors la function isTriplet renvoi un booléen`() {
@@ -53,12 +53,12 @@ class CeeloUnitTest {
 
     @Test
     fun `si mon jet est un triplet alors je peux identifer sa valeur`() {
-        assertEquals(NOT_A_TRIPLET, whichTriplet(`1_2_3`))
-        assertEquals(ONE, whichTriplet(`1_1_1`))
-        assertEquals(TWO, whichTriplet(`2_2_2`))
-        assertEquals(THREE, whichTriplet(`3_3_3`))
-        assertEquals(FOUR, whichTriplet(`4_4_4`))
-        assertEquals(FIVE, whichTriplet(`5_5_5`))
-        assertEquals(SIX, whichTriplet(`6_6_6`))
+        assertEquals(NOT_A_TRIPLET, whichTripletIsIt(`1_2_3`))
+        assertEquals(ONE, whichTripletIsIt(`1_1_1`))
+        assertEquals(TWO, whichTripletIsIt(`2_2_2`))
+        assertEquals(THREE, whichTripletIsIt(`3_3_3`))
+        assertEquals(FOUR, whichTripletIsIt(`4_4_4`))
+        assertEquals(FIVE, whichTripletIsIt(`5_5_5`))
+        assertEquals(SIX, whichTripletIsIt(`6_6_6`))
     }
 }

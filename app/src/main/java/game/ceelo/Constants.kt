@@ -29,3 +29,7 @@ val TRIPLETS by lazy {
 const val NOT_A_TRIPLET = -1
 const val NOT_A_DOUBLET = 0
 
+enum class DiceThrowResult {
+    WIN, LOOSE, RETHROW
+}
+
