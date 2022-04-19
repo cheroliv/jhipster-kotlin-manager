@@ -12,6 +12,14 @@ const val CEELO_DICE_THROW_SIZE = 3
 const val NOT_A_TRIPLET = -1
 const val NOT_A_DOUBLET = 0
 
+const val AUTOMATIC_WIN_456_BRANCH = 1
+const val AUTOMATIC_LOOSE_123_BRANCH = 2
+const val TRIPLET_BRANCH = 3
+const val DOUBLET_BRANCH = 4
+const val STRAIGHT_234_345_BRANCH = 5
+
+
+
 val `4_5_6` by lazy { listOf(FOUR, FIVE, SIX) }
 val `1_2_3` by lazy { listOf(ONE, TWO, THREE) }
 
@@ -51,3 +59,4 @@ val DOUBLETS by lazy {
         `6_6_x`
     )
 }
+
