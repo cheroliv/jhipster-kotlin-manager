@@ -21,15 +21,6 @@ fun <T> List<T>.middle(): T {
 }
 
 /**
- * compare un jet à un autre
- * pour renvoyer un resultat de jeu
- */
-fun List<Int>.compareThrows(secondPlayerThrow: List<Int>): DiceThrowResult =
-    if (containsAll(`4_5_6`)) isOpponentMade456(secondPlayerThrow)
-    else isOpponentMade123(secondPlayerThrow)
-
-
-/**
  * Est ce que le jet est un 1 2 3 ?
  */
 fun List<Int>.isOpponentMade123(secondPlayerThrow: List<Int>): DiceThrowResult =
@@ -38,6 +29,7 @@ fun List<Int>.isOpponentMade123(secondPlayerThrow: List<Int>): DiceThrowResult =
     ) LOOSE else if (containsAll(`1_2_3`) &&
         secondPlayerThrow.containsAll(`1_2_3`)
     ) RETHROW else WIN
+
 
 /**
  * Est ce que le jet est un 4 5 6 ?
@@ -52,8 +44,8 @@ fun List<Int>.isOpponentMade456(secondPlayerThrow: List<Int>): DiceThrowResult =
 /**
  * Est ce un triplet?
  */
-fun isTriplet(param: List<Int>): Boolean =
-    TRIPLETS.map { it.containsAll(param) }.contains(true)
+//fun isTriplet(param: List<Int>): Boolean =
+//    TRIPLETS.map { it.containsAll(param) }.contains(true)
 
 /**
  * La valeur faciale du dé triplet
@@ -61,5 +53,44 @@ fun isTriplet(param: List<Int>): Boolean =
  * renvoi NOT_A_TRIPLET
  */
 fun whichTripletIsIt(currentDiceThrow: List<Int>): Int =
-    if (!isTriplet(currentDiceThrow)) NOT_A_TRIPLET
+    if (!currentDiceThrow.isTriplet) NOT_A_TRIPLET
     else TRIPLETS.find { it.containsAll(currentDiceThrow) }!!.first()
+
+val List<Int>.whichThrowBranch: Int
+    get() {
+        if (containsAll(`4_5_6`)) return 1
+        if (containsAll(`1_2_3`)) return 2
+        if (isTriplet) return 3
+        if (isDoublet()) return 4
+        return 5
+    }
+
+fun List<Int>.isDoublet(): Boolean {
+    TODO("Not yet implemented")
+}
+
+val List<Int>.isTriplet: Boolean
+    get() {
+        return TRIPLETS.map { it.containsAll(this) }.contains(true)
+    }
+
+
+val List<Int>.is456: Boolean
+    get() {
+        TODO("Not yet implemented")
+    }
+
+
+val List<Int>.is123: Boolean
+    get() {
+        TODO("Not yet implemented")
+    }
+
+/**
+ * compare un jet à un autre
+ * pour renvoyer un resultat de jeu
+ */
+fun List<Int>.compareThrows(secondPlayerThrow: List<Int>): DiceThrowResult {
+    if (containsAll(`4_5_6`)) return isOpponentMade456(secondPlayerThrow)
+    if (containsAll(`1_2_3`)) return isOpponentMade123(secondPlayerThrow)
+}

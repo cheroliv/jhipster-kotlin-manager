@@ -3,6 +3,7 @@ package game.ceelo
 import game.ceelo.DiceThrowResult.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Ignore
 import org.junit.Test
 
 @Suppress("NonAsciiCharacters")
@@ -60,5 +61,35 @@ class CeeloUnitTest {
         assertEquals(FOUR, whichTripletIsIt(`4_4_4`))
         assertEquals(FIVE, whichTripletIsIt(`5_5_5`))
         assertEquals(SIX, whichTripletIsIt(`6_6_6`))
+    }
+
+    @Test
+    fun `si mon jet est un triplet et l'autre aussi alors le triplet le plus fort gagne`() {
+        assertEquals(`6_6_6`.compareThrows(`5_5_5`), WIN)
+        assertEquals(`6_6_6`.compareThrows(`4_4_4`), WIN)
+        assertEquals(`6_6_6`.compareThrows(`3_3_3`), WIN)
+        assertEquals(`6_6_6`.compareThrows(`2_2_2`), WIN)
+        assertEquals(`6_6_6`.compareThrows(`1_1_1`), WIN)
+    }
+
+    @Test
+    @Ignore
+    fun `si mon jet est un triplet et l'autre aussi alors le triplet le plus faible perd`() {
+        assertEquals(`1_1_1`.compareThrows(`6_6_6`), LOOSE)
+        assertEquals(`1_1_1`.compareThrows(`5_5_5`), LOOSE)
+        assertEquals(`1_1_1`.compareThrows(`4_4_4`), LOOSE)
+        assertEquals(`1_1_1`.compareThrows(`3_3_3`), LOOSE)
+        assertEquals(`1_1_1`.compareThrows(`2_2_2`), LOOSE)
+    }
+
+    @Test
+    @Ignore
+    fun `si mon jet est un triplet alors les triplets égaux font rejouer`() {
+        assertEquals(`6_6_6`.compareThrows(`6_6_6`), RETHROW)
+        assertEquals(`5_5_5`.compareThrows(`5_5_5`), RETHROW)
+        assertEquals(`4_4_4`.compareThrows(`4_4_4`), RETHROW)
+        assertEquals(`3_3_3`.compareThrows(`3_3_3`), RETHROW)
+        assertEquals(`2_2_2`.compareThrows(`2_2_2`), RETHROW)
+        assertEquals(`1_1_1`.compareThrows(`1_1_1`), RETHROW)
     }
 }
