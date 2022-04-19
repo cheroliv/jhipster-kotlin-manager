@@ -2,6 +2,10 @@ package game.ceelo
 
 import game.ceelo.DiceThrowResult.*
 
+enum class DiceThrowResult {
+    WIN, LOOSE, RETHROW
+}
+
 /**
  * un jet de dés au hazard
  */
