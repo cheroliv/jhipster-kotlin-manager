@@ -53,12 +53,12 @@ class CeeloUnitTest {
 
     @Test
     fun `si mon jet est un triplet alors je peux identifer sa valeur`() {
-        assertEquals(NOT_A_TRIPLET, wichTriplet(`1_2_3`))
-        assertEquals(ONE, wichTriplet(`1_1_1`))
-        assertEquals(TWO, wichTriplet(`2_2_2`))
-        assertEquals(THREE, wichTriplet(`3_3_3`))
-        assertEquals(FOUR, wichTriplet(`4_4_4`))
-        assertEquals(FIVE, wichTriplet(`5_5_5`))
-        assertEquals(SIX, wichTriplet(`6_6_6`))
+        assertEquals(NOT_A_TRIPLET, whichTriplet(`1_2_3`))
+        assertEquals(ONE, whichTriplet(`1_1_1`))
+        assertEquals(TWO, whichTriplet(`2_2_2`))
+        assertEquals(THREE, whichTriplet(`3_3_3`))
+        assertEquals(FOUR, whichTriplet(`4_4_4`))
+        assertEquals(FIVE, whichTriplet(`5_5_5`))
+        assertEquals(SIX, whichTriplet(`6_6_6`))
     }
 }
