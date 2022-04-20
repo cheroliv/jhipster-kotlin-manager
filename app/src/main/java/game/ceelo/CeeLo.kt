@@ -52,9 +52,9 @@ fun List<Int>.isOpponentMade456(secondPlayerThrow: List<Int>): DiceThrowResult =
  * Si le jet n'est pas un triplet
  * renvoi NOT_A_TRIPLET
  */
-fun whichTripletIsIt(currentDiceThrow: List<Int>): Int =
-    if (!currentDiceThrow.isTriplet) NOT_A_TRIPLET
-    else TRIPLETS.find { it.containsAll(currentDiceThrow) }!!.first()
+val List<Int>.whichTripletIsIt: Int
+    get() = if (!isTriplet) NOT_A_TRIPLET
+    else TRIPLETS.find { it.containsAll(elements = this) }!!.first()
 
 val List<Int>.whichThrowBranch: Int
     get() {
@@ -90,7 +90,7 @@ val List<Int>.is123: Boolean
  * compare un jet à un autre
  * pour renvoyer un resultat de jeu
  */
-fun List<Int>.compareThrows(secondPlayerThrow: List<Int>): DiceThrowResult {
-    if (containsAll(`4_5_6`)) return isOpponentMade456(secondPlayerThrow)
-    if (containsAll(`1_2_3`)) return isOpponentMade123(secondPlayerThrow)
-}
+//fun List<Int>.compareThrows(secondPlayerThrow: List<Int>): DiceThrowResult {
+//    if (containsAll(`4_5_6`)) return isOpponentMade456(secondPlayerThrow)
+//    if (containsAll(`1_2_3`)) return isOpponentMade123(secondPlayerThrow)
+//}
