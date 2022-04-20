@@ -42,12 +42,6 @@ fun List<Int>.isOpponentMade456(secondPlayerThrow: List<Int>): DiceThrowResult =
     ) RETHROW else LOOSE
 
 /**
- * Est ce un triplet?
- */
-//fun isTriplet(param: List<Int>): Boolean =
-//    TRIPLETS.map { it.containsAll(param) }.contains(true)
-
-/**
  * La valeur faciale du dé triplet
  * Si le jet n'est pas un triplet
  * renvoi NOT_A_TRIPLET
@@ -68,7 +62,9 @@ val List<Int>.whichThrowBranch: Int
 fun List<Int>.isDoublet(): Boolean {
     TODO("Not yet implemented")
 }
-
+/**
+ * Est ce un triplet?
+ */
 val List<Int>.isTriplet: Boolean
     get() {
         return TRIPLETS.map { it.containsAll(this) }.contains(true)
