@@ -9,7 +9,17 @@ enum class DiceThrowResult {
 /**
  * un jet de dés au hazard
  */
-val dicesThrow get() = List(size = 3, init = { (ONE..SIX).random() })
+/**
+ * un jet de dés au hazard
+ */
+val dicesThrow: List<Int> = List(size = 3, init = { (ONE..SIX).random() })
+
+/**
+ * Est ce un triplet?
+ */
+val List<Int>.isTriplet: Boolean
+    get() = UNIFORM_TRIPLETS.map { it.containsAll(this) }.contains(true)
+
 
 /**
  * La valeur du deuxieme dé
@@ -48,7 +58,7 @@ fun List<Int>.isOpponentMade456(secondPlayerThrow: List<Int>): DiceThrowResult =
  */
 val List<Int>.whichTripletIsIt: Int
     get() = if (!isTriplet) NOT_A_TRIPLET
-    else TRIPLETS.find { it.containsAll(elements = this) }!!.first()
+    else UNIFORM_TRIPLETS.find { it.containsAll(elements = this) }!!.first()
 
 val List<Int>.whichThrowBranch: Int
     get() {
@@ -62,25 +72,14 @@ val List<Int>.whichThrowBranch: Int
 fun List<Int>.isDoublet(): Boolean {
     TODO("Not yet implemented")
 }
-/**
- * Est ce un triplet?
- */
-val List<Int>.isTriplet: Boolean
-    get() {
-        return TRIPLETS.map { it.containsAll(this) }.contains(true)
-    }
 
 
 val List<Int>.is456: Boolean
     get() {
-        TODO("Not yet implemented")
+       return containsAll(`4_5_6`)
     }
 
 
-val List<Int>.is123: Boolean
-    get() {
-        TODO("Not yet implemented")
-    }
 
 /**
  * compare un jet à un autre

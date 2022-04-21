@@ -30,7 +30,7 @@ val `4_4_4` by lazy { listOf(FOUR, FOUR, FOUR) }
 val `5_5_5` by lazy { listOf(FIVE, FIVE, FIVE) }
 val `6_6_6` by lazy { listOf(SIX, SIX, SIX) }
 
-val TRIPLETS by lazy {
+val UNIFORM_TRIPLETS by lazy {
     listOf(
         `1_1_1`,
         `2_2_2`,
@@ -49,7 +49,7 @@ val `5_5_x` by lazy { listOf(FIVE, FIVE) }
 val `6_6_x` by lazy { listOf(SIX, SIX) }
 
 
-val DOUBLETS by lazy {
+val UNIFORM_DOUBLETS by lazy {
     listOf(
         `1_1_x`,
         `2_2_x`,

@@ -1,23 +1,41 @@
 package game.ceelo
 
-import game.ceelo.DiceThrowResult.*
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertTrue
+import org.junit.Assert.assertFalse
 import org.junit.Ignore
 import org.junit.Test
+
+private val List<Int>.is456: Boolean
+    get() = containsAll(`4_5_6`)
 
 @Suppress("NonAsciiCharacters")
 class CeeloUnitTest {
 
     @Test
-    fun `Quand je lance les dés je récupère un triplet d'entier entre 1 et 6`() =
+    fun `Si le jet est correct alors on récupere un triplet d'entier entre 1 et 6`() =
         dicesThrow.run {
             assertEquals(size, CEELO_DICE_THROW_SIZE)
-            forEach { assertTrue(it in ONE..SIX) }
+            forEach { assert(it in ONE..SIX) }
         }
 
     @Test
-    fun `si le jet est un triplet alors la function isTriplet renvoi un booléen`() {
+    fun `Si le jet contient (4,5,6) alors la propriété is456 renvoi vrai`() {
+        assert(listOf(4, 5, 6).is456)
+        assert(listOf(4, 6, 5).is456)
+        assert(listOf(5, 4, 6).is456)
+        assert(listOf(6, 5, 4).is456)
+        assert(listOf(6, 4, 5).is456)
+    }
+
+    @Test
+    fun `Si le jet ne contient pas (4,5,6) alors la fonction is456 renvoi false`() {
+        assertFalse(`1_2_3`.is456)
+        UNIFORM_TRIPLETS.map { assertFalse(it.is456) }
+    }
+
+    @Test
+    @Ignore
+    fun `Si le jet est un triplet uniforme alors la propriété isTriplet renvoi un booléen`() {
         assertEquals(true, `1_1_1`.isTriplet)
         assertEquals(true, `2_2_2`.isTriplet)
         assertEquals(true, `3_3_3`.isTriplet)
@@ -29,6 +47,7 @@ class CeeloUnitTest {
     }
 
     @Test
+    @Ignore
     fun `si mon jet est un triplet alors je peux identifer sa valeur`() {
         assertEquals(NOT_A_TRIPLET, `1_2_3`.whichTripletIsIt)
         assertEquals(ONE, `1_1_1`.whichTripletIsIt)
