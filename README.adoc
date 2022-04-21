@@ -31,5 +31,6 @@ voir aussi : https://en.wikipedia.org/wiki/Cee-lo[wiki cee-lo]
 . "Si le jet est correct alors on récupère un triplet d'entier entre 1 et 6"
 . "Si le jet contient (4,5,6) alors la propriété is456 renvoi vrai"
 .. "Si le jet ne contient pas (4,5,6) alors la fonction is456 renvoi false"
-. "Si le jet est un triplet uniforme alors la propriété isTriplet renvoi un booléen"
+. "Si le jet est un triplet uniforme alors la propriété isTriplet renvoi un true"
+. "Si le jet est un triplet uniforme alors la propriété tripletUniformeValue renvoi la valeur faciale du dé"
 

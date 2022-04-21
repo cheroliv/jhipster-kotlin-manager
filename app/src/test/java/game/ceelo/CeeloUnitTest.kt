@@ -12,7 +12,7 @@ private val List<Int>.is456: Boolean
 class CeeloUnitTest {
 
     @Test
-    fun `Si le jet est correct alors on récupere un triplet d'entier entre 1 et 6`() =
+    fun `Si le jet est correct alors on récupère un triplet d'entier entre 1 et 6`() =
         dicesThrow.run {
             assertEquals(size, CEELO_DICE_THROW_SIZE)
             forEach { assert(it in ONE..SIX) }
@@ -35,7 +35,7 @@ class CeeloUnitTest {
 
     @Test
     @Ignore
-    fun `Si le jet est un triplet uniforme alors la propriété isTriplet renvoi un booléen`() {
+    fun `Si le jet est un triplet uniforme alors la propriété isTriplet renvoi un true`() {
         assertEquals(true, `1_1_1`.isTriplet)
         assertEquals(true, `2_2_2`.isTriplet)
         assertEquals(true, `3_3_3`.isTriplet)
@@ -48,7 +48,7 @@ class CeeloUnitTest {
 
     @Test
     @Ignore
-    fun `si mon jet est un triplet alors je peux identifer sa valeur`() {
+    fun `Si le jet est un triplet uniforme alors la propriete tripletUniformeValue renvoi la valeur facial du dé`() {
         assertEquals(NOT_A_TRIPLET, `1_2_3`.whichTripletIsIt)
         assertEquals(ONE, `1_1_1`.whichTripletIsIt)
         assertEquals(TWO, `2_2_2`.whichTripletIsIt)
