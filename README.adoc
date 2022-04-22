@@ -34,3 +34,7 @@ voir aussi : https://en.wikipedia.org/wiki/Cee-lo[wiki cee-lo]
 . "Si le jet est un triplet uniforme alors la propriété isTriplet renvoi un true"
 . "Si le jet est un triplet uniforme alors la propriété tripletUniformeValue renvoi la valeur faciale du dé"
 
+=== Environement
+----
+nvm install 14.15.0
+----

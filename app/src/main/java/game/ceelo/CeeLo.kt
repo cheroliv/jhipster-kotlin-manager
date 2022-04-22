@@ -1,34 +1,31 @@
 package game.ceelo
 
+
 import game.ceelo.DiceThrowResult.*
 
 enum class DiceThrowResult {
     WIN, LOOSE, RETHROW
 }
 
+fun main() {
+    println("mon main")
+    println(dicesThrow)
+}
+
 /**
  * un jet de dés au hazard
  */
-/**
- * un jet de dés au hazard
- */
-val dicesThrow: List<Int> = List(size = 3, init = { (ONE..SIX).random() })
+val dicesThrow: List<Int> by lazy { List(size = 3, init = { (ONE..SIX).random() }) }
 
 /**
  * Est ce un triplet?
  */
-val List<Int>.isTriplet: Boolean
-    get() = UNIFORM_TRIPLETS.map { it.containsAll(this) }.contains(true)
+val List<Int>.isUniformTriplet: Boolean
+    get() = UNIFORM_TRIPLETS.map { it.containsAll(elements = this) }.contains(true)
 
+val List<Int>.is456: Boolean get() = containsAll(`4_5_6`)
 
-/**
- * La valeur du deuxieme dé
- */
-fun <T> List<T>.middle(): T {
-    if (isEmpty())
-        throw NoSuchElementException("dice throw is empty.")
-    return this.elementAt(index = 1)
-}
+val List<Int>.is123: Boolean get() = containsAll(`1_2_3`)
 
 /**
  * Est ce que le jet est un 1 2 3 ?
@@ -56,29 +53,21 @@ fun List<Int>.isOpponentMade456(secondPlayerThrow: List<Int>): DiceThrowResult =
  * Si le jet n'est pas un triplet
  * renvoi NOT_A_TRIPLET
  */
-val List<Int>.whichTripletIsIt: Int
-    get() = if (!isTriplet) NOT_A_TRIPLET
+val List<Int>.uniformTripletValue: Int
+    get() = if (!isUniformTriplet) NOT_A_TRIPLET
     else UNIFORM_TRIPLETS.find { it.containsAll(elements = this) }!!.first()
 
 val List<Int>.whichThrowBranch: Int
     get() {
         if (containsAll(`4_5_6`)) return 1
         if (containsAll(`1_2_3`)) return 2
-        if (isTriplet) return 3
-        if (isDoublet()) return 4
+        if (isUniformTriplet) return 3
+        if (isDoublet) return 4
         return 5
     }
 
-fun List<Int>.isDoublet(): Boolean {
-    TODO("Not yet implemented")
-}
-
-
-val List<Int>.is456: Boolean
-    get() {
-       return containsAll(`4_5_6`)
-    }
-
+val List<Int>.isDoublet: Boolean
+    get() = UNIFORM_DOUBLETS.map { it.containsAll(elements = this) }.contains(true)
 
 
 /**
