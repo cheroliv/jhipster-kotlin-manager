@@ -89,12 +89,14 @@ fun main() {
 }
 
 val List<Int>.whichCase: Int
-    get() = if (is456) AUTOMATIC_WIN_456_CASE
-    else if (is123) AUTOMATIC_LOOSE_123_CASE
-    else if (isStraight) STRAIGHT_234_345_CASE
-    else if (isUniformTriplet) TRIPLET_CASE
-    else if (isUniformDoublet) DOUBLET_CASE
-    else OTHERS_CASE
+    get() = when {
+        is456 -> AUTOMATIC_WIN_456_CASE
+        is123 -> AUTOMATIC_LOOSE_123_CASE
+        isStraight -> STRAIGHT_234_345_CASE
+        isUniformTriplet -> TRIPLET_CASE
+        isUniformDoublet -> DOUBLET_CASE
+        else -> OTHERS_CASE
+    }
 
 
 
