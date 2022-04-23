@@ -1,6 +1,6 @@
 @file:Suppress("ObjectPropertyName")
 
-package game.ceelo
+package game.ceelo.domain
 
 const val ONE = 1
 const val TWO = 2

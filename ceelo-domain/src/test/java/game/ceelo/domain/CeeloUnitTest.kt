@@ -1,4 +1,4 @@
-package game.ceelo
+package game.ceelo.domain
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse

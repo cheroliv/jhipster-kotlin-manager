@@ -1,14 +1,14 @@
-package game.ceelo
+package game.ceelo.domain
 
 
-import game.ceelo.DiceThrowResult.*
+import game.ceelo.domain.DiceThrowResult.*
 
 enum class DiceThrowResult {
     WIN, LOOSE, RETHROW
 }
 
 fun main() {
-    println("mon main")
+    println("un jet de dés :")
     println(dicesThrow)
 }
 
