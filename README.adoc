@@ -35,6 +35,15 @@ voir aussi : https://en.wikipedia.org/wiki/Cee-lo[wiki cee-lo]
 . "Si le jet est un triplet uniforme alors la propriété tripletUniformeValue renvoi la valeur faciale du dé"
 
 === Environement
+avoir curl installé sur son ordi
 ----
+sudo apt install curl
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+nvm install node
 nvm install 14.15.0
+nvm use 14.15.0
+npm install -g generator-jhipster
+npm install -g generator-jhipster-kotlin
+sudo snap install heroku --classic
+heroku login
 ----
