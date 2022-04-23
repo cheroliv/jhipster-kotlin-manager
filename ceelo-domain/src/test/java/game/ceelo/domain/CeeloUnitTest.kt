@@ -4,12 +4,13 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Test
 
+
 @Suppress("NonAsciiCharacters")
 class CeeloUnitTest {
 
     @Test
     fun `Si le jet est correct alors la propriété dicesThrow renvoi un triplet d'entier entre 1 et 6`() =
-        dicesThrow.run {
+        getDicesThrow().run {
             assertEquals(size, CEELO_DICE_THROW_SIZE)
             forEach { assert(it in ONE..SIX) }
         }
@@ -80,18 +81,18 @@ class CeeloUnitTest {
         assertFalse(`4_5_6`.containsUniformTriplet)
         assertFalse(`1_2_3`.containsUniformTriplet)
     }
-/*
+
     @Test
     fun `Si le jet comporte un doublet uniforme alors la propriété uniformDoubletValue renvoi la valeur facial du dé non uniforme`() {
         assertEquals(NOT_A_DOUBLET, `1_2_3`.uniformDoubletValue)
-        assertEquals(ONE, `1_1_1`.uniformTripletValue)
-        assertEquals(TWO, `2_2_2`.uniformTripletValue)
-        assertEquals(THREE, `3_3_3`.uniformTripletValue)
-        assertEquals(FOUR, `4_4_4`.uniformTripletValue)
-        assertEquals(FIVE, `5_5_5`.uniformTripletValue)
-        assertEquals(SIX, `6_6_6`.uniformTripletValue)
+        assertEquals(ONE, `1_1_1`.uniformDoubletValue)
+        assertEquals(TWO, `2_2_2`.uniformDoubletValue)
+        assertEquals(THREE, `3_3_3`.uniformDoubletValue)
+        assertEquals(FOUR, `4_4_4`.uniformDoubletValue)
+        assertEquals(FIVE, `5_5_5`.uniformDoubletValue)
+        assertEquals(SIX, `6_6_6`.uniformDoubletValue)
     }
-*/
+
 
 //    @Test
 //    fun `si mon jet contient 4 5 6 et l'autre non alors je gagne`() =
