@@ -12,14 +12,6 @@ const val CEELO_DICE_THROW_SIZE = 3
 const val NOT_A_TRIPLET = -1
 const val NOT_A_DOUBLET = 0
 
-const val AUTOMATIC_WIN_456_BRANCH = 1
-const val AUTOMATIC_LOOSE_123_BRANCH = 2
-const val TRIPLET_BRANCH = 3
-const val DOUBLET_BRANCH = 4
-const val STRAIGHT_234_345_BRANCH = 5
-
-
-
 val `4_5_6` by lazy { listOf(FOUR, FIVE, SIX) }
 val `1_2_3` by lazy { listOf(ONE, TWO, THREE) }
 
@@ -62,14 +54,20 @@ val UNIFORM_DOUBLETS by lazy {
 
 val `2_3_4` by lazy { listOf(TWO, THREE, FOUR) }
 val `3_4_5` by lazy { listOf(THREE, FOUR, FIVE) }
-val STRAIGHT_DOUBLETS by lazy {
+
+val STRAIGHT_TRIPLETS by lazy {
     listOf(
         `2_3_4`,
         `3_4_5`,
     )
 }
 
-
+const val AUTOMATIC_WIN_456_CASE = 6
+const val TRIPLET_CASE = 5
+const val DOUBLET_CASE = 4
+const val STRAIGHT_234_345_CASE = 3
+const val OTHERS_CASE = 2
+const val AUTOMATIC_LOOSE_123_CASE = 1
 
 enum class DiceThrowResult {
     WIN, LOOSE, RETHROW

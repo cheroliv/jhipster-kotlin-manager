@@ -21,7 +21,7 @@ val List<Int>.is123: Boolean get() = containsAll(`1_2_3`)
 /**
  * Est ce un triplet?
  */
-val List<Int>.containsUniformTriplet: Boolean
+val List<Int>.isUniformTriplet: Boolean
     get() = UNIFORM_TRIPLETS.map {
         it.first().run {
             this == first() && this == middle() && this == last()
@@ -34,11 +34,11 @@ val List<Int>.containsUniformTriplet: Boolean
  * renvoi NOT_A_TRIPLET
  */
 val List<Int>.uniformTripletValue: Int
-    get() = if (!containsUniformTriplet) NOT_A_TRIPLET
+    get() = if (!isUniformTriplet) NOT_A_TRIPLET
     else UNIFORM_TRIPLETS.find { containsAll(elements = it) }!!.first()
 
 
-val List<Int>.containsUniformDoublet: Boolean
+val List<Int>.isUniformDoublet: Boolean
     get() = run {
         UNIFORM_DOUBLETS.map {
             it.first().run {
@@ -54,10 +54,10 @@ val List<Int>.containsUniformDoublet: Boolean
  * Renvoi la valeur du dé qui n'est pas un doublet
  */
 val List<Int>.uniformDoubletValue: Int
-    get() = (if (!containsUniformTriplet && !containsUniformDoublet) NOT_A_DOUBLET
+    get() = (if (!isUniformTriplet && !isUniformDoublet) NOT_A_DOUBLET
     else when {
-        containsUniformTriplet -> NOT_A_DOUBLET
-        containsUniformDoublet ->
+        isUniformTriplet -> NOT_A_DOUBLET
+        isUniformDoublet ->
             find { it: Int ->
                 UNIFORM_DOUBLETS.first {
                     first() == it.first() && middle() == it.first() ||
@@ -68,7 +68,7 @@ val List<Int>.uniformDoubletValue: Int
         else -> NOT_A_DOUBLET
     })
 
-val List<Int>.isStraight: Boolean get() = STRAIGHT_DOUBLETS.map { containsAll(it) }.contains(true)
+val List<Int>.isStraight: Boolean get() = STRAIGHT_TRIPLETS.map { containsAll(it) }.contains(true)
 
 fun main() {
     //"ici dans ce main c'est le playground pour tester du code"
@@ -87,6 +87,15 @@ fun main() {
     println(straight1.containsAll(listOf(4, 3, 2)))
     println(straight2.containsAll(listOf(5, 4, 3)))
 }
+
+val List<Int>.whichCase: Int
+    get() = if (is456) AUTOMATIC_WIN_456_CASE
+    else if (is123) AUTOMATIC_LOOSE_123_CASE
+    else if (isStraight) STRAIGHT_234_345_CASE
+    else if (isUniformTriplet) TRIPLET_CASE
+    else if (isUniformDoublet) DOUBLET_CASE
+    else OTHERS_CASE
+
 
 
 //val List<Int>.whichThrowBranch: Int

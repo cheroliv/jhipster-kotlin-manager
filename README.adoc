@@ -82,3 +82,12 @@ heroku login
 . `Si le jet comporte un doublet uniforme alors la propriété containsUniformDoublet renvoi un true`
 .. `Si le jet comporte un doublet uniforme alors la propriété uniformDoubletValue renvoi la valeur facial du dé non uniforme`
 .. `Si le jet ne comporte pas uniquement un doublet uniforme alors la propriété uniformDoubletValue renvoi la valeur NOT_A_DOUBLET`
+. `Si le jet contient 2 3 4 ou 3 4 5 alors la propriété isStraight renvoi true`
+.. `Si le jet ne contient pas 2 3 4 ou 3 4 5 alors la propriété isStraight renvoi false`
+. `Si le jet contient (4,5,6) alors la propriété whichCase renvoi AUTOMATIC_WIN_456_CASE`
+.. `Si le jet contient (1,2,3) alors la propriété whichCase renvoi AUTOMATIC_LOOSE_123_CASE`
+.. `Si le jet contient (2,3,4) ou (3,4,5) alors la propriété whichCase renvoi STRAIGHT_234_345_CASE`
+.. `Si le jet contient un triplet uniforme alors la propriété whichCase renvoi TRIPLET_CASE`
+.. `Si le jet contient un doublet uniforme uniquement alors la propriété whichCase renvoi DOUBLET_CASE`
+.. `Si le jet ne contient ni (4,5,6) ni (1,2,3) ni triplet uniforme ni doublet uniforme alors la propriété whichCase renvoi OTHERS_CASE`
+
