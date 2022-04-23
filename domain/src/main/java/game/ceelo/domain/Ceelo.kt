@@ -52,21 +52,19 @@ val List<Int>.uniformTripletValue: Int
  * Renvoi la valeur du dé qui n'est pas un doublet
  */
 val List<Int>.uniformDoubletValue: Int
-    get() = if (!containsUniformTriplet && !containsUniformDoublet) NOT_A_DOUBLET
-    else {
-        when {
-            containsUniformTriplet -> NOT_A_DOUBLET
-            containsUniformDoublet ->
-                find { it ->
-                    UNIFORM_DOUBLETS.first {
-                        first() == it.first() && middle() == it.first() ||
-                                first() == it.first() && last() == it.first() ||
-                                middle() == it.first() && last() == it.first()
-                    }.first() != it
-                }!!
-            else -> NOT_A_DOUBLET
-        }
-    }
+    get() = (if (!containsUniformTriplet && !containsUniformDoublet) NOT_A_DOUBLET
+    else when {
+        containsUniformTriplet -> NOT_A_DOUBLET
+        containsUniformDoublet ->
+            find { it: Int ->
+                UNIFORM_DOUBLETS.first {
+                    first() == it.first() && middle() == it.first() ||
+                            first() == it.first() && last() == it.first() ||
+                            middle() == it.first() && last() == it.first()
+                }.first() != it
+            }!!
+        else -> NOT_A_DOUBLET
+    })
 
 
 fun main() {

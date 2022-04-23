@@ -9,3 +9,8 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+task server(type: GradleBuild) {
+    description = "lance le server backend de l'application"
+    buildFile = 'backend/build.gradle'
+    tasks = ['bootRun']
+}
