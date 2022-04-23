@@ -10,6 +10,9 @@ enum class DiceThrowResult {
 fun main() {
     println("un jet de dés :")
     println(dicesThrow)
+    println(dicesThrow)
+    println(dicesThrow)
+    println(dicesThrow)
 }
 
 /**
@@ -20,12 +23,17 @@ val dicesThrow: List<Int> by lazy { List(size = 3, init = { (ONE..SIX).random() 
 /**
  * Est ce un triplet?
  */
-val List<Int>.isUniformTriplet: Boolean
+val List<Int>.containsUniformTriplet: Boolean
     get() = UNIFORM_TRIPLETS.map { it.containsAll(elements = this) }.contains(true)
 
 val List<Int>.is456: Boolean get() = containsAll(`4_5_6`)
 
 val List<Int>.is123: Boolean get() = containsAll(`1_2_3`)
+
+val List<Int>.containsUniformDoublet: Boolean
+    get() = UNIFORM_DOUBLETS.map { it.containsAll(elements = this) }.contains(true)
+
+
 
 /**
  * Est ce que le jet est un 1 2 3 ?
@@ -54,20 +62,19 @@ fun List<Int>.isOpponentMade456(secondPlayerThrow: List<Int>): DiceThrowResult =
  * renvoi NOT_A_TRIPLET
  */
 val List<Int>.uniformTripletValue: Int
-    get() = if (!isUniformTriplet) NOT_A_TRIPLET
+    get() = if (!containsUniformTriplet) NOT_A_TRIPLET
     else UNIFORM_TRIPLETS.find { it.containsAll(elements = this) }!!.first()
 
 val List<Int>.whichThrowBranch: Int
     get() {
         if (containsAll(`4_5_6`)) return 1
         if (containsAll(`1_2_3`)) return 2
-        if (isUniformTriplet) return 3
-        if (isDoublet) return 4
+        if (containsUniformTriplet) return 3
+        if (containsUniformDoublet) return 4
         return 5
     }
 
-val List<Int>.isDoublet: Boolean
-    get() = UNIFORM_DOUBLETS.map { it.containsAll(elements = this) }.contains(true)
+
 
 
 /**
