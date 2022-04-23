@@ -27,6 +27,8 @@ voir aussi : https://en.wikipedia.org/wiki/Cee-lo[wiki cee-lo]
 
 
 === Environement
+
+==== Installer jhipster/khipster
 avoir curl installé sur son ordi
 ----
 sudo apt install curl
@@ -36,9 +38,29 @@ nvm install 14.15.0
 nvm use 14.15.0
 npm install -g generator-jhipster
 npm install -g generator-jhipster-kotlin
+----
+
+==== Executer le backend
+Dans un terminal se placer à la racine du projet et taper:
+----
+cd backend;
+----
+Execution du backend en local
+----
+./gradlew
+----
+executer les test
+----
+./gradlew check
+----
+
+==== Deployer sur heroku
+installer heroku client
+----
 sudo snap install heroku --classic
 heroku login
 ----
+
 
 === Test Driven Developpement
 
