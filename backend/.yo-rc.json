@@ -2,7 +2,7 @@
   "generator-jhipster": {
     "applicationType": "monolith",
     "authenticationType": "jwt",
-    "baseName": "CeeLoBackEnd",
+    "baseName": "CeeLoBackend",
     "blueprints": [
       {
         "name": "generator-jhipster-kotlin",
@@ -25,6 +25,9 @@
     "enableSwaggerCodegen": false,
     "enableTranslation": true,
     "entitySuffix": "",
+    "herokuAppName": "ceelo-backend",
+    "herokuDeployType": "jar",
+    "herokuJavaVersion": "11",
     "jhiPrefix": "jhi",
     "jhipsterVersion": "7.8.1",
     "jwtSecretKey": "MGI5ZWUzMWRiZjY5MTdlNTU5OGUwZjMzYTVhYzk1OWIyMDRhNzFhODZhYmE4YWMyMzAwM2M3ZTk0NjhlMDM3ODNjMGM2NjE2ZDFiMTk0Y2M1MjU4ODBiMGExZGI5Yjk3ZDQxNDdkNzM3NWZlYjI4Yjc2Y2FkOTllNGY4MDQxZTE=",
