@@ -1,0 +1,16 @@
+plugins {
+    id 'java-library'
+    id 'org.jetbrains.kotlin.jvm'
+    id 'application'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
+application {
+    mainClass = 'game.ceelo.domain.CeeloKt'
+}
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+}
