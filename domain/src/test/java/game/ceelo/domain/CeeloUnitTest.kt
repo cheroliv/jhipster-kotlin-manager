@@ -74,29 +74,37 @@ class CeeloUnitTest {
     @Test
     fun `Si le jet comporte un doublet uniforme alors la propriété containsUniformDoublet renvoi un true`() {
         assert(listOf(1, 1, 6).containsUniformDoublet)
-        assert(listOf(2, 2, 5).containsUniformTriplet)
-        assert(listOf(3, 3, 4).containsUniformTriplet)
-        assert(listOf(4, 4, 3).containsUniformTriplet)
-        assert(listOf(5, 5, 2).containsUniformTriplet)
-        assert(listOf(6, 6, 1).containsUniformTriplet)
-        assertFalse(`4_5_6`.containsUniformTriplet)
-        assertFalse(`1_2_3`.containsUniformTriplet)
+        assert(listOf(2, 2, 5).containsUniformDoublet)
+        assert(listOf(3, 3, 4).containsUniformDoublet)
+        assert(listOf(4, 4, 3).containsUniformDoublet)
+        assert(listOf(5, 5, 2).containsUniformDoublet)
+        assert(listOf(6, 6, 1).containsUniformDoublet)
+        assertFalse(`4_5_6`.containsUniformDoublet)
+        assertFalse(`1_2_3`.containsUniformDoublet)
         UNIFORM_TRIPLETS.map {
             assertFalse(it.containsUniformDoublet)
         }
     }
 
     @Test
-    @Ignore
     fun `Si le jet comporte un doublet uniforme alors la propriété uniformDoubletValue renvoi la valeur facial du dé non uniforme`() {
-//        assertEquals(NOT_A_DOUBLET, `1_2_3`.uniformDoubletValue)
         assertEquals(SIX, listOf(1, 1, 6).uniformDoubletValue)
-//        assertEquals(TWO, `2_2_x`.uniformDoubletValue)
-//        assertEquals(THREE, `3_3_x`.uniformDoubletValue)
-//        assertEquals(FOUR, `4_4_x`.uniformDoubletValue)
-//        assertEquals(FIVE, `5_5_x`.uniformDoubletValue)
-//        assertEquals(SIX, `6_6_x`.uniformDoubletValue)
+        assertEquals(FIVE, listOf(2, 2, 5).uniformDoubletValue)
+        assertEquals(FOUR, listOf(3, 3, 4).uniformDoubletValue)
+        assertEquals(THREE, listOf(4, 4, 3).uniformDoubletValue)
+        assertEquals(TWO, listOf(5, 5, 2).uniformDoubletValue)
+        assertEquals(ONE, listOf(6, 6, 1).uniformDoubletValue)
     }
+
+    @Test
+    fun `Si le jet ne comporte pas uniquement un doublet uniforme alors la propriété uniformDoubletValue renvoi la valeur NOT_A_DOUBLET`() {
+        assertEquals(NOT_A_DOUBLET, `1_2_3`.uniformDoubletValue)
+        assertEquals(NOT_A_DOUBLET, `4_5_6`.uniformDoubletValue)
+        UNIFORM_TRIPLETS.map {
+            assertEquals(NOT_A_DOUBLET, it.uniformDoubletValue)
+        }
+    }
+
 
 
 //    @Test

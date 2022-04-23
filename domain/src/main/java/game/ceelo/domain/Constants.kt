@@ -60,3 +60,7 @@ val UNIFORM_DOUBLETS by lazy {
     )
 }
 
+enum class DiceThrowResult {
+    WIN, LOOSE, RETHROW
+}
+
