@@ -41,6 +41,7 @@ npm install -g generator-jhipster-kotlin
 ----
 
 ==== Executer le backend
+== Depuis le projet backend
 Dans un terminal se placer à la racine du projet et taper:
 ----
 cd backend;
@@ -54,18 +55,30 @@ executer les test
 ./gradlew check
 ----
 
+== Depuis le projet parent
+----
+./gradlew runLocalServer
+----
+
+
+
 ==== Deployer sur heroku
 installer heroku client
 ----
 sudo snap install heroku --classic
 heroku login
 ----
-
+(pas fini!) +
 
 === Test Driven Developpement
 
-. "Si le jet est correct alors on récupère un triplet d'entier entre 1 et 6"
-. "Si le jet contient (4,5,6) alors la propriété is456 renvoi vrai"
-.. "Si le jet ne contient pas (4,5,6) alors la fonction is456 renvoi false"
-. "Si le jet est un triplet uniforme alors la propriété isTriplet renvoi un true"
-. "Si le jet est un triplet uniforme alors la propriété tripletUniformeValue renvoi la valeur faciale du dé"
+. `Si le jet est correct alors la propriété dicesThrow renvoi un triplet d'entier entre 1 et 6`
+. `Si le jet contient (4,5,6) alors la propriété is456 renvoi vrai`
+.. `Si le jet ne contient pas (4,5,6) alors la propriété is456 renvoi false`
+. `Si le jet contient (1,2,3) alors la propriété is123 renvoi vrai`
+.. `Si le jet ne contient pas (1,2,3) alors la propriété is123 renvoi false`
+. `Si le jet est un triplet uniforme alors la propriété containsUniformTriplet renvoi un true`
+.. `Si le jet est un triplet uniforme alors la propriété uniformTripletValue renvoi la valeur facial du dé`
+. `Si le jet comporte un doublet uniforme alors la propriété containsUniformDoublet renvoi un true`
+.. `Si le jet comporte un doublet uniforme alors la propriété uniformDoubletValue renvoi la valeur facial du dé non uniforme`
+.. `Si le jet ne comporte pas uniquement un doublet uniforme alors la propriété uniformDoubletValue renvoi la valeur NOT_A_DOUBLET`
