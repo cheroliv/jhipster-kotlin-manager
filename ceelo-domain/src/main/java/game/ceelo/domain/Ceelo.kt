@@ -1,16 +1,6 @@
 package game.ceelo.domain
 
 
-
-
-fun main() {
-    println("un jet de dés :")
-    println("bank throw : ${getDicesThrow()}")
-    println("player one throw : ${getDicesThrow()}")
-    println("player two throw : ${getDicesThrow()}")
-    println("player three throw : ${getDicesThrow()}")
-}
-
 /**
  * un jet de dés au hazard
  */
@@ -29,6 +19,7 @@ val List<Int>.is123: Boolean get() = containsAll(`1_2_3`)
 
 val List<Int>.containsUniformDoublet: Boolean
     get() = UNIFORM_DOUBLETS.map { it.containsAll(elements = this) }.contains(true)
+
 /**
  * La valeur faciale du dé triplet
  * Si le jet n'est pas un triplet
@@ -36,14 +27,41 @@ val List<Int>.containsUniformDoublet: Boolean
  */
 val List<Int>.uniformTripletValue: Int
     get() = if (!containsUniformTriplet) NOT_A_TRIPLET
-    else UNIFORM_TRIPLETS.find { it.containsAll(elements = this) }!!.first()
+    else UNIFORM_TRIPLETS.find { containsAll(elements = it) }!!.first()
 
 val List<Int>.uniformDoubletValue: Int
-    get() {
-        TODO("Not yet implemented")
+    get() = if (!containsUniformTriplet && !containsUniformDoublet) NOT_A_DOUBLET
+    else {
+        when {
+            containsUniformTriplet -> NOT_A_DOUBLET
+            containsUniformDoublet -> run {
+                first { it ->
+                    it != UNIFORM_DOUBLETS.find {
+                        it.containsAll(
+                            elements = this@uniformDoubletValue
+                        )
+                    }!!.first()
+                }
+            }
+            else -> NOT_A_DOUBLET
+        }
     }
 
+fun main() {
+    println("un jet de dés :")
+    println("bank throw : ${getDicesThrow()}")
+    println("player one throw : ${getDicesThrow()}")
+    println("player two throw : ${getDicesThrow()}")
+    println("player three throw : ${getDicesThrow()}")
 
+    val doublet = listOf(1, 5, 1)
+    println("doublet : $doublet")
+    println(doublet.uniformDoubletValue)
+//    println(`1_2_3`.uniformDoubletValue)
+//    println(`1_1_1`.uniformDoubletValue)
+//    println(`4_5_6`.uniformDoubletValue)
+    println(listOf(1, 1, 6).uniformDoubletValue)
+}
 
 //enum class DiceThrowResult {
 //    WIN, LOOSE, RETHROW
