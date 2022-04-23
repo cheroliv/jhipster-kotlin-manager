@@ -60,6 +60,17 @@ val UNIFORM_DOUBLETS by lazy {
     )
 }
 
+val `2_3_4` by lazy { listOf(TWO, THREE, FOUR) }
+val `3_4_5` by lazy { listOf(THREE, FOUR, FIVE) }
+val STRAIGHT_DOUBLETS by lazy {
+    listOf(
+        `2_3_4`,
+        `3_4_5`,
+    )
+}
+
+
+
 enum class DiceThrowResult {
     WIN, LOOSE, RETHROW
 }

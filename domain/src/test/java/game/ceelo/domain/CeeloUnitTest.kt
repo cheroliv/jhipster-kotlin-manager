@@ -12,7 +12,7 @@ class CeeloUnitTest {
     @Test
     fun `Si le jet est correct alors la propriété dicesThrow renvoi un triplet d'entier entre 1 et 6`() =
         getDicesThrow().run {
-            assertEquals(size, CEELO_DICE_THROW_SIZE)
+            assertEquals(CEELO_DICE_THROW_SIZE, size)
             forEach { assert(it in ONE..SIX) }
         }
 
@@ -105,7 +105,21 @@ class CeeloUnitTest {
         }
     }
 
+    @Test
+    fun `Si le jet contient 2 3 4 ou 3 4 5 alors la propriété isStraight renvoi true`() {
+        assert(listOf(2, 3, 4).isStraight)
+        assert(listOf(3, 4, 5).isStraight)
+    }
 
+    @Test
+    fun `Si le jet ne contient pas 2 3 4 ou 3 4 5 alors la propriété isStraight renvoi false`() {
+        UNIFORM_TRIPLETS.map {
+            assertFalse(it.containsAll(STRAIGHT_DOUBLETS.first()))
+            assertFalse(it.containsAll(STRAIGHT_DOUBLETS.last()))
+        }
+        assertFalse(STRAIGHT_DOUBLETS.map { it.containsAll(`1_2_3`) }.contains(true))
+        assertFalse(STRAIGHT_DOUBLETS.map { it.containsAll(`4_5_6`) }.contains(true))
+    }
 
 //    @Test
 //    fun `si mon jet contient 4 5 6 et l'autre non alors je gagne`() =

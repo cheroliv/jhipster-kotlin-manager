@@ -14,6 +14,10 @@ fun List<Int>.middle(): Int {
     return this.elementAt(index = 1)
 }
 
+val List<Int>.is456: Boolean get() = containsAll(`4_5_6`)
+
+val List<Int>.is123: Boolean get() = containsAll(`1_2_3`)
+
 /**
  * Est ce un triplet?
  */
@@ -24,9 +28,15 @@ val List<Int>.containsUniformTriplet: Boolean
         }
     }.contains(true)
 
-val List<Int>.is456: Boolean get() = containsAll(`4_5_6`)
+/**
+ * La valeur faciale du dé triplet
+ * Si le jet n'est pas un triplet
+ * renvoi NOT_A_TRIPLET
+ */
+val List<Int>.uniformTripletValue: Int
+    get() = if (!containsUniformTriplet) NOT_A_TRIPLET
+    else UNIFORM_TRIPLETS.find { containsAll(elements = it) }!!.first()
 
-val List<Int>.is123: Boolean get() = containsAll(`1_2_3`)
 
 val List<Int>.containsUniformDoublet: Boolean
     get() = run {
@@ -39,14 +49,6 @@ val List<Int>.containsUniformDoublet: Boolean
         }.contains(true)
     }
 
-/**
- * La valeur faciale du dé triplet
- * Si le jet n'est pas un triplet
- * renvoi NOT_A_TRIPLET
- */
-val List<Int>.uniformTripletValue: Int
-    get() = if (!containsUniformTriplet) NOT_A_TRIPLET
-    else UNIFORM_TRIPLETS.find { containsAll(elements = it) }!!.first()
 
 /**
  * Renvoi la valeur du dé qui n'est pas un doublet
@@ -66,6 +68,7 @@ val List<Int>.uniformDoubletValue: Int
         else -> NOT_A_DOUBLET
     })
 
+val List<Int>.isStraight: Boolean get() = STRAIGHT_DOUBLETS.map { containsAll(it) }.contains(true)
 
 fun main() {
     //"ici dans ce main c'est le playground pour tester du code"
@@ -78,7 +81,11 @@ fun main() {
     val doublet = listOf(1, 5, 1)
     println("doublet : $doublet")
 
-    println()
+    val straight1 = listOf(2, 3, 4)
+    val straight2 = listOf(3, 4, 5)
+
+    println(straight1.containsAll(listOf(4, 3, 2)))
+    println(straight2.containsAll(listOf(5, 4, 3)))
 }
 
 
