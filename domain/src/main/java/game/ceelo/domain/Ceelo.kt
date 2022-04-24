@@ -1,5 +1,7 @@
 package game.ceelo.domain
 
+import game.ceelo.domain.DiceThrowResult.WIN
+
 /**
  * un jet de dés au hazard
  */
@@ -70,6 +72,26 @@ val List<Int>.uniformDoubletValue: Int
 
 val List<Int>.isStraight: Boolean get() = STRAIGHT_TRIPLETS.map { containsAll(it) }.contains(true)
 
+
+val List<Int>.whichCase: Int
+    get() = when {
+        is456 -> AUTOMATIC_WIN_456_CASE
+        is123 -> AUTOMATIC_LOOSE_123_CASE
+        isStraight -> STRAIGHT_234_345_CASE
+        isUniformTriplet -> TRIPLET_CASE
+        isUniformDoublet -> DOUBLET_CASE
+        else -> OTHERS_CASE
+    }
+
+/**
+ * compare un jet à un autre
+ * pour renvoyer un resultat de jeu
+ */
+fun List<Int>.compareThrows(secondPlayerThrow: List<Int>): DiceThrowResult {
+    return WIN
+}
+
+
 fun main() {
     //"ici dans ce main c'est le playground pour tester du code"
     println("un jet de dés :")
@@ -88,34 +110,6 @@ fun main() {
     println(straight2.containsAll(listOf(5, 4, 3)))
 }
 
-val List<Int>.whichCase: Int
-    get() = when {
-        is456 -> AUTOMATIC_WIN_456_CASE
-        is123 -> AUTOMATIC_LOOSE_123_CASE
-        isStraight -> STRAIGHT_234_345_CASE
-        isUniformTriplet -> TRIPLET_CASE
-        isUniformDoublet -> DOUBLET_CASE
-        else -> OTHERS_CASE
-    }
-
-
-
-//val List<Int>.whichThrowBranch: Int
-//    get() {
-//        if (containsAll(`4_5_6`)) return 1
-//        if (containsAll(`1_2_3`)) return 2
-//        if (containsUniformTriplet) return 3
-//        if (containsUniformDoublet) return 4
-//        return 5
-//    }
-///**
-// * compare un jet à un autre
-// * pour renvoyer un resultat de jeu
-// */
-//fun List<Int>.compareThrows(secondPlayerThrow: List<Int>): DiceThrowResult {
-//    if (containsAll(`4_5_6`)) return isOpponentMade456(secondPlayerThrow)
-//    if (containsAll(`1_2_3`)) return isOpponentMade123(secondPlayerThrow)
-//}
 
 ///**
 // * Est ce que le jet est un 1 2 3 ?
