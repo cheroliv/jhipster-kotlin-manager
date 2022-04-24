@@ -161,7 +161,7 @@ class CeeloUnitTest {
 
 
     @Test
-    fun `si le jet contient (4,5,6) et l'autre (1,2,3) alors la methode renvoi WIN`() =
+    fun `Si le jet contient (4,5,6) et l'autre (1,2,3) alors la méthode renvoi WIN`() =
         assertEquals(WIN, `4_5_6`.compareThrows(`1_2_3`))
 //
 //    @Test
