@@ -92,33 +92,63 @@ fun List<Int>.compareThrows(secondPlayerThrow: List<Int>): DiceThrowResult =
             return when {
                 this@whichCase > this@otherWhichCase -> WIN
                 this@whichCase < this@otherWhichCase -> LOOSE
-                //TODO:amener les tests sur les cas d'égalité
-                else -> RETHROW
+                else -> onSameCase(
+                    secondPlayerThrow = secondPlayerThrow,
+                    throwCase = this@whichCase
+                )
             }
         }
     }
 
+fun List<Int>.onSameCase(
+    secondPlayerThrow: List<Int>,
+    throwCase: Int
+): DiceThrowResult = when (throwCase) {
+    AUTOMATIC_WIN_456_CASE -> RETHROW
+    AUTOMATIC_LOOSE_123_CASE -> RETHROW
+    STRAIGHT_234_345_CASE -> when {
+        containsAll(`2_3_4`) && secondPlayerThrow.containsAll(`2_3_4`) -> RETHROW
+        containsAll(`3_4_5`) && secondPlayerThrow.containsAll(`3_4_5`) -> RETHROW
+        containsAll(`2_3_4`) && secondPlayerThrow.containsAll(`3_4_5`) -> LOOSE
+        else -> WIN
+    }
+    TRIPLET_CASE -> when {
+        uniformTripletValue > secondPlayerThrow.uniformTripletValue -> WIN
+        uniformTripletValue < secondPlayerThrow.uniformTripletValue -> LOOSE
+        else -> RETHROW
+    }
+    DOUBLET_CASE -> when {
+        uniformDoubletValue > secondPlayerThrow.uniformDoubletValue -> WIN
+        uniformDoubletValue < secondPlayerThrow.uniformDoubletValue -> LOOSE
+        else -> RETHROW
+    }
+    else -> when {
+        sum() > secondPlayerThrow.sum() -> WIN
+        sum() < secondPlayerThrow.sum() -> LOOSE
+        else -> RETHROW
+    }
+}
 
-@Suppress("UNUSED_PARAMETER")
-fun main(args: Array<String>) {
+
+fun main(/*args: Array<String>*/) {
     /*"ici dans ce main c'est le playground pour tester du code"*/
     println("un jet de dés :")
-    println("bank throw : $dicesThrow")
-    println("player one throw : $dicesThrow")
-    println("player two throw : $dicesThrow")
-    println("player three throw : $dicesThrow")
-
-//    val doublet = listOf(1, 5, 1)
-//    println("doublet : $doublet")
-//    val straight1 = listOf(2, 3, 4)
-//    val straight2 = listOf(3, 4, 5)
-//    println(straight1.containsAll(listOf(4, 3, 2)))
-//    println(straight2.containsAll(listOf(5, 4, 3)))
-//    println()
-//    println()
-//    println()
-//    println(dicesThrow)
-//    println(dicesThrow)
-//    println(dicesThrow)
-//    println(dicesThrow)
+    dicesThrow.run playerOne@{
+        dicesThrow.run playerTwo@{
+            println("player one throw : ${this@playerOne}")
+            println("player two throw : ${this@playerTwo}")
+            println(
+                "player one : ${
+                    this@playerOne
+                        .compareThrows(secondPlayerThrow = this@playerTwo)
+                }"
+            )
+            println(
+                "player two : ${
+                    this@playerTwo
+                        .compareThrows(secondPlayerThrow = this@playerOne)
+                }"
+            )
+        }
+    }
 }
