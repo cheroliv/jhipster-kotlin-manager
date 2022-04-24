@@ -29,7 +29,7 @@ class CeeloUnitTest {
     @Test
     fun `Si le jet ne contient pas (4,5,6) alors la propriété is456 renvoi false`() {
         assertFalse(`1_2_3`.is456)
-        UNIFORM_TRIPLETS.map { assertFalse(it.is456) }
+        UNIFORM_TRIPLETS.forEach { assertFalse(it.is456) }
     }
 
     @Test
@@ -45,7 +45,7 @@ class CeeloUnitTest {
     @Test
     fun `Si le jet ne contient pas (1,2,3) alors la propriété is123 renvoi false`() {
         assertFalse(`1_2_3`.is456)
-        UNIFORM_TRIPLETS.map { assertFalse(it.is123) }
+        UNIFORM_TRIPLETS.forEach { assertFalse(it.is123) }
     }
 
     @Test
@@ -81,9 +81,7 @@ class CeeloUnitTest {
         assert(listOf(6, 6, 1).isUniformDoublet)
         assertFalse(`4_5_6`.isUniformDoublet)
         assertFalse(`1_2_3`.isUniformDoublet)
-        UNIFORM_TRIPLETS.map {
-            assertFalse(it.isUniformDoublet)
-        }
+        UNIFORM_TRIPLETS.forEach { assertFalse(it.isUniformDoublet) }
     }
 
     @Test
@@ -100,9 +98,7 @@ class CeeloUnitTest {
     fun `Si le jet ne comporte pas uniquement un doublet uniforme alors la propriété uniformDoubletValue renvoi la valeur NOT_A_DOUBLET`() {
         assertEquals(NOT_A_DOUBLET, `1_2_3`.uniformDoubletValue)
         assertEquals(NOT_A_DOUBLET, `4_5_6`.uniformDoubletValue)
-        UNIFORM_TRIPLETS.map {
-            assertEquals(NOT_A_DOUBLET, it.uniformDoubletValue)
-        }
+        UNIFORM_TRIPLETS.forEach { assertEquals(NOT_A_DOUBLET, it.uniformDoubletValue) }
     }
 
     @Test
@@ -122,14 +118,12 @@ class CeeloUnitTest {
     }
 
     @Test
-    fun `Si le jet contient (4,5,6) alors la propriété whichCase renvoi AUTOMATIC_WIN_456_CASE`() {
+    fun `Si le jet contient (4,5,6) alors la propriété whichCase renvoi AUTOMATIC_WIN_456_CASE`() =
         assertEquals(AUTOMATIC_WIN_456_CASE, listOf(4, 5, 6).whichCase)
-    }
 
     @Test
-    fun `Si le jet contient (1,2,3) alors la propriété whichCase renvoi AUTOMATIC_LOOSE_123_CASE`() {
+    fun `Si le jet contient (1,2,3) alors la propriété whichCase renvoi AUTOMATIC_LOOSE_123_CASE`() =
         assertEquals(AUTOMATIC_LOOSE_123_CASE, listOf(1, 2, 3).whichCase)
-    }
 
     @Test
     fun `Si le jet contient (2,3,4) ou (3,4,5) alors la propriété whichCase renvoi STRAIGHT_234_345_CASE`() {
@@ -138,11 +132,8 @@ class CeeloUnitTest {
     }
 
     @Test
-    fun `Si le jet contient un triplet uniforme alors la propriété whichCase renvoi TRIPLET_CASE`() {
-        UNIFORM_TRIPLETS.map {
-            assertEquals(UNIFORM_TRIPLET_CASE, it.whichCase)
-        }
-    }
+    fun `Si le jet contient un triplet uniforme alors la propriété whichCase renvoi TRIPLET_CASE`():Unit =
+        UNIFORM_TRIPLETS.forEach { assertEquals(UNIFORM_TRIPLET_CASE, it.whichCase) }
 
     @Test
     fun `Si le jet contient un doublet uniforme uniquement alors la propriété whichCase renvoi DOUBLET_CASE`() {
@@ -155,9 +146,8 @@ class CeeloUnitTest {
     }
 
     @Test
-    fun `Si le jet ne contient ni (4,5,6) ni (1,2,3) ni triplet uniforme ni doublet uniforme alors la propriété whichCase renvoi OTHERS_CASE`() {
+    fun `Si le jet ne contient ni (4,5,6) ni (1,2,3) ni triplet uniforme ni doublet uniforme alors la propriété whichCase renvoi OTHERS_CASE`() =
         assertEquals(OTHER_THROW_CASE, listOf(1, 3, 6).whichCase)
-    }
 
     @Test
     fun `Si le jet contient (4,5,6) et l'autre (1,2,3) alors la propriété compareThrows renvoi WIN`() =
