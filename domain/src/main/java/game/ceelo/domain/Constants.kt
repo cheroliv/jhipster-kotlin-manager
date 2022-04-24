@@ -63,13 +63,9 @@ val STRAIGHT_TRIPLETS by lazy {
 }
 
 const val AUTOMATIC_WIN_456_CASE = 6
-const val TRIPLET_CASE = 5
-const val DOUBLET_CASE = 4
+const val UNIFORM_TRIPLET_CASE = 5
+const val UNIFORM_DOUBLET_CASE = 4
 const val STRAIGHT_234_345_CASE = 3
-const val OTHERS_CASE = 2
+const val OTHER_THROW_CASE = 2
 const val AUTOMATIC_LOOSE_123_CASE = 1
-
-enum class DiceThrowResult {
-    WIN, LOOSE, RETHROW
-}
 

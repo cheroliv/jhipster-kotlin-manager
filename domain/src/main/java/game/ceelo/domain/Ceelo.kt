@@ -77,9 +77,9 @@ val List<Int>.whichCase: Int
         is456 -> AUTOMATIC_WIN_456_CASE
         is123 -> AUTOMATIC_LOOSE_123_CASE
         isStraight -> STRAIGHT_234_345_CASE
-        isUniformTriplet -> TRIPLET_CASE
-        isUniformDoublet -> DOUBLET_CASE
-        else -> OTHERS_CASE
+        isUniformTriplet -> UNIFORM_TRIPLET_CASE
+        isUniformDoublet -> UNIFORM_DOUBLET_CASE
+        else -> OTHER_THROW_CASE
     }
 
 /**
@@ -112,12 +112,12 @@ fun List<Int>.onSameCase(
         containsAll(`2_3_4`) && secondPlayerThrow.containsAll(`3_4_5`) -> LOOSE
         else -> WIN
     }
-    TRIPLET_CASE -> when {
+    UNIFORM_TRIPLET_CASE -> when {
         uniformTripletValue > secondPlayerThrow.uniformTripletValue -> WIN
         uniformTripletValue < secondPlayerThrow.uniformTripletValue -> LOOSE
         else -> RETHROW
     }
-    DOUBLET_CASE -> when {
+    UNIFORM_DOUBLET_CASE -> when {
         uniformDoubletValue > secondPlayerThrow.uniformDoubletValue -> WIN
         uniformDoubletValue < secondPlayerThrow.uniformDoubletValue -> LOOSE
         else -> RETHROW
@@ -128,7 +128,9 @@ fun List<Int>.onSameCase(
         else -> RETHROW
     }
 }
-
+enum class DiceThrowResult {
+    WIN, LOOSE, RETHROW
+}
 
 fun main(/*args: Array<String>*/) {
     /*"ici dans ce main c'est le playground pour tester du code"*/

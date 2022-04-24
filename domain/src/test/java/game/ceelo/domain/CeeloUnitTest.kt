@@ -3,7 +3,6 @@ package game.ceelo.domain
 import game.ceelo.domain.DiceThrowResult.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
-import org.junit.Ignore
 import org.junit.Test
 
 
@@ -141,23 +140,23 @@ class CeeloUnitTest {
     @Test
     fun `Si le jet contient un triplet uniforme alors la propriété whichCase renvoi TRIPLET_CASE`() {
         UNIFORM_TRIPLETS.map {
-            assertEquals(TRIPLET_CASE, it.whichCase)
+            assertEquals(UNIFORM_TRIPLET_CASE, it.whichCase)
         }
     }
 
     @Test
     fun `Si le jet contient un doublet uniforme uniquement alors la propriété whichCase renvoi DOUBLET_CASE`() {
-        assertEquals(DOUBLET_CASE, listOf(1, 1, 6).whichCase)
-        assertEquals(DOUBLET_CASE, listOf(2, 2, 5).whichCase)
-        assertEquals(DOUBLET_CASE, listOf(3, 3, 4).whichCase)
-        assertEquals(DOUBLET_CASE, listOf(4, 4, 3).whichCase)
-        assertEquals(DOUBLET_CASE, listOf(5, 5, 2).whichCase)
-        assertEquals(DOUBLET_CASE, listOf(6, 6, 1).whichCase)
+        assertEquals(UNIFORM_DOUBLET_CASE, listOf(1, 1, 6).whichCase)
+        assertEquals(UNIFORM_DOUBLET_CASE, listOf(2, 2, 5).whichCase)
+        assertEquals(UNIFORM_DOUBLET_CASE, listOf(3, 3, 4).whichCase)
+        assertEquals(UNIFORM_DOUBLET_CASE, listOf(4, 4, 3).whichCase)
+        assertEquals(UNIFORM_DOUBLET_CASE, listOf(5, 5, 2).whichCase)
+        assertEquals(UNIFORM_DOUBLET_CASE, listOf(6, 6, 1).whichCase)
     }
 
     @Test
     fun `Si le jet ne contient ni (4,5,6) ni (1,2,3) ni triplet uniforme ni doublet uniforme alors la propriété whichCase renvoi OTHERS_CASE`() {
-        assertEquals(OTHERS_CASE, listOf(1, 3, 6).whichCase)
+        assertEquals(OTHER_THROW_CASE, listOf(1, 3, 6).whichCase)
     }
 
     @Test
