@@ -7,49 +7,61 @@ import androidx.lifecycle.LifecycleOwner
 class DiceGameObserver : DefaultLifecycleObserver {
     override fun onCreate(owner: LifecycleOwner) {
         super.onCreate(owner)
-        Log.d(
-            DiceGameObserver::class.java.name,
-            "onCreate()"
-        )
+        this::class.java.name.apply {
+            Log.d(
+                this,
+                "$this.onCreate()"
+            )
+        }
     }
 
     override fun onStart(owner: LifecycleOwner) {
         super.onStart(owner)
-        Log.d(
-            DiceGameObserver::class.java.name,
-            "onStart()"
-        )
+        this::class.java.name.apply {
+            Log.d(
+                this,
+                "$this.onStart()"
+            )
+        }
     }
 
     override fun onResume(owner: LifecycleOwner) {
         super.onResume(owner)
-        Log.d(
-            DiceGameObserver::class.java.name,
-            "onResume()"
-        )
+        this::class.java.name.apply {
+            Log.d(
+                this,
+                "$this.onResume()"
+            )
+        }
     }
 
     override fun onPause(owner: LifecycleOwner) {
         super.onPause(owner)
-        Log.d(
-            DiceGameObserver::class.java.name,
-            "onPause()"
-        )
+        this::class.java.name.apply {
+            Log.d(
+                this,
+                "$this.onPause()"
+            )
+        }
     }
 
     override fun onStop(owner: LifecycleOwner) {
         super.onStop(owner)
-        Log.d(
-            DiceGameObserver::class.java.name,
-            "onStop()"
-        )
+        this::class.java.name.apply {
+            Log.d(
+                this,
+                "$this.onStop()"
+            )
+        }
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
         super.onDestroy(owner)
-        Log.d(
-            DiceGameObserver::class.java.name,
-            "onDestroy()"
-        )
+        this::class.java.name.apply {
+            Log.d(
+                this,
+                "$this.onDestroy()"
+            )
+        }
     }
 }
