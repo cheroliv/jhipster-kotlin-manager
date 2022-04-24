@@ -160,12 +160,12 @@ class CeeloUnitTest {
     }
 
     @Test
-    fun `Si le jet contient (4,5,6) et l'autre (1,2,3) alors la méthode renvoi WIN`() =
+    fun `Si le jet contient (4,5,6) et l'autre (1,2,3) alors la propriété compareThrows renvoi WIN`() =
         assertEquals(WIN, `4_5_6`.compareThrows(`1_2_3`))
 
 
     @Test
-    fun `Si le jet contient 4 5 6 non ordonné et l'autre non alors je gagne`() =
+    fun `Si le jet contient 4 5 6 non ordonné et l'autre (1,2,3) alors la propriété compareThrows renvoi WIN`() =
         assertEquals(listOf(5, 6, 4).compareThrows(`1_2_3`), WIN)
 
 //    @Test

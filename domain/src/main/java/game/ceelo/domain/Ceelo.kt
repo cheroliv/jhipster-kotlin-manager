@@ -102,16 +102,12 @@ fun main(args:Array<String>) {
     println("player two throw : $dicesThrow")
     println("player three throw : $dicesThrow")
 
-    val doublet = listOf(1, 5, 1)
-    println("doublet : $doublet")
-
-    val straight1 = listOf(2, 3, 4)
-    val straight2 = listOf(3, 4, 5)
-
-    println(straight1.containsAll(listOf(4, 3, 2)))
-    println(straight2.containsAll(listOf(5, 4, 3)))
-
-
+//    val doublet = listOf(1, 5, 1)
+//    println("doublet : $doublet")
+//    val straight1 = listOf(2, 3, 4)
+//    val straight2 = listOf(3, 4, 5)
+//    println(straight1.containsAll(listOf(4, 3, 2)))
+//    println(straight2.containsAll(listOf(5, 4, 3)))
 //    println()
 //    println()
 //    println()
