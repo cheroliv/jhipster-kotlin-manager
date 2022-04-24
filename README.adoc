@@ -81,10 +81,11 @@ Dans un terminal se placer à la racine du projet et taper:
 ----
 cd backend;
 ----
-Execution du backend en local
+Execution du backend en local : http://localhost:8080[http://localhost:8080]
 ----
 ./gradlew
 ----
+
 executer les test
 ----
 ./gradlew check
@@ -94,7 +95,7 @@ executer les test
 ----
 ./gradlew runLocalServer
 ----
-
+Toujour en local sur http://localhost:8080[http://localhost:8080]
 
 ==== Deployer sur heroku
 installer heroku client
