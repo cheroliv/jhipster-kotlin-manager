@@ -1,6 +1,6 @@
 package game.ceelo.domain
 
-import game.ceelo.domain.DiceThrowResult.WIN
+import game.ceelo.domain.DiceThrowResult.*
 
 /**
  * un jet de dés au hazard
@@ -89,12 +89,21 @@ val List<Int>.whichCase: Int
  * pour renvoyer un resultat de jeu
  */
 fun List<Int>.compareThrows(secondPlayerThrow: List<Int>): DiceThrowResult {
-    return WIN
+    whichCase.run whichCase@{
+        secondPlayerThrow.whichCase.run otherWhichCase@{
+            return when {
+                this@whichCase > this@otherWhichCase -> WIN
+                this@whichCase < this@otherWhichCase -> LOOSE
+                //TODO:amener les tests sur les cas d'égalité
+                else -> RETHROW
+            }
+        }
+    }
 }
 
 
 @Suppress("UNUSED_PARAMETER")
-fun main(args:Array<String>) {
+fun main(args: Array<String>) {
     /*"ici dans ce main c'est le playground pour tester du code"*/
     println("un jet de dés :")
     println("bank throw : $dicesThrow")
@@ -116,24 +125,3 @@ fun main(args:Array<String>) {
 //    println(dicesThrow)
 //    println(dicesThrow)
 }
-
-///**
-// * Est ce que le jet est un 1 2 3 ?
-// */
-//fun List<Int>.isOpponentMade123(secondPlayerThrow: List<Int>): DiceThrowResult =
-//    if (containsAll(`1_2_3`) &&
-//        !secondPlayerThrow.containsAll(`1_2_3`)
-//    ) LOOSE else if (containsAll(`1_2_3`) &&
-//        secondPlayerThrow.containsAll(`1_2_3`)
-//    ) RETHROW else WIN
-//
-//
-///**
-// * Est ce que le jet est un 4 5 6 ?
-// */
-//fun List<Int>.isOpponentMade456(secondPlayerThrow: List<Int>): DiceThrowResult =
-//    if (containsAll(`4_5_6`) &&
-//        !secondPlayerThrow.containsAll(`4_5_6`)
-//    ) WIN else if (containsAll(`4_5_6`) &&
-//        secondPlayerThrow.containsAll(`4_5_6`)
-//    ) RETHROW else LOOSE

@@ -1,6 +1,6 @@
 package game.ceelo.domain
 
-import game.ceelo.domain.DiceThrowResult.WIN
+import game.ceelo.domain.DiceThrowResult.*
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Test
@@ -168,13 +168,13 @@ class CeeloUnitTest {
     fun `Si le jet contient (4,5,6) non ordonné et l'autre (1,2,3) alors la propriété compareThrows renvoi WIN`() =
         assertEquals(listOf(5, 6, 4).compareThrows(`1_2_3`), WIN)
 
-//    @Test
-//    fun `Si le jet contient 4 5 6 et l'autre aussi alors rejouer`() =
-//        assertEquals(`4_5_6`.compareThrows(`4_5_6`), RETHROW)
-//
-//    @Test
-//    fun `Si le jet contient 1 2 3 et l'autre non alors je perds`() =
-//        assertEquals(`1_2_3`.compareThrows(`4_5_6`), LOOSE)
+    @Test
+    fun `Si le jet contient 4 5 6 et l'autre aussi alors la propriété compareThrows renvoi RETHROW`() =
+        assertEquals(`4_5_6`.compareThrows(`4_5_6`), RETHROW)
+
+    @Test
+    fun `Si le jet contient (1,2,3) et l'autre (4,5,6) alors la propriété compareThrows renvoi LOOSE`() =
+        assertEquals(`1_2_3`.compareThrows(`4_5_6`), LOOSE)
 //
 //    @Test
 //    fun `Si le jet contient 1 2 3 non ordonné et l'autre non alors je perds`() =
