@@ -94,7 +94,18 @@ npm install -g generator-jhipster
 npm install -g generator-jhipster-kotlin
 ----
 
+=== Executer le domain metier
+le fichier game.ceelo.domain.Ceelo.kt possède une fonction main, +
+cela permet d'exécuter du metier indépendamment de tous frameworks.
+---
+./gradlew :domain:run
+---
 
+=== Tester le domain metier
+---
+./gradlew :domain:check
+---
+le rapport de test est ici : domain/build/reports/tests/test/index.html
 
 === Executer le backend
 
@@ -115,7 +126,7 @@ exécuter les tests
 
 ==== Depuis le projet parent
 ----
-./gradlew runLocalServer
+./gradlew serve
 ----
 Toujours en local sur http://localhost:8080[http://localhost:8080]
 

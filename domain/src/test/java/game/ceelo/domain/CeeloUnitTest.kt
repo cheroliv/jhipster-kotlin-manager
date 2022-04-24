@@ -10,8 +10,8 @@ import org.junit.Test
 class CeeloUnitTest {
 
     @Test
-    fun `Si le jet est correct alors la function dicesThrow() renvoi un triplet d'entier entre 1 et 6`() =
-        getDicesThrow().run {
+    fun `Si le jet est correct alors la propriété dicesThrow renvoi un triplet d'entier entre 1 et 6`() =
+        dicesThrow.run {
             assertEquals(CEELO_DICE_THROW_SIZE, size)
             forEach { assert(it in ONE..SIX) }
         }

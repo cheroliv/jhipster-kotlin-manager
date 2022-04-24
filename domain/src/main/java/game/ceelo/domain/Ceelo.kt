@@ -5,7 +5,8 @@ import game.ceelo.domain.DiceThrowResult.WIN
 /**
  * un jet de dés au hazard
  */
-fun getDicesThrow(): List<Int> = List(size = 3, init = { (ONE..SIX).random() })
+val dicesThrow: List<Int>
+    get() = List(size = 3, init = { (ONE..SIX).random() })
 
 /**
  * Renvoi le dé du milieu
@@ -56,7 +57,7 @@ val List<Int>.isUniformDoublet: Boolean
  * Renvoi la valeur du dé qui n'est pas un doublet
  */
 val List<Int>.uniformDoubletValue: Int
-    get() = (if (!isUniformTriplet && !isUniformDoublet) NOT_A_DOUBLET
+    get() = if (!isUniformTriplet && !isUniformDoublet) NOT_A_DOUBLET
     else when {
         isUniformTriplet -> NOT_A_DOUBLET
         isUniformDoublet ->
@@ -68,7 +69,7 @@ val List<Int>.uniformDoubletValue: Int
                 }.first() != it
             }!!
         else -> NOT_A_DOUBLET
-    })
+    }
 
 val List<Int>.isStraight: Boolean get() = STRAIGHT_TRIPLETS.map { containsAll(it) }.contains(true)
 
@@ -92,13 +93,14 @@ fun List<Int>.compareThrows(secondPlayerThrow: List<Int>): DiceThrowResult {
 }
 
 
-fun main() {
-    //"ici dans ce main c'est le playground pour tester du code"
+@Suppress("UNUSED_PARAMETER")
+fun main(args:Array<String>) {
+    /*"ici dans ce main c'est le playground pour tester du code"*/
     println("un jet de dés :")
-    println("bank throw : ${getDicesThrow()}")
-    println("player one throw : ${getDicesThrow()}")
-    println("player two throw : ${getDicesThrow()}")
-    println("player three throw : ${getDicesThrow()}")
+    println("bank throw : $dicesThrow")
+    println("player one throw : $dicesThrow")
+    println("player two throw : $dicesThrow")
+    println("player three throw : $dicesThrow")
 
     val doublet = listOf(1, 5, 1)
     println("doublet : $doublet")
@@ -108,8 +110,16 @@ fun main() {
 
     println(straight1.containsAll(listOf(4, 3, 2)))
     println(straight2.containsAll(listOf(5, 4, 3)))
+
+
+//    println()
+//    println()
+//    println()
+//    println(dicesThrow)
+//    println(dicesThrow)
+//    println(dicesThrow)
+//    println(dicesThrow)
 }
-fun dicesThrow(): List<Int> = List(size = 3, init = { (ONE..SIX).random() })
 
 ///**
 // * Est ce que le jet est un 1 2 3 ?
