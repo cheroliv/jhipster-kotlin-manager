@@ -17,7 +17,7 @@ class CeeloUnitTest {
         }
 
     @Test
-    fun `Si le jet contient (4,5,6) alors la propriété is456 renvoi vrai`() {
+    fun `Si le jet contient (4,5,6) alors la propriété is456 renvoi true`() {
         assert(listOf(4, 5, 6).is456)
         assert(listOf(4, 6, 5).is456)
         assert(listOf(5, 4, 6).is456)
@@ -33,7 +33,7 @@ class CeeloUnitTest {
     }
 
     @Test
-    fun `Si le jet contient (1,2,3) alors la propriété is123 renvoi vrai`() {
+    fun `Si le jet contient (1,2,3) alors la propriété is123 renvoi true`() {
         assert(listOf(1, 2, 3).is123)
         assert(listOf(1, 3, 2).is123)
         assert(listOf(2, 1, 3).is123)
@@ -106,13 +106,13 @@ class CeeloUnitTest {
     }
 
     @Test
-    fun `Si le jet contient 2 3 4 ou 3 4 5 alors la propriété isStraight renvoi true`() {
+    fun `Si le jet contient (2,3,4) ou (3,4,5) alors la propriété isStraight renvoi true`() {
         assert(listOf(2, 3, 4).isStraight)
         assert(listOf(3, 4, 5).isStraight)
     }
 
     @Test
-    fun `Si le jet ne contient pas 2 3 4 ou 3 4 5 alors la propriété isStraight renvoi false`() {
+    fun `Si le jet ne contient pas (2,3,4) ou (3,4,5) alors la propriété isStraight renvoi false`() {
         UNIFORM_TRIPLETS.map {
             assertFalse(it.containsAll(STRAIGHT_TRIPLETS.first()))
             assertFalse(it.containsAll(STRAIGHT_TRIPLETS.last()))
