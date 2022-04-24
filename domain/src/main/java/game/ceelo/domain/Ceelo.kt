@@ -109,7 +109,7 @@ fun main() {
     println(straight1.containsAll(listOf(4, 3, 2)))
     println(straight2.containsAll(listOf(5, 4, 3)))
 }
-
+fun dicesThrow(): List<Int> = List(size = 3, init = { (ONE..SIX).random() })
 
 ///**
 // * Est ce que le jet est un 1 2 3 ?

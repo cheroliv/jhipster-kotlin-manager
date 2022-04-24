@@ -10,7 +10,7 @@ import org.junit.Test
 class CeeloUnitTest {
 
     @Test
-    fun `Si le jet est correct alors la propriété dicesThrow renvoi un triplet d'entier entre 1 et 6`() =
+    fun `Si le jet est correct alors la function dicesThrow() renvoi un triplet d'entier entre 1 et 6`() =
         getDicesThrow().run {
             assertEquals(CEELO_DICE_THROW_SIZE, size)
             forEach { assert(it in ONE..SIX) }
@@ -159,33 +159,33 @@ class CeeloUnitTest {
         assertEquals(OTHERS_CASE, listOf(1, 3, 6).whichCase)
     }
 
-
     @Test
     fun `Si le jet contient (4,5,6) et l'autre (1,2,3) alors la méthode renvoi WIN`() =
         assertEquals(WIN, `4_5_6`.compareThrows(`1_2_3`))
-//
+
+
+    @Test
+    fun `Si le jet contient 4 5 6 non ordonné et l'autre non alors je gagne`() =
+        assertEquals(listOf(5, 6, 4).compareThrows(`1_2_3`), WIN)
+
 //    @Test
-//    fun `si mon jet contient 4 5 6 non ordonné et l'autre non alors je gagne`() =
-//        assertEquals(listOf(5, 6, 4).compareThrows(`1_2_3`), WIN)
-//
-//    @Test
-//    fun `si mon jet contient 4 5 6 et l'autre aussi alors rejouer`() =
+//    fun `Si le jet contient 4 5 6 et l'autre aussi alors rejouer`() =
 //        assertEquals(`4_5_6`.compareThrows(`4_5_6`), RETHROW)
 //
 //    @Test
-//    fun `si mon jet contient 1 2 3 et l'autre non alors je perds`() =
+//    fun `Si le jet contient 1 2 3 et l'autre non alors je perds`() =
 //        assertEquals(`1_2_3`.compareThrows(`4_5_6`), LOOSE)
 //
 //    @Test
-//    fun `si mon jet contient 1 2 3 non ordonné et l'autre non alors je perds`() =
+//    fun `Si le jet contient 1 2 3 non ordonné et l'autre non alors je perds`() =
 //        assertEquals(listOf(3, 2, 1).compareThrows(`4_5_6`), LOOSE)
 //
 //    @Test
-//    fun `si mon jet contient 1 2 3 et l'autre aussi alors rejouer`() =
+//    fun `Si le jet contient 1 2 3 et l'autre aussi alors rejouer`() =
 //        assertEquals(`1_2_3`.compareThrows(`1_2_3`), RETHROW)
 //
 //    @Test
-//    fun `si mon jet est un triplet et l'autre aussi alors le triplet le plus fort gagne`() {
+//    fun `Si le jet est un triplet et l'autre aussi alors le triplet le plus fort gagne`() {
 //        assertEquals(`6_6_6`.compareThrows(`5_5_5`), WIN)
 //        assertEquals(`6_6_6`.compareThrows(`4_4_4`), WIN)
 //        assertEquals(`6_6_6`.compareThrows(`3_3_3`), WIN)
@@ -195,7 +195,7 @@ class CeeloUnitTest {
 //
 //    @Test
 //    @Ignore
-//    fun `si mon jet est un triplet et l'autre aussi alors le triplet le plus faible perd`() {
+//    fun `Si le jet est un triplet et l'autre aussi alors le triplet le plus faible perd`() {
 //        assertEquals(`1_1_1`.compareThrows(`6_6_6`), LOOSE)
 //        assertEquals(`1_1_1`.compareThrows(`5_5_5`), LOOSE)
 //        assertEquals(`1_1_1`.compareThrows(`4_4_4`), LOOSE)
@@ -205,7 +205,7 @@ class CeeloUnitTest {
 //
 //    @Test
 //    @Ignore
-//    fun `si mon jet est un triplet alors les triplets égaux font rejouer`() {
+//    fun `Si le jet est un triplet alors les triplets égaux font rejouer`() {
 //        assertEquals(`6_6_6`.compareThrows(`6_6_6`), RETHROW)
 //        assertEquals(`5_5_5`.compareThrows(`5_5_5`), RETHROW)
 //        assertEquals(`4_4_4`.compareThrows(`4_4_4`), RETHROW)
