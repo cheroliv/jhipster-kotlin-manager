@@ -97,45 +97,55 @@ npm install -g generator-jhipster-kotlin
 === Executer le domain metier
 le fichier game.ceelo.domain.Ceelo.kt possède une fonction main, +
 cela permet d'exécuter du metier indépendamment de tous frameworks.
----
+[source,bash]
+----
 ./gradlew :domain:run
----
+----
 
 === Tester le domain metier
----
+[source,bash]
+----
 ./gradlew :domain:check
----
+----
 le rapport de test est ici : domain/build/reports/tests/test/index.html
 
 === Executer le backend
 
 ==== Depuis le projet backend
+
 Dans un terminal se placer à la racine du projet et taper:
+[source,bash]
 ----
 cd backend;
 ----
+
 Exécution du backend en local : http://localhost:8080[http://localhost:8080]
+[source,bash]
 ----
 ./gradlew
 ----
 
 exécuter les tests
+[source,bash]
 ----
 ./gradlew check
 ----
 
 ==== Depuis le projet parent
+[source,bash]
 ----
 ./gradlew serve
 ----
 Toujours en local sur http://localhost:8080[http://localhost:8080]
 
+
 ==== Deployer sur heroku
 installer heroku client
+[source,bash]
 ----
 sudo snap install heroku --classic
 heroku login
 ----
-(pas fini!) +
+(TODO : pas fini!) +
 
 === Déployer son app mobile sur playstore (TODO)
