@@ -110,34 +110,14 @@ cela permet d'exécuter du metier indépendamment de tous frameworks.
 ----
 le rapport de test est ici : domain/build/reports/tests/test/index.html
 
-=== Executer le backend
-
-==== Depuis le projet backend
-
-Dans un terminal se placer à la racine du projet et taper:
-[source,bash]
-----
-cd backend;
-----
-
-Exécution du backend en local : http://localhost:8080[http://localhost:8080]
-[source,bash]
-----
-./gradlew
-----
-
-exécuter les tests
-[source,bash]
-----
-./gradlew check
-----
-
-==== Depuis le projet parent
+=== Executer le backend, depuis le projet parent
+Le backend est un projet independant du multibuild project, +
+mais lançable depuis une tache du projet racine.
 [source,bash]
 ----
 ./gradlew serve
 ----
-Toujours en local sur http://localhost:8080[http://localhost:8080]
+En local sur http://localhost:8080[http://localhost:8080]
 
 
 ==== Deployer sur heroku
