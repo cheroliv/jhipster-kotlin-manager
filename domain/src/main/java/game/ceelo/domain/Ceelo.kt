@@ -11,11 +11,9 @@ val dicesThrow: List<Int>
 /**
  * Renvoi le dé du milieu
  */
-fun List<Int>.middle(): Int {
-    if (isEmpty())
-        throw NoSuchElementException("dice throw is empty.")
-    return this.elementAt(index = 1)
-}
+fun List<Int>.middle(): Int = if (isEmpty())
+    throw NoSuchElementException("dice throw is empty.")
+else elementAt(index = 1)
 
 val List<Int>.is456: Boolean get() = containsAll(`4_5_6`)
 
@@ -88,7 +86,7 @@ val List<Int>.whichCase: Int
  * compare un jet à un autre
  * pour renvoyer un resultat de jeu
  */
-fun List<Int>.compareThrows(secondPlayerThrow: List<Int>): DiceThrowResult {
+fun List<Int>.compareThrows(secondPlayerThrow: List<Int>): DiceThrowResult =
     whichCase.run whichCase@{
         secondPlayerThrow.whichCase.run otherWhichCase@{
             return when {
@@ -99,7 +97,6 @@ fun List<Int>.compareThrows(secondPlayerThrow: List<Int>): DiceThrowResult {
             }
         }
     }
-}
 
 
 @Suppress("UNUSED_PARAMETER")
