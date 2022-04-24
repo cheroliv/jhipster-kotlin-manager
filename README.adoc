@@ -61,12 +61,28 @@ Root project 'CeeLoGame' +
 \--- Project ':domain' +
 Extern Project 'backend'
 
+
 === Environement
 
-==== Installer jhipster/khipster
-avoir curl installé sur son ordi
+==== Installer de l'environement de dev
+curl, sdkman, java 17, nvm, node.js, jhipster, khipster
+curl
+[source,bash]
 ----
+sudo snap remove curl
 sudo apt install curl
+----
+
+si java n'est pas installé, installons le
+[source,bash]
+----
+curl -s "https://get.sdkman.io" | bash
+sdk i java 17.0.2-oracle
+----
+
+nvm node.js, npm, jhisper et khipster
+[source,bash]
+----
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 nvm install node
 nvm install 14.15.0
@@ -75,7 +91,10 @@ npm install -g generator-jhipster
 npm install -g generator-jhipster-kotlin
 ----
 
+
+
 === Executer le backend
+
 ==== Depuis le projet backend
 Dans un terminal se placer à la racine du projet et taper:
 ----
@@ -86,7 +105,7 @@ Execution du backend en local : http://localhost:8080[http://localhost:8080]
 ./gradlew
 ----
 
-executer les test
+executer les tests
 ----
 ./gradlew check
 ----
@@ -104,3 +123,5 @@ sudo snap install heroku --classic
 heroku login
 ----
 (pas fini!) +
+
+=== Déployer son app mobile sur playstore (TODO)
