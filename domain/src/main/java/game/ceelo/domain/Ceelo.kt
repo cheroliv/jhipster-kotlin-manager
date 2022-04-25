@@ -128,6 +128,7 @@ fun List<Int>.onSameCase(
         else -> RETHROW
     }
 }
+
 enum class DiceThrowResult {
     WIN, LOOSE, RETHROW
 }
@@ -137,20 +138,14 @@ fun main(/*args: Array<String>*/) {
     println("un jet de dés :")
     dicesThrow.run playerOne@{
         dicesThrow.run playerTwo@{
-            println("player one throw : ${this@playerOne}")
-            println("player two throw : ${this@playerTwo}")
-            println(
-                "player one : ${
-                    this@playerOne
-                        .compareThrows(secondPlayerThrow = this@playerTwo)
-                }"
-            )
-            println(
-                "player two : ${
-                    this@playerTwo
-                        .compareThrows(secondPlayerThrow = this@playerOne)
-                }"
-            )
+            do {
+                println("player one throw : ${this@playerOne}")
+                println("player two throw : ${this@playerTwo}")
+                val result = this@playerOne
+                    .compareThrows(secondPlayerThrow = this@playerTwo)
+                if (result == WIN) println("player one : $WIN")
+                else println("player two : $WIN")
+            } while (result == RETHROW)
         }
     }
 }
