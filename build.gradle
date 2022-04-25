@@ -11,6 +11,7 @@ task clean(type: Delete) {
 
 task serve(type: GradleBuild) {
     description = "lance le server backend de l'application"
+    //noinspection GrDeprecatedAPIUsage
     buildFile = 'backend/build.gradle'
     tasks = ['bootRun']
 }
