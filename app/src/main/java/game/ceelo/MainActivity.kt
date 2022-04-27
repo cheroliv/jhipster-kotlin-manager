@@ -1,7 +1,6 @@
 package game.ceelo
 
 import android.os.Bundle
-import android.view.View
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import game.ceelo.R.drawable.*
@@ -21,47 +20,53 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun laodLocalGame() {
-        binding.playLocalButton.setOnClickListener {
-            val player: List<Int> = dicesThrow
-            val computer: List<Int> = dicesThrow
+        binding.apply {
+            playLocalButton.setOnClickListener {
+                val player: List<Int> = dicesThrow
+                val computer: List<Int> = dicesThrow
 
-            binding.playerOneFirstDiceImageId.setImageResource(
-                getDiceImageResourcefromDiceValue(player.first())
-            )
 
-            binding.playerTwoMiddleDiceImageId.setImageResource(
-                getDiceImageResourcefromDiceValue(player.middle())
-            )
-            binding.playerTwoLastDiceImageId.setImageResource(
-                getDiceImageResourcefromDiceValue(player.last())
-            )
-            binding.playerTwoFirstDiceImageId.setImageResource(
-                getDiceImageResourcefromDiceValue(computer.first())
-            )
-            binding.playerTwoMiddleDiceImageId.setImageResource(
-                getDiceImageResourcefromDiceValue(computer.middle())
-            )
-            binding.playerTwoLastDiceImageId.setImageResource(
-                getDiceImageResourcefromDiceValue(computer.last())
-            )
+                playerOneFirstDiceImageId.setImageResource(
+                    getDiceImageResourcefromDiceValue(player.first())
+                )
 
-            binding.localPlayerResultText.apply {
-                text =
-                    when (player.compareThrows(computer)) {
-                        WIN -> WIN.toString()
-                        LOOSE -> LOOSE.toString()
-                        else -> RETHROW.toString()
-                    }
-                visibility = VISIBLE
-            }
-            binding.computerResultText.apply {
-                text =
-                    when (computer.compareThrows(player)) {
-                        WIN -> WIN.toString()
-                        LOOSE -> LOOSE.toString()
-                        else -> RETHROW.toString()
-                    }
-                visibility = VISIBLE
+                playerTwoMiddleDiceImageId.setImageResource(
+                    getDiceImageResourcefromDiceValue(player.middle())
+                )
+                playerTwoLastDiceImageId.setImageResource(
+                    getDiceImageResourcefromDiceValue(player.last())
+                )
+
+
+
+                playerTwoFirstDiceImageId.setImageResource(
+                    getDiceImageResourcefromDiceValue(computer.first())
+                )
+                playerTwoMiddleDiceImageId.setImageResource(
+                    getDiceImageResourcefromDiceValue(computer.middle())
+                )
+                playerTwoLastDiceImageId.setImageResource(
+                    getDiceImageResourcefromDiceValue(computer.last())
+                )
+
+                localPlayerResultText.apply {
+                    text =
+                        when (player.compareThrows(computer)) {
+                            WIN -> WIN.toString()
+                            LOOSE -> LOOSE.toString()
+                            else -> RETHROW.toString()
+                        }
+                    visibility = VISIBLE
+                }
+                computerResultText.apply {
+                    text =
+                        when (computer.compareThrows(player)) {
+                            WIN -> WIN.toString()
+                            LOOSE -> LOOSE.toString()
+                            else -> RETHROW.toString()
+                        }
+                    visibility = VISIBLE
+                }
             }
         }
     }
