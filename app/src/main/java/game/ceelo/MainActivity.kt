@@ -24,21 +24,26 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
+
+
 fun loadLocalGame(binding: ActivityMainBinding) = binding.apply {
     playLocalButton.setOnClickListener {
         dicesThrow.apply player@{
             dicesThrow.apply computer@{
+
                 throwDiceAnimation(playerOneFirstDiceImageId, this@player.first())
                 throwDiceAnimation(playerOneMiddleDiceImageId, this@player.middle())
                 throwDiceAnimation(playerOneLastDiceImageId, this@player.last())
+
                 throwDiceAnimation(playerTwoFirstDiceImageId, this@computer.first())
                 throwDiceAnimation(playerTwoMiddleDiceImageId, this@computer.middle())
                 throwDiceAnimation(playerTwoLastDiceImageId, this@computer.last())
-                applyTextViewResult(
+
+                setTextViewResult(
                     localPlayerResultText,
                     this@player.compareThrows(secondPlayerThrow = this@computer)
                 )
-                applyTextViewResult(
+                setTextViewResult(
                     computerResultText,
                     this@computer.compareThrows(secondPlayerThrow = this@player)
                 )
@@ -57,6 +62,7 @@ val diceImages: List<Int> by lazy {
         dice_face_six,
     )
 }
+
 
 fun throwDiceAnimation(
     diceImage: ImageView,
@@ -92,7 +98,7 @@ fun getDiceImageFromDiceValue(
     else -> throw Exception("Only six faces is possible!")
 }
 
-fun applyTextViewResult(
+fun setTextViewResult(
     textViewResult: TextView,
     diceResult: DiceThrowResult
 ): TextView = textViewResult.apply {
@@ -103,6 +109,3 @@ fun applyTextViewResult(
     }
     visibility = VISIBLE
 }
-
-
-
