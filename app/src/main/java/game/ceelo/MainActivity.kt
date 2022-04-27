@@ -5,6 +5,7 @@ import android.view.View.VISIBLE
 import android.view.animation.Animation.RELATIVE_TO_SELF
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import game.ceelo.R.drawable.*
 import game.ceelo.databinding.ActivityMainBinding
@@ -52,7 +53,10 @@ private fun getDiceImageResourcefromDiceValue(diceValue: Int): Int {
         else -> throw Exception("Only six faces is possible!")
     }
 }
+//TODO:
+fun setTextViewResult(textViewResult: TextView, diceResult:DiceThrowResult){
 
+}
 private fun laodLocalGame(binding: ActivityMainBinding) {
     binding.apply {
         playLocalButton.setOnClickListener {
@@ -64,6 +68,7 @@ private fun laodLocalGame(binding: ActivityMainBinding) {
                     throwDiceAnimation(playerTwoFirstDiceImageId, this@computer.first())
                     throwDiceAnimation(playerTwoMiddleDiceImageId, this@computer.middle())
                     throwDiceAnimation(playerTwoLastDiceImageId, this@computer.last())
+                    //TODO: fun setTextViewResult(textViewResult: TextView, diceResult:DiceThrowResult){
                     localPlayerResultText.apply {
                         text =
                             when (this@player.compareThrows(secondPlayerThrow = this@computer)) {
@@ -73,6 +78,7 @@ private fun laodLocalGame(binding: ActivityMainBinding) {
                             }
                         visibility = VISIBLE
                     }
+
                     computerResultText.apply {
                         text =
                             when (this@computer.compareThrows(secondPlayerThrow = this@player)) {
