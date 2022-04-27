@@ -10,7 +10,7 @@
     <Button
         android:id="@+id/loginButtonId"
         android:layout_width="wrap_content"
-        android:layout_height="38dp"
+        android:layout_height="48dp"
         android:layout_marginStart="22dp"
         android:layout_marginTop="4dp"
         android:text="LOGIN"
@@ -22,7 +22,7 @@
         android:id="@+id/registerButtonId"
 
         android:layout_width="wrap_content"
-        android:layout_height="38dp"
+        android:layout_height="48dp"
         android:layout_marginStart="484dp"
         android:text="REGISTER"
         android:visibility="visible"
@@ -32,7 +32,7 @@
     <Button
         android:id="@+id/playLocalButton"
         android:layout_width="0dp"
-        android:layout_height="38dp"
+        android:layout_height="48dp"
         android:text="PLAY LOCAL"
         app:layout_constraintEnd_toEndOf="@+id/registerButtonId"
         app:layout_constraintHorizontal_bias="0.0"

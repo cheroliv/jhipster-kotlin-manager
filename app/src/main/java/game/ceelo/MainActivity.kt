@@ -24,8 +24,6 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-
-
 fun loadLocalGame(binding: ActivityMainBinding) = binding.apply {
     playLocalButton.setOnClickListener {
         dicesThrow.apply player@{
