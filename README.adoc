@@ -153,8 +153,12 @@ mais lançable depuis une tache du projet racine.
 ----
 ./gradlew serve
 ----
-En local sur http://localhost:8080[http://localhost:8080]
-
+En local sur http://localhost:8080[http://localhost:8080] +
+Si le lancement du back end echoue tapper:
+[source,bash]
+----
+./gradlew --stop
+----
 
 ==== Deployer sur heroku
 installer heroku client
