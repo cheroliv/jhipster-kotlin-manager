@@ -13,6 +13,23 @@ import game.ceelo.databinding.ActivityMainBinding.inflate
 import game.ceelo.domain.*
 import game.ceelo.domain.DiceThrowResult.*
 
+data class DiceThrow(
+    val diceThrowId:Long,
+    val firstDice:Int,
+    val middleDice:Int,
+    val lastDice:Int
+)
+data class Game(
+    val gameId:Long
+)
+data class Player(
+    val playerId:Long
+)
+data class Playground(
+    val playgroundId:Long
+)
+
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
