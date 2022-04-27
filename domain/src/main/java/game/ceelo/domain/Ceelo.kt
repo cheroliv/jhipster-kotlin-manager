@@ -87,7 +87,8 @@ val List<Int>.whichCase: Int
  * compare un jet à un autre
  * pour renvoyer un resultat de jeu
  */
-fun List<Int>.compareThrows(secondPlayerThrow: List<Int>): DiceThrowResult =
+fun List<Int>.compareThrows(secondPlayerThrow: List<Int>)
+: DiceThrowResult =
     whichCase.run whichCase@{
         secondPlayerThrow.whichCase.run otherWhichCase@{
             return when {
