@@ -6,7 +6,7 @@ import java.io.*
 /**
  * un jet de dés au hazard
  */
-val dicesThrow: List<Int>
+ val dicesThrow: List<Int>
     get() = List(size = 3, init = { (ONE..SIX).random() })
 
 /**
@@ -15,6 +15,18 @@ val dicesThrow: List<Int>
 fun List<Int>.middle(): Int = if (isEmpty())
     throw NoSuchElementException("dice throw is empty.")
 else elementAt(index = 1)
+
+fun List<List<Int>>.second(): List<Int> = if (isEmpty())
+    throw NoSuchElementException("second player throw is empty.")
+else elementAt(index = 1)
+
+fun List<List<Int>>.third(): List<Int> = if (isEmpty())
+    throw NoSuchElementException("third player throw is empty.")
+else elementAt(index = 2)
+
+fun List<List<Int>>.fourth(): List<Int> = if (isEmpty())
+    throw NoSuchElementException("fourth player throw is empty.")
+else elementAt(index = 3)
 
 val List<Int>.is456: Boolean get() = containsAll(`4_5_6`)
 

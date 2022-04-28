@@ -7,6 +7,10 @@ import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import game.ceelo.R.drawable.*
 import game.ceelo.databinding.ActivityMainBinding
 import game.ceelo.databinding.ActivityMainBinding.inflate
@@ -14,19 +18,22 @@ import game.ceelo.domain.*
 import game.ceelo.domain.DiceThrowResult.*
 
 data class DiceThrow(
-    val diceThrowId:Long,
-    val firstDice:Int,
-    val middleDice:Int,
-    val lastDice:Int
+    val diceThrowId: Long,
+    val firstDice: Int,
+    val middleDice: Int,
+    val lastDice: Int
 )
+
 data class Game(
-    val gameId:Long
+    val gameId: Long
 )
+
 data class Player(
-    val playerId:Long
+    val playerId: Long
 )
+
 data class Playground(
-    val playgroundId:Long
+    val playgroundId: Long
 )
 
 
@@ -36,35 +43,41 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         inflate(layoutInflater).apply {
             setContentView(root)
-            loadLocalGame(binding = this)
+            loadLocalGame(binding = this, this@MainActivity)
         }
     }
 }
 
-fun loadLocalGame(binding: ActivityMainBinding) = binding.apply {
-    playLocalButton.setOnClickListener {
-        dicesThrow.apply player@{
-            dicesThrow.apply computer@{
+fun loadLocalGame(binding: ActivityMainBinding, mainActivity: MainActivity) = binding.apply {
+    val diceGameViewModel = DiceGameViewModel()
+    diceGameViewModel.getDiceGame().observe(
+        mainActivity
+    ) { game ->
+        playLocalButton.setOnClickListener {
+            game.first().apply player@{
+                game.second().apply computer@{
 
-                throwDiceAnimation(playerOneFirstDiceImageId, this@player.first())
-                throwDiceAnimation(playerOneMiddleDiceImageId, this@player.middle())
-                throwDiceAnimation(playerOneLastDiceImageId, this@player.last())
+                    throwDiceAnimation(playerOneFirstDiceImageId, this@player.first())
+                    throwDiceAnimation(playerOneMiddleDiceImageId, this@player.middle())
+                    throwDiceAnimation(playerOneLastDiceImageId, this@player.last())
 
-                throwDiceAnimation(playerTwoFirstDiceImageId, this@computer.first())
-                throwDiceAnimation(playerTwoMiddleDiceImageId, this@computer.middle())
-                throwDiceAnimation(playerTwoLastDiceImageId, this@computer.last())
+                    throwDiceAnimation(playerTwoFirstDiceImageId, this@computer.first())
+                    throwDiceAnimation(playerTwoMiddleDiceImageId, this@computer.middle())
+                    throwDiceAnimation(playerTwoLastDiceImageId, this@computer.last())
 
-                setTextViewResult(
-                    localPlayerResultText,
-                    this@player.compareThrows(secondPlayerThrow = this@computer)
-                )
-                setTextViewResult(
-                    computerResultText,
-                    this@computer.compareThrows(secondPlayerThrow = this@player)
-                )
+                    setTextViewResult(
+                        localPlayerResultText,
+                        this@player.compareThrows(secondPlayerThrow = this@computer)
+                    )
+                    setTextViewResult(
+                        computerResultText,
+                        this@computer.compareThrows(secondPlayerThrow = this@player)
+                    )
+                }
             }
         }
     }
+
 }
 
 val diceImages: List<Int> by lazy {
@@ -123,4 +136,21 @@ fun setTextViewResult(
         else -> RETHROW.toString()
     }
     visibility = VISIBLE
+}
+
+
+
+
+class DiceGameViewModel : ViewModel() {
+    private val diceGame: MutableLiveData<List<List<Int>>> by lazy {
+        MutableLiveData<List<List<Int>>>().apply { value = loadDices() }
+    }
+
+    fun getDiceGame(): LiveData<List<List<Int>>> = diceGame
+
+    private fun loadDices(): List<List<Int>> = listOf(
+        dicesThrow,
+        dicesThrow
+    )
+
 }
