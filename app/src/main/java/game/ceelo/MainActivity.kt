@@ -49,7 +49,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
+class DiceGameViewModel : ViewModel() {
+    private val _diceGame: MutableLiveData<List<List<Int>>> = MutableLiveData()
+    val diceGame: LiveData<List<List<Int>>> = _diceGame
+    fun onClickPlayButton() {
+        _diceGame.value = listOf(dicesThrow, dicesThrow)
+    }
+}
 fun loadLocalGame(
     binding: ActivityMainBinding,
     mainActivity: MainActivity
@@ -66,13 +72,13 @@ fun loadLocalGame(
                     diceImages = this
                 )
             )
-            playerOneFirstDiceImageId.setImageResource(
+            playerOneMiddleDiceImageId.setImageResource(
                 getDiceImageFromDiceValue(
                     diceValue = game.first().middle(),
                     diceImages = this
                 )
             )
-            playerOneFirstDiceImageId.setImageResource(
+            playerOneLastDiceImageId.setImageResource(
                 getDiceImageFromDiceValue(
                     diceValue = game.first().last(),
                     diceImages = this
@@ -87,18 +93,17 @@ fun loadLocalGame(
                 )
 
             )
-            playerTwoFirstDiceImageId.setImageResource(
+            playerTwoMiddleDiceImageId.setImageResource(
                 getDiceImageFromDiceValue(
                     diceValue = game.second().middle(),
                     diceImages = this
                 )
             )
-            playerTwoFirstDiceImageId.setImageResource(
+            playerTwoLastDiceImageId.setImageResource(
                 getDiceImageFromDiceValue(
                     diceValue = game.second().last(),
                     diceImages = this
                 )
-
             )
         }
 
@@ -106,28 +111,30 @@ fun loadLocalGame(
 
     playLocalButton.setOnClickListener {
         diceGameViewModel.onClickPlayButton()
-        diceGameViewModel.diceGame.value
-//        game.first().apply player@{
-//            game.second().apply computer@{
-//
-//                throwDiceAnimation(playerOneFirstDiceImageId, this@player.first())
-//                throwDiceAnimation(playerOneMiddleDiceImageId, this@player.middle())
-//                throwDiceAnimation(playerOneLastDiceImageId, this@player.last())
-//
-//                throwDiceAnimation(playerTwoFirstDiceImageId, this@computer.first())
-//                throwDiceAnimation(playerTwoMiddleDiceImageId, this@computer.middle())
-//                throwDiceAnimation(playerTwoLastDiceImageId, this@computer.last())
-//
-//                setTextViewResult(
-//                    localPlayerResultText,
-//                    this@player.compareThrows(secondPlayerThrow = this@computer)
-//                )
-//                setTextViewResult(
-//                    computerResultText,
-//                    this@computer.compareThrows(secondPlayerThrow = this@player)
-//                )
-//            }
-//        }
+        diceGameViewModel.diceGame.value.apply {
+            this!!.first().apply player@{
+                this@apply!!.second().apply computer@{
+
+                    throwDiceAnimation(playerOneFirstDiceImageId, this@player.first())
+                    throwDiceAnimation(playerOneMiddleDiceImageId, this@player.middle())
+                    throwDiceAnimation(playerOneLastDiceImageId, this@player.last())
+
+                    throwDiceAnimation(playerTwoFirstDiceImageId, this@computer.first())
+                    throwDiceAnimation(playerTwoMiddleDiceImageId, this@computer.middle())
+                    throwDiceAnimation(playerTwoLastDiceImageId, this@computer.last())
+
+                    setTextViewResult(
+                        localPlayerResultText,
+                        this@player.compareThrows(secondPlayerThrow = this@computer)
+                    )
+                    setTextViewResult(
+                        computerResultText,
+                        this@computer.compareThrows(secondPlayerThrow = this@player)
+                    )
+                }
+            }
+        }
+
     }
 }
 
@@ -190,10 +197,4 @@ fun setTextViewResult(
 }
 
 
-class DiceGameViewModel : ViewModel() {
-    private val _diceGame: MutableLiveData<List<List<Int>>> = MutableLiveData()
-    val diceGame: LiveData<List<List<Int>>> = _diceGame
-    fun onClickPlayButton() {
-        _diceGame.value = listOf(dicesThrow, dicesThrow)
-    }
-}
+
