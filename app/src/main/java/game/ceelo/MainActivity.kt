@@ -1,16 +1,14 @@
 package game.ceelo
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View.VISIBLE
 import android.view.animation.Animation.RELATIVE_TO_SELF
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import game.ceelo.R.drawable.*
 import game.ceelo.databinding.ActivityMainBinding
 import game.ceelo.databinding.ActivityMainBinding.inflate
@@ -38,46 +36,62 @@ data class Playground(
 
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         inflate(layoutInflater).apply {
             setContentView(root)
-            loadLocalGame(binding = this, this@MainActivity)
+            Log.d("on passe ici", "foo")
+            loadLocalGame(
+                binding = this,
+                this@MainActivity
+            )
         }
     }
 }
 
-fun loadLocalGame(binding: ActivityMainBinding, mainActivity: MainActivity) = binding.apply {
-    val diceGameViewModel = DiceGameViewModel()
-    diceGameViewModel.getDiceGame().observe(
+fun loadLocalGame(
+    binding: ActivityMainBinding,
+    mainActivity: MainActivity
+) = binding.apply {
+    Log.d("on passe ici", "bar")
+    val diceGameViewModel = ViewModelProvider(mainActivity).get<DiceGameViewModel>()
+    diceGameViewModel.diceGame.observe(
         mainActivity
-    ) { game ->
-        playLocalButton.setOnClickListener {
-            game.first().apply player@{
-                game.second().apply computer@{
+    ) { dices ->
+        playerOneFirstDiceImageId.setImageResource(diceImages[dices.first().first()-1])
+        playerOneFirstDiceImageId.setImageResource(diceImages[dices.first().middle()-1])
+        playerOneFirstDiceImageId.setImageResource(diceImages[dices.first().last()-1])
 
-                    throwDiceAnimation(playerOneFirstDiceImageId, this@player.first())
-                    throwDiceAnimation(playerOneMiddleDiceImageId, this@player.middle())
-                    throwDiceAnimation(playerOneLastDiceImageId, this@player.last())
-
-                    throwDiceAnimation(playerTwoFirstDiceImageId, this@computer.first())
-                    throwDiceAnimation(playerTwoMiddleDiceImageId, this@computer.middle())
-                    throwDiceAnimation(playerTwoLastDiceImageId, this@computer.last())
-
-                    setTextViewResult(
-                        localPlayerResultText,
-                        this@player.compareThrows(secondPlayerThrow = this@computer)
-                    )
-                    setTextViewResult(
-                        computerResultText,
-                        this@computer.compareThrows(secondPlayerThrow = this@player)
-                    )
-                }
-            }
-        }
+        playerTwoFirstDiceImageId.setImageResource(diceImages[dices.second().first()-1])
+        playerTwoFirstDiceImageId.setImageResource(diceImages[dices.second().middle()-1])
+        playerTwoFirstDiceImageId.setImageResource(diceImages[dices.second().last()-1])
     }
 
+    playLocalButton.setOnClickListener {
+        diceGameViewModel.onClickPlayButton()
+//        game.first().apply player@{
+//            game.second().apply computer@{
+//
+//                throwDiceAnimation(playerOneFirstDiceImageId, this@player.first())
+//                throwDiceAnimation(playerOneMiddleDiceImageId, this@player.middle())
+//                throwDiceAnimation(playerOneLastDiceImageId, this@player.last())
+//
+//                throwDiceAnimation(playerTwoFirstDiceImageId, this@computer.first())
+//                throwDiceAnimation(playerTwoMiddleDiceImageId, this@computer.middle())
+//                throwDiceAnimation(playerTwoLastDiceImageId, this@computer.last())
+//
+//                setTextViewResult(
+//                    localPlayerResultText,
+//                    this@player.compareThrows(secondPlayerThrow = this@computer)
+//                )
+//                setTextViewResult(
+//                    computerResultText,
+//                    this@computer.compareThrows(secondPlayerThrow = this@player)
+//                )
+//            }
+//        }
+    }
 }
 
 val diceImages: List<Int> by lazy {
@@ -139,18 +153,10 @@ fun setTextViewResult(
 }
 
 
-
-
 class DiceGameViewModel : ViewModel() {
-    private val diceGame: MutableLiveData<List<List<Int>>> by lazy {
-        MutableLiveData<List<List<Int>>>().apply { value = loadDices() }
+    private val _diceGame: MutableLiveData<List<List<Int>>> = MutableLiveData()
+    val diceGame: LiveData<List<List<Int>>> = _diceGame
+    fun onClickPlayButton() {
+        _diceGame.value = listOf(dicesThrow, dicesThrow)
     }
-
-    fun getDiceGame(): LiveData<List<List<Int>>> = diceGame
-
-    private fun loadDices(): List<List<Int>> = listOf(
-        dicesThrow,
-        dicesThrow
-    )
-
 }

@@ -28,6 +28,14 @@ fun List<List<Int>>.fourth(): List<Int> = if (isEmpty())
     throw NoSuchElementException("fourth player throw is empty.")
 else elementAt(index = 3)
 
+fun List<List<Int>>.fifth(): List<Int> = if (isEmpty())
+    throw NoSuchElementException("fourth player throw is empty.")
+else elementAt(index = 4)
+
+fun List<List<Int>>.sixth(): List<Int> = if (isEmpty())
+    throw NoSuchElementException("fourth player throw is empty.")
+else elementAt(index = 5)
+
 val List<Int>.is456: Boolean get() = containsAll(`4_5_6`)
 
 val List<Int>.is123: Boolean get() = containsAll(`1_2_3`)
