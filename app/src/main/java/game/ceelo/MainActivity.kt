@@ -47,13 +47,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
 class DiceGameViewModel : ViewModel() {
-    private val _diceGame: MutableLiveData<List<List<Int>>> = MutableLiveData()
+    private val _diceGame: MutableLiveData<List<List<Int>>> = MutableLiveData(
+        listOf(
+            listOf(ONE, ONE, ONE),
+            listOf(ONE, ONE, ONE),
+        )
+    )
     val diceGame: LiveData<List<List<Int>>> = _diceGame
     fun onClickPlayButton() {
         _diceGame.value = listOf(dicesThrow, dicesThrow)
     }
 }
+
 fun loadLocalGame(
     binding: ActivityMainBinding,
     mainActivity: MainActivity
@@ -64,45 +71,8 @@ fun loadLocalGame(
         mainActivity
     ) { game ->
         diceImages.run {
-            playerOneFirstDiceImageId.setImageResource(
-                getDiceImageFromDiceValue(
-                    diceValue = game.first().first(),
-                    diceImages = this
-                )
-            )
-            playerOneMiddleDiceImageId.setImageResource(
-                getDiceImageFromDiceValue(
-                    diceValue = game.first().middle(),
-                    diceImages = this
-                )
-            )
-            playerOneLastDiceImageId.setImageResource(
-                getDiceImageFromDiceValue(
-                    diceValue = game.first().last(),
-                    diceImages = this
-                )
-
-            )
-
-            playerTwoFirstDiceImageId.setImageResource(
-                getDiceImageFromDiceValue(
-                    diceValue = game.second().first(),
-                    diceImages = this
-                )
-
-            )
-            playerTwoMiddleDiceImageId.setImageResource(
-                getDiceImageFromDiceValue(
-                    diceValue = game.second().middle(),
-                    diceImages = this
-                )
-            )
-            playerTwoLastDiceImageId.setImageResource(
-                getDiceImageFromDiceValue(
-                    diceValue = game.second().last(),
-                    diceImages = this
-                )
-            )
+            playerOneUI(activityMainBinding = this@apply, game, this)
+            playerTwoUI(activityMainBinding = this@apply, game, this)
         }
 
     }
@@ -134,6 +104,57 @@ fun loadLocalGame(
         }
 
     }
+}
+
+private fun playerTwoUI(
+    activityMainBinding: ActivityMainBinding,
+    game: List<List<Int>>,
+    list: List<Int>
+) {
+    activityMainBinding.playerTwoFirstDiceImageId.setImageResource(
+        getDiceImageFromDiceValue(
+            diceValue = game.second().first(),
+            diceImages = list
+        )
+
+    )
+    activityMainBinding.playerTwoMiddleDiceImageId.setImageResource(
+        getDiceImageFromDiceValue(
+            diceValue = game.second().middle(),
+            diceImages = list
+        )
+    )
+    activityMainBinding.playerTwoLastDiceImageId.setImageResource(
+        getDiceImageFromDiceValue(
+            diceValue = game.second().last(),
+            diceImages = list
+        )
+    )
+}
+
+private fun playerOneUI(
+    activityMainBinding: ActivityMainBinding,
+    game: List<List<Int>>,
+    list: List<Int>
+) {
+    activityMainBinding.playerOneFirstDiceImageId.setImageResource(
+        getDiceImageFromDiceValue(
+            diceValue = game.first().first(),
+            diceImages = list
+        )
+    )
+    activityMainBinding.playerOneMiddleDiceImageId.setImageResource(
+        getDiceImageFromDiceValue(
+            diceValue = game.first().middle(),
+            diceImages = list
+        )
+    )
+    activityMainBinding.playerOneLastDiceImageId.setImageResource(
+        getDiceImageFromDiceValue(
+            diceValue = game.first().last(),
+            diceImages = list
+        )
+    )
 }
 
 val diceImages: List<Int> by lazy {
