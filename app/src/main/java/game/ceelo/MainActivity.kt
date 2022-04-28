@@ -55,21 +55,58 @@ fun loadLocalGame(
     mainActivity: MainActivity
 ) = binding.apply {
     Log.d("on passe ici", "bar")
-    val diceGameViewModel = ViewModelProvider(mainActivity).get<DiceGameViewModel>()
+    val diceGameViewModel = ViewModelProvider(mainActivity).get(DiceGameViewModel::class.java)
     diceGameViewModel.diceGame.observe(
         mainActivity
-    ) { dices ->
-        playerOneFirstDiceImageId.setImageResource(diceImages[dices.first().first()-1])
-        playerOneFirstDiceImageId.setImageResource(diceImages[dices.first().middle()-1])
-        playerOneFirstDiceImageId.setImageResource(diceImages[dices.first().last()-1])
+    ) { game ->
+        diceImages.run {
+            playerOneFirstDiceImageId.setImageResource(
+                getDiceImageFromDiceValue(
+                    diceValue = game.first().first(),
+                    diceImages = this
+                )
+            )
+            playerOneFirstDiceImageId.setImageResource(
+                getDiceImageFromDiceValue(
+                    diceValue = game.first().middle(),
+                    diceImages = this
+                )
+            )
+            playerOneFirstDiceImageId.setImageResource(
+                getDiceImageFromDiceValue(
+                    diceValue = game.first().last(),
+                    diceImages = this
+                )
 
-        playerTwoFirstDiceImageId.setImageResource(diceImages[dices.second().first()-1])
-        playerTwoFirstDiceImageId.setImageResource(diceImages[dices.second().middle()-1])
-        playerTwoFirstDiceImageId.setImageResource(diceImages[dices.second().last()-1])
+            )
+
+            playerTwoFirstDiceImageId.setImageResource(
+                getDiceImageFromDiceValue(
+                    diceValue = game.second().first(),
+                    diceImages = this
+                )
+
+            )
+            playerTwoFirstDiceImageId.setImageResource(
+                getDiceImageFromDiceValue(
+                    diceValue = game.second().middle(),
+                    diceImages = this
+                )
+            )
+            playerTwoFirstDiceImageId.setImageResource(
+                getDiceImageFromDiceValue(
+                    diceValue = game.second().last(),
+                    diceImages = this
+                )
+
+            )
+        }
+
     }
 
     playLocalButton.setOnClickListener {
         diceGameViewModel.onClickPlayButton()
+        diceGameViewModel.diceGame.value
 //        game.first().apply player@{
 //            game.second().apply computer@{
 //
