@@ -38,10 +38,8 @@ data class Playground(
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         inflate(layoutInflater).apply {
             setContentView(root)
-            Log.d("on passe ici", "foo")
             loadLocalGame(
                 binding = this,
                 this@MainActivity
@@ -60,8 +58,8 @@ fun loadLocalGame(
     binding: ActivityMainBinding,
     mainActivity: MainActivity
 ) = binding.apply {
-    Log.d("on passe ici", "bar")
-    val diceGameViewModel = ViewModelProvider(mainActivity).get(DiceGameViewModel::class.java)
+    val diceGameViewModel = ViewModelProvider(mainActivity)
+        .get(DiceGameViewModel::class.java)
     diceGameViewModel.diceGame.observe(
         mainActivity
     ) { game ->
