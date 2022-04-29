@@ -1,7 +1,6 @@
 package game.ceelo
 
 import android.os.Bundle
-import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.animation.Animation.RELATIVE_TO_SELF
 import android.view.animation.RotateAnimation
@@ -42,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             setContentView(root)
             loadLocalGame(
                 binding = this,
-                this@MainActivity
+                mainActivity = this@MainActivity
             )
         }
     }
@@ -82,8 +81,16 @@ fun loadLocalGame(
         mainActivity
     ) { game ->
         diceImages.run {
-            playerOneUI(activityMainBinding = this@apply, game, this)
-            playerTwoUI(activityMainBinding = this@apply, game, this)
+            playerOneUI(
+                activityMainBinding = this@apply,
+                game = game,
+                list = this
+            )
+            playerTwoUI(
+                activityMainBinding = this@apply,
+                game = game,
+                list = this
+            )
         }
 
     }
@@ -91,18 +98,18 @@ fun loadLocalGame(
     diceGameViewModel.playerOneResult.observe(mainActivity) { result: DiceThrowResult ->
         diceGameViewModel.resultVisibility.observe(mainActivity) { visibility: Int ->
             setTextViewResult(
-                localPlayerResultText,
-                result,
-                visibility
+                textViewResult = localPlayerResultText,
+                diceResult = result,
+                textViewVisibility = visibility
             )
         }
     }
     diceGameViewModel.playerTwoResult.observe(mainActivity) { result: DiceThrowResult ->
         diceGameViewModel.resultVisibility.observe(mainActivity) { visibility: Int ->
             setTextViewResult(
-                computerResultText,
-                result,
-                visibility
+                textViewResult = computerResultText,
+                diceResult = result,
+                textViewVisibility = visibility
             )
         }
     }
@@ -110,28 +117,20 @@ fun loadLocalGame(
 
     playLocalButton.setOnClickListener {
 
-        diceGameViewModel.apply {
+        diceGameViewModel.apply vm@{
             onClickPlayButton()
             diceGame.value.apply {
                 this!!.first().apply player@{
                     this@apply!!.second().apply computer@{
-
-                        throwDiceAnimation(playerOneFirstDiceImageId, this@player.first())
-                        throwDiceAnimation(playerOneMiddleDiceImageId, this@player.middle())
-                        throwDiceAnimation(playerOneLastDiceImageId, this@player.last())
-                        setTextViewResult(
-                            localPlayerResultText,
-                            playerOneResult.value!!,
-                            resultVisibility.value!!
+                        playerOneThrow(
+                            activityMainBinding = binding,
+                            list = this@player,
+                            diceGameViewModel = this@vm
                         )
-
-                        throwDiceAnimation(playerTwoFirstDiceImageId, this@computer.first())
-                        throwDiceAnimation(playerTwoMiddleDiceImageId, this@computer.middle())
-                        throwDiceAnimation(playerTwoLastDiceImageId, this@computer.last())
-                        setTextViewResult(
-                            computerResultText,
-                            playerTwoResult.value!!,
-                            resultVisibility.value!!
+                        playerTwoThrow(
+                            activityMainBinding = binding,
+                            list = this@computer,
+                            diceGameViewModel = this@vm
                         )
                     }
                 }
@@ -141,7 +140,55 @@ fun loadLocalGame(
     }
 }
 
-private fun playerTwoUI(
+fun playerTwoThrow(
+    activityMainBinding: ActivityMainBinding,
+    list: List<Int>,
+    diceGameViewModel: DiceGameViewModel
+) {
+    throwDiceAnimation(
+        diceImage = activityMainBinding.playerTwoFirstDiceImageId,
+        diceValue = list.first()
+    )
+    throwDiceAnimation(
+        diceImage = activityMainBinding.playerTwoMiddleDiceImageId,
+        diceValue = list.middle()
+    )
+    throwDiceAnimation(
+        diceImage = activityMainBinding.playerTwoLastDiceImageId,
+        diceValue = list.last()
+    )
+    setTextViewResult(
+        textViewResult = activityMainBinding.computerResultText,
+        diceResult = diceGameViewModel.playerTwoResult.value!!,
+        textViewVisibility = diceGameViewModel.resultVisibility.value!!
+    )
+}
+
+fun playerOneThrow(
+    activityMainBinding: ActivityMainBinding,
+    list: List<Int>,
+    diceGameViewModel: DiceGameViewModel
+) {
+    throwDiceAnimation(
+        diceImage = activityMainBinding.playerOneFirstDiceImageId,
+        diceValue = list.first()
+    )
+    throwDiceAnimation(
+        diceImage = activityMainBinding.playerOneMiddleDiceImageId,
+        diceValue = list.middle()
+    )
+    throwDiceAnimation(
+        diceImage = activityMainBinding.playerOneLastDiceImageId,
+        diceValue = list.last()
+    )
+    setTextViewResult(
+        textViewResult = activityMainBinding.localPlayerResultText,
+        diceResult = diceGameViewModel.playerOneResult.value!!,
+        textViewVisibility = diceGameViewModel.resultVisibility.value!!
+    )
+}
+
+fun playerTwoUI(
     activityMainBinding: ActivityMainBinding,
     game: List<List<Int>>,
     list: List<Int>
@@ -167,7 +214,7 @@ private fun playerTwoUI(
     )
 }
 
-private fun playerOneUI(
+fun playerOneUI(
     activityMainBinding: ActivityMainBinding,
     game: List<List<Int>>,
     list: List<Int>
@@ -210,8 +257,8 @@ fun throwDiceAnimation(
 ) = diceImage.apply {
     setImageResource(
         getDiceImageFromDiceValue(
-            diceValue,
-            diceImages
+            diceValue = diceValue,
+            diceImages = diceImages
         )
     )
 }.run {
@@ -250,4 +297,3 @@ fun setTextViewResult(
     }
     visibility = textViewVisibility
 }
-
