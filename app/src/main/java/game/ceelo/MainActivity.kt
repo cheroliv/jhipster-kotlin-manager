@@ -78,8 +78,6 @@ fun loadLocalGame(
 ) = binding.apply {
     val diceGameViewModel = ViewModelProvider(mainActivity)
         .get(DiceGameViewModel::class.java)
-
-
     diceGameViewModel.diceGame.observe(
         mainActivity
     ) { game ->
@@ -91,7 +89,7 @@ fun loadLocalGame(
     }
 
     diceGameViewModel.playerOneResult.observe(mainActivity) { result: DiceThrowResult ->
-        diceGameViewModel.resultVisibility.observe(mainActivity) { visibility ->
+        diceGameViewModel.resultVisibility.observe(mainActivity) { visibility: Int ->
             setTextViewResult(
                 localPlayerResultText,
                 result,
@@ -99,8 +97,8 @@ fun loadLocalGame(
             )
         }
     }
-    diceGameViewModel.playerTwoResult.observe(mainActivity) { result ->
-        diceGameViewModel.resultVisibility.observe(mainActivity) { visibility ->
+    diceGameViewModel.playerTwoResult.observe(mainActivity) { result: DiceThrowResult ->
+        diceGameViewModel.resultVisibility.observe(mainActivity) { visibility: Int ->
             setTextViewResult(
                 computerResultText,
                 result,
@@ -137,7 +135,6 @@ fun loadLocalGame(
                 }
             }
         }
-
     }
 }
 
