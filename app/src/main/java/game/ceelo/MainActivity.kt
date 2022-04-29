@@ -119,16 +119,15 @@ fun loadLocalGame(
                         throwDiceAnimation(playerOneFirstDiceImageId, this@player.first())
                         throwDiceAnimation(playerOneMiddleDiceImageId, this@player.middle())
                         throwDiceAnimation(playerOneLastDiceImageId, this@player.last())
-
-                        throwDiceAnimation(playerTwoFirstDiceImageId, this@computer.first())
-                        throwDiceAnimation(playerTwoMiddleDiceImageId, this@computer.middle())
-                        throwDiceAnimation(playerTwoLastDiceImageId, this@computer.last())
-
                         setTextViewResult(
                             localPlayerResultText,
                             playerOneResult.value!!,
                             resultVisibility.value!!
                         )
+
+                        throwDiceAnimation(playerTwoFirstDiceImageId, this@computer.first())
+                        throwDiceAnimation(playerTwoMiddleDiceImageId, this@computer.middle())
+                        throwDiceAnimation(playerTwoLastDiceImageId, this@computer.last())
                         setTextViewResult(
                             computerResultText,
                             playerTwoResult.value!!,
