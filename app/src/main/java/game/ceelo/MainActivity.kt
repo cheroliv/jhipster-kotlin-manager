@@ -1,7 +1,7 @@
 package game.ceelo
 
 import android.os.Bundle
-import android.util.Log
+import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.animation.Animation.RELATIVE_TO_SELF
 import android.view.animation.RotateAnimation
@@ -49,6 +49,12 @@ class MainActivity : AppCompatActivity() {
 }
 
 class DiceGameViewModel : ViewModel() {
+    private val _playerOneResult: MutableLiveData<DiceThrowResult> = MutableLiveData()
+    val playerOneResult: LiveData<DiceThrowResult> = _playerOneResult
+    private val _playerTwoResult: MutableLiveData<DiceThrowResult> = MutableLiveData()
+    val playerTwoResult: LiveData<DiceThrowResult> = _playerTwoResult
+    private val _resultVisibility: MutableLiveData<Int> = MutableLiveData()
+    val resultVisibility: MutableLiveData<Int> = _resultVisibility
     private val _diceGame: MutableLiveData<List<List<Int>>> = MutableLiveData(
         listOf(
             listOf(ONE, ONE, ONE),
@@ -58,6 +64,11 @@ class DiceGameViewModel : ViewModel() {
     val diceGame: LiveData<List<List<Int>>> = _diceGame
     fun onClickPlayButton() {
         _diceGame.value = listOf(dicesThrow, dicesThrow)
+        _playerOneResult.value = _diceGame.value!!.first()
+            .compareThrows(_diceGame.value!!.second())
+        _playerTwoResult.value = _diceGame.value!!.second()
+            .compareThrows(_diceGame.value!!.first())
+        _resultVisibility.value = VISIBLE
     }
 }
 
@@ -67,6 +78,8 @@ fun loadLocalGame(
 ) = binding.apply {
     val diceGameViewModel = ViewModelProvider(mainActivity)
         .get(DiceGameViewModel::class.java)
+
+
     diceGameViewModel.diceGame.observe(
         mainActivity
     ) { game ->
@@ -76,6 +89,26 @@ fun loadLocalGame(
         }
 
     }
+
+    diceGameViewModel.playerOneResult.observe(mainActivity) { result: DiceThrowResult ->
+        diceGameViewModel.resultVisibility.observe(mainActivity) { visibility ->
+            setTextViewResult(
+                localPlayerResultText,
+                result,
+                visibility
+            )
+        }
+    }
+    diceGameViewModel.playerTwoResult.observe(mainActivity) { result ->
+        diceGameViewModel.resultVisibility.observe(mainActivity) { visibility ->
+            setTextViewResult(
+                computerResultText,
+                result,
+                visibility
+            )
+        }
+    }
+
 
     playLocalButton.setOnClickListener {
         diceGameViewModel.onClickPlayButton()
@@ -93,11 +126,13 @@ fun loadLocalGame(
 
                     setTextViewResult(
                         localPlayerResultText,
-                        this@player.compareThrows(secondPlayerThrow = this@computer)
+                        diceGameViewModel.playerOneResult.value!!,
+                        diceGameViewModel.resultVisibility.value!!
                     )
                     setTextViewResult(
                         computerResultText,
-                        this@computer.compareThrows(secondPlayerThrow = this@player)
+                        diceGameViewModel.playerTwoResult.value!!,
+                        diceGameViewModel.resultVisibility.value!!
                     )
                 }
             }
@@ -205,15 +240,14 @@ fun getDiceImageFromDiceValue(
 
 fun setTextViewResult(
     textViewResult: TextView,
-    diceResult: DiceThrowResult
+    diceResult: DiceThrowResult,
+    textViewVisibility: Int
 ): TextView = textViewResult.apply {
     text = when (diceResult) {
         WIN -> WIN.toString()
         LOOSE -> LOOSE.toString()
         else -> RETHROW.toString()
     }
-    visibility = VISIBLE
+    visibility = textViewVisibility
 }
-
-
 
