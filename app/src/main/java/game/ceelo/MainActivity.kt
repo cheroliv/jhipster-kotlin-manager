@@ -1,37 +1,18 @@
 package game.ceelo
 
 import android.os.Bundle
-import android.view.View.VISIBLE
 import android.view.animation.Animation.RELATIVE_TO_SELF
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.*
-import game.ceelo.R.drawable.*
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import game.ceelo.databinding.ActivityMainBinding
 import game.ceelo.databinding.ActivityMainBinding.inflate
 import game.ceelo.domain.*
 import game.ceelo.domain.DiceThrowResult.*
-
-data class DiceThrow(
-    val diceThrowId: Long,
-    val firstDice: Int,
-    val middleDice: Int,
-    val lastDice: Int
-)
-
-data class Game(
-    val gameId: Long
-)
-
-data class Player(
-    val playerId: Long
-)
-
-data class Playground(
-    val playgroundId: Long
-)
+import game.ceelo.vm.DiceGameViewModel
 
 
 class MainActivity : AppCompatActivity() {
@@ -44,30 +25,6 @@ class MainActivity : AppCompatActivity() {
                 mainActivity = this@MainActivity
             )
         }
-    }
-}
-
-class DiceGameViewModel : ViewModel() {
-    private val _playerOneResult: MutableLiveData<DiceThrowResult> = MutableLiveData()
-    val playerOneResult: LiveData<DiceThrowResult> = _playerOneResult
-    private val _playerTwoResult: MutableLiveData<DiceThrowResult> = MutableLiveData()
-    val playerTwoResult: LiveData<DiceThrowResult> = _playerTwoResult
-    private val _resultVisibility: MutableLiveData<Int> = MutableLiveData()
-    val resultVisibility: LiveData<Int> = _resultVisibility
-    private val _diceGame: MutableLiveData<List<List<Int>>> = MutableLiveData(
-        listOf(
-            listOf(ONE, ONE, ONE),
-            listOf(ONE, ONE, ONE),
-        )
-    )
-    val diceGame: LiveData<List<List<Int>>> = _diceGame
-    fun onClickPlayButton() {
-        _diceGame.value = listOf(dicesThrow, dicesThrow)
-        _playerOneResult.value = _diceGame.value!!.first()
-            .compareThrows(_diceGame.value!!.second())
-        _playerTwoResult.value = _diceGame.value!!.second()
-            .compareThrows(_diceGame.value!!.first())
-        _resultVisibility.value = VISIBLE
     }
 }
 
@@ -234,17 +191,6 @@ fun playerOneUI(
             diceValue = game.first().last(),
             diceImages = list
         )
-    )
-}
-
-val diceImages: List<Int> by lazy {
-    listOf(
-        dice_face_one,
-        dice_face_two,
-        dice_face_three,
-        dice_face_four,
-        dice_face_five,
-        dice_face_six,
     )
 }
 
