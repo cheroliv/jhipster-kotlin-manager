@@ -53,7 +53,7 @@ class DiceGameViewModel : ViewModel() {
     private val _playerTwoResult: MutableLiveData<DiceThrowResult> = MutableLiveData()
     val playerTwoResult: LiveData<DiceThrowResult> = _playerTwoResult
     private val _resultVisibility: MutableLiveData<Int> = MutableLiveData()
-    val resultVisibility: MutableLiveData<Int> = _resultVisibility
+    val resultVisibility: LiveData<Int> = _resultVisibility
     private val _diceGame: MutableLiveData<List<List<Int>>> = MutableLiveData(
         listOf(
             listOf(ONE, ONE, ONE),
@@ -77,9 +77,7 @@ fun loadLocalGame(
 ) = binding.apply {
     val diceGameViewModel = ViewModelProvider(mainActivity)
         .get(DiceGameViewModel::class.java)
-    diceGameViewModel.diceGame.observe(
-        mainActivity
-    ) { game ->
+    diceGameViewModel.diceGame.observe(mainActivity) { game ->
         diceImages.run {
             playerOneUI(
                 activityMainBinding = this@apply,
