@@ -120,8 +120,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PLAYER"
-        app:layout_constraintStart_toStartOf="@+id/playLocalButton"
-        app:layout_constraintTop_toBottomOf="@+id/playLocalButton" />
+        app:layout_constraintStart_toStartOf="@+id/playOnLineButton"
+        app:layout_constraintTop_toBottomOf="@+id/playOnLineButton" />
 
     <TextView
         android:id="@+id/localPlayerResultText"
@@ -131,7 +131,7 @@
         android:text="PLAYER RESULT"
         android:visibility="invisible"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="@+id/playLocalButton"
+        app:layout_constraintEnd_toEndOf="@+id/playOnLineButton"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView" />
 
