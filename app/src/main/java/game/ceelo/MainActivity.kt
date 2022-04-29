@@ -109,30 +109,34 @@ fun loadLocalGame(
 
 
     playLocalButton.setOnClickListener {
-        diceGameViewModel.onClickPlayButton()
-        diceGameViewModel.diceGame.value.apply {
-            this!!.first().apply player@{
-                this@apply!!.second().apply computer@{
 
-                    throwDiceAnimation(playerOneFirstDiceImageId, this@player.first())
-                    throwDiceAnimation(playerOneMiddleDiceImageId, this@player.middle())
-                    throwDiceAnimation(playerOneLastDiceImageId, this@player.last())
+        diceGameViewModel.apply {
+            onClickPlayButton()
+            diceGame.value.apply {
+                this!!.first().apply player@{
+                    this@apply!!.second().apply computer@{
 
-                    throwDiceAnimation(playerTwoFirstDiceImageId, this@computer.first())
-                    throwDiceAnimation(playerTwoMiddleDiceImageId, this@computer.middle())
-                    throwDiceAnimation(playerTwoLastDiceImageId, this@computer.last())
+                        throwDiceAnimation(playerOneFirstDiceImageId, this@player.first())
+                        throwDiceAnimation(playerOneMiddleDiceImageId, this@player.middle())
+                        throwDiceAnimation(playerOneLastDiceImageId, this@player.last())
 
-                    setTextViewResult(
-                        localPlayerResultText,
-                        diceGameViewModel.playerOneResult.value!!,
-                        diceGameViewModel.resultVisibility.value!!
-                    )
-                    setTextViewResult(
-                        computerResultText,
-                        diceGameViewModel.playerTwoResult.value!!,
-                        diceGameViewModel.resultVisibility.value!!
-                    )
+                        throwDiceAnimation(playerTwoFirstDiceImageId, this@computer.first())
+                        throwDiceAnimation(playerTwoMiddleDiceImageId, this@computer.middle())
+                        throwDiceAnimation(playerTwoLastDiceImageId, this@computer.last())
+
+                        setTextViewResult(
+                            localPlayerResultText,
+                            playerOneResult.value!!,
+                            resultVisibility.value!!
+                        )
+                        setTextViewResult(
+                            computerResultText,
+                            playerTwoResult.value!!,
+                            resultVisibility.value!!
+                        )
+                    }
                 }
+
             }
         }
     }

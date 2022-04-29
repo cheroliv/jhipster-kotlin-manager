@@ -34,7 +34,7 @@
     <Button
         android:id="@+id/playLocalButton"
         android:layout_width="567dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:text="PLAY LOCAL"
         app:layout_constraintEnd_toEndOf="@+id/registerButtonId"
         app:layout_constraintHorizontal_bias="0.0"
@@ -63,29 +63,32 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/dice_face_one" />
 
+
     <ImageView
         android:id="@+id/playerOneLastDiceImageId"
         android:layout_width="70dp"
-        android:layout_height="95dp"
+        android:layout_height="70dp"
         android:layout_marginStart="150dp"
         android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="@+id/playerOneMiddleDiceImageId"
         app:layout_constraintEnd_toEndOf="@+id/localPlayerResultText"
+        app:layout_constraintHorizontal_bias="0.964"
         app:layout_constraintStart_toEndOf="@+id/playerOneMiddleDiceImageId"
         app:layout_constraintTop_toTopOf="@+id/playerOneMiddleDiceImageId"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/dice_face_one" />
-
 
     <ImageView
         android:id="@+id/playerTwoFirstDiceImageId"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:contentDescription="TODO"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView3"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/dice_face_one" />
 
     <ImageView
