@@ -18,5 +18,5 @@ application {
 dependencies {
     implementation(dependencyNotation = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${properties["kotlinx_coroutines_version"]}")
     testImplementation(dependencyNotation = "org.jetbrains.kotlin:kotlin-test")
-    testImplementation (dependencyNotation = "org.jetbrains.kotlin:kotlin-test-junit")
+    testImplementation(dependencyNotation = "org.jetbrains.kotlin:kotlin-test-junit")
 }
