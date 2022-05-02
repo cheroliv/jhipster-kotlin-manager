@@ -8,31 +8,13 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
-import game.ceelo.R.drawable.*
 import game.ceelo.databinding.ActivityMainBinding
 import game.ceelo.databinding.ActivityMainBinding.inflate
-import game.ceelo.domain.*
+import game.ceelo.domain.DiceThrowResult
 import game.ceelo.domain.DiceThrowResult.*
+import game.ceelo.domain.middle
+import game.ceelo.domain.second
 import game.ceelo.vm.DiceGameViewModel
-
-data class DiceThrow(
-    val diceThrowId: Long,
-    val firstDice: Int,
-    val middleDice: Int,
-    val lastDice: Int
-)
-
-data class Game(
-    val gameId: Long
-)
-
-data class Player(
-    val playerId: Long
-)
-
-data class Playground(
-    val playgroundId: Long
-)
 
 
 class MainActivity : AppCompatActivity() {
@@ -47,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
 fun loadLocalGame(
     binding: ActivityMainBinding,
     mainActivity: MainActivity
