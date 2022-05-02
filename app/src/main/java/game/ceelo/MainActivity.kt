@@ -238,9 +238,6 @@ fun playerTwoUI(
     )
 }
 
-
-
-
 fun throwDiceAnimation(
     diceImage: ImageView,
     diceValue: Int
