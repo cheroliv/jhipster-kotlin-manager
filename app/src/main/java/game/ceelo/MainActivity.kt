@@ -1,18 +1,19 @@
 package game.ceelo
 
 import android.os.Bundle
-import android.view.View.VISIBLE
 import android.view.animation.Animation.RELATIVE_TO_SELF
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import game.ceelo.R.drawable.*
 import game.ceelo.databinding.ActivityMainBinding
 import game.ceelo.databinding.ActivityMainBinding.inflate
 import game.ceelo.domain.*
 import game.ceelo.domain.DiceThrowResult.*
+import game.ceelo.vm.DiceGameViewModel
 
 data class DiceThrow(
     val diceThrowId: Long,
@@ -113,30 +114,6 @@ fun loadLocalGame(
     }
 }
 
-
-class DiceGameViewModel : ViewModel() {
-    private val _playerOneResult: MutableLiveData<DiceThrowResult> = MutableLiveData()
-    val playerOneResult: LiveData<DiceThrowResult> = _playerOneResult
-    private val _playerTwoResult: MutableLiveData<DiceThrowResult> = MutableLiveData()
-    val playerTwoResult: LiveData<DiceThrowResult> = _playerTwoResult
-    private val _resultVisibility: MutableLiveData<Int> = MutableLiveData()
-    val resultVisibility: LiveData<Int> = _resultVisibility
-    private val _diceGame: MutableLiveData<List<List<Int>>> = MutableLiveData(
-        listOf(
-            listOf(ONE, ONE, ONE),
-            listOf(ONE, ONE, ONE),
-        )
-    )
-    val diceGame: LiveData<List<List<Int>>> = _diceGame
-    fun onClickPlayButton() {
-        _diceGame.value = listOf(dicesThrow, dicesThrow)
-        _playerOneResult.value = _diceGame.value!!.first()
-            .compareThrows(_diceGame.value!!.second())
-        _playerTwoResult.value = _diceGame.value!!.second()
-            .compareThrows(_diceGame.value!!.first())
-        _resultVisibility.value = VISIBLE
-    }
-}
 
 fun playerOneThrow(
     activityMainBinding: ActivityMainBinding,
@@ -259,19 +236,6 @@ fun throwDiceAnimation(
     ).apply { duration = 500 })
 }
 
-fun getDiceImageFromDiceValue(
-    diceValue: Int,
-    diceImages: List<Int>
-): Int = when (diceValue) {
-    ONE -> diceImages[ONE - 1]
-    TWO -> diceImages[TWO - 1]
-    THREE -> diceImages[THREE - 1]
-    FOUR -> diceImages[FOUR - 1]
-    FIVE -> diceImages[FIVE - 1]
-    SIX -> diceImages[SIX - 1]
-    else -> throw Exception("Only six faces is possible!")
-}
-
 fun setTextViewResult(
     textViewResult: TextView,
     diceResult: DiceThrowResult,
@@ -283,15 +247,4 @@ fun setTextViewResult(
         else -> RETHROW.toString()
     }
     visibility = textViewVisibility
-}
-
-val diceImages: List<Int> by lazy {
-    listOf(
-        dice_face_one,
-        dice_face_two,
-        dice_face_three,
-        dice_face_four,
-        dice_face_five,
-        dice_face_six,
-    )
 }
