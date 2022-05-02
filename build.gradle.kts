@@ -27,3 +27,20 @@ tasks.register<GradleBuild>("serve") {
     buildFile = File("${rootDir.path}${pathSeparator}backend${pathSeparator}build.gradle")
     tasks = listOf("bootRun")
 }
+/*
+ext {
+    kotlin_version = '1.6.20'
+    activityVersion = '1.4.0'
+    appCompatVersion = '1.4.1'
+    constraintLayoutVersion = '2.1.3'
+    coreTestingVersion = '2.1.0'
+    coroutines = '1.3.9'
+    lifecycleVersion = '2.4.1'
+    materialVersion = '1.5.0'
+    roomVersion = '2.4.2'
+    // testing
+    junitVersion = '4.13.2'
+    espressoVersion = '3.4.0'
+    androidxJunitVersion = '1.1.3'
+}
+ */
