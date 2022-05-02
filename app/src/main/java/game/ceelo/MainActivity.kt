@@ -46,6 +46,73 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+fun loadLocalGame(
+    binding: ActivityMainBinding,
+    mainActivity: MainActivity
+) = binding.apply {
+    val diceGameViewModel = ViewModelProvider(mainActivity)
+        .get(DiceGameViewModel::class.java)
+    diceGameViewModel.diceGame.observe(mainActivity) { game ->
+        diceImages.run {
+            playerOneUI(
+                activityMainBinding = this@apply,
+                game = game,
+                list = this
+            )
+            playerTwoUI(
+                activityMainBinding = this@apply,
+                game = game,
+                list = this
+            )
+        }
+
+    }
+    //TODO refactor pour avoir un field dans le viewmodel nommé textViewResultPair Pair<result,visibility>
+    // on evitera le nested observe
+    diceGameViewModel.playerOneResult.observe(mainActivity) { result: DiceThrowResult ->
+        diceGameViewModel.resultVisibility.observe(mainActivity) { visibility: Int ->
+            setTextViewResult(
+                textViewResult = localPlayerResultText,
+                diceResult = result,
+                textViewVisibility = visibility
+            )
+        }
+    }
+    diceGameViewModel.playerTwoResult.observe(mainActivity) { result: DiceThrowResult ->
+        diceGameViewModel.resultVisibility.observe(mainActivity) { visibility: Int ->
+            setTextViewResult(
+                textViewResult = computerResultText,
+                diceResult = result,
+                textViewVisibility = visibility
+            )
+        }
+    }
+
+
+    playLocalButton.setOnClickListener {
+        diceGameViewModel.apply vm@{
+            onClickPlayButton()
+            diceGame.value.apply {
+                this!!.first().apply player@{
+                    this@apply!!.second().apply computer@{
+                        playerOneThrow(
+                            activityMainBinding = binding,
+                            list = this@player,
+                            diceGameViewModel = this@vm
+                        )
+                        playerTwoThrow(
+                            activityMainBinding = binding,
+                            list = this@computer,
+                            diceGameViewModel = this@vm
+                        )
+                    }
+                }
+
+            }
+        }
+    }
+}
+
 
 class DiceGameViewModel : ViewModel() {
     private val _playerOneResult: MutableLiveData<DiceThrowResult> = MutableLiveData()
@@ -71,72 +138,7 @@ class DiceGameViewModel : ViewModel() {
     }
 }
 
-fun loadLocalGame(
-    binding: ActivityMainBinding,
-    mainActivity: MainActivity
-) = binding.apply {
-    val diceGameViewModel = ViewModelProvider(mainActivity)
-        .get(DiceGameViewModel::class.java)
-    diceGameViewModel.diceGame.observe(mainActivity) { game ->
-        diceImages.run {
-            playerOneUI(
-                activityMainBinding = this@apply,
-                game = game,
-                list = this
-            )
-            playerTwoUI(
-                activityMainBinding = this@apply,
-                game = game,
-                list = this
-            )
-        }
 
-    }
-
-    diceGameViewModel.playerOneResult.observe(mainActivity) { result: DiceThrowResult ->
-        diceGameViewModel.resultVisibility.observe(mainActivity) { visibility: Int ->
-            setTextViewResult(
-                textViewResult = localPlayerResultText,
-                diceResult = result,
-                textViewVisibility = visibility
-            )
-        }
-    }
-    diceGameViewModel.playerTwoResult.observe(mainActivity) { result: DiceThrowResult ->
-        diceGameViewModel.resultVisibility.observe(mainActivity) { visibility: Int ->
-            setTextViewResult(
-                textViewResult = computerResultText,
-                diceResult = result,
-                textViewVisibility = visibility
-            )
-        }
-    }
-
-
-    playLocalButton.setOnClickListener {
-
-        diceGameViewModel.apply vm@{
-            onClickPlayButton()
-            diceGame.value.apply {
-                this!!.first().apply player@{
-                    this@apply!!.second().apply computer@{
-                        playerOneThrow(
-                            activityMainBinding = binding,
-                            list = this@player,
-                            diceGameViewModel = this@vm
-                        )
-                        playerTwoThrow(
-                            activityMainBinding = binding,
-                            list = this@computer,
-                            diceGameViewModel = this@vm
-                        )
-                    }
-                }
-
-            }
-        }
-    }
-}
 
 fun playerTwoThrow(
     activityMainBinding: ActivityMainBinding,
@@ -158,30 +160,6 @@ fun playerTwoThrow(
     setTextViewResult(
         textViewResult = activityMainBinding.computerResultText,
         diceResult = diceGameViewModel.playerTwoResult.value!!,
-        textViewVisibility = diceGameViewModel.resultVisibility.value!!
-    )
-}
-
-fun playerOneThrow(
-    activityMainBinding: ActivityMainBinding,
-    list: List<Int>,
-    diceGameViewModel: DiceGameViewModel
-) {
-    throwDiceAnimation(
-        diceImage = activityMainBinding.playerOneFirstDiceImageId,
-        diceValue = list.first()
-    )
-    throwDiceAnimation(
-        diceImage = activityMainBinding.playerOneMiddleDiceImageId,
-        diceValue = list.middle()
-    )
-    throwDiceAnimation(
-        diceImage = activityMainBinding.playerOneLastDiceImageId,
-        diceValue = list.last()
-    )
-    setTextViewResult(
-        textViewResult = activityMainBinding.localPlayerResultText,
-        diceResult = diceGameViewModel.playerOneResult.value!!,
         textViewVisibility = diceGameViewModel.resultVisibility.value!!
     )
 }
@@ -212,6 +190,10 @@ fun playerTwoUI(
     )
 }
 
+
+
+
+
 fun playerOneUI(
     activityMainBinding: ActivityMainBinding,
     game: List<List<Int>>,
@@ -234,6 +216,30 @@ fun playerOneUI(
             diceValue = game.first().last(),
             diceImages = list
         )
+    )
+}
+
+fun playerOneThrow(
+    activityMainBinding: ActivityMainBinding,
+    list: List<Int>,
+    diceGameViewModel: DiceGameViewModel
+) {
+    throwDiceAnimation(
+        diceImage = activityMainBinding.playerOneFirstDiceImageId,
+        diceValue = list.first()
+    )
+    throwDiceAnimation(
+        diceImage = activityMainBinding.playerOneMiddleDiceImageId,
+        diceValue = list.middle()
+    )
+    throwDiceAnimation(
+        diceImage = activityMainBinding.playerOneLastDiceImageId,
+        diceValue = list.last()
+    )
+    setTextViewResult(
+        textViewResult = activityMainBinding.localPlayerResultText,
+        diceResult = diceGameViewModel.playerOneResult.value!!,
+        textViewVisibility = diceGameViewModel.resultVisibility.value!!
     )
 }
 
