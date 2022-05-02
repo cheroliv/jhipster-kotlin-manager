@@ -14,25 +14,16 @@ plugins {
     id("org.jetbrains.kotlin.android") version ("1.6.21") apply (false)
     id("org.jetbrains.kotlin.jvm") version ("1.6.21") apply (false)
 }
+val pathSeparator: String = System.getProperty("file.separator")
 
-//task clean(type: Delete) {
-//    delete rootProject.buildDir
-//}
 tasks.register<Delete>("clean") {
     description = "Delete directory build"
     group = "build"
     delete(rootProject.buildDir)
 }
-//task serve(type: GradleBuild) {
-//    description = "lance le server backend de l'application"
-//    noinspection GrDeprecatedAPIUsage
-//    buildFile = 'backend/build.gradle'
-//    tasks = ['bootRun']
-//}
 
 tasks.register<GradleBuild>("serve") {
     description = "lance le server backend de l'application"
-    val pathSeparator: String = System.getProperty("path.separator")
-    dir = File("${projectDir.path}${pathSeparator}backend${pathSeparator}build.gradle")
+    buildFile = File("${rootDir.path}${pathSeparator}backend${pathSeparator}build.gradle")
     tasks = listOf("bootRun")
 }
