@@ -1,17 +1,22 @@
+import org.gradle.api.JavaVersion.VERSION_1_8
+
 plugins {
+    kotlin(module = "jvm")
     id("java-library")
-    kotlin("jvm")
     application
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = VERSION_1_8
+    targetCompatibility = VERSION_1_8
 }
+
 application {
     mainClass.set("game.ceelo.domain.CeeloKt")
 }
+
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
-    testImplementation("junit:junit:4.13.2")
+    implementation(dependencyNotation = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${properties["kotlinx_coroutines_version"]}")
+    testImplementation(dependencyNotation = "org.jetbrains.kotlin:kotlin-test")
+    testImplementation(dependencyNotation = "org.jetbrains.kotlin:kotlin-test-junit")
 }

@@ -12,7 +12,7 @@ import org.junit.Assert.*
 @RunWith(AndroidJUnit4::class)
 class CanaryRepositoryInstrumentedTest {
     @Test
-    fun canary_test() {
+    fun canary_repository_test() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("game.ceelo", appContext.packageName)

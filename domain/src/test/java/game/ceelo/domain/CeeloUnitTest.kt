@@ -1,9 +1,7 @@
 package game.ceelo.domain
 
 import game.ceelo.domain.DiceThrowResult.*
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Test
+import kotlin.test.*
 
 
 @Suppress("NonAsciiCharacters")
