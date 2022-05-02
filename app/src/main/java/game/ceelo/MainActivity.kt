@@ -138,7 +138,29 @@ class DiceGameViewModel : ViewModel() {
     }
 }
 
-
+fun playerOneThrow(
+    activityMainBinding: ActivityMainBinding,
+    list: List<Int>,
+    diceGameViewModel: DiceGameViewModel
+) {
+    throwDiceAnimation(
+        diceImage = activityMainBinding.playerOneFirstDiceImageId,
+        diceValue = list.first()
+    )
+    throwDiceAnimation(
+        diceImage = activityMainBinding.playerOneMiddleDiceImageId,
+        diceValue = list.middle()
+    )
+    throwDiceAnimation(
+        diceImage = activityMainBinding.playerOneLastDiceImageId,
+        diceValue = list.last()
+    )
+    setTextViewResult(
+        textViewResult = activityMainBinding.localPlayerResultText,
+        diceResult = diceGameViewModel.playerOneResult.value!!,
+        textViewVisibility = diceGameViewModel.resultVisibility.value!!
+    )
+}
 
 fun playerTwoThrow(
     activityMainBinding: ActivityMainBinding,
@@ -163,6 +185,32 @@ fun playerTwoThrow(
         textViewVisibility = diceGameViewModel.resultVisibility.value!!
     )
 }
+
+fun playerOneUI(
+    activityMainBinding: ActivityMainBinding,
+    game: List<List<Int>>,
+    list: List<Int>
+) {
+    activityMainBinding.playerOneFirstDiceImageId.setImageResource(
+        getDiceImageFromDiceValue(
+            diceValue = game.first().first(),
+            diceImages = list
+        )
+    )
+    activityMainBinding.playerOneMiddleDiceImageId.setImageResource(
+        getDiceImageFromDiceValue(
+            diceValue = game.first().middle(),
+            diceImages = list
+        )
+    )
+    activityMainBinding.playerOneLastDiceImageId.setImageResource(
+        getDiceImageFromDiceValue(
+            diceValue = game.first().last(),
+            diceImages = list
+        )
+    )
+}
+
 
 fun playerTwoUI(
     activityMainBinding: ActivityMainBinding,
@@ -191,68 +239,6 @@ fun playerTwoUI(
 }
 
 
-
-
-
-fun playerOneUI(
-    activityMainBinding: ActivityMainBinding,
-    game: List<List<Int>>,
-    list: List<Int>
-) {
-    activityMainBinding.playerOneFirstDiceImageId.setImageResource(
-        getDiceImageFromDiceValue(
-            diceValue = game.first().first(),
-            diceImages = list
-        )
-    )
-    activityMainBinding.playerOneMiddleDiceImageId.setImageResource(
-        getDiceImageFromDiceValue(
-            diceValue = game.first().middle(),
-            diceImages = list
-        )
-    )
-    activityMainBinding.playerOneLastDiceImageId.setImageResource(
-        getDiceImageFromDiceValue(
-            diceValue = game.first().last(),
-            diceImages = list
-        )
-    )
-}
-
-fun playerOneThrow(
-    activityMainBinding: ActivityMainBinding,
-    list: List<Int>,
-    diceGameViewModel: DiceGameViewModel
-) {
-    throwDiceAnimation(
-        diceImage = activityMainBinding.playerOneFirstDiceImageId,
-        diceValue = list.first()
-    )
-    throwDiceAnimation(
-        diceImage = activityMainBinding.playerOneMiddleDiceImageId,
-        diceValue = list.middle()
-    )
-    throwDiceAnimation(
-        diceImage = activityMainBinding.playerOneLastDiceImageId,
-        diceValue = list.last()
-    )
-    setTextViewResult(
-        textViewResult = activityMainBinding.localPlayerResultText,
-        diceResult = diceGameViewModel.playerOneResult.value!!,
-        textViewVisibility = diceGameViewModel.resultVisibility.value!!
-    )
-}
-
-val diceImages: List<Int> by lazy {
-    listOf(
-        dice_face_one,
-        dice_face_two,
-        dice_face_three,
-        dice_face_four,
-        dice_face_five,
-        dice_face_six,
-    )
-}
 
 
 fun throwDiceAnimation(
@@ -300,4 +286,15 @@ fun setTextViewResult(
         else -> RETHROW.toString()
     }
     visibility = textViewVisibility
+}
+
+val diceImages: List<Int> by lazy {
+    listOf(
+        dice_face_one,
+        dice_face_two,
+        dice_face_three,
+        dice_face_four,
+        dice_face_five,
+        dice_face_six,
+    )
 }
