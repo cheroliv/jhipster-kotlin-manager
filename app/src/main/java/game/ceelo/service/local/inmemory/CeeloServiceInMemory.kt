@@ -1,14 +1,15 @@
-package game.ceelo.service
+package game.ceelo.service.local.inmemory
 
 import android.content.Context
 import game.ceelo.domain.dicesThrow
-import game.ceelo.service.FakeCeeloService.Data.addGame
-import game.ceelo.service.FakeCeeloService.Data.getAllGames
+import game.ceelo.service.ICeeloService
+import game.ceelo.service.local.inmemory.CeeloServiceInMemory.InMemoryData.addGame
+import game.ceelo.service.local.inmemory.CeeloServiceInMemory.InMemoryData.getAllGames
 
-class FakeCeeloService(
+class CeeloServiceInMemory(
     @Suppress("UNUSED_PARAMETER") context: Context?
 ) : ICeeloService {
-    object Data {
+    object InMemoryData {
         private val repo: MutableList<List<List<Int>>> = MutableList(size = 10, init = {
             listOf(dicesThrow, dicesThrow)
         })

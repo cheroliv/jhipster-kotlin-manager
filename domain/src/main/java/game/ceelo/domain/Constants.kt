@@ -2,6 +2,10 @@
 
 package game.ceelo.domain
 
+const val PLAYER_ONE_NAME = "Player"
+const val PLAYER_TWO_NAME = "Computer"
+const val GAME_TYPE = "LOCAL"
+
 const val ONE = 1
 const val TWO = 2
 const val THREE = 3

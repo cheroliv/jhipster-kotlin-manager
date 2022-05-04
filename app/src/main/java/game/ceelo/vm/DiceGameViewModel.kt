@@ -1,6 +1,6 @@
 package game.ceelo.vm
 
-import android.view.View
+import android.view.View.VISIBLE
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,6 +29,6 @@ class DiceGameViewModel : ViewModel() {
             .compareThrows(_diceGame.value!!.second())
         _playerTwoResult.value = _diceGame.value!!.second()
             .compareThrows(_diceGame.value!!.first())
-        _resultVisibility.value = View.VISIBLE
+        _resultVisibility.value = VISIBLE
     }
 }

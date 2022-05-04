@@ -1,22 +1,12 @@
 package game.ceelo.domain
 
 import game.ceelo.domain.DiceThrowResult.*
-import java.net.*
-import java.io.*
-import kotlin.coroutines.CoroutineContext
 
 /**
  * un jet de dés au hazard
  */
  val dicesThrow: List<Int>
     get() = List(size = 3, init = { (ONE..SIX).random() })
-
-
-//suspend fun rollDicesService():List<Int>{
-//    CoroutineContext(Dispatchers)
-//    return dicesThrow
-//}
-
 
 /**
  * Renvoi le dé du milieu

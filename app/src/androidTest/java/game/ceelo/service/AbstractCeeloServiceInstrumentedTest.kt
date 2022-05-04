@@ -1,7 +1,6 @@
 package game.ceelo.service
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
 import game.ceelo.domain.CEELO_DICE_THROW_SIZE
 import game.ceelo.domain.ONE
 import game.ceelo.domain.SIX
@@ -12,15 +11,16 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 
-@Suppress("NonAsciiCharacters", "TestFunctionName")
+@Suppress(
+    "NonAsciiCharacters",
+    "TestFunctionName"
+)
 @RunWith(AndroidJUnit4::class)
-class CeeloServiceInstrumentedTest {
+abstract class AbstractCeeloServiceInstrumentedTest {
     private lateinit var ceeloService: ICeeloService
 
     @BeforeTest
-    fun initContext() {
-        ceeloService = FakeCeeloService(getInstrumentation().targetContext)
-    }
+    abstract fun initContext()
 
 
     @Test
