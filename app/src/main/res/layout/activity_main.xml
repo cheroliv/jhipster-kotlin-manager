@@ -12,12 +12,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="STATS"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/playerTwoLastDiceImageId"
         app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="@+id/playerTwoFirstDiceImageId"
-        app:layout_constraintTop_toBottomOf="@+id/playerTwoMiddleDiceImageId"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/playerTwoMiddleDiceImageId" />
 
     <Button
         android:id="@+id/playLocalButton"
@@ -139,5 +137,17 @@
         app:layout_constraintEnd_toEndOf="@+id/playerOneLastDiceImageId"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="SIGNIN"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/statsButton"
+        app:layout_constraintTop_toBottomOf="@+id/statsButton"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
