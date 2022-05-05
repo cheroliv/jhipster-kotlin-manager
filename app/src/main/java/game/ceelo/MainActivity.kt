@@ -80,7 +80,6 @@ fun loadLocalGame(
         }
     }
 
-
     playLocalButton.setOnClickListener {
         diceGameViewModel.apply vm@{
             onClickPlayButton()

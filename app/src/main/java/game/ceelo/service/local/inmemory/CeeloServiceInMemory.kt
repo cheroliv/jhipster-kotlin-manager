@@ -17,7 +17,6 @@ class CeeloServiceInMemory(
         @JvmStatic
         fun getAllGames(): List<List<List<Int>>> = repo
 
-        @Suppress("unused")
         @JvmStatic
         fun addGame(game: List<List<Int>>) {
             repo.add(game)
