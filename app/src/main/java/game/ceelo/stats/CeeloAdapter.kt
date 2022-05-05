@@ -14,7 +14,7 @@ import game.ceelo.service.local.inmemory.CeeloServiceInMemory
 import game.ceelo.stats.CeeloAdapter.CeeloViewHolder
 
 class CeeloAdapter : Adapter<CeeloViewHolder>() {
-    private val ceeloService: ICeeloService = CeeloServiceInMemory(null)
+    private val ceeloService: ICeeloService by lazy { CeeloServiceInMemory(context = null) }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
