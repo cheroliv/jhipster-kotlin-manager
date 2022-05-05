@@ -6,16 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StatsActivity">
-
-    <ListView
-        android:id="@+id/personListViewId"
-        android:layout_width="0dp"
-        android:layout_height="363dp"
-        android:layout_marginTop="22dp"
-        app:layout_constraintEnd_toEndOf="@+id/backButtonId"
-        app:layout_constraintStart_toStartOf="@+id/backButtonId"
-        app:layout_constraintTop_toBottomOf="@+id/backButtonId" />
-
     <Button
         android:id="@+id/backButtonId"
         android:layout_width="0dp"
@@ -23,9 +13,19 @@
         android:layout_marginStart="22dp"
         android:layout_marginTop="22dp"
         android:layout_marginEnd="22dp"
-        android:onClick="onClickBackButtonEvent"
         android:text="BACK"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/statsRV"
+        android:layout_width="0dp"
+        android:layout_height="363dp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintEnd_toEndOf="@+id/backButtonId"
+        app:layout_constraintStart_toStartOf="@+id/backButtonId"
+        app:layout_constraintTop_toBottomOf="@+id/backButtonId" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
