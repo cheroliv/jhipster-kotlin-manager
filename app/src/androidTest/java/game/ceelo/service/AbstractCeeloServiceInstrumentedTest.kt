@@ -22,7 +22,6 @@ abstract class AbstractCeeloServiceInstrumentedTest {
     @BeforeTest
     abstract fun initContext()
 
-
     @Test
     fun localDicesThrow_retourne_un_jeux_de_jet_de_dès_correct() {
         assertEquals(expected = 2, actual = ceeloService.launchLocalGame().size)

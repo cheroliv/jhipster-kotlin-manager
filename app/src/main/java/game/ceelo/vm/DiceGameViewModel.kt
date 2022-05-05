@@ -7,16 +7,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import game.ceelo.ceeloService
 import game.ceelo.domain.*
-import game.ceelo.service.ICeeloService
-import game.ceelo.service.local.inmemory.CeeloServiceInMemory
 
 
 //TODO refactor pour avoir un field dans le viewmodel nommé textViewResultPair Pair<result,visibility>
 // on evitera le nested observe
-//class DiceGameViewModel(application: Application) : AndroidViewModel(application) {
-    class DiceGameViewModel :ViewModel() {
-    private val ceeloService: ICeeloService = CeeloServiceInMemory(null)
+class DiceGameViewModel(application: Application) : AndroidViewModel(application) {
+//class DiceGameViewModel : ViewModel() {
     private val _playerOneResult: MutableLiveData<DiceThrowResult> = MutableLiveData()
     val playerOneResult: LiveData<DiceThrowResult> = _playerOneResult
     private val _playerTwoResult: MutableLiveData<DiceThrowResult> = MutableLiveData()
@@ -42,6 +40,6 @@ import game.ceelo.service.local.inmemory.CeeloServiceInMemory
             .compareThrows(_diceGame.value!!.first())
         _resultVisibility.value = VISIBLE
         _games.value = ceeloService.allGames()
-        Log.d("foofoo",_games.value.toString())
+        Log.d("foofoo", _games.value.toString())
     }
 }

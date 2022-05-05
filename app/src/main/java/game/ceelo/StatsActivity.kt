@@ -17,26 +17,26 @@ class StatsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        val diceGameViewModel = ViewModelProvider(this)
-//            .get(DiceGameViewModel::class.java)
-        inflate(layoutInflater).apply {
-            setContentView(root)
-            backButton.setOnClickListener { finish() }
-            Log.d("foo", "avant")
-            statsRV.apply {
-                Log.d("foo", "pendant")
-//                diceGameViewModel.games.observe(this@StatsActivity) { g ->
-//                    games.clear()
-//                    games.addAll(g)
-//                    Log.d("foo", "on observe")
-//                    adapter = CeeloAdapter(games = games)
-//                    Log.d("foo", g.toString())
-//                }
-                adapter = CeeloAdapter(ceeloService.allGames())
+        ViewModelProvider(owner = this).get(DiceGameViewModel::class.java).run {
+            inflate(layoutInflater).apply {
+                setContentView(root)
+                backButton.setOnClickListener { finish() }
+                Log.d("foo", "avant")
 
-                layoutManager = LinearLayoutManager(this@StatsActivity)
+                statsRV.apply {
+                    Log.d("foo", "pendant")
+                    games.observe(this@StatsActivity) { games: List<List<List<Int>>> ->
+                        Log.d("foo", "on observe")
+//                    adapter = CeeloAdapter(games = games)
+                        Log.d("foo", games.toString())
+                    }
+                    adapter = CeeloAdapter(ceeloService.allGames())
+                    layoutManager = LinearLayoutManager(this@StatsActivity)
+                }
+
+                Log.d("foo", "apres")
             }
-            Log.d("foo", "apres")
         }
+
     }
 }
