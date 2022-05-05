@@ -4,10 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.animation.Animation.RELATIVE_TO_SELF
 import android.view.animation.RotateAnimation
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -18,11 +16,9 @@ import game.ceelo.domain.DiceThrowResult.*
 import game.ceelo.domain.middle
 import game.ceelo.domain.second
 import game.ceelo.vm.DiceGameViewModel
-import java.io.Serializable
 
 
 class MainActivity : AppCompatActivity() {
-//    private lateinit var intentActivityResultLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,16 +29,6 @@ class MainActivity : AppCompatActivity() {
                 mainActivity = this@MainActivity
             )
             statsButton.setOnClickListener{
-//                intentActivityResultLauncher.launch(
-//                    Intent(
-//                        this@MainActivity,
-//                        StatsActivity::class.java
-//                    )
-//                )
-
-
-
-
                 startActivity(Intent(
                     this@MainActivity,
                     StatsActivity::class.java
