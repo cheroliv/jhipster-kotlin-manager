@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
                     StatsActivity::class.java
                 ))
             }
+
         }
     }
 }
