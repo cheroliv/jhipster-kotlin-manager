@@ -43,7 +43,7 @@
         android:id="@+id/playerOneMiddleDiceImageId"
         android:layout_width="104dp"
         android:layout_height="95dp"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="44dp"
         android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="@+id/playerOneFirstDiceImageId"
         app:layout_constraintStart_toEndOf="@+id/playerOneFirstDiceImageId"
