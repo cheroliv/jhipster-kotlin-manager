@@ -28,13 +28,20 @@ class MainActivity : AppCompatActivity() {
                 binding = this,
                 mainActivity = this@MainActivity
             )
-            statsButton.setOnClickListener{
+            statsButton.setOnClickListener {
+                startActivity(
+                    Intent(
+                        this@MainActivity,
+                        StatsActivity::class.java
+                    )
+                )
+            }
+            signinButton.setOnClickListener {
                 startActivity(Intent(
                     this@MainActivity,
-                    StatsActivity::class.java
+                    LoginActivity::class.java
                 ))
             }
-
         }
     }
 }
