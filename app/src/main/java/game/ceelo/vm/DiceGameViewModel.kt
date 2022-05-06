@@ -37,7 +37,7 @@ class DiceGameViewModel(application: Application) : AndroidViewModel(application
     )
 
     fun onClickPlayButton() {
-        _diceGame.value = listOf(dicesThrow, dicesThrow)
+        _diceGame.value = listOf(runDices(), runDices())
         ceeloService.saveGame(_diceGame.value!!)
         _playerOneResult.value = _diceGame.value!!.first()
             .compareThrows(_diceGame.value!!.second())

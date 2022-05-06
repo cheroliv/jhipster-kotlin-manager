@@ -5,7 +5,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import game.ceelo.domain.CEELO_DICE_THROW_SIZE
 import game.ceelo.domain.ONE
 import game.ceelo.domain.SIX
-import game.ceelo.domain.dicesThrow
+import game.ceelo.domain.runDices
 import game.ceelo.service.local.inmemory.CeeloServiceInMemory
 import org.junit.runner.RunWith
 import kotlin.test.BeforeTest
@@ -56,7 +56,7 @@ import kotlin.test.assertEquals
     @Test
     fun saveGame_ajoute_une_partie() {
         val beforeSave = ceeloService.allGames().size
-        ceeloService.saveGame(listOf(dicesThrow, dicesThrow))
+        ceeloService.saveGame(listOf(runDices(), runDices()))
         assertEquals(
             expected = beforeSave + 1,
             actual = ceeloService.allGames().size

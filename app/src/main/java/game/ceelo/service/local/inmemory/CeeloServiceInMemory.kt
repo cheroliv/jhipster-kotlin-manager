@@ -1,7 +1,7 @@
 package game.ceelo.service.local.inmemory
 
 import android.content.Context
-import game.ceelo.domain.dicesThrow
+import game.ceelo.domain.runDices
 import game.ceelo.service.ICeeloService
 import game.ceelo.service.local.inmemory.CeeloServiceInMemory.InMemoryData.addGame
 import game.ceelo.service.local.inmemory.CeeloServiceInMemory.InMemoryData.getAllGames
@@ -11,7 +11,7 @@ class CeeloServiceInMemory(
 ) : ICeeloService {
     object InMemoryData {
         private val repo: MutableList<List<List<Int>>> = MutableList(size = 10, init = {
-            listOf(dicesThrow, dicesThrow)
+            listOf(runDices(), runDices())
         })
 
         @JvmStatic
@@ -23,7 +23,7 @@ class CeeloServiceInMemory(
         }
     }
 
-    override fun launchLocalGame(): List<List<Int>> = listOf(dicesThrow, dicesThrow)
+    override fun launchLocalGame(): List<List<Int>> = listOf(runDices(), runDices())
     override fun allGames(): List<List<List<Int>>> = getAllGames()
     override fun saveGame(newGame: List<List<Int>>) = addGame(newGame)
 }
