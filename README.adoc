@@ -182,5 +182,26 @@ heroku login
 
 === Se connecter au back end
 ----
-curl
+curl -X 'POST' \
+  'http://localhost:8080/api/authenticate' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "username": "user",
+  "password": "user",
+  "rememberMe": true
+}'
 ----
+on récupère notre preuve de connection avec le bearer pour le user "user"
+----
+curl -X 'POST' \
+'http://localhost:8080/api/authenticate' \
+-H 'accept: */*' \
+-H 'Content-Type: application/json' \
+-d '{
+"username": "admin",
+"password": "admin",
+"rememberMe": true
+}'
+----
+on récupère notre preuve de connection avec le bearer pour le user "admin"
