@@ -14,3 +14,6 @@
 .cxx
 local.properties
 /CeeLoGame.code-workspace
+backend/.gradle
+bakend/node_modules
+bakend/build
