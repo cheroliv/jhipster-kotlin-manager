@@ -1,20 +1,18 @@
 package game.ceelo
 
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
-
+import androidx.test.platform.app.InstrumentationRegistry.getInstrumentation
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import org.junit.Assert.*
 
 
 @RunWith(AndroidJUnit4::class)
 class CanaryInstrumentedTest {
     @Test
     fun canary_test() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("game.ceelo", appContext.packageName)
+        getInstrumentation().targetContext.apply {
+            assertEquals("game.ceelo", packageName)
+        }
     }
 }
