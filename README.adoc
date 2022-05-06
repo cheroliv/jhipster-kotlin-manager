@@ -28,6 +28,8 @@ voir aussi : https://en.wikipedia.org/wiki/Cee-lo[wiki cee-lo]
 
 === Test Driven Developpement
 
+==== Tests Unitaires sur le métier :
+
 . `Si le jet est correct alors la propriété dicesThrow renvoi un triplet d'entier entre 1 et 6`
 
 . `Si le jet contient (4,5,6) alors la propriété is456 renvoi true`
@@ -84,6 +86,12 @@ voir aussi : https://en.wikipedia.org/wiki/Cee-lo[wiki cee-lo]
 
 . `Si le jet est un triplet uniforme et l'autre aussi avec la meme face alors la propriété compareThrows renvoi RETHROW`
 
+==== Tests instrumentés (fonctionnels)
+
+===== CeeloService (CeeloServiceInstrumentedTest):
+. `localDicesThrow_retourne_un_jeux_de_jet_de_dès_correct`
+. `allGames_retourne_toutes_les_parties_et_sont_correct`
+. `saveGame_ajoute_une_partie`
 
  rapport de test
 domain/build/reports/tests/test/index.html
@@ -171,3 +179,8 @@ heroku login
 (TODO : pas fini!) +
 
 === Déployer son app mobile sur playstore (TODO)
+
+=== Se connecter au back end
+----
+curl
+----
