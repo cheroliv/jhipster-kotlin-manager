@@ -1,7 +1,5 @@
 = Jeu de Cee Lo
 
-Le projet continue sur ce https://github.com/cheroliv/CeeLoDiceGame.git[dépot]
-
 === Essayez le cee-lo.
 C'est un jeu populaire lors duquel chaque joueur possède trois dés, +
 en général dans une sorte de verre et chaque joueur lance les dés +
