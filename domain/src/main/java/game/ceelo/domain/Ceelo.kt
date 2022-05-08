@@ -35,7 +35,7 @@ If banker lost all his money which is in the bank then game will start from step
 
 
 
-fun initPlayground(howMuchPlayer: Int): Playground {
+fun initPlayground(@Suppress("UNUSED_PARAMETER") howMuchPlayer: Int): Playground {
     return Playground()
 }
 
