@@ -16,11 +16,11 @@ import kotlin.test.assertEquals
     "TestFunctionName"
 )
 @RunWith(AndroidJUnit4::class)
- class CeeloServiceInstrumentedTest {
+class CeeloServiceInstrumentedTest {
     private lateinit var ceeloService: ICeeloService
 
     @BeforeTest
-     fun initContext() {
+    fun initContext() {
         ceeloService = CeeloServiceInMemory()
     }
 
