@@ -1,13 +1,16 @@
 package game.ceelo.domain
 
 import game.ceelo.domain.DiceThrowResult.*
+import game.ceelo.service.ICeeloService
 
 /*
 
 RULES
 
 Game can be played by minimum 2 player and maximum 4 player.
-On startup all user will get chance/turn to roll 1 dice. Highest dice roll wins bank. If more than 1 player have highest number, players that have the highest number must roll again to get the highest number. This must continue until it is established who has bank.
+On startup all user will get chance/turn to roll 1 dice. Highest dice roll wins bank.
+If more than 1 player have highest number, players that have the highest number
+must roll again to get the highest number. This must continue until it is established who has bank.
 Then banker will put Cee Lo bucks in the bank as much as he wants (Not below than mandatory minimum).
 All other player will bet as much as he wants.
 Then banker get a chance to roll 3 dice. Banker can tap on PUSH (Don't know the exact word) before taking his turn:
@@ -30,7 +33,23 @@ If banker lost all his money which is in the bank then game will start from step
  */
 
 
-fun initBank(n: Int) = List(size = n, init = { (ONE..SIX).random() })
+class Playground
+class Game
+class Player
+class DiceThrow
+
+fun initPlayground(howMuchPlayer: Int): Playground {
+    return Playground()
+}
+
+fun initBank(howMuchPlayer: Int): List<Int> {
+    return List(size = howMuchPlayer, init = { (ONE..SIX).random() })
+}
+
+fun launchGame():Game{
+    return Game()
+}
+
 
 
 /**
@@ -186,20 +205,3 @@ enum class DiceThrowResult {
     WIN, LOOSE, RETHROW
 }
 
-fun main(/*args: Array<String>*/) {
-    /*"ici dans ce main c'est le playground pour tester du code"*/
-    println("un jet de dés :")
-
-    runDices().run playerOne@{
-        runDices().run playerTwo@{
-            do {
-                println("player one throw : ${this@playerOne}")
-                println("player two throw : ${this@playerTwo}")
-                val result = this@playerOne
-                    .compareThrows(secondPlayerThrow = this@playerTwo)
-                if (result == WIN) println("player one : $WIN")
-                else println("player two : $WIN")
-            } while (result == RETHROW)
-        }
-    }
-}
