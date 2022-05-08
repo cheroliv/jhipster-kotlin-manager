@@ -4,7 +4,7 @@ import org.gradle.api.JavaVersion.VERSION_1_8
 plugins {
     kotlin(module = "jvm")
     id("java-library")
-    application
+
 }
 
 dependencies {
@@ -23,8 +23,4 @@ dependencies {
 java {
     sourceCompatibility = VERSION_1_8
     targetCompatibility = VERSION_11
-}
-
-application {
-    mainClass.set("game.ceelo.domain.ApplicationKt")
 }

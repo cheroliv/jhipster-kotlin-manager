@@ -1,12 +1,10 @@
 package game.ceelo.service
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import game.ceelo.domain.CEELO_DICE_THROW_SIZE
 import game.ceelo.domain.ONE
 import game.ceelo.domain.SIX
 import game.ceelo.domain.runDices
-import game.ceelo.service.local.inmemory.CeeloServiceInMemory
 import org.junit.runner.RunWith
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -23,7 +21,7 @@ import kotlin.test.assertEquals
 
     @BeforeTest
      fun initContext() {
-        ceeloService = CeeloServiceInMemory(InstrumentationRegistry.getInstrumentation().targetContext)
+        ceeloService = CeeloServiceInMemory()
     }
 
     @Test

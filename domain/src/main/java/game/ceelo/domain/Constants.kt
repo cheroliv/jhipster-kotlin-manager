@@ -16,6 +16,13 @@ const val CEELO_DICE_THROW_SIZE = 3
 const val NOT_A_TRIPLET = -1
 const val NOT_A_DOUBLET = 0
 
+const val AUTOMATIC_WIN_456_CASE = 6
+const val UNIFORM_TRIPLET_CASE = 5
+const val UNIFORM_DOUBLET_CASE = 4
+const val STRAIGHT_234_345_CASE = 3
+const val OTHER_THROW_CASE = 2
+const val AUTOMATIC_LOOSE_123_CASE = 1
+
 val `4_5_6` by lazy { listOf(FOUR, FIVE, SIX) }
 val `1_2_3` by lazy { listOf(ONE, TWO, THREE) }
 
@@ -65,11 +72,4 @@ val STRAIGHT_TRIPLETS by lazy {
         `3_4_5`,
     )
 }
-
-const val AUTOMATIC_WIN_456_CASE = 6
-const val UNIFORM_TRIPLET_CASE = 5
-const val UNIFORM_DOUBLET_CASE = 4
-const val STRAIGHT_234_345_CASE = 3
-const val OTHER_THROW_CASE = 2
-const val AUTOMATIC_LOOSE_123_CASE = 1
 
