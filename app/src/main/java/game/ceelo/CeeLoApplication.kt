@@ -38,6 +38,7 @@ class CeeLoApplication : Application() {
     }
 }
 
+@JvmField
 val ceeloModule = module {
     single<ICeeloService> { CeeloServiceInMemory() }
 }

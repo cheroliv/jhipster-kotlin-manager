@@ -1,11 +1,13 @@
 package game.ceelo.service
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import game.ceelo.domain.CEELO_DICE_THROW_SIZE
-import game.ceelo.domain.ONE
-import game.ceelo.domain.SIX
-import game.ceelo.domain.runDices
+import androidx.test.platform.app.InstrumentationRegistry
+import game.ceelo.ceeloModule
+import game.ceelo.domain.*
 import org.junit.runner.RunWith
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.GlobalContext.startKoin
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -31,11 +33,9 @@ class CeeloServiceInstrumentedTest {
 //        startKoin {
 //            androidLogger()
 //            androidContext(InstrumentationRegistry.getInstrumentation().targetContext)
-//            modules(modules = module {
-//                single { CeeloServiceInMemory() }
-//            })
+//            modules(modules = ceeloModule)
 //        }
-        val ceeloService: ICeeloService by lazy { CeeloServiceInMemory() }//by inject(ICeeloService::class.java)
+//        val ceeloService: ICeeloService by lazy { CeeloServiceInMemory() }//by inject(ICeeloService::class.java)
         assertEquals(expected = 2, actual = ceeloService.launchLocalGame().size)
         ceeloService.launchLocalGame().first().run {
             assertEquals(CEELO_DICE_THROW_SIZE, size)
