@@ -151,13 +151,18 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="SIGNIN"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/statsButton"
-        app:layout_constraintTop_toBottomOf="@+id/statsButton"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="@+id/paramButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paramButton" />
 
+    <Button
+        android:id="@+id/paramButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="PARAMETER"
+        app:layout_constraintEnd_toEndOf="@+id/statsButton"
+        app:layout_constraintStart_toStartOf="@+id/statsButton"
+        app:layout_constraintTop_toBottomOf="@+id/statsButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
