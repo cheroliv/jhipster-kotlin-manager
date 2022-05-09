@@ -48,7 +48,19 @@ fun launchGame():Game{
     return Game()
 }
 
-
+fun runConsoleLocalGame() = runDices().run playerOne@{
+    runDices().run playerTwo@{
+        do {
+            println("player one throw : ${this@playerOne}")
+            println("player two throw : ${this@playerTwo}")
+            val result = this@playerOne.compareThrows(
+                secondPlayerThrow = this@playerTwo
+            )
+            if (result == WIN) println("player one : $WIN")
+            else println("player two : $WIN")
+        } while (result == RETHROW)
+    }
+}
 
 
 
