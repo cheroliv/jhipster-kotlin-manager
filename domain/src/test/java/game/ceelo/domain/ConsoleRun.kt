@@ -12,18 +12,20 @@ import kotlin.test.Test
 
 @Suppress("NonAsciiCharacters")
 class ConsoleRun {
-    init {
+
+    private  val ceeloService: ICeeloService by inject(ICeeloService::class.java)
+
+    @Test
+    fun run_main_as_test(): Unit =
         startKoin {
             modules(modules = module {
                 single<ICeeloService> { CeeloServiceInMemory() }
             })
+        }.run {
+            ceeloService.run {
+                println("un jet de dés :")
+                runConsoleLocalGame()
+            }
         }
-    }
-    private  val ceeloService: ICeeloService by inject(ICeeloService::class.java)
 
-    @Test
-    fun run_main_as_test(): Unit = ceeloService.run {
-        println("un jet de dés :")
-        runConsoleLocalGame()
-    }
 }

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import game.ceelo.databinding.ActivityStatsBinding.inflate
+import game.ceelo.service.CeeloServiceInMemory
 import game.ceelo.stats.CeeloAdapter
 import game.ceelo.vm.DiceGameViewModel
 
@@ -27,6 +28,7 @@ class StatsActivity : AppCompatActivity() {
 //                    adapter = CeeloAdapter(games = games)
                         Log.d("foo", games.toString())
                     }
+                    val ceeloService = CeeloServiceInMemory()
                     adapter = CeeloAdapter(ceeloService.allGames())
                     layoutManager = LinearLayoutManager(this@StatsActivity)
                 }

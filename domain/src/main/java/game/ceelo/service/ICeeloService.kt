@@ -1,6 +1,7 @@
 package game.ceelo.service
 
-import game.ceelo.domain.DiceThrowResult
+import game.ceelo.domain.DiceThrowResult.RETHROW
+import game.ceelo.domain.DiceThrowResult.WIN
 import game.ceelo.domain.compareThrows
 import game.ceelo.domain.runDices
 
@@ -16,9 +17,9 @@ interface ICeeloService {
                 val result = this@playerOne.compareThrows(
                     secondPlayerThrow = this@playerTwo
                 )
-                if (result == DiceThrowResult.WIN) println("player one : ${DiceThrowResult.WIN}")
-                else println("player two : ${DiceThrowResult.WIN}")
-            } while (result == DiceThrowResult.RETHROW)
+                if (result == WIN) println("player one : $WIN")
+                else println("player two : $WIN")
+            } while (result == RETHROW)
         }
     }
 }
