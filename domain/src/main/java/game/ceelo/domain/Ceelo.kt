@@ -1,6 +1,7 @@
 package game.ceelo.domain
 
 import game.ceelo.domain.DiceThrowResult.*
+import game.ceelo.service.CeeloServiceInMemory
 import game.ceelo.service.ICeeloService
 
 /*
@@ -33,7 +34,7 @@ If banker lost all his money which is in the bank then game will start from step
  */
 
 
-
+val ceeloService:ICeeloService by lazy { CeeloServiceInMemory() }
 
 fun initPlayground(@Suppress("UNUSED_PARAMETER") howMuchPlayer: Int): Playground {
     return Playground()

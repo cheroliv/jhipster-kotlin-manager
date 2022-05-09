@@ -27,7 +27,6 @@ class CeeLoApplication : Application() {
             modules(modules = module {
                 single<ICeeloService> { CeeloServiceInMemory() }
             })
-
         }
     }
 }

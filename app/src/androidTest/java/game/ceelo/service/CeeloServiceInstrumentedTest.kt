@@ -1,23 +1,12 @@
 package game.ceelo.service
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import game.ceelo.CeeLoApplication
 import game.ceelo.domain.CEELO_DICE_THROW_SIZE
 import game.ceelo.domain.ONE
 import game.ceelo.domain.SIX
 import game.ceelo.domain.runDices
 import org.junit.runner.RunWith
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.KoinApplication
-import org.koin.core.context.startKoin
-import org.koin.dsl.module
-import org.koin.java.KoinJavaComponent
-import org.koin.java.KoinJavaComponent.get
-import org.koin.java.KoinJavaComponent.inject
 import kotlin.test.BeforeTest
-import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

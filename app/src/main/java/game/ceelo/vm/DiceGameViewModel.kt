@@ -9,7 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import game.ceelo.domain.*
 import game.ceelo.service.ICeeloService
-import org.koin.java.KoinJavaComponent
+import org.koin.java.KoinJavaComponent.inject
 
 
 //TODO refactor pour avoir un field dans le viewmodel nommé textViewResultPair Pair<result,visibility>
@@ -36,7 +36,7 @@ class DiceGameViewModel(application: Application) : AndroidViewModel(application
         listOf(ONE, ONE, ONE),
         listOf(ONE, ONE, ONE),
     )
-    val ceeloService :ICeeloService by KoinJavaComponent.inject<ICeeloService>(ICeeloService::class.java)
+
 
     fun onClickPlayButton() {
         _diceGame.value = listOf(runDices(), runDices())
