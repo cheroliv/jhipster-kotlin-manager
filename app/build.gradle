@@ -3,6 +3,7 @@ plugins {
     id "org.jetbrains.kotlin.android"
     id "androidx.navigation.safeargs"
     id 'kotlin-kapt'
+
 }
 
 android {
@@ -42,10 +43,6 @@ android {
     }
     buildFeatures {
         viewBinding = true
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     packagingOptions {
         exclude 'META-INF/atomicfu.kotlin_module'
