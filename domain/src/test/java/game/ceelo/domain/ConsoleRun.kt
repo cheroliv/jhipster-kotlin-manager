@@ -1,13 +1,10 @@
 package game.ceelo.domain
 
 import game.ceelo.service.CeeloServiceInMemory
-import game.ceelo.service.ICeeloService
+import game.ceelo.service.CeeloService
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
-import org.koin.dsl.single
 import org.koin.java.KoinJavaComponent.get
-import org.koin.java.KoinJavaComponent.inject
-import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 
@@ -18,10 +15,10 @@ class ConsoleRun {
     fun run_main_as_test(): Unit =
         startKoin {
             modules(modules = module {
-                single<ICeeloService> { CeeloServiceInMemory() }
+                single<CeeloService> { CeeloServiceInMemory() }
             })
         }.run {
-            get<ICeeloService>(ICeeloService::class.java).run {
+            get<CeeloService>(CeeloService::class.java).run {
                 println("un jet de dés :")
                 runConsoleLocalGame()
             }

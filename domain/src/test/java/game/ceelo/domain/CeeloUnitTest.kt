@@ -1,8 +1,6 @@
 package game.ceelo.domain
 
 import game.ceelo.domain.DiceThrowResult.*
-import game.ceelo.service.CeeloServiceInMemory
-import game.ceelo.service.ICeeloService
 import kotlin.test.*
 
 

@@ -1,13 +1,8 @@
 package game.ceelo.service
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import game.ceelo.ceeloModule
 import game.ceelo.domain.*
 import org.junit.runner.RunWith
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.GlobalContext.startKoin
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -21,7 +16,7 @@ import kotlin.test.assertEquals
 class CeeloServiceInstrumentedTest {
 
 
-//    private val ceeloService: ICeeloService by inject(ICeeloService::class.java)
+//    private val CEELO_SERVICE: CeeloService by inject(CeeloService::class.java)
 
     @BeforeTest
     fun initService() {
@@ -35,13 +30,13 @@ class CeeloServiceInstrumentedTest {
 //            androidContext(InstrumentationRegistry.getInstrumentation().targetContext)
 //            modules(modules = ceeloModule)
 //        }
-//        val ceeloService: ICeeloService by lazy { CeeloServiceInMemory() }//by inject(ICeeloService::class.java)
-        assertEquals(expected = 2, actual = ceeloService.launchLocalGame().size)
-        ceeloService.launchLocalGame().first().run {
+//        val CEELO_SERVICE: CeeloService by lazy { CeeloServiceInMemory() }//by inject(CeeloService::class.java)
+        assertEquals(expected = 2, actual = CEELO_SERVICE.launchLocalGame().size)
+        CEELO_SERVICE.launchLocalGame().first().run {
             assertEquals(CEELO_DICE_THROW_SIZE, size)
             forEach { assert(it in ONE..SIX) }
         }
-        ceeloService.launchLocalGame().last().run {
+        CEELO_SERVICE.launchLocalGame().last().run {
             assertEquals(CEELO_DICE_THROW_SIZE, size)
             forEach { assert(it in ONE..SIX) }
         }
@@ -49,7 +44,7 @@ class CeeloServiceInstrumentedTest {
 
     @Test
     fun allGames_retourne_toutes_les_parties_et_sont_correct() {
-        val ceeloService: ICeeloService by lazy { CeeloServiceInMemory() }
+        val ceeloService: CeeloService by lazy { CeeloServiceInMemory() }
         ceeloService.allGames().forEach { it ->
             assertEquals(expected = 2, actual = it.size)
             it.first().run {
@@ -65,7 +60,7 @@ class CeeloServiceInstrumentedTest {
 
     @Test
     fun saveGame_ajoute_une_partie() {
-        val ceeloService: ICeeloService by lazy { CeeloServiceInMemory() }
+        val ceeloService: CeeloService by lazy { CeeloServiceInMemory() }
         val beforeSave = ceeloService.allGames().size
         ceeloService.saveGame(listOf(runDices(), runDices()))
         assertEquals(

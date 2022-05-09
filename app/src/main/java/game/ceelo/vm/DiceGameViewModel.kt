@@ -8,8 +8,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import game.ceelo.domain.*
-import game.ceelo.service.ICeeloService
-import org.koin.java.KoinJavaComponent.inject
 
 
 //TODO refactor pour avoir un field dans le viewmodel nommé textViewResultPair Pair<result,visibility>
@@ -40,13 +38,13 @@ class DiceGameViewModel(application: Application) : AndroidViewModel(application
 
     fun onClickPlayButton() {
         _diceGame.value = listOf(runDices(), runDices())
-        ceeloService.saveGame(_diceGame.value!!)
+        CEELO_SERVICE.saveGame(_diceGame.value!!)
         _playerOneResult.value = _diceGame.value!!.first()
             .compareThrows(_diceGame.value!!.second())
         _playerTwoResult.value = _diceGame.value!!.second()
             .compareThrows(_diceGame.value!!.first())
         _resultVisibility.value = VISIBLE
-        _games.value = ceeloService.allGames()
+        _games.value = CEELO_SERVICE.allGames()
         Log.d("foofoo", _games.value.toString())
     }
 

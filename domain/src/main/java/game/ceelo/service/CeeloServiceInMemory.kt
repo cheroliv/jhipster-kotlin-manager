@@ -4,7 +4,7 @@ import game.ceelo.domain.runDices
 import game.ceelo.service.CeeloServiceInMemory.InMemoryData.addGame
 import game.ceelo.service.CeeloServiceInMemory.InMemoryData.getAllGames
 
-class CeeloServiceInMemory : ICeeloService {
+class CeeloServiceInMemory : CeeloService {
     object InMemoryData {
         private val repo: MutableList<List<List<Int>>> = MutableList(size = 10, init = {
             listOf(runDices(), runDices())

@@ -4,7 +4,7 @@ import android.app.Application
 import android.util.Log
 import game.ceelo.R.drawable.*
 import game.ceelo.service.CeeloServiceInMemory
-import game.ceelo.service.ICeeloService
+import game.ceelo.service.CeeloService
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -40,5 +40,5 @@ class CeeLoApplication : Application() {
 
 @JvmField
 val ceeloModule = module {
-    single<ICeeloService> { CeeloServiceInMemory() }
+    single<CeeloService> { CeeloServiceInMemory() }
 }
