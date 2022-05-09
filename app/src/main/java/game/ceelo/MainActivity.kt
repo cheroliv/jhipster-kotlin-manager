@@ -12,6 +12,7 @@ import game.ceelo.databinding.ActivityMainBinding
 import game.ceelo.databinding.ActivityMainBinding.inflate
 import game.ceelo.domain.DiceThrowResult
 import game.ceelo.domain.DiceThrowResult.*
+import game.ceelo.domain.getDiceImageFromDiceValue
 import game.ceelo.domain.middle
 import game.ceelo.domain.second
 import game.ceelo.vm.DiceGameViewModel
