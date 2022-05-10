@@ -38,13 +38,13 @@ class DiceGameViewModel(application: Application) : AndroidViewModel(application
 
     fun onClickPlayButton() {
         _diceGame.value = listOf(runDices(), runDices())
-        CEELO_SERVICE.saveGame(_diceGame.value!!)
+        ceeloService.saveGame(_diceGame.value!!)
         _playerOneResult.value = _diceGame.value!!.first()
             .compareThrows(_diceGame.value!!.second())
         _playerTwoResult.value = _diceGame.value!!.second()
             .compareThrows(_diceGame.value!!.first())
         _resultVisibility.value = VISIBLE
-        _games.value = CEELO_SERVICE.allGames()
+        _games.value = ceeloService.allGames()
         Log.d("foofoo", _games.value.toString())
     }
 

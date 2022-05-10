@@ -3,8 +3,6 @@ package game.ceelo.domain
 import game.ceelo.domain.DiceThrowResult.*
 import kotlin.test.*
 
-
-
 @Suppress("NonAsciiCharacters")
 class CeeloUnitTest {
 

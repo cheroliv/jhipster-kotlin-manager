@@ -1,8 +1,9 @@
 package game.ceelo.domain
 
-import game.ceelo.domain.DiceThrowResult.*
-import game.ceelo.service.CeeloServiceInMemory
+import game.ceelo.domain.DiceThrowResult.RETHROW
+import game.ceelo.domain.DiceThrowResult.WIN
 import game.ceelo.service.CeeloService
+import game.ceelo.service.CeeloServiceInMemory
 
 /*
 
@@ -34,33 +35,35 @@ If banker lost all his money which is in the bank then game will start from step
  */
 
 
-val CEELO_SERVICE:CeeloService by lazy { CeeloServiceInMemory() }
-
-fun initPlayground(@Suppress("UNUSED_PARAMETER") howMuchPlayer: Int): Playground {
-    return Playground()
+val ceeloService: CeeloService by lazy {
+    CeeloServiceInMemory()
 }
 
-fun initBank(howMuchPlayer: Int): List<Int> {
-    return List(size = howMuchPlayer, init = { (ONE..SIX).random() })
+fun runConsoleLocalGame() {
+    var playerOne: List<Int> = runDices()
+    var playerTwo: List<Int> = runDices()
+    do {
+        println("player one throw : $playerOne")
+        println("player two throw : $playerTwo")
+        val result = playerOne.compareThrows(
+            secondPlayerThrow = playerTwo
+        )
+        if (result == WIN) println("player one : $WIN")
+        else println("player two : $WIN")
+    } while (result == RETHROW.apply {
+            playerOne = runDices()
+            playerTwo = runDices()
+        })
 }
 
-fun launchGame():Game{
-    return Game()
-}
-
-fun runConsoleLocalGame() = runDices().run playerOne@{
-    runDices().run playerTwo@{
-        do {
-            println("player one throw : ${this@playerOne}")
-            println("player two throw : ${this@playerTwo}")
-            val result = this@playerOne.compareThrows(
-                secondPlayerThrow = this@playerTwo
-            )
-            if (result == WIN) println("player one : $WIN")
-            else println("player two : $WIN")
-        } while (result == RETHROW)
-    }
-}
+fun initPlayground(
+    howMuchPlayer: Int
+): Playground = Playground()
 
 
+fun initBank(howMuchPlayer: Int): List<Int> = List(
+    size = howMuchPlayer,
+    init = { (ONE..SIX).random() }
+)
 
+fun launchGame(): Game = Game()

@@ -31,12 +31,12 @@ class CeeloServiceInstrumentedTest {
 //            modules(modules = ceeloModule)
 //        }
 //        val CEELO_SERVICE: CeeloService by lazy { CeeloServiceInMemory() }//by inject(CeeloService::class.java)
-        assertEquals(expected = 2, actual = CEELO_SERVICE.launchLocalGame().size)
-        CEELO_SERVICE.launchLocalGame().first().run {
+        assertEquals(expected = 2, actual = ceeloService.launchLocalGame().size)
+        ceeloService.launchLocalGame().first().run {
             assertEquals(CEELO_DICE_THROW_SIZE, size)
             forEach { assert(it in ONE..SIX) }
         }
-        CEELO_SERVICE.launchLocalGame().last().run {
+        ceeloService.launchLocalGame().last().run {
             assertEquals(CEELO_DICE_THROW_SIZE, size)
             forEach { assert(it in ONE..SIX) }
         }
@@ -69,4 +69,3 @@ class CeeloServiceInstrumentedTest {
         )
     }
 }
-
