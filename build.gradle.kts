@@ -22,8 +22,28 @@ tasks.register<Delete>("clean") {
     delete(rootProject.buildDir)
 }
 
-tasks.register<GradleBuild>("serve") {
+tasks.register<DefaulTask>("serve") {
     description = "lance le server backend de l'application"
-    buildFile = File("${rootDir.path}${pathSeparator}backend${pathSeparator}build.gradle")
+    dependsOn("servlet")
+}
+
+tasks.register<GradleBuild>("servlet") {
+    description = "lance la servlet backend de l'application"
+    buildFile = File("${rootDir.path}${pathSeparator}servlet${pathSeparator}build.gradle")
     tasks = listOf("bootRun")
 }
+
+tasks.register<GradleBuild>("webflux") {
+    description = "lance le webflux backend de l'application"
+    buildFile = File("${rootDir.path}${pathSeparator}webflux${pathSeparator}build.gradle")
+    tasks = listOf("bootRun")
+}
+
+
+/*
+task serve(type: GradleBuild) {
+    description = "lance le server backend de l'application"
+    //noinspection GrDeprecatedAPIUsage
+    buildFile = 'backend/build.gradle'
+    tasks = ['bootRun']
+} */

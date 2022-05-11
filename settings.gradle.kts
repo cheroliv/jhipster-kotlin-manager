@@ -14,6 +14,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "CeeLoGame"
+rootProject.name = "ceelo"
 include (":app")
 include (":domain")

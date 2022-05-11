@@ -18,7 +18,11 @@ captures
 .externalNativeBuild
 .cxx
 local.properties
-/CeeLoGame.code-workspace
-backend/.gradle
-bakend/node_modules
-bakend/build
+ceelo.code-workspace
+servlet/.gradle
+servlet/node_modules
+servlet/build
+
+webflux/.gradle
+webflux/node_modules
+webflux/build
