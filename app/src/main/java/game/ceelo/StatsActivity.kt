@@ -1,15 +1,11 @@
 package game.ceelo
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import game.ceelo.databinding.ActivityStatsBinding.inflate
-import game.ceelo.domain.ceeloService
-import game.ceelo.service.CeeloServiceInMemory
+import game.ceelo.inmemory.ceeloService
 import game.ceelo.stats.CeeloAdapter
-import game.ceelo.vm.DiceGameViewModel
 
 
 class StatsActivity : AppCompatActivity() {

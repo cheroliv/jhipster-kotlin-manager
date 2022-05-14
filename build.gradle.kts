@@ -22,10 +22,10 @@ tasks.register<Delete>("clean") {
     delete(rootProject.buildDir)
 }
 
-tasks.register<DefaulTask>("serve") {
-    description = "lance le server backend de l'application"
-    dependsOn("servlet")
-}
+//tasks.register<DefaulTask>("serve") {
+//    description = "lance le server backend de l'application"
+//    dependsOn("servlet")
+//}
 
 tasks.register<GradleBuild>("servlet") {
     description = "lance la servlet backend de l'application"

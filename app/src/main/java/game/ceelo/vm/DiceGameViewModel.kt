@@ -7,17 +7,22 @@ import android.view.View.VISIBLE
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import game.ceelo.domain.*
+import game.ceelo.Ceelo.DiceRunResult
+import game.ceelo.Ceelo.ONE
+import game.ceelo.Ceelo.compareThrows
+import game.ceelo.Ceelo.runDices
+import game.ceelo.Ceelo.second
+import game.ceelo.inmemory.ceeloService
 
 
 //TODO refactor pour avoir un field dans le viewmodel nommé textViewResultPair Pair<result,visibility>
 // on evitera le nested observe
 class DiceGameViewModel(application: Application) : AndroidViewModel(application) {
     //class DiceGameViewModel : ViewModel() {
-    private val _playerOneResult: MutableLiveData<DiceThrowResult> = MutableLiveData()
-    val playerOneResult: LiveData<DiceThrowResult> = _playerOneResult
-    private val _playerTwoResult: MutableLiveData<DiceThrowResult> = MutableLiveData()
-    val playerTwoResult: LiveData<DiceThrowResult> = _playerTwoResult
+    private val _playerOneResult: MutableLiveData<DiceRunResult> = MutableLiveData()
+    val playerOneResult: LiveData<DiceRunResult> = _playerOneResult
+    private val _playerTwoResult: MutableLiveData<DiceRunResult> = MutableLiveData()
+    val playerTwoResult: LiveData<DiceRunResult> = _playerTwoResult
     private val _resultVisibility: MutableLiveData<Int> = MutableLiveData()
     val resultVisibility: LiveData<Int> = _resultVisibility
     private val _diceGame: MutableLiveData<List<List<Int>>> =

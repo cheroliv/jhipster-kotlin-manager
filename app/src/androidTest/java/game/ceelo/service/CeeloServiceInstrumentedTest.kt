@@ -1,7 +1,13 @@
 package game.ceelo.service
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import game.ceelo.domain.*
+import game.ceelo.Ceelo.CEELO_DICE_THROW_SIZE
+import game.ceelo.Ceelo.ONE
+import game.ceelo.Ceelo.SIX
+import game.ceelo.Ceelo.runDices
+import game.ceelo.CeeloService
+import game.ceelo.inmemory.CeeloServiceInMemory
+import game.ceelo.inmemory.ceeloService
 import org.junit.runner.RunWith
 import kotlin.test.BeforeTest
 import kotlin.test.Test

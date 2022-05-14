@@ -8,13 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import game.ceelo.Ceelo.DiceRunResult
+import game.ceelo.Ceelo.DiceRunResult.*
+import game.ceelo.Ceelo.getDiceImageFromDiceValue
+import game.ceelo.Ceelo.middle
+import game.ceelo.Ceelo.second
 import game.ceelo.databinding.ActivityMainBinding
 import game.ceelo.databinding.ActivityMainBinding.inflate
-import game.ceelo.domain.DiceThrowResult
-import game.ceelo.domain.DiceThrowResult.*
-import game.ceelo.domain.getDiceImageFromDiceValue
-import game.ceelo.domain.middle
-import game.ceelo.domain.second
 import game.ceelo.vm.DiceGameViewModel
 
 
@@ -37,10 +37,12 @@ class MainActivity : AppCompatActivity() {
                 )
             }
             signinButton.setOnClickListener {
-                startActivity(Intent(
-                    this@MainActivity,
-                    LoginActivity::class.java
-                ))
+                startActivity(
+                    Intent(
+                        this@MainActivity,
+                        LoginActivity::class.java
+                    )
+                )
             }
         }
     }
@@ -69,7 +71,7 @@ fun loadLocalGame(
     }
     //TODO refactor pour avoir un field dans le viewmodel nommé textViewResultPair Pair<result,visibility>
     // on evitera le nested observe
-    diceGameViewModel.playerOneResult.observe(mainActivity) { result: DiceThrowResult ->
+    diceGameViewModel.playerOneResult.observe(mainActivity) { result: DiceRunResult ->
         diceGameViewModel.resultVisibility.observe(mainActivity) { visibility: Int ->
             setTextViewResult(
                 textViewResult = localPlayerResultText,
@@ -78,7 +80,7 @@ fun loadLocalGame(
             )
         }
     }
-    diceGameViewModel.playerTwoResult.observe(mainActivity) { result: DiceThrowResult ->
+    diceGameViewModel.playerTwoResult.observe(mainActivity) { result: DiceRunResult ->
         diceGameViewModel.resultVisibility.observe(mainActivity) { visibility: Int ->
             setTextViewResult(
                 textViewResult = computerResultText,
@@ -236,7 +238,7 @@ fun throwDiceAnimation(
 
 fun setTextViewResult(
     textViewResult: TextView,
-    diceResult: DiceThrowResult,
+    diceResult: DiceRunResult,
     textViewVisibility: Int
 ): TextView = textViewResult.apply {
     text = when (diceResult) {

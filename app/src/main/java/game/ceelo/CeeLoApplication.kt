@@ -3,8 +3,7 @@ package game.ceelo
 import android.app.Application
 import android.util.Log
 import game.ceelo.R.drawable.*
-import game.ceelo.service.CeeloServiceInMemory
-import game.ceelo.service.CeeloService
+import game.ceelo.inmemory.CeeloServiceInMemory
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
