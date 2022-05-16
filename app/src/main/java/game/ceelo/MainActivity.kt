@@ -8,11 +8,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import game.ceelo.CeeloService.Ceelo.DiceRunResult
-import game.ceelo.CeeloService.Ceelo.DiceRunResult.*
-import game.ceelo.CeeloService.Ceelo.getDiceImageFromDiceValue
-import game.ceelo.CeeloService.Ceelo.middle
-import game.ceelo.CeeloService.Ceelo.second
+import game.ceelo.DiceRunResult.*
+import game.ceelo.Ceelo.getDiceImageFromDiceValue
+import game.ceelo.Ceelo.middle
+import game.ceelo.Ceelo.second
 import game.ceelo.databinding.ActivityMainBinding
 import game.ceelo.databinding.ActivityMainBinding.inflate
 import game.ceelo.vm.DiceGameViewModel

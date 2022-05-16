@@ -1,43 +1,20 @@
 package game.ceelo
 
-import game.ceelo.CeeloService.Ceelo.CEELO_DICE_THROW_SIZE
-import game.ceelo.CeeloService.Ceelo.DiceRunResult.*
-import game.ceelo.CeeloService.Ceelo.NOT_A_DOUBLET
-import game.ceelo.CeeloService.Ceelo.ONE
-import game.ceelo.CeeloService.Ceelo.SIX
-import game.ceelo.CeeloService.Ceelo.UNIFORM_TRIPLETS
-import game.ceelo.CeeloService.Ceelo.is456
-import game.ceelo.CeeloService.Ceelo.runDices
-import kotlin.test.*
-import game.ceelo.CeeloService.Ceelo.`2_2_2`
-import game.ceelo.CeeloService.Ceelo.`3_3_3`
-import game.ceelo.CeeloService.Ceelo.`4_4_4`
-import game.ceelo.CeeloService.Ceelo.`5_5_5`
-import game.ceelo.CeeloService.Ceelo.`6_6_6`
-import game.ceelo.CeeloService.Ceelo.`4_5_6`
-import game.ceelo.CeeloService.Ceelo.`1_2_3`
-import game.ceelo.CeeloService.Ceelo.is123
-import game.ceelo.CeeloService.Ceelo.`1_1_1`
-import game.ceelo.CeeloService.Ceelo.AUTOMATIC_LOOSE_123_CASE
-import game.ceelo.CeeloService.Ceelo.AUTOMATIC_WIN_456_CASE
-import game.ceelo.CeeloService.Ceelo.FIVE
-import game.ceelo.CeeloService.Ceelo.FOUR
-import game.ceelo.CeeloService.Ceelo.NOT_A_TRIPLET
-import game.ceelo.CeeloService.Ceelo.OTHER_THROW_CASE
-import game.ceelo.CeeloService.Ceelo.STRAIGHT_234_345_CASE
-import game.ceelo.CeeloService.Ceelo.STRAIGHT_TRIPLETS
-import game.ceelo.CeeloService.Ceelo.THREE
-import game.ceelo.CeeloService.Ceelo.TWO
-import game.ceelo.CeeloService.Ceelo.UNIFORM_DOUBLET_CASE
-import game.ceelo.CeeloService.Ceelo.UNIFORM_TRIPLET_CASE
-import game.ceelo.CeeloService.Ceelo.compareThrows
-import game.ceelo.CeeloService.Ceelo.isStraight
-import game.ceelo.CeeloService.Ceelo.isUniformDoublet
-import game.ceelo.CeeloService.Ceelo.isUniformTriplet
-import game.ceelo.CeeloService.Ceelo.onSameCase
-import game.ceelo.CeeloService.Ceelo.uniformDoubletValue
-import game.ceelo.CeeloService.Ceelo.uniformTripletValue
-import game.ceelo.CeeloService.Ceelo.whichCase
+import game.ceelo.CeeloDomain.compareThrows
+import game.ceelo.CeeloDomain.onSameCase
+import game.ceelo.CeeloDomain.whichCase
+import game.ceelo.DiceRunResult.*
+import game.ceelo.CeeloDicesHandDomain.is123
+import game.ceelo.CeeloDicesHandDomain.is456
+import game.ceelo.CeeloDicesHandDomain.isStraight
+import game.ceelo.CeeloDicesHandDomain.isUniformDoublet
+import game.ceelo.CeeloDicesHandDomain.isUniformTriplet
+import game.ceelo.CeeloDicesHandDomain.runDices
+import game.ceelo.CeeloDicesHandDomain.uniformDoubletValue
+import game.ceelo.CeeloDicesHandDomain.uniformTripletValue
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 
 @Suppress("NonAsciiCharacters")
 class CeeloUnitTest {
@@ -230,10 +207,10 @@ class CeeloUnitTest {
     @Test
     fun `Si le jet est un triplet uniforme et l'autre aussi avec une face plus forte alors la propriété compareThrows renvoi LOOSE`() {
         assertEquals(expected = LOOSE, actual = `1_1_1`.compareThrows(`6_6_6`))
-        assertEquals(expected = LOOSE, actual =`1_1_1`.compareThrows(`5_5_5`))
-        assertEquals(expected = LOOSE, actual =`1_1_1`.compareThrows(`4_4_4`))
-        assertEquals(expected = LOOSE, actual =`1_1_1`.compareThrows(`3_3_3`))
-        assertEquals(expected = LOOSE, actual =`1_1_1`.compareThrows(`2_2_2`))
+        assertEquals(expected = LOOSE, actual = `1_1_1`.compareThrows(`5_5_5`))
+        assertEquals(expected = LOOSE, actual = `1_1_1`.compareThrows(`4_4_4`))
+        assertEquals(expected = LOOSE, actual = `1_1_1`.compareThrows(`3_3_3`))
+        assertEquals(expected = LOOSE, actual = `1_1_1`.compareThrows(`2_2_2`))
     }
 
     @Test

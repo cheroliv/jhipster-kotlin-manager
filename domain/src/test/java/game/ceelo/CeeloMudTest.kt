@@ -1,9 +1,7 @@
 package game.ceelo
 
-import game.ceelo.CeeloService.Ceelo.SIX
-import game.ceelo.CeeloService.Ceelo.TWO
-import game.ceelo.CeeloService.Ceelo.launchGame
-import game.ceelo.CeeloService.Ceelo.randomNumberOfPlayers
+import game.ceelo.CeeloDomain.launchGame
+import game.ceelo.CeeloDomain.randomNumberOfPlayers
 import kotlin.test.Test
 
 class CeeloMudTest {

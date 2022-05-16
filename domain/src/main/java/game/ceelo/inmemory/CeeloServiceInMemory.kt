@@ -1,8 +1,7 @@
 package game.ceelo.inmemory
 
+import game.ceelo.CeeloDicesHandDomain.runDices
 import game.ceelo.CeeloService
-import game.ceelo.CeeloService.Ceelo.TWO
-import game.ceelo.CeeloService.Ceelo.runDices
 import game.ceelo.inmemory.CeeloServiceInMemory.InMemoryData.addGame
 import game.ceelo.inmemory.CeeloServiceInMemory.InMemoryData.getAllGames
 
