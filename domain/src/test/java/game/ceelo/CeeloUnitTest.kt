@@ -1,7 +1,43 @@
 package game.ceelo
 
-import game.ceelo.DiceRunResult.*
+import game.ceelo.CeeloService.Ceelo.CEELO_DICE_THROW_SIZE
+import game.ceelo.CeeloService.Ceelo.DiceRunResult.*
+import game.ceelo.CeeloService.Ceelo.NOT_A_DOUBLET
+import game.ceelo.CeeloService.Ceelo.ONE
+import game.ceelo.CeeloService.Ceelo.SIX
+import game.ceelo.CeeloService.Ceelo.UNIFORM_TRIPLETS
+import game.ceelo.CeeloService.Ceelo.is456
+import game.ceelo.CeeloService.Ceelo.runDices
 import kotlin.test.*
+import game.ceelo.CeeloService.Ceelo.`2_2_2`
+import game.ceelo.CeeloService.Ceelo.`3_3_3`
+import game.ceelo.CeeloService.Ceelo.`4_4_4`
+import game.ceelo.CeeloService.Ceelo.`5_5_5`
+import game.ceelo.CeeloService.Ceelo.`6_6_6`
+import game.ceelo.CeeloService.Ceelo.`4_5_6`
+import game.ceelo.CeeloService.Ceelo.`1_2_3`
+import game.ceelo.CeeloService.Ceelo.is123
+import game.ceelo.CeeloService.Ceelo.`1_1_1`
+import game.ceelo.CeeloService.Ceelo.AUTOMATIC_LOOSE_123_CASE
+import game.ceelo.CeeloService.Ceelo.AUTOMATIC_WIN_456_CASE
+import game.ceelo.CeeloService.Ceelo.FIVE
+import game.ceelo.CeeloService.Ceelo.FOUR
+import game.ceelo.CeeloService.Ceelo.NOT_A_TRIPLET
+import game.ceelo.CeeloService.Ceelo.OTHER_THROW_CASE
+import game.ceelo.CeeloService.Ceelo.STRAIGHT_234_345_CASE
+import game.ceelo.CeeloService.Ceelo.STRAIGHT_TRIPLETS
+import game.ceelo.CeeloService.Ceelo.THREE
+import game.ceelo.CeeloService.Ceelo.TWO
+import game.ceelo.CeeloService.Ceelo.UNIFORM_DOUBLET_CASE
+import game.ceelo.CeeloService.Ceelo.UNIFORM_TRIPLET_CASE
+import game.ceelo.CeeloService.Ceelo.compareThrows
+import game.ceelo.CeeloService.Ceelo.isStraight
+import game.ceelo.CeeloService.Ceelo.isUniformDoublet
+import game.ceelo.CeeloService.Ceelo.isUniformTriplet
+import game.ceelo.CeeloService.Ceelo.onSameCase
+import game.ceelo.CeeloService.Ceelo.uniformDoubletValue
+import game.ceelo.CeeloService.Ceelo.uniformTripletValue
+import game.ceelo.CeeloService.Ceelo.whichCase
 
 @Suppress("NonAsciiCharacters")
 class CeeloUnitTest {
@@ -25,7 +61,7 @@ class CeeloUnitTest {
 
     @Test
     fun `Si le jet ne contient pas (4,5,6) alors la propriété is456 renvoi false`() {
-        assertFalse(`1_2_3`.is456)
+        assertFalse(actual = `1_2_3`.is456)
         UNIFORM_TRIPLETS.forEach { assertFalse(it.is456) }
     }
 
@@ -129,7 +165,7 @@ class CeeloUnitTest {
     }
 
     @Test
-    fun `Si le jet contient un triplet uniforme alors la propriété whichCase renvoi TRIPLET_CASE`():Unit =
+    fun `Si le jet contient un triplet uniforme alors la propriété whichCase renvoi TRIPLET_CASE`(): Unit =
         UNIFORM_TRIPLETS.forEach { assertEquals(UNIFORM_TRIPLET_CASE, it.whichCase) }
 
     @Test
