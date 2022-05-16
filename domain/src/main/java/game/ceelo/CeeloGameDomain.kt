@@ -14,6 +14,7 @@ object CeeloGameDomain {
      * un jet de dés au hazard
      */
     fun runDices(): List<Int> = List(size = 3, init = { (ONE..SIX).random() })
+
     fun randomNumberOfPlayers(): Int {
         return (TWO..SIX).random()
     }

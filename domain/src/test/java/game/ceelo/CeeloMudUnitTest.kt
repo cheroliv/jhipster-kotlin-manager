@@ -3,7 +3,10 @@ package game.ceelo
 
 import game.ceelo.CeeloGameDomain.randomNumberOfPlayers
 import game.ceelo.CeeloPlaygroundDomain.launchGame
+import game.ceelo.CeeloPlaygroundDomain.launchLocalGame
 import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class CeeloMudUnitTest {
     /*
@@ -18,9 +21,15 @@ class CeeloMudUnitTest {
 
 
     @Test
-    fun `launchGame renvoi un game`() {
+    fun `launchLocalGame renvoi un game multi joueurs`() {
         val numberOfPlayer = randomNumberOfPlayers()
+        val result = launchLocalGame(numberOfPlayer)
         println(numberOfPlayer)
-        println(launchGame(numberOfPlayer))
+        println(result)
+        assertEquals(numberOfPlayer, result.size)
+        result.map { hand ->
+            assertEquals(THREE, hand.size)
+            hand.map { dice -> assert(dice in 2..6) }
+        }
     }
 }
