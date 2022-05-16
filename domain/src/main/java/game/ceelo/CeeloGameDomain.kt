@@ -46,17 +46,18 @@ object CeeloGameDomain {
         throw NoSuchElementException("fourth player throw is empty.")
     else elementAt(index = 5)
 
-    fun List<List<Int>>.compareRuns(): List<Int> {
-        var winner = first()
-        forEachIndexed { index: Int, hand ->
-            if (index >= ONE) {
-                val result = hand.compareThrows(this[index - 1])
-                if (result == WIN) {
-                    winner = hand
-                }
-            }
-        }
-        return winner
+    fun List<List<Int>>.compareRuns(): List<List<Int>> {
+//        var winner = first()
+//        forEachIndexed { index: Int, hand ->
+//            if (index >= ONE) {
+//                val result = hand.compareThrows(this[index - 1])
+//                if (result == WIN) {
+//                    winner = hand
+//                }
+//            }
+//        }
+//        return winner
+     return listOf(listOf(0,0))
     }
 
     @Suppress("MemberVisibilityCanBePrivate")

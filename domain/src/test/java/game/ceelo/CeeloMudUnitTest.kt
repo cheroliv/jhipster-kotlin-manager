@@ -1,9 +1,11 @@
 package game.ceelo
 
 
+import game.ceelo.CeeloGameDomain.compareThrows
 import game.ceelo.CeeloGameDomain.randomNumberOfPlayers
 import game.ceelo.CeeloPlaygroundDomain.launchGame
 import game.ceelo.CeeloPlaygroundDomain.launchLocalGame
+import game.ceelo.DiceRunResult.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -27,25 +29,35 @@ class CeeloMudUnitTest {
         println(numberOfPlayer)
         println(result)
         assertEquals(numberOfPlayer, result.size)
-        result.map { hand ->
-            assertEquals(THREE, hand.size)
-            hand.map { dice -> assert(dice in 2..6) }
+        result.map { hands ->
+            assertEquals(THREE, hands.size)
+            hands.map { dice -> assert(dice in ONE..SIX) }
         }
     }
 
     @Test
-    fun `compareRuns renvoi le vainqueur d'une partie`() {
-        val numberOfPlayer = randomNumberOfPlayers()
-        val result = launchLocalGame(numberOfPlayer)
+    fun `compareRuns renvoi la liste des vainqueurs d'une partie`() {
+        val numberOfPlayer: Int = randomNumberOfPlayers()
+        val result: List<List<Int>> = launchLocalGame(numberOfPlayer)
         println(numberOfPlayer)
         println(result)
         assertEquals(numberOfPlayer, result.size)
-        result.forEach { hand: List<Int> ->
-            assertEquals(THREE, hand.size)
-            hand.forEach { dice: Int ->
-                assertTrue(actual = dice in ONE..SIX)
+
+        var winnerIndexes: MutableList<Int> = mutableListOf(0)
+        result.forEachIndexed { index, hands: List<Int> ->
+            if (index > 0) {
+                if (hands.compareThrows(result[index - 1]) == WIN)
+                    winnerIndexes[0] = index
+                if (
+                    hands.compareThrows(result[index - 1]) == RETHROW
+                    && hands.compareThrows(result.first()) == WIN
+                ) winnerIndexes.add(index)
             }
         }
+        println("winner: ${winnerIndexes.map { result[it] }}")
+
+        //construisons des situations facile a tester
+//        val strongerFirst=
     }
 
 }
