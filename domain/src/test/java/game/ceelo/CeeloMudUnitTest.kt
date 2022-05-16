@@ -32,4 +32,18 @@ class CeeloMudUnitTest {
             hand.map { dice -> assert(dice in 2..6) }
         }
     }
+
+    @Test
+    fun `compareRuns renvoi le vainqueur d'une partie`(){
+        val numberOfPlayer = randomNumberOfPlayers()
+        val result = launchLocalGame(numberOfPlayer)
+        println(numberOfPlayer)
+        println(result)
+        assertEquals(numberOfPlayer, result.size)
+        result.map { hand ->
+            assertEquals(THREE, hand.size)
+            hand.map { dice -> assert(dice in 2..6) }
+        }
+    }
+
 }

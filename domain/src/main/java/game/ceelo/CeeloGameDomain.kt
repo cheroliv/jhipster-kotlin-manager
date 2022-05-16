@@ -7,6 +7,7 @@ import game.ceelo.CeeloDicesHandDomain.isUniformDoublet
 import game.ceelo.CeeloDicesHandDomain.isUniformTriplet
 import game.ceelo.CeeloDicesHandDomain.uniformDoubletValue
 import game.ceelo.CeeloDicesHandDomain.uniformTripletValue
+import game.ceelo.DiceRunResult.*
 
 
 object CeeloGameDomain {
@@ -18,6 +19,7 @@ object CeeloGameDomain {
     fun randomNumberOfPlayers(): Int {
         return (TWO..SIX).random()
     }
+
     fun initBank(howMuchPlayer: Int): List<Int> = List(
         size = howMuchPlayer,
         init = { (ONE..SIX).random() }
@@ -44,9 +46,19 @@ object CeeloGameDomain {
         throw NoSuchElementException("fourth player throw is empty.")
     else elementAt(index = 5)
 
-    fun compareRuns(launchGame: Game): Any? {
-        TODO("Not yet implemented")
+    fun List<List<Int>>.compareRuns(): List<Int> {
+        var winner = first()
+        forEachIndexed { index: Int, hand ->
+            if (index >= ONE) {
+                val result = hand.compareThrows(this[index - 1])
+                if (result == WIN) {
+                    winner = hand
+                }
+            }
+        }
+        return winner
     }
+
     @Suppress("MemberVisibilityCanBePrivate")
     val List<Int>.whichCase: Int
         get() = when {
@@ -68,8 +80,8 @@ object CeeloGameDomain {
             @Suppress("IMPLICIT_NOTHING_TYPE_ARGUMENT_AGAINST_NOT_NOTHING_EXPECTED_TYPE")
             secondPlayerThrow.whichCase.run otherWhichCase@{
                 return when {
-                    this@whichCase > this@otherWhichCase -> DiceRunResult.WIN
-                    this@whichCase < this@otherWhichCase -> DiceRunResult.LOOSE
+                    this@whichCase > this@otherWhichCase -> WIN
+                    this@whichCase < this@otherWhichCase -> LOOSE
                     else -> onSameCase(
                         secondPlayerThrow = secondPlayerThrow,
                         throwCase = this@whichCase
@@ -83,28 +95,28 @@ object CeeloGameDomain {
         secondPlayerThrow: List<Int>,
         throwCase: Int
     ): DiceRunResult = when (throwCase) {
-        AUTOMATIC_WIN_456_CASE -> DiceRunResult.RETHROW
-        AUTOMATIC_LOOSE_123_CASE -> DiceRunResult.RETHROW
+        AUTOMATIC_WIN_456_CASE -> RETHROW
+        AUTOMATIC_LOOSE_123_CASE -> RETHROW
         STRAIGHT_234_345_CASE -> when {
-            containsAll(`2_3_4`) && secondPlayerThrow.containsAll(`2_3_4`) -> DiceRunResult.RETHROW
-            containsAll(`3_4_5`) && secondPlayerThrow.containsAll(`3_4_5`) -> DiceRunResult.RETHROW
-            containsAll(`2_3_4`) && secondPlayerThrow.containsAll(`3_4_5`) -> DiceRunResult.LOOSE
-            else -> DiceRunResult.WIN
+            containsAll(`2_3_4`) && secondPlayerThrow.containsAll(`2_3_4`) -> RETHROW
+            containsAll(`3_4_5`) && secondPlayerThrow.containsAll(`3_4_5`) -> RETHROW
+            containsAll(`2_3_4`) && secondPlayerThrow.containsAll(`3_4_5`) -> LOOSE
+            else -> WIN
         }
         UNIFORM_TRIPLET_CASE -> when {
-            uniformTripletValue > secondPlayerThrow.uniformTripletValue -> DiceRunResult.WIN
-            uniformTripletValue < secondPlayerThrow.uniformTripletValue -> DiceRunResult.LOOSE
-            else -> DiceRunResult.RETHROW
+            uniformTripletValue > secondPlayerThrow.uniformTripletValue -> WIN
+            uniformTripletValue < secondPlayerThrow.uniformTripletValue -> LOOSE
+            else -> RETHROW
         }
         UNIFORM_DOUBLET_CASE -> when {
-            uniformDoubletValue > secondPlayerThrow.uniformDoubletValue -> DiceRunResult.WIN
-            uniformDoubletValue < secondPlayerThrow.uniformDoubletValue -> DiceRunResult.LOOSE
-            else -> DiceRunResult.RETHROW
+            uniformDoubletValue > secondPlayerThrow.uniformDoubletValue -> WIN
+            uniformDoubletValue < secondPlayerThrow.uniformDoubletValue -> LOOSE
+            else -> RETHROW
         }
         else -> when {
-            sum() > secondPlayerThrow.sum() -> DiceRunResult.WIN
-            sum() < secondPlayerThrow.sum() -> DiceRunResult.LOOSE
-            else -> DiceRunResult.RETHROW
+            sum() > secondPlayerThrow.sum() -> WIN
+            sum() < secondPlayerThrow.sum() -> LOOSE
+            else -> RETHROW
         }
     }
 }
