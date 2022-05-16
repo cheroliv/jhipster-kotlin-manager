@@ -5,7 +5,7 @@ import game.ceelo.CeeloGameDomain.randomNumberOfPlayers
 import game.ceelo.CeeloPlaygroundDomain.launchGame
 import kotlin.test.Test
 
-class CeeloMudTest {
+class CeeloMudUnitTest {
     /*
         - lancer une partie entre 2 et 6 joueurs
         -
@@ -23,6 +23,4 @@ class CeeloMudTest {
         println(numberOfPlayer)
         println(launchGame(numberOfPlayer))
     }
-
-
 }

@@ -9,7 +9,7 @@ import kotlin.test.Test
 
 
 @Suppress("NonAsciiCharacters")
-class ConsoleRun {
+class ConsoleRunUnit {
 
     @Test
     fun run_main_as_test(): Unit =
