@@ -10,7 +10,7 @@ class LoginActivity : AppCompatActivity() {
         ActivityLoginBinding.inflate(layoutInflater).apply {
             setContentView(root)
             login.setOnClickListener {
-                val authService = null
+                @Suppress("UNUSED_VARIABLE") val authService = null
                 val authResultIsOk = securityService.login(
                     username.text.toString(),
                     password.text.toString()

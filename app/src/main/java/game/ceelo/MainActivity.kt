@@ -93,9 +93,9 @@ fun loadLocalGame(
     playLocalButton.setOnClickListener {
         diceGameViewModel.apply vm@{
             onClickPlayButton()
-            diceGame.value.apply {
-                this!!.first().apply player@{
-                    this@apply!!.second().apply computer@{
+            diceGame.value.apply game@{
+                this@game!!.first().apply player@{
+                    this@game.second().apply computer@{
                         playerOneThrow(
                             activityMainBinding = binding,
                             list = this@player,

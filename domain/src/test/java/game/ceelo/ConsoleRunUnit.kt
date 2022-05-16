@@ -12,7 +12,7 @@ import kotlin.test.Test
 class ConsoleRunUnit {
 
     @Test
-    fun run_main_as_test(): Unit =
+    fun `run main as test`(): Unit =
         startKoin {
             modules(modules = module {
                 single<CeeloService> { CeeloServiceInMemory() }
@@ -23,5 +23,4 @@ class ConsoleRunUnit {
                 runConsoleLocalGame()
             }
         }
-
 }
