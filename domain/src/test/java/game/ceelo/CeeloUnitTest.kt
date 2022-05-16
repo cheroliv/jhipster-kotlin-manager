@@ -220,20 +220,20 @@ class CeeloUnitTest {
 
     @Test
     fun `Si le jet est un triplet uniforme et l'autre aussi avec une face plus faible alors la propriété compareThrows renvoi WIN`() {
-        assertEquals(WIN, `6_6_6`.compareThrows(`5_5_5`))
-        assertEquals(WIN, `6_6_6`.compareThrows(`4_4_4`))
-        assertEquals(WIN, `6_6_6`.compareThrows(`3_3_3`))
-        assertEquals(WIN, `6_6_6`.compareThrows(`2_2_2`))
-        assertEquals(WIN, `6_6_6`.compareThrows(`1_1_1`))
+        assertEquals(expected = WIN, actual = `6_6_6`.compareThrows(`5_5_5`))
+        assertEquals(expected = WIN, actual = `6_6_6`.compareThrows(`4_4_4`))
+        assertEquals(expected = WIN, actual = `6_6_6`.compareThrows(`3_3_3`))
+        assertEquals(expected = WIN, actual = `6_6_6`.compareThrows(`2_2_2`))
+        assertEquals(expected = WIN, actual = `6_6_6`.compareThrows(`1_1_1`))
     }
 
     @Test
     fun `Si le jet est un triplet uniforme et l'autre aussi avec une face plus forte alors la propriété compareThrows renvoi LOOSE`() {
-        assertEquals(`1_1_1`.compareThrows(`6_6_6`), LOOSE)
-        assertEquals(`1_1_1`.compareThrows(`5_5_5`), LOOSE)
-        assertEquals(`1_1_1`.compareThrows(`4_4_4`), LOOSE)
-        assertEquals(`1_1_1`.compareThrows(`3_3_3`), LOOSE)
-        assertEquals(`1_1_1`.compareThrows(`2_2_2`), LOOSE)
+        assertEquals(expected = LOOSE, actual = `1_1_1`.compareThrows(`6_6_6`))
+        assertEquals(expected = LOOSE, actual =`1_1_1`.compareThrows(`5_5_5`))
+        assertEquals(expected = LOOSE, actual =`1_1_1`.compareThrows(`4_4_4`))
+        assertEquals(expected = LOOSE, actual =`1_1_1`.compareThrows(`3_3_3`))
+        assertEquals(expected = LOOSE, actual =`1_1_1`.compareThrows(`2_2_2`))
     }
 
     @Test
@@ -247,4 +247,6 @@ class CeeloUnitTest {
     }
 
     //TODO: tester les autres branches de cas pour
+
+
 }

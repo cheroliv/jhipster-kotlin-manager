@@ -36,11 +36,18 @@ If banker lost all his money which is in the bank then game will start from step
  */
 interface CeeloService {
 
-    fun launchLocalGame(): List<List<Int>>
     fun allGames(): List<List<List<Int>>>
     fun saveGame(newGame: List<List<Int>>)
+    fun connect()
+    fun suscribe()
+
 
     object Ceelo {
+        fun launchLocalGame(): List<List<Int>> = listOf(runDices(), runDices())
+
+        fun randomNumberOfPlayers(): Int {
+            return (TWO..SIX).random()
+        }
         const val PLAYER_ONE_NAME = "Player"
         const val PLAYER_TWO_NAME = "Computer"
         const val GAME_TYPE = "LOCAL"
@@ -143,7 +150,11 @@ interface CeeloService {
             init = { (ONE..SIX).random() }
         )
 
-        fun launchGame(): Game = Game()
+        fun launchGame(nbPlayer:Int): Game = Game()
+
+        fun compareRuns(launchGame: Game): Any? {
+            TODO("Not yet implemented")
+        }
 
         /**
          * un jet de dés au hazard

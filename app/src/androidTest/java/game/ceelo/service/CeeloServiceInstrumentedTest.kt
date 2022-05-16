@@ -1,11 +1,12 @@
 package game.ceelo.service
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import game.ceelo.Ceelo.CEELO_DICE_THROW_SIZE
-import game.ceelo.Ceelo.ONE
-import game.ceelo.Ceelo.SIX
-import game.ceelo.Ceelo.runDices
+import game.ceelo.CeeloService.Ceelo.CEELO_DICE_THROW_SIZE
+import game.ceelo.CeeloService.Ceelo.ONE
+import game.ceelo.CeeloService.Ceelo.SIX
+import game.ceelo.CeeloService.Ceelo.runDices
 import game.ceelo.CeeloService
+import game.ceelo.CeeloService.Ceelo.launchLocalGame
 import game.ceelo.inmemory.CeeloServiceInMemory
 import game.ceelo.inmemory.ceeloService
 import org.junit.runner.RunWith
@@ -37,12 +38,12 @@ class CeeloServiceInstrumentedTest {
 //            modules(modules = ceeloModule)
 //        }
 //        val CEELO_SERVICE: CeeloService by lazy { CeeloServiceInMemory() }//by inject(CeeloService::class.java)
-        assertEquals(expected = 2, actual = ceeloService.launchLocalGame().size)
-        ceeloService.launchLocalGame().first().run {
+        assertEquals(expected = 2, actual = launchLocalGame().size)
+        launchLocalGame().first().run {
             assertEquals(CEELO_DICE_THROW_SIZE, size)
             forEach { assert(it in ONE..SIX) }
         }
-        ceeloService.launchLocalGame().last().run {
+        launchLocalGame().last().run {
             assertEquals(CEELO_DICE_THROW_SIZE, size)
             forEach { assert(it in ONE..SIX) }
         }
