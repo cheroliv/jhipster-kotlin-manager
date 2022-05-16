@@ -1,6 +1,6 @@
 package game.ceelo.inmemory
 
-import game.ceelo.CeeloDicesHandDomain.runDices
+import game.ceelo.CeeloGameDomain.runDices
 import game.ceelo.CeeloService
 import game.ceelo.inmemory.CeeloServiceInMemory.InMemoryData.addGame
 import game.ceelo.inmemory.CeeloServiceInMemory.InMemoryData.getAllGames
@@ -29,6 +29,7 @@ class CeeloServiceInMemory : CeeloService {
     override fun connect() {
         TODO("Not yet implemented")
     }
+
     override fun suscribe() {
         TODO("Not yet implemented")
     }

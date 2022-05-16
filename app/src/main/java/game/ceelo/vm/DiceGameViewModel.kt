@@ -7,11 +7,11 @@ import android.view.View.VISIBLE
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import game.ceelo.CeeloGameDomain.compareThrows
+import game.ceelo.CeeloGameDomain.runDices
+import game.ceelo.CeeloGameDomain.second
 import game.ceelo.DiceRunResult
-import game.ceelo.Ceelo.ONE
-import game.ceelo.Ceelo.compareThrows
-import game.ceelo.Ceelo.runDices
-import game.ceelo.Ceelo.second
+import game.ceelo.ONE
 import game.ceelo.inmemory.ceeloService
 
 

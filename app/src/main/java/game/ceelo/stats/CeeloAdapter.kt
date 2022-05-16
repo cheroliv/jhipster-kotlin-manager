@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import game.ceelo.Ceelo.GAME_TYPE
-import game.ceelo.Ceelo.PLAYER_ONE_NAME
-import game.ceelo.Ceelo.PLAYER_TWO_NAME
-import game.ceelo.Ceelo.compareThrows
-import game.ceelo.Ceelo.second
+import game.ceelo.CeeloGameDomain.compareThrows
+import game.ceelo.CeeloGameDomain.second
+import game.ceelo.GAME_TYPE
+import game.ceelo.PLAYER_ONE_NAME
+import game.ceelo.PLAYER_TWO_NAME
+
 import game.ceelo.R
 import game.ceelo.R.layout.game_row
 import game.ceelo.stats.CeeloAdapter.CeeloViewHolder

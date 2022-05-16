@@ -1,10 +1,7 @@
 package game.ceelo
 
 object CeeloDicesHandDomain {
-    /**
-     * un jet de dés au hazard
-     */
-    fun runDices(): List<Int> = List(size = 3, init = { (ONE..SIX).random() })
+
     /**
      * Renvoi le dé du milieu
      */
@@ -67,5 +64,15 @@ object CeeloDicesHandDomain {
     val List<Int>.isStraight: Boolean
         get() = STRAIGHT_TRIPLETS.map { containsAll(it) }.contains(true)
 
-
+    fun List<Int>.getDiceImageFromDiceValue(
+        diceValue: Int
+    ): Int = when (diceValue) {
+        ONE -> this[ONE - 1]
+        TWO -> this[TWO - 1]
+        THREE -> this[THREE - 1]
+        FOUR -> this[FOUR - 1]
+        FIVE -> this[FIVE - 1]
+        SIX -> this[SIX - 1]
+        else -> throw Exception("Only six faces is possible!")
+    }
 }

@@ -1,6 +1,6 @@
 package game.ceelo
 
-import game.ceelo.CeeloDomain.runConsoleLocalGame
+import game.ceelo.CeeloPlaygroundDomain.runConsoleLocalGame
 import game.ceelo.inmemory.CeeloServiceInMemory
 import org.koin.core.context.startKoin
 import org.koin.dsl.module

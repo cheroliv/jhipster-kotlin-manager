@@ -1,17 +1,18 @@
 package game.ceelo
 
-import game.ceelo.CeeloDomain.compareThrows
-import game.ceelo.CeeloDomain.onSameCase
-import game.ceelo.CeeloDomain.whichCase
+
 import game.ceelo.DiceRunResult.*
 import game.ceelo.CeeloDicesHandDomain.is123
 import game.ceelo.CeeloDicesHandDomain.is456
 import game.ceelo.CeeloDicesHandDomain.isStraight
 import game.ceelo.CeeloDicesHandDomain.isUniformDoublet
 import game.ceelo.CeeloDicesHandDomain.isUniformTriplet
-import game.ceelo.CeeloDicesHandDomain.runDices
 import game.ceelo.CeeloDicesHandDomain.uniformDoubletValue
 import game.ceelo.CeeloDicesHandDomain.uniformTripletValue
+import game.ceelo.CeeloGameDomain.compareThrows
+import game.ceelo.CeeloGameDomain.onSameCase
+import game.ceelo.CeeloGameDomain.runDices
+import game.ceelo.CeeloGameDomain.whichCase
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse

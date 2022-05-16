@@ -8,10 +8,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import game.ceelo.CeeloDicesHandDomain.getDiceImageFromDiceValue
+import game.ceelo.CeeloDicesHandDomain.middle
+import game.ceelo.CeeloGameDomain.second
 import game.ceelo.DiceRunResult.*
-import game.ceelo.Ceelo.getDiceImageFromDiceValue
-import game.ceelo.Ceelo.middle
-import game.ceelo.Ceelo.second
+
 import game.ceelo.databinding.ActivityMainBinding
 import game.ceelo.databinding.ActivityMainBinding.inflate
 import game.ceelo.vm.DiceGameViewModel
@@ -168,22 +169,13 @@ fun playerOneUI(
     list: List<Int>
 ) {
     activityMainBinding.playerOneFirstDiceImageId.setImageResource(
-        getDiceImageFromDiceValue(
-            diceValue = game.first().first(),
-            diceImages = list
-        )
+        list.getDiceImageFromDiceValue(diceValue = game.first().first())
     )
     activityMainBinding.playerOneMiddleDiceImageId.setImageResource(
-        getDiceImageFromDiceValue(
-            diceValue = game.first().middle(),
-            diceImages = list
-        )
+        list.getDiceImageFromDiceValue(diceValue = game.first().middle())
     )
     activityMainBinding.playerOneLastDiceImageId.setImageResource(
-        getDiceImageFromDiceValue(
-            diceValue = game.first().last(),
-            diceImages = list
-        )
+        list.getDiceImageFromDiceValue(diceValue = game.first().last())
     )
 }
 
@@ -194,22 +186,20 @@ fun playerTwoUI(
     list: List<Int>
 ) {
     activityMainBinding.playerTwoFirstDiceImageId.setImageResource(
-        getDiceImageFromDiceValue(
-            diceValue = game.second().first(),
-            diceImages = list
+        list.getDiceImageFromDiceValue(
+            diceValue = game.second().first()
+
         )
 
     )
     activityMainBinding.playerTwoMiddleDiceImageId.setImageResource(
-        getDiceImageFromDiceValue(
-            diceValue = game.second().middle(),
-            diceImages = list
+        list.getDiceImageFromDiceValue(
+            diceValue = game.second().middle()
         )
     )
     activityMainBinding.playerTwoLastDiceImageId.setImageResource(
-        getDiceImageFromDiceValue(
-            diceValue = game.second().last(),
-            diceImages = list
+        list.getDiceImageFromDiceValue(
+            diceValue = game.second().last()
         )
     )
 }
@@ -219,9 +209,8 @@ fun throwDiceAnimation(
     diceValue: Int
 ) = diceImage.apply {
     setImageResource(
-        getDiceImageFromDiceValue(
-            diceValue = diceValue,
-            diceImages = diceImages
+        diceImages.getDiceImageFromDiceValue(
+            diceValue = diceValue
         )
     )
 }.run {
