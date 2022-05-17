@@ -18,7 +18,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/statsRV"
         android:layout_width="match_parent"
-        android:layout_height="528dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="0dp">
 
     </androidx.recyclerview.widget.RecyclerView>
