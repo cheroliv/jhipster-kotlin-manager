@@ -14,7 +14,7 @@ import game.ceelo.PLAYER_ONE_NAME
 import game.ceelo.PLAYER_TWO_NAME
 
 import game.ceelo.R
-import game.ceelo.R.layout.game_row
+import game.ceelo.R.layout.simple_game_row
 import game.ceelo.stats.CeeloAdapter.CeeloViewHolder
 
 class CeeloAdapter(var games: List<List<List<Int>>>) : Adapter<CeeloViewHolder>() {
@@ -25,7 +25,7 @@ class CeeloAdapter(var games: List<List<List<Int>>>) : Adapter<CeeloViewHolder>(
         viewType: Int
     ): CeeloViewHolder = CeeloViewHolder(
         from(parent.context).inflate(
-            game_row,
+            simple_game_row,
             parent,
             false
         )
