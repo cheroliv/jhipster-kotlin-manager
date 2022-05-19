@@ -1,7 +1,6 @@
 package game.ceelo
 
 
-import game.ceelo.DiceRunResult.*
 import game.ceelo.CeeloDicesHandDomain.is123
 import game.ceelo.CeeloDicesHandDomain.is456
 import game.ceelo.CeeloDicesHandDomain.isStraight
@@ -13,12 +12,30 @@ import game.ceelo.CeeloGameDomain.compareThrows
 import game.ceelo.CeeloGameDomain.onSameCase
 import game.ceelo.CeeloGameDomain.runDices
 import game.ceelo.CeeloGameDomain.whichCase
+import game.ceelo.CeeloPlaygroundDomain.runConsoleLocalGame
+import game.ceelo.DiceRunResult.*
+import game.ceelo.inmemory.CeeloServiceInMemory
+import org.koin.core.context.startKoin
+import org.koin.dsl.module
+import org.koin.java.KoinJavaComponent.get
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 
 @Suppress("NonAsciiCharacters")
 class CeeloUnitTest {
+
+    @Test
+    fun runTestAsMain(): Unit = startKoin {
+        modules(modules = module(moduleDeclaration = {
+            single<CeeloService>(definition = { CeeloServiceInMemory() })
+        }))
+    }.run {
+        get<CeeloService>(CeeloService::class.java).apply {
+            println("un jet de dés :")
+            runConsoleLocalGame()
+        }
+    }
 
     @Test
     fun `Si le jet est correct alors la propriété dicesThrow renvoi un triplet d'entier entre 1 et 6`() =
@@ -226,5 +243,52 @@ class CeeloUnitTest {
 
     //TODO: tester les autres branches de cas pour
 
+    /*
+        - lancer une partie entre 2 et 6 joueurs
+        -
+     */
+    @Test
+    fun random_nombre_de_joueurs_est_inf_ou_egal_a_6_et_sup_ou_egal_a_2() {
+        assert(CeeloGameDomain.randomNumberOfPlayers() <= SIX)
+        assert(CeeloGameDomain.randomNumberOfPlayers() >= TWO)
+    }
 
+
+    @Test
+    fun `launchLocalGame renvoi un game multi joueurs`() {
+        val numberOfPlayer = CeeloGameDomain.randomNumberOfPlayers()
+        val result = CeeloPlaygroundDomain.launchLocalGame(numberOfPlayer)
+        println(numberOfPlayer)
+        println(result)
+        assertEquals(numberOfPlayer, result.size)
+        result.map { hands ->
+            assertEquals(THREE, hands.size)
+            hands.map { dice -> assert(dice in ONE..SIX) }
+        }
+    }
+
+    @Test
+    fun `compareRuns renvoi la liste des vainqueurs d'une partie`() {
+        val numberOfPlayer: Int = CeeloGameDomain.randomNumberOfPlayers()
+        val result: List<List<Int>> = CeeloPlaygroundDomain.launchLocalGame(numberOfPlayer)
+        println(numberOfPlayer)
+        println(result)
+        assertEquals(numberOfPlayer, result.size)
+
+        var winnerIndexes: MutableList<Int> = mutableListOf(0)
+        result.forEachIndexed { index, hands: List<Int> ->
+            if (index > 0) {
+                if (hands.compareThrows(result[index - 1]) == WIN)
+                    winnerIndexes[0] = index
+                if (
+                    hands.compareThrows(result[index - 1]) == RETHROW
+                    && hands.compareThrows(result.first()) == WIN
+                ) winnerIndexes.add(index)
+            }
+        }
+        println("winner: ${winnerIndexes.map { result[it] }}")
+
+        //construisons des situations facile a tester
+//        val strongerFirst=
+    }
 }
