@@ -1,5 +1,7 @@
 package game.ceelo
 
+import game.ceelo.DiceRunResult.*
+
 object CeeloDicesHandDomain {
 
     /**
@@ -9,9 +11,9 @@ object CeeloDicesHandDomain {
         throw NoSuchElementException("dice throw is empty.")
     else elementAt(index = ONE)
 
-    val List<Int>.is456: Boolean get() = containsAll(`4_5_6`)
+    val List<Int>.is456: Boolean get() = containsAll(FOUR_FIVE_SIX)
 
-    val List<Int>.is123: Boolean get() = containsAll(`1_2_3`)
+    val List<Int>.is123: Boolean get() = containsAll(ONE_TWO_THREE)
 
 
     @Suppress("MemberVisibilityCanBePrivate")
@@ -32,7 +34,9 @@ object CeeloDicesHandDomain {
     val List<Int>.isUniformTriplet: Boolean
         get() = UNIFORM_TRIPLETS.map {
             it.firstDice().run {
-                this == firstDice() && this == middleDice() && this == last()
+                this == firstDice() &&
+                        this == middleDice() &&
+                        this == last()
             }
         }.contains(true)
 
@@ -71,21 +75,20 @@ object CeeloDicesHandDomain {
         get() = if (!isUniformTriplet && !isUniformDoublet) NOT_A_DOUBLET
         else when {
             isUniformTriplet -> NOT_A_DOUBLET
-            isUniformDoublet ->
-                find { dice: Int ->
-                    UNIFORM_DOUBLETS.first { hand: List<Int> ->
-                        (firstDice() == hand.firstDice() &&
-                                middleDice() == hand.firstDice())
-                                ||
-                                (firstDice() == hand.firstDice() &&
-                                        lastDice() == hand.firstDice())
-                                ||
-                                (middleDice() == hand.firstDice() &&
-                                        lastDice() == hand.firstDice())
-                    }.first() != dice
-                }!!
+            isUniformDoublet -> find { dice: Int ->
+                UNIFORM_DOUBLETS.first { hand: List<Int> ->
+                    (firstDice() == hand.firstDice() &&
+                            middleDice() == hand.firstDice())
+                            ||
+                            (firstDice() == hand.firstDice() &&
+                                    lastDice() == hand.firstDice())
+                            ||
+                            (middleDice() == hand.firstDice() &&
+                                    lastDice() == hand.firstDice())
+                }.first() != dice
+            }
             else -> NOT_A_DOUBLET
-        }
+        }!!
 
     val List<Int>.isStraight: Boolean
         get() = STRAIGHT_TRIPLETS.map { containsAll(it) }.contains(true)
@@ -100,5 +103,86 @@ object CeeloDicesHandDomain {
         FIVE -> this[FIVE - ONE]
         SIX -> this[SIX - ONE]
         else -> throw Exception("Only six faces is possible!")
+    }
+
+    fun initBank(howMuchPlayer: Int): List<Int> = List(
+        size = howMuchPlayer,
+        init = { (ONE..SIX).random() }
+    )
+
+
+    @Suppress("MemberVisibilityCanBePrivate")
+    val List<Int>.handCase: Int
+        get() = when {
+            is456 -> AUTOMATIC_WIN_456_CASE
+            is123 -> AUTOMATIC_LOOSE_123_CASE
+            isStraight -> STRAIGHT_234_345_CASE
+            isUniformTriplet -> UNIFORM_TRIPLET_CASE
+            isUniformDoublet -> UNIFORM_DOUBLET_CASE
+            else -> OTHER_DICE_RUN_CASE
+        }
+
+    /**
+     * compare un jet à un autre
+     * pour renvoyer un resultat de jeu
+     */
+    fun List<Int>.compareHands(secondPlayerRun: List<Int>)
+            : DiceRunResult =
+        handCase.run whichCase@{
+            @Suppress("IMPLICIT_NOTHING_TYPE_ARGUMENT_AGAINST_NOT_NOTHING_EXPECTED_TYPE")
+            secondPlayerRun.handCase.run otherWhichCase@{
+                return when {
+                    this@whichCase > this@otherWhichCase -> WIN
+                    this@whichCase < this@otherWhichCase -> LOOSE
+                    else -> handsOnSameCase(
+                        secondPlayerThrow = secondPlayerRun,
+                        handCase = this@whichCase
+                    )
+                }
+            }
+        }
+
+    fun List<List<Int>>.compareHands(): List<List<Int>> {
+//        var winner = first()
+//        forEachIndexed { index: Int, hand ->
+//            if (index >= ONE) {
+//                val result = hand.compareThrows(this[index - 1])
+//                if (result == WIN) {
+//                    winner = hand
+//                }
+//            }
+//        }
+//        return winner
+        return listOf(listOf(0, 0))
+    }
+
+    @Suppress("MemberVisibilityCanBePrivate")
+    fun List<Int>.handsOnSameCase(
+        secondPlayerThrow: List<Int>,
+        handCase: Int
+    ): DiceRunResult = when (handCase) {
+        AUTOMATIC_WIN_456_CASE -> RETHROW
+        AUTOMATIC_LOOSE_123_CASE -> RETHROW
+        STRAIGHT_234_345_CASE -> when {
+            containsAll(TWO_THREE_FOUR) && secondPlayerThrow.containsAll(TWO_THREE_FOUR) -> RETHROW
+            containsAll(THREE_FOUR_FIVE) && secondPlayerThrow.containsAll(THREE_FOUR_FIVE) -> RETHROW
+            containsAll(TWO_THREE_FOUR) && secondPlayerThrow.containsAll(THREE_FOUR_FIVE) -> LOOSE
+            else -> WIN
+        }
+        UNIFORM_TRIPLET_CASE -> when {
+            uniformTripletValue > secondPlayerThrow.uniformTripletValue -> WIN
+            uniformTripletValue < secondPlayerThrow.uniformTripletValue -> LOOSE
+            else -> RETHROW
+        }
+        UNIFORM_DOUBLET_CASE -> when {
+            uniformDoubletValue > secondPlayerThrow.uniformDoubletValue -> WIN
+            uniformDoubletValue < secondPlayerThrow.uniformDoubletValue -> LOOSE
+            else -> RETHROW
+        }
+        else -> when {
+            sum() > secondPlayerThrow.sum() -> WIN
+            sum() < secondPlayerThrow.sum() -> LOOSE
+            else -> RETHROW
+        }
     }
 }

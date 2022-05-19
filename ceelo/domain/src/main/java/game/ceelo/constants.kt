@@ -19,56 +19,56 @@ package game.ceelo
     const val UNIFORM_TRIPLET_CASE = 5
     const val UNIFORM_DOUBLET_CASE = 4
     const val STRAIGHT_234_345_CASE = 3
-    const val OTHER_THROW_CASE = 2
+    const val OTHER_DICE_RUN_CASE = 2
     const val AUTOMATIC_LOOSE_123_CASE = 1
 
-    val `4_5_6` by lazy { listOf(FOUR, FIVE, SIX) }
-    val `1_2_3` by lazy { listOf(ONE, TWO, THREE) }
+    val FOUR_FIVE_SIX by lazy { listOf(FOUR, FIVE, SIX) }
+    val ONE_TWO_THREE by lazy { listOf(ONE, TWO, THREE) }
 
-    val `1_1_1` by lazy { listOf(ONE, ONE, ONE) }
-    val `2_2_2` by lazy { listOf(TWO, TWO, TWO) }
-    val `3_3_3` by lazy { listOf(THREE, THREE, THREE) }
-    val `4_4_4` by lazy { listOf(FOUR, FOUR, FOUR) }
-    val `5_5_5` by lazy { listOf(FIVE, FIVE, FIVE) }
-    val `6_6_6` by lazy { listOf(SIX, SIX, SIX) }
+    val ONE_ONE_ONE by lazy { listOf(ONE, ONE, ONE) }
+    val TWO_TWO_TWO by lazy { listOf(TWO, TWO, TWO) }
+    val THREE_THREE_THREE by lazy { listOf(THREE, THREE, THREE) }
+    val FOUR_FOUR_FOUR by lazy { listOf(FOUR, FOUR, FOUR) }
+    val FIVE_FIVE_FIVE by lazy { listOf(FIVE, FIVE, FIVE) }
+    val SIX_SIX_SIX by lazy { listOf(SIX, SIX, SIX) }
 
     val UNIFORM_TRIPLETS by lazy {
         listOf(
-            `1_1_1`,
-            `2_2_2`,
-            `3_3_3`,
-            `4_4_4`,
-            `5_5_5`,
-            `6_6_6`
+            ONE_ONE_ONE,
+            TWO_TWO_TWO,
+            THREE_THREE_THREE,
+            FOUR_FOUR_FOUR,
+            FIVE_FIVE_FIVE,
+            SIX_SIX_SIX
         )
     }
 
-    val `1_1_x` by lazy { listOf(ONE, ONE) }
-    val `2_2_x` by lazy { listOf(TWO, TWO) }
-    val `3_3_x` by lazy { listOf(THREE, THREE) }
-    val `4_4_x` by lazy { listOf(FOUR, FOUR) }
-    val `5_5_x` by lazy { listOf(FIVE, FIVE) }
-    val `6_6_x` by lazy { listOf(SIX, SIX) }
+    val ONE_ONE_X by lazy { listOf(ONE, ONE) }
+    val TWO_TWO_X by lazy { listOf(TWO, TWO) }
+    val THREE_THREE_X by lazy { listOf(THREE, THREE) }
+    val FOUR_FOUR_X by lazy { listOf(FOUR, FOUR) }
+    val FIVE_FIVE_X by lazy { listOf(FIVE, FIVE) }
+    val SIX_SIX_X by lazy { listOf(SIX, SIX) }
 
 
     val UNIFORM_DOUBLETS by lazy {
         listOf(
-            `1_1_x`,
-            `2_2_x`,
-            `3_3_x`,
-            `4_4_x`,
-            `5_5_x`,
-            `6_6_x`
+            ONE_ONE_X,
+            TWO_TWO_X,
+            THREE_THREE_X,
+            FOUR_FOUR_X,
+            FIVE_FIVE_X,
+            SIX_SIX_X
         )
     }
 
-    val `2_3_4` by lazy { listOf(TWO, THREE, FOUR) }
-    val `3_4_5` by lazy { listOf(THREE, FOUR, FIVE) }
+    val TWO_THREE_FOUR by lazy { listOf(TWO, THREE, FOUR) }
+    val THREE_FOUR_FIVE by lazy { listOf(THREE, FOUR, FIVE) }
 
     val STRAIGHT_TRIPLETS by lazy {
         listOf(
-            `2_3_4`,
-            `3_4_5`,
+            TWO_THREE_FOUR,
+            THREE_FOUR_FIVE,
         )
     }
 

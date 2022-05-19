@@ -7,7 +7,7 @@ import android.view.View.VISIBLE
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import game.ceelo.CeeloGameDomain.compareRuns
+import game.ceelo.CeeloDicesHandDomain.compareHands
 import game.ceelo.CeeloGameDomain.runDices
 import game.ceelo.CeeloGameDomain.secondPlayer
 import game.ceelo.DiceRunResult
@@ -45,9 +45,9 @@ class DiceGameViewModel(application: Application) : AndroidViewModel(application
         _diceGame.value = listOf(runDices(), runDices())
         ceeloService.saveGame(_diceGame.value!!)
         _playerOneResult.value = _diceGame.value!!.first()
-            .compareRuns(_diceGame.value!!.secondPlayer())
+            .compareHands(_diceGame.value!!.secondPlayer())
         _playerTwoResult.value = _diceGame.value!!.secondPlayer()
-            .compareRuns(_diceGame.value!!.first())
+            .compareHands(_diceGame.value!!.first())
         _resultVisibility.value = VISIBLE
         _games.value = ceeloService.allGames()
         Log.d("foofoo", _games.value.toString())

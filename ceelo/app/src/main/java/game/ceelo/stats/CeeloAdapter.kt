@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import game.ceelo.CeeloGameDomain.compareRuns
+import game.ceelo.CeeloDicesHandDomain.compareHands
+import game.ceelo.CeeloGameDomain.firstPlayer
 import game.ceelo.CeeloGameDomain.secondPlayer
 import game.ceelo.GAME_TYPE
 import game.ceelo.PLAYER_ONE_NAME
@@ -39,14 +40,14 @@ class CeeloAdapter(var games: List<List<List<Int>>>) : Adapter<CeeloViewHolder>(
         games[position].apply {
             holder.gameIdText.text = (position + 1).toString()
             holder.player_one_name_text.text = PLAYER_ONE_NAME
-            holder.player_one_dices_throw_text.text = first().toString()
-            holder.player_one_result_text.text = first()
-                .compareRuns(secondPlayerRun = secondPlayer()).toString()
+            holder.player_one_dices_throw_text.text = firstPlayer().toString()
+            holder.player_one_result_text.text = firstPlayer()
+                .compareHands(secondPlayerRun = secondPlayer()).toString()
             holder.player_one_game_type_text.text = GAME_TYPE
             holder.player_two_name_text.text = PLAYER_TWO_NAME
             holder.player_two_dices_throw_text.text = secondPlayer().toString()
             holder.player_two_result_text.text = secondPlayer()
-                .compareRuns(secondPlayerRun = first()).toString()
+                .compareHands(secondPlayerRun = firstPlayer()).toString()
             holder.player_two_game_type_text.text = GAME_TYPE
         }
     }
