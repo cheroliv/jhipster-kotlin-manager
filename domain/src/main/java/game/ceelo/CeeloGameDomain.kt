@@ -25,24 +25,29 @@ object CeeloGameDomain {
         init = { (ONE..SIX).random() }
     )
 
-    fun List<List<Int>>.second(): List<Int> = if (isEmpty())
+    fun List<List<Int>>.firstPlayer(): List<Int> = if (isEmpty())
+        throw NoSuchElementException("first player throw is empty.")
+    else first()
+
+
+    fun List<List<Int>>.secondPlayer(): List<Int> = if (isEmpty())
         throw NoSuchElementException("second player throw is empty.")
     else elementAt(index = 1)
 
 
-    fun List<List<Int>>.third(): List<Int> = if (isEmpty())
+    fun List<List<Int>>.thirdPlayer(): List<Int> = if (isEmpty())
         throw NoSuchElementException("third player throw is empty.")
     else elementAt(index = 2)
 
-    fun List<List<Int>>.fourth(): List<Int> = if (isEmpty())
+    fun List<List<Int>>.fourthPlayer(): List<Int> = if (isEmpty())
         throw NoSuchElementException("fourth player throw is empty.")
     else elementAt(index = 3)
 
-    fun List<List<Int>>.fifth(): List<Int> = if (isEmpty())
+    fun List<List<Int>>.fifthPlayer(): List<Int> = if (isEmpty())
         throw NoSuchElementException("fourth player throw is empty.")
     else elementAt(index = 4)
 
-    fun List<List<Int>>.sixth(): List<Int> = if (isEmpty())
+    fun List<List<Int>>.sixthPlayer(): List<Int> = if (isEmpty())
         throw NoSuchElementException("fourth player throw is empty.")
     else elementAt(index = 5)
 
@@ -75,16 +80,16 @@ object CeeloGameDomain {
      * compare un jet à un autre
      * pour renvoyer un resultat de jeu
      */
-    fun List<Int>.compareThrows(secondPlayerThrow: List<Int>)
+    fun List<Int>.compareRuns(secondPlayerRun: List<Int>)
             : DiceRunResult =
         whichCase.run whichCase@{
             @Suppress("IMPLICIT_NOTHING_TYPE_ARGUMENT_AGAINST_NOT_NOTHING_EXPECTED_TYPE")
-            secondPlayerThrow.whichCase.run otherWhichCase@{
+            secondPlayerRun.whichCase.run otherWhichCase@{
                 return when {
                     this@whichCase > this@otherWhichCase -> WIN
                     this@whichCase < this@otherWhichCase -> LOOSE
                     else -> onSameCase(
-                        secondPlayerThrow = secondPlayerThrow,
+                        secondPlayerThrow = secondPlayerRun,
                         throwCase = this@whichCase
                     )
                 }

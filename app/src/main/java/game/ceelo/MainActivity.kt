@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import game.ceelo.CeeloDicesHandDomain.getDiceImageFromDiceValue
 import game.ceelo.CeeloDicesHandDomain.middle
-import game.ceelo.CeeloGameDomain.second
+import game.ceelo.CeeloGameDomain.secondPlayer
 import game.ceelo.DiceRunResult.*
 
 import game.ceelo.databinding.ActivityMainBinding
@@ -95,7 +95,7 @@ fun loadLocalGame(
             onClickPlayButton()
             diceGame.value.apply game@{
                 this@game!!.first().apply player@{
-                    this@game.second().apply computer@{
+                    this@game.secondPlayer().apply computer@{
                         playerOneThrow(
                             activityMainBinding = binding,
                             list = this@player,
@@ -187,19 +187,19 @@ fun playerTwoUI(
 ) {
     activityMainBinding.playerTwoFirstDiceImageId.setImageResource(
         list.getDiceImageFromDiceValue(
-            diceValue = game.second().first()
+            diceValue = game.secondPlayer().first()
 
         )
 
     )
     activityMainBinding.playerTwoMiddleDiceImageId.setImageResource(
         list.getDiceImageFromDiceValue(
-            diceValue = game.second().middle()
+            diceValue = game.secondPlayer().middle()
         )
     )
     activityMainBinding.playerTwoLastDiceImageId.setImageResource(
         list.getDiceImageFromDiceValue(
-            diceValue = game.second().last()
+            diceValue = game.secondPlayer().last()
         )
     )
 }

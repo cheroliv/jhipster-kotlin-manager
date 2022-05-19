@@ -7,11 +7,15 @@ import game.ceelo.CeeloDicesHandDomain.isUniformDoublet
 import game.ceelo.CeeloDicesHandDomain.isUniformTriplet
 import game.ceelo.CeeloDicesHandDomain.uniformDoubletValue
 import game.ceelo.CeeloDicesHandDomain.uniformTripletValue
-import game.ceelo.CeeloGameDomain.compareThrows
+import game.ceelo.CeeloGameDomain.compareRuns
+import game.ceelo.CeeloGameDomain.firstPlayer
 import game.ceelo.CeeloGameDomain.onSameCase
 import game.ceelo.CeeloGameDomain.randomNumberOfPlayers
 import game.ceelo.CeeloGameDomain.runDices
+import game.ceelo.CeeloGameDomain.secondPlayer
 import game.ceelo.CeeloGameDomain.whichCase
+import game.ceelo.CeeloPlaygroundDomain.launchLocalGame
+import game.ceelo.CeeloPlaygroundDomain.runConsoleLocalGame
 import game.ceelo.DiceRunResult.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -24,34 +28,6 @@ class CeeloUnitTest {
     fun runTestAsMain(): Unit = println("un jet de dés :").also {
         runConsoleLocalGame()
     }
-
-    private fun runConsoleLocalGame() {
-        var playerOne: List<Int> = runDices()
-        var playerTwo: List<Int> = runDices()
-        do {
-            println("player one throw : $playerOne")
-            println("player two throw : $playerTwo")
-            val result = playerOne.compareThrows(
-                secondPlayerThrow = playerTwo
-            )
-            if (result == WIN) println("player one : $WIN")
-            else println("player two : $WIN")
-        } while (result == RETHROW.apply {
-                playerOne = runDices()
-                playerTwo = runDices()
-            })
-    }
-
-    private fun launchLocalGame(nbPlayers: Int): List<List<Int>> =
-        mutableListOf<List<Int>>().apply {
-            repeat(nbPlayers) { add(runDices()) }
-        }.toList()
-
-    private fun launchGame(nbPlayer: Int): List<List<Int>> = mutableListOf()
-    private fun launchLocalGame(): List<List<Int>> = listOf(
-        runDices(),
-        runDices()
-    )
 
     fun initPlayground(
         @Suppress("UNUSED_PARAMETER") howMuchPlayer: Int
@@ -199,28 +175,28 @@ class CeeloUnitTest {
 
     @Test
     fun `Si le jet contient (4,5,6) et l'autre (1,2,3) alors la propriété compareThrows renvoi WIN`() =
-        assertEquals(WIN, `4_5_6`.compareThrows(`1_2_3`))
+        assertEquals(WIN, `4_5_6`.compareRuns(`1_2_3`))
 
 
     @Test
     fun `Si le jet contient (4,5,6) non ordonné et l'autre (1,2,3) alors la propriété compareThrows renvoi WIN`() =
-        assertEquals(WIN, listOf(5, 6, 4).compareThrows(`1_2_3`))
+        assertEquals(WIN, listOf(5, 6, 4).compareRuns(`1_2_3`))
 
     @Test
     fun `Si le jet contient (4,5,6) et l'autre aussi alors la propriété compareThrows renvoi RETHROW`() =
-        assertEquals(RETHROW, `4_5_6`.compareThrows(`4_5_6`))
+        assertEquals(RETHROW, `4_5_6`.compareRuns(`4_5_6`))
 
     @Test
     fun `Si le jet contient (1,2,3) et l'autre (4,5,6) alors la propriété compareThrows renvoi LOOSE`() =
-        assertEquals(LOOSE, `1_2_3`.compareThrows(`4_5_6`))
+        assertEquals(LOOSE, `1_2_3`.compareRuns(`4_5_6`))
 
     @Test
     fun `Si le jet contient (1,2,3) non ordonné et l'autre non alors la propriété compareThrows renvoi LOOSE`() =
-        assertEquals(LOOSE, listOf(3, 2, 1).compareThrows(`4_5_6`))
+        assertEquals(LOOSE, listOf(3, 2, 1).compareRuns(`4_5_6`))
 
     @Test
     fun `Si le jet contient (1,2,3) et l'autre aussi alors la propriété compareThrows renvoi RETHROW`() =
-        assertEquals(RETHROW, `1_2_3`.compareThrows(`1_2_3`))
+        assertEquals(RETHROW, `1_2_3`.compareRuns(`1_2_3`))
 
 
     @Test
@@ -235,30 +211,30 @@ class CeeloUnitTest {
 
     @Test
     fun `Si le jet est un triplet uniforme et l'autre aussi avec une face plus faible alors la propriété compareThrows renvoi WIN`() {
-        assertEquals(expected = WIN, actual = `6_6_6`.compareThrows(`5_5_5`))
-        assertEquals(expected = WIN, actual = `6_6_6`.compareThrows(`4_4_4`))
-        assertEquals(expected = WIN, actual = `6_6_6`.compareThrows(`3_3_3`))
-        assertEquals(expected = WIN, actual = `6_6_6`.compareThrows(`2_2_2`))
-        assertEquals(expected = WIN, actual = `6_6_6`.compareThrows(`1_1_1`))
+        assertEquals(expected = WIN, actual = `6_6_6`.compareRuns(`5_5_5`))
+        assertEquals(expected = WIN, actual = `6_6_6`.compareRuns(`4_4_4`))
+        assertEquals(expected = WIN, actual = `6_6_6`.compareRuns(`3_3_3`))
+        assertEquals(expected = WIN, actual = `6_6_6`.compareRuns(`2_2_2`))
+        assertEquals(expected = WIN, actual = `6_6_6`.compareRuns(`1_1_1`))
     }
 
     @Test
     fun `Si le jet est un triplet uniforme et l'autre aussi avec une face plus forte alors la propriété compareThrows renvoi LOOSE`() {
-        assertEquals(expected = LOOSE, actual = `1_1_1`.compareThrows(`6_6_6`))
-        assertEquals(expected = LOOSE, actual = `1_1_1`.compareThrows(`5_5_5`))
-        assertEquals(expected = LOOSE, actual = `1_1_1`.compareThrows(`4_4_4`))
-        assertEquals(expected = LOOSE, actual = `1_1_1`.compareThrows(`3_3_3`))
-        assertEquals(expected = LOOSE, actual = `1_1_1`.compareThrows(`2_2_2`))
+        assertEquals(expected = LOOSE, actual = `1_1_1`.compareRuns(`6_6_6`))
+        assertEquals(expected = LOOSE, actual = `1_1_1`.compareRuns(`5_5_5`))
+        assertEquals(expected = LOOSE, actual = `1_1_1`.compareRuns(`4_4_4`))
+        assertEquals(expected = LOOSE, actual = `1_1_1`.compareRuns(`3_3_3`))
+        assertEquals(expected = LOOSE, actual = `1_1_1`.compareRuns(`2_2_2`))
     }
 
     @Test
     fun `Si le jet est un triplet uniforme et l'autre aussi avec la meme face alors la propriété compareThrows renvoi RETHROW`() {
-        assertEquals(`6_6_6`.compareThrows(`6_6_6`), RETHROW)
-        assertEquals(`5_5_5`.compareThrows(`5_5_5`), RETHROW)
-        assertEquals(`4_4_4`.compareThrows(`4_4_4`), RETHROW)
-        assertEquals(`3_3_3`.compareThrows(`3_3_3`), RETHROW)
-        assertEquals(`2_2_2`.compareThrows(`2_2_2`), RETHROW)
-        assertEquals(`1_1_1`.compareThrows(`1_1_1`), RETHROW)
+        assertEquals(`6_6_6`.compareRuns(`6_6_6`), RETHROW)
+        assertEquals(`5_5_5`.compareRuns(`5_5_5`), RETHROW)
+        assertEquals(`4_4_4`.compareRuns(`4_4_4`), RETHROW)
+        assertEquals(`3_3_3`.compareRuns(`3_3_3`), RETHROW)
+        assertEquals(`2_2_2`.compareRuns(`2_2_2`), RETHROW)
+        assertEquals(`1_1_1`.compareRuns(`1_1_1`), RETHROW)
     }
 
     //TODO: tester les autres branches de cas pour
@@ -298,11 +274,11 @@ class CeeloUnitTest {
         var winnerIndexes: MutableList<Int> = mutableListOf(0)
         result.forEachIndexed { index, hands: List<Int> ->
             if (index > 0) {
-                if (hands.compareThrows(result[index - 1]) == WIN)
+                if (hands.compareRuns(result[index - 1]) == WIN)
                     winnerIndexes[0] = index
                 if (
-                    hands.compareThrows(result[index - 1]) == RETHROW
-                    && hands.compareThrows(result.first()) == WIN
+                    hands.compareRuns(result[index - 1]) == RETHROW
+                    && hands.compareRuns(result.first()) == WIN
                 ) winnerIndexes.add(index)
             }
         }
