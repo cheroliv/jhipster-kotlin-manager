@@ -1,0 +1,127 @@
+plugins {
+    id "com.android.application"
+    id "org.jetbrains.kotlin.android"
+    id "androidx.navigation.safeargs"
+    id 'kotlin-kapt'
+//    id("com.github.triplet.play") version ("3.7.0")
+}
+
+android {
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "game.ceelo"
+        minSdk 23
+        targetSdk 32
+        versionCode 4
+        versionName "0.0.4"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation "androidx.appcompat:appcompat:$app_compat_version"
+    implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+    implementation project(path: ":domain")
+    androidTestImplementation("org.jetbrains.kotlin:kotlin-test")
+    androidTestImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
+    //
+    testImplementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    testImplementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    //
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_version"
+
+    // Kotlin
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    // Feature module Support
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$nav_version"
+    // Testing Navigation
+    androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
+
+    //
+    testImplementation "androidx.room:room-runtime:$room_version"
+    testAnnotationProcessor "androidx.room:room-compiler:$room_version"
+    //
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    //
+    testImplementation "androidx.room:room-guava:$room_version"
+    //
+    // optional - Test helpers
+    testImplementation "androidx.room:room-testing:$room_version"
+    // optional - Paging 3 Integration
+    //
+    testImplementation "androidx.room:room-paging:2.5.0-alpha01"
+    //
+
+    // Lifecycle components
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-common-java8:2.4.1")
+
+
+    // Kotlin components
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
+
+
+    // UI
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+    implementation "com.google.android.material:material:$material_version"
+
+    // Testing
+
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+    androidTestImplementation("androidx.test.espresso:espresso-core:$espresso_version", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
+    // Koin main features for Android
+    implementation "io.insert-koin:koin-android:$koin_version"
+    // Java Compatibility
+    implementation "io.insert-koin:koin-android-compat:$koin_version"
+    // Jetpack WorkManager
+    implementation "io.insert-koin:koin-androidx-workmanager:$koin_version"
+    // Navigation Graph
+    implementation "io.insert-koin:koin-androidx-navigation:$koin_version"
+
+    // Koin testing tools
+    testImplementation("io.insert-koin:koin-test:$koin_version")
+    androidTestImplementation("io.insert-koin:koin-test:$koin_version")
+    // Needed JUnit version
+    testImplementation("io.insert-koin:koin-test-junit4:$koin_version")
+    androidTestImplementation("io.insert-koin:koin-test-junit4:$koin_version")
+}
