@@ -9,9 +9,9 @@ import game.ceelo.CeeloDicesHandDomain.uniformDoubletValue
 import game.ceelo.CeeloDicesHandDomain.uniformTripletValue
 import game.ceelo.CeeloGameDomain.compareThrows
 import game.ceelo.CeeloGameDomain.onSameCase
+import game.ceelo.CeeloGameDomain.randomNumberOfPlayers
 import game.ceelo.CeeloGameDomain.runDices
 import game.ceelo.CeeloGameDomain.whichCase
-import game.ceelo.CeeloPlaygroundDomain.runConsoleLocalGame
 import game.ceelo.DiceRunResult.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -25,6 +25,37 @@ class CeeloUnitTest {
         runConsoleLocalGame()
     }
 
+    private fun runConsoleLocalGame() {
+        var playerOne: List<Int> = runDices()
+        var playerTwo: List<Int> = runDices()
+        do {
+            println("player one throw : $playerOne")
+            println("player two throw : $playerTwo")
+            val result = playerOne.compareThrows(
+                secondPlayerThrow = playerTwo
+            )
+            if (result == WIN) println("player one : $WIN")
+            else println("player two : $WIN")
+        } while (result == RETHROW.apply {
+                playerOne = runDices()
+                playerTwo = runDices()
+            })
+    }
+
+    private fun launchLocalGame(nbPlayers: Int): List<List<Int>> =
+        mutableListOf<List<Int>>().apply {
+            repeat(nbPlayers) { add(runDices()) }
+        }.toList()
+
+    private fun launchGame(nbPlayer: Int): List<List<Int>> = mutableListOf()
+    private fun launchLocalGame(): List<List<Int>> = listOf(
+        runDices(),
+        runDices()
+    )
+
+    fun initPlayground(
+        @Suppress("UNUSED_PARAMETER") howMuchPlayer: Int
+    ): Playground = Playground()
 
     @Test
     fun `Si le jet est correct alors la propriété dicesThrow renvoi un triplet d'entier entre 1 et 6`() =
@@ -238,15 +269,15 @@ class CeeloUnitTest {
      */
     @Test
     fun random_nombre_de_joueurs_est_inf_ou_egal_a_6_et_sup_ou_egal_a_2() {
-        assert(CeeloGameDomain.randomNumberOfPlayers() <= SIX)
-        assert(CeeloGameDomain.randomNumberOfPlayers() >= TWO)
+        assert(randomNumberOfPlayers() <= SIX)
+        assert(randomNumberOfPlayers() >= TWO)
     }
 
 
     @Test
     fun `launchLocalGame renvoi un game multi joueurs`() {
-        val numberOfPlayer = CeeloGameDomain.randomNumberOfPlayers()
-        val result = CeeloPlaygroundDomain.launchLocalGame(numberOfPlayer)
+        val numberOfPlayer = randomNumberOfPlayers()
+        val result = launchLocalGame(numberOfPlayer)
         println(numberOfPlayer)
         println(result)
         assertEquals(numberOfPlayer, result.size)
@@ -258,8 +289,8 @@ class CeeloUnitTest {
 
     @Test
     fun `compareRuns renvoi la liste des vainqueurs d'une partie`() {
-        val numberOfPlayer: Int = CeeloGameDomain.randomNumberOfPlayers()
-        val result: List<List<Int>> = CeeloPlaygroundDomain.launchLocalGame(numberOfPlayer)
+        val numberOfPlayer: Int = randomNumberOfPlayers()
+        val result: List<List<Int>> = launchLocalGame(numberOfPlayer)
         println(numberOfPlayer)
         println(result)
         assertEquals(numberOfPlayer, result.size)

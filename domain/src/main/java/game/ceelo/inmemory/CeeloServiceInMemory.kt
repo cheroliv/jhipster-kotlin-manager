@@ -30,7 +30,7 @@ class CeeloServiceInMemory : CeeloService {
         TODO("Not yet implemented")
     }
 
-    override fun suscribe() {
+    override fun subscribe() {
         TODO("Not yet implemented")
     }
 }

@@ -35,5 +35,5 @@ interface CeeloService {
     fun allGames(): List<List<List<Int>>>
     fun saveGame(newGame: List<List<Int>>)
     fun connect()
-    fun suscribe()
+    fun subscribe()
 }
