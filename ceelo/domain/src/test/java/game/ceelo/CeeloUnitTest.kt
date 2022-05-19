@@ -31,7 +31,7 @@ class CeeloUnitTest {
 
     fun initPlayground(
         @Suppress("UNUSED_PARAMETER") howMuchPlayer: Int
-    ): Playground = Playground()
+    ): Playground = Playground(mutableListOf())
 
     @Test
     fun `Si le jet est correct alors la propriété dicesThrow renvoi un triplet d'entier entre 1 et 6`() =

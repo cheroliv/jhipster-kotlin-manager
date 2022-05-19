@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import game.ceelo.CeeloDicesHandDomain.getDiceImageFromDiceValue
-import game.ceelo.CeeloDicesHandDomain.middle
+import game.ceelo.CeeloDicesHandDomain.middleDice
 import game.ceelo.CeeloGameDomain.secondPlayer
 import game.ceelo.DiceRunResult.*
 
@@ -126,7 +126,7 @@ fun playerOneThrow(
     )
     throwDiceAnimation(
         diceImage = activityMainBinding.playerOneMiddleDiceImageId,
-        diceValue = list.middle()
+        diceValue = list.middleDice()
     )
     throwDiceAnimation(
         diceImage = activityMainBinding.playerOneLastDiceImageId,
@@ -150,7 +150,7 @@ fun playerTwoThrow(
     )
     throwDiceAnimation(
         diceImage = activityMainBinding.playerTwoMiddleDiceImageId,
-        diceValue = list.middle()
+        diceValue = list.middleDice()
     )
     throwDiceAnimation(
         diceImage = activityMainBinding.playerTwoLastDiceImageId,
@@ -172,7 +172,7 @@ fun playerOneUI(
         list.getDiceImageFromDiceValue(diceValue = game.first().first())
     )
     activityMainBinding.playerOneMiddleDiceImageId.setImageResource(
-        list.getDiceImageFromDiceValue(diceValue = game.first().middle())
+        list.getDiceImageFromDiceValue(diceValue = game.first().middleDice())
     )
     activityMainBinding.playerOneLastDiceImageId.setImageResource(
         list.getDiceImageFromDiceValue(diceValue = game.first().last())
@@ -194,7 +194,7 @@ fun playerTwoUI(
     )
     activityMainBinding.playerTwoMiddleDiceImageId.setImageResource(
         list.getDiceImageFromDiceValue(
-            diceValue = game.secondPlayer().middle()
+            diceValue = game.secondPlayer().middleDice()
         )
     )
     activityMainBinding.playerTwoLastDiceImageId.setImageResource(

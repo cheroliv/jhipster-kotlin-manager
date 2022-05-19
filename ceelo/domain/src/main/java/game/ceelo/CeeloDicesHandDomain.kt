@@ -5,18 +5,26 @@ object CeeloDicesHandDomain {
     /**
      * Renvoi le dé du milieu
      */
-    fun List<Int>.middle(): Int = if (isEmpty())
+    fun List<Int>.middleDice(): Int = if (isEmpty())
         throw NoSuchElementException("dice throw is empty.")
-    else elementAt(index = 1)
+    else elementAt(index = ONE)
 
     val List<Int>.is456: Boolean get() = containsAll(`4_5_6`)
 
     val List<Int>.is123: Boolean get() = containsAll(`1_2_3`)
 
 
+    @Suppress("MemberVisibilityCanBePrivate")
     fun List<Int>.firstDice(): Int = if (isEmpty())
         throw NoSuchElementException("no first dice found in hand.")
     else first()
+
+
+    @Suppress("MemberVisibilityCanBePrivate")
+    fun List<Int>.lastDice(): Int = if (isEmpty())
+        throw NoSuchElementException("no last dice found in hand.")
+    else last()
+
 
     /**
      * Est ce un triplet?
@@ -24,7 +32,7 @@ object CeeloDicesHandDomain {
     val List<Int>.isUniformTriplet: Boolean
         get() = UNIFORM_TRIPLETS.map {
             it.firstDice().run {
-                this == firstDice() && this == middle() && this == last()
+                this == firstDice() && this == middleDice() && this == last()
             }
         }.contains(true)
 
@@ -40,10 +48,12 @@ object CeeloDicesHandDomain {
     val List<Int>.isUniformDoublet: Boolean
         get() = run {
             UNIFORM_DOUBLETS.map {
-                it.first().run {
-                    first() == this && middle() == this && last() != this ||
-                            first() == this && last() == this && middle() != this ||
-                            middle() == this && last() == this && first() != this
+                it.firstDice().run {
+                    firstDice() == this && middleDice() == this &&
+                            lastDice() != this || firstDice() == this &&
+                            lastDice() == this && middleDice() != this ||
+                            middleDice() == this && lastDice() == this &&
+                            firstDice() != this
                 }
             }.contains(true)
         }
@@ -56,12 +66,12 @@ object CeeloDicesHandDomain {
         else when {
             isUniformTriplet -> NOT_A_DOUBLET
             isUniformDoublet ->
-                find { it: Int ->
-                    UNIFORM_DOUBLETS.first {
-                        first() == it.first() && middle() == it.first() ||
-                                first() == it.first() && last() == it.first() ||
-                                middle() == it.first() && last() == it.first()
-                    }.first() != it
+                find { dice: Int ->
+                    UNIFORM_DOUBLETS.first { hand: List<Int> ->
+                        (firstDice() == hand.firstDice() && middleDice() == hand.firstDice()) ||
+                                (firstDice() == hand.firstDice() && lastDice() == hand.firstDice()) ||
+                                (middleDice() == hand.firstDice() && lastDice() == hand.firstDice())
+                    }.first() != dice
                 }!!
             else -> NOT_A_DOUBLET
         }
@@ -72,12 +82,12 @@ object CeeloDicesHandDomain {
     fun List<Int>.getDiceImageFromDiceValue(
         diceValue: Int
     ): Int = when (diceValue) {
-        ONE -> this[ONE - 1]
-        TWO -> this[TWO - 1]
-        THREE -> this[THREE - 1]
-        FOUR -> this[FOUR - 1]
-        FIVE -> this[FIVE - 1]
-        SIX -> this[SIX - 1]
+        ONE -> first()
+        TWO -> this[TWO - ONE]
+        THREE -> this[THREE - ONE]
+        FOUR -> this[FOUR - ONE]
+        FIVE -> this[FIVE - ONE]
+        SIX -> this[SIX - ONE]
         else -> throw Exception("Only six faces is possible!")
     }
 }
