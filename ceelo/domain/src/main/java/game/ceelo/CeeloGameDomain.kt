@@ -32,24 +32,24 @@ object CeeloGameDomain {
 
     fun List<List<Int>>.secondPlayer(): List<Int> = if (isEmpty())
         throw NoSuchElementException("second player throw is empty.")
-    else elementAt(index = 1)
+    else elementAt(index = ONE)
 
 
     fun List<List<Int>>.thirdPlayer(): List<Int> = if (isEmpty())
         throw NoSuchElementException("third player throw is empty.")
-    else elementAt(index = 2)
+    else elementAt(index = TWO)
 
     fun List<List<Int>>.fourthPlayer(): List<Int> = if (isEmpty())
         throw NoSuchElementException("fourth player throw is empty.")
-    else elementAt(index = 3)
+    else elementAt(index = THREE)
 
     fun List<List<Int>>.fifthPlayer(): List<Int> = if (isEmpty())
         throw NoSuchElementException("fourth player throw is empty.")
-    else elementAt(index = 4)
+    else elementAt(index = FOUR)
 
     fun List<List<Int>>.sixthPlayer(): List<Int> = if (isEmpty())
         throw NoSuchElementException("fourth player throw is empty.")
-    else elementAt(index = 5)
+    else elementAt(index = FIVE)
 
     fun List<List<Int>>.compareRuns(): List<List<Int>> {
 //        var winner = first()

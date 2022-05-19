@@ -49,11 +49,17 @@ object CeeloDicesHandDomain {
         get() = run {
             UNIFORM_DOUBLETS.map {
                 it.firstDice().run {
-                    firstDice() == this && middleDice() == this &&
-                            lastDice() != this || firstDice() == this &&
-                            lastDice() == this && middleDice() != this ||
-                            middleDice() == this && lastDice() == this &&
-                            firstDice() != this
+                    (firstDice() == this &&
+                            middleDice() == this &&
+                            lastDice() != this)
+                            ||
+                            (firstDice() == this &&
+                                    lastDice() == this
+                                    && middleDice() != this)
+                            ||
+                            (middleDice() == this &&
+                                    lastDice() == this &&
+                                    firstDice() != this)
                 }
             }.contains(true)
         }
@@ -68,9 +74,14 @@ object CeeloDicesHandDomain {
             isUniformDoublet ->
                 find { dice: Int ->
                     UNIFORM_DOUBLETS.first { hand: List<Int> ->
-                        (firstDice() == hand.firstDice() && middleDice() == hand.firstDice()) ||
-                                (firstDice() == hand.firstDice() && lastDice() == hand.firstDice()) ||
-                                (middleDice() == hand.firstDice() && lastDice() == hand.firstDice())
+                        (firstDice() == hand.firstDice() &&
+                                middleDice() == hand.firstDice())
+                                ||
+                                (firstDice() == hand.firstDice() &&
+                                        lastDice() == hand.firstDice())
+                                ||
+                                (middleDice() == hand.firstDice() &&
+                                        lastDice() == hand.firstDice())
                     }.first() != dice
                 }!!
             else -> NOT_A_DOUBLET
