@@ -1,6 +1,5 @@
 package game.ceelo
 
-
 object CeeloGameDomain {
     /**
      * un jet de dés au hazard
