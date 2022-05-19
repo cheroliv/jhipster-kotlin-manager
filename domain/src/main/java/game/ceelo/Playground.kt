@@ -1,3 +1,3 @@
 package game.ceelo
 
-class Playground
+class Playground(val games:List<Game>)

@@ -1,3 +1,3 @@
 package game.ceelo
 
-class Game
+class Game(val hands:List<DiceRun>)

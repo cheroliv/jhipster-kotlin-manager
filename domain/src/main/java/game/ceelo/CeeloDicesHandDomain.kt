@@ -13,13 +13,18 @@ object CeeloDicesHandDomain {
 
     val List<Int>.is123: Boolean get() = containsAll(`1_2_3`)
 
+
+    fun List<Int>.firstDice(): Int = if (isEmpty())
+        throw NoSuchElementException("no first dice found in hand.")
+    else first()
+
     /**
      * Est ce un triplet?
      */
     val List<Int>.isUniformTriplet: Boolean
         get() = UNIFORM_TRIPLETS.map {
-            it.first().run {
-                this == first() && this == middle() && this == last()
+            it.firstDice().run {
+                this == firstDice() && this == middle() && this == last()
             }
         }.contains(true)
 
