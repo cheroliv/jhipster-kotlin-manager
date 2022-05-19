@@ -1,6 +1,5 @@
 package game.ceelo
 
-
 import game.ceelo.CeeloDicesHandDomain.is123
 import game.ceelo.CeeloDicesHandDomain.is456
 import game.ceelo.CeeloDicesHandDomain.isStraight
@@ -14,10 +13,6 @@ import game.ceelo.CeeloGameDomain.runDices
 import game.ceelo.CeeloGameDomain.whichCase
 import game.ceelo.CeeloPlaygroundDomain.runConsoleLocalGame
 import game.ceelo.DiceRunResult.*
-import game.ceelo.inmemory.CeeloServiceInMemory
-import org.koin.core.context.startKoin
-import org.koin.dsl.module
-import org.koin.java.KoinJavaComponent.get
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -26,16 +21,10 @@ import kotlin.test.assertFalse
 class CeeloUnitTest {
 
     @Test
-    fun runTestAsMain(): Unit = startKoin {
-        modules(modules = module(moduleDeclaration = {
-            single<CeeloService>(definition = { CeeloServiceInMemory() })
-        }))
-    }.run {
-        get<CeeloService>(CeeloService::class.java).apply {
-            println("un jet de dés :")
-            runConsoleLocalGame()
-        }
+    fun runTestAsMain(): Unit = println("un jet de dés :").also {
+        runConsoleLocalGame()
     }
+
 
     @Test
     fun `Si le jet est correct alors la propriété dicesThrow renvoi un triplet d'entier entre 1 et 6`() =
