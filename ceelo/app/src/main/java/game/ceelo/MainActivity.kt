@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             setContentView(root)
             loadLocalGame(
                 binding = this,
-                mainActivity = this@MainActivity
+                activity = this@MainActivity
             )
             statsButton.setOnClickListener {
                 startActivity(
@@ -50,11 +50,11 @@ class MainActivity : AppCompatActivity() {
 
 fun loadLocalGame(
     binding: ActivityMainBinding,
-    mainActivity: MainActivity
+    activity: MainActivity
 ) = binding.apply {
-    val diceGameViewModel = ViewModelProvider(mainActivity)
+    val diceGameViewModel = ViewModelProvider(activity)
         .get(DiceGameViewModel::class.java)
-    diceGameViewModel.diceGame.observe(mainActivity) { game ->
+    diceGameViewModel.diceGame.observe(activity) { game ->
         diceImages.run {
             playerOneUI(
                 activityMainBinding = this@apply,
@@ -71,8 +71,8 @@ fun loadLocalGame(
     }
     //TODO refactor pour avoir un field dans le viewmodel nommé textViewResultPair Pair<result,visibility>
     // on evitera le nested observe
-    diceGameViewModel.playerOneResult.observe(mainActivity) { result: DiceRunResult ->
-        diceGameViewModel.resultVisibility.observe(mainActivity) { visibility: Int ->
+    diceGameViewModel.playerOneResult.observe(activity) { result: DiceRunResult ->
+        diceGameViewModel.resultVisibility.observe(activity) { visibility: Int ->
             setTextViewResult(
                 textViewResult = localPlayerResultText,
                 diceResult = result,
@@ -80,8 +80,8 @@ fun loadLocalGame(
             )
         }
     }
-    diceGameViewModel.playerTwoResult.observe(mainActivity) { result: DiceRunResult ->
-        diceGameViewModel.resultVisibility.observe(mainActivity) { visibility: Int ->
+    diceGameViewModel.playerTwoResult.observe(activity) { result: DiceRunResult ->
+        diceGameViewModel.resultVisibility.observe(activity) { visibility: Int ->
             setTextViewResult(
                 textViewResult = computerResultText,
                 diceResult = result,
@@ -188,7 +188,6 @@ fun playerTwoUI(
     activityMainBinding.playerTwoFirstDiceImageId.setImageResource(
         list.getDiceImageFromDiceValue(
             diceValue = game.secondPlayer().first()
-
         )
 
     )
