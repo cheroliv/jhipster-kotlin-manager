@@ -1,3 +1,3 @@
 package game.ceelo
 
-class Player
+data class Player(val name:String)
