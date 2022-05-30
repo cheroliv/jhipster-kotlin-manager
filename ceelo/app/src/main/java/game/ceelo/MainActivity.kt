@@ -28,22 +28,6 @@ class MainActivity : AppCompatActivity() {
                 binding = this,
                 activity = this@MainActivity
             )
-            statsButton.setOnClickListener {
-                startActivity(
-                    Intent(
-                        this@MainActivity,
-                        StatsActivity::class.java
-                    )
-                )
-            }
-            signinButton.setOnClickListener {
-                startActivity(
-                    Intent(
-                        this@MainActivity,
-                        LoginActivity::class.java
-                    )
-                )
-            }
         }
     }
 }
@@ -51,66 +35,84 @@ class MainActivity : AppCompatActivity() {
 fun loadLocalGame(
     binding: ActivityMainBinding,
     activity: MainActivity
-) = binding.apply {
-    val diceGameViewModel = ViewModelProvider(activity)
-        .get(DiceGameViewModel::class.java)
-    diceGameViewModel.diceGame.observe(activity) { game ->
-        diceImages.run {
-            playerOneUI(
-                activityMainBinding = this@apply,
-                game = game,
-                list = this
-            )
-            playerTwoUI(
-                activityMainBinding = this@apply,
-                game = game,
-                list = this
-            )
-        }
+): ActivityMainBinding {
+    return binding.apply {
+        val diceGameViewModel = ViewModelProvider(activity)
+            .get(DiceGameViewModel::class.java)
+        diceGameViewModel.diceGame.observe(activity) { game ->
+            diceImages.run {
+                playerOneUI(
+                    activityMainBinding = this@apply,
+                    game = game,
+                    list = this
+                )
+                playerTwoUI(
+                    activityMainBinding = this@apply,
+                    game = game,
+                    list = this
+                )
+            }
 
-    }
-    //TODO refactor pour avoir un field dans le viewmodel nommé textViewResultPair Pair<result,visibility>
-    // on evitera le nested observe
-    diceGameViewModel.playerOneResult.observe(activity) { result: DiceRunResult ->
-        diceGameViewModel.resultVisibility.observe(activity) { visibility: Int ->
-            setTextViewResult(
-                textViewResult = localPlayerResultText,
-                diceResult = result,
-                textViewVisibility = visibility
-            )
         }
-    }
-    diceGameViewModel.playerTwoResult.observe(activity) { result: DiceRunResult ->
-        diceGameViewModel.resultVisibility.observe(activity) { visibility: Int ->
-            setTextViewResult(
-                textViewResult = computerResultText,
-                diceResult = result,
-                textViewVisibility = visibility
-            )
-        }
-    }
-
-    playLocalButton.setOnClickListener {
-        diceGameViewModel.apply vm@{
-            onClickPlayButton()
-            diceGame.value.apply game@{
-                this@game!!.first().apply player@{
-                    this@game.secondPlayer().apply computer@{
-                        playerOneThrow(
-                            activityMainBinding = binding,
-                            list = this@player,
-                            diceGameViewModel = this@vm
-                        )
-                        playerTwoThrow(
-                            activityMainBinding = binding,
-                            list = this@computer,
-                            diceGameViewModel = this@vm
-                        )
-                    }
-                }
-
+        //TODO refactor pour avoir un field dans le viewmodel nommé textViewResultPair Pair<result,visibility>
+        // on evitera le nested observe
+        diceGameViewModel.playerOneResult.observe(activity) { result: DiceRunResult ->
+            diceGameViewModel.resultVisibility.observe(activity) { visibility: Int ->
+                setTextViewResult(
+                    textViewResult = localPlayerResultText,
+                    diceResult = result,
+                    textViewVisibility = visibility
+                )
             }
         }
+        diceGameViewModel.playerTwoResult.observe(activity) { result: DiceRunResult ->
+            diceGameViewModel.resultVisibility.observe(activity) { visibility: Int ->
+                setTextViewResult(
+                    textViewResult = computerResultText,
+                    diceResult = result,
+                    textViewVisibility = visibility
+                )
+            }
+        }
+
+        playLocalButton.setOnClickListener {
+            diceGameViewModel.apply vm@{
+                onClickPlayButton()
+                val game = diceGame.value.apply game@{
+                    val player: List<Int> = this@game!!.first().apply player@{
+                        val computer: List<Int> = this@game.secondPlayer().apply computer@{
+                            playerOneThrow(
+                                activityMainBinding = binding,
+                                list = this@player,
+                                diceGameViewModel = this@vm
+                            )
+                            playerTwoThrow(
+                                activityMainBinding = binding,
+                                list = this@computer,
+                                diceGameViewModel = this@vm
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        statsButton.setOnClickListener {
+            activity.startActivity(
+                Intent(
+                    activity,
+                    StatsActivity::class.java
+                )
+            )
+        }
+        signinButton.setOnClickListener {
+            activity.startActivity(
+                Intent(
+                    activity,
+                    LoginActivity::class.java
+                )
+            )
+        }
+
     }
 }
 
@@ -189,7 +191,6 @@ fun playerTwoUI(
         list.getDiceImageFromDiceValue(
             diceValue = game.secondPlayer().first()
         )
-
     )
     activityMainBinding.playerTwoMiddleDiceImageId.setImageResource(
         list.getDiceImageFromDiceValue(
