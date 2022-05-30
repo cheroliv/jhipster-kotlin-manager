@@ -7,7 +7,6 @@ import game.ceelo.databinding.ActivityStatsBinding.inflate
 import game.ceelo.inmemory.ceeloService
 import game.ceelo.stats.CeeloAdapter
 
-
 class StatsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
