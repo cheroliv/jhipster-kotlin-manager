@@ -20,15 +20,15 @@ val diceImages: List<Int> by lazy {
     )
 }
 
+@JvmField
+val ceeloModule = module {
+    single<CeeloService> { CeeloServiceInMemory() }
+}
+
 class CeeLoApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        this::class.java.name.apply {
-            Log.d(
-                this,
-                "$this.onCreate()"
-            )
-        }
+        debug(msg = "$this.onCreate()")
         startKoin {
             androidLogger()
             androidContext(this@CeeLoApplication)
@@ -37,7 +37,6 @@ class CeeLoApplication : Application() {
     }
 }
 
-@JvmField
-val ceeloModule = module {
-    single<CeeloService> { CeeloServiceInMemory() }
+private fun CeeLoApplication.debug(msg: String) = this::class.java.name.run {
+    Log.d(this, msg)
 }
