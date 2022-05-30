@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    Greeting(name = "Android")
                 }
             }
         }
@@ -37,7 +37,5 @@ fun Greeting(name: String) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    CeeloTheme {
-        Greeting("Android")
-    }
+    CeeloTheme { Greeting(name = "Android") }
 }

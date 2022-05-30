@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package game.ceelo
 
 import game.ceelo.CeeloDicesHandDomain.compareHands

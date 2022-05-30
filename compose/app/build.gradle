@@ -43,6 +43,12 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+
+    sourceSets {
+        main.java.srcDirs += "src/main/../../../../ceelo/domain/src/main/java/"
+        test.java.srcDirs += "src/test/../../../../ceelo/domain/src/test/java/"
+    }
+
 }
 
 dependencies {
@@ -59,4 +65,16 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+
+
+        // coroutines
+//        implementation(dependencyNotation = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version")
+        // Koin for Kotlin apps
+//        implementation(dependencyNotation = "io.insert-koin:koin-core:${properties["koin_version"]}")
+        testImplementation("org.jetbrains.kotlin:kotlin-test")
+        testImplementation( "org.jetbrains.kotlin:kotlin-test-junit")
+        // Testing koin for Kotlin
+//        testImplementation (dependencyNotation = "io.insert-koin:koin-test:${properties["koin_version"]}")
+        // Koin for JUnit 4
+//        testImplementation(dependencyNotation = "io.insert-koin:koin-test-junit4:${properties["koin_version"]}")
 }
