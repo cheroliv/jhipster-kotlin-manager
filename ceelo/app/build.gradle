@@ -73,10 +73,10 @@ dependencies {
     // Testing Navigation
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
 
-    // kapt "androidx.room:room-compiler:$room_version"
-    // testKapt "androidx.room:room-compiler:$room_version"
-    testImplementation "androidx.room:room-runtime:$room_version"
+//    kapt "androidx.room:room-compiler:$room_version"
     testAnnotationProcessor "androidx.room:room-compiler:$room_version"
+    testImplementation "androidx.room:room-runtime:$room_version"
+
     //
     // optional - Guava support for Room, including Optional and ListenableFuture
     //
