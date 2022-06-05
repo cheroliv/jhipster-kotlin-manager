@@ -110,7 +110,6 @@ object CeeloDicesHandDomain {
         init = { (ONE..SIX).random() }
     )
 
-
     @Suppress("MemberVisibilityCanBePrivate")
     val List<Int>.handCase: Int
         get() = when {
@@ -141,20 +140,6 @@ object CeeloDicesHandDomain {
                 }
             }
         }
-
-    fun List<List<Int>>.compareHands(): List<List<Int>> {
-//        var winner = first()
-//        forEachIndexed { index: Int, hand ->
-//            if (index >= ONE) {
-//                val result = hand.compareThrows(this[index - 1])
-//                if (result == WIN) {
-//                    winner = hand
-//                }
-//            }
-//        }
-//        return winner
-        return listOf(listOf(0, 0))
-    }
 
     @Suppress("MemberVisibilityCanBePrivate")
     fun List<Int>.handsOnSameCase(

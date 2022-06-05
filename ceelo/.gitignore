@@ -26,3 +26,5 @@ servlet/build
 webflux/.gradle
 webflux/node_modules
 webflux/build
+
+gradle/wrapper/gradle-wrapper.jar
