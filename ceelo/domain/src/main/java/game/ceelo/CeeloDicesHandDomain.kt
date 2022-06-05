@@ -146,28 +146,28 @@ object CeeloDicesHandDomain {
         secondPlayerThrow: List<Int>,
         handCase: Int
     ): DiceRunResult = when (handCase) {
-        AUTOMATIC_WIN_456_CASE -> RETHROW
-        AUTOMATIC_LOOSE_123_CASE -> RETHROW
+        AUTOMATIC_WIN_456_CASE -> RERUN
+        AUTOMATIC_LOOSE_123_CASE -> RERUN
         STRAIGHT_234_345_CASE -> when {
-            containsAll(TWO_THREE_FOUR) && secondPlayerThrow.containsAll(TWO_THREE_FOUR) -> RETHROW
-            containsAll(THREE_FOUR_FIVE) && secondPlayerThrow.containsAll(THREE_FOUR_FIVE) -> RETHROW
+            containsAll(TWO_THREE_FOUR) && secondPlayerThrow.containsAll(TWO_THREE_FOUR) -> RERUN
+            containsAll(THREE_FOUR_FIVE) && secondPlayerThrow.containsAll(THREE_FOUR_FIVE) -> RERUN
             containsAll(TWO_THREE_FOUR) && secondPlayerThrow.containsAll(THREE_FOUR_FIVE) -> LOOSE
             else -> WIN
         }
         UNIFORM_TRIPLET_CASE -> when {
             uniformTripletValue > secondPlayerThrow.uniformTripletValue -> WIN
             uniformTripletValue < secondPlayerThrow.uniformTripletValue -> LOOSE
-            else -> RETHROW
+            else -> RERUN
         }
         UNIFORM_DOUBLET_CASE -> when {
             uniformDoubletValue > secondPlayerThrow.uniformDoubletValue -> WIN
             uniformDoubletValue < secondPlayerThrow.uniformDoubletValue -> LOOSE
-            else -> RETHROW
+            else -> RERUN
         }
         else -> when {
             sum() > secondPlayerThrow.sum() -> WIN
             sum() < secondPlayerThrow.sum() -> LOOSE
-            else -> RETHROW
+            else -> RERUN
         }
     }
 }

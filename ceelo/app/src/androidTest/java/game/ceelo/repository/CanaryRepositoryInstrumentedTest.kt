@@ -11,9 +11,8 @@ import kotlin.test.assertEquals
 @RunWith(AndroidJUnit4::class)
 class CanaryRepositoryInstrumentedTest {
     @Test
-    fun canary_repository_test() {
-        // Context of the app under test.
-        val appContext = getInstrumentation().targetContext
-        assertEquals("game.ceelo", appContext.packageName)
-    }
+    fun canary_repository_test() = getInstrumentation()
+        .targetContext
+        .packageName
+        .run { assertEquals("game.ceelo", this) }
 }

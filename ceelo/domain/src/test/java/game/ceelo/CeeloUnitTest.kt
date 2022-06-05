@@ -184,7 +184,7 @@ class CeeloUnitTest {
 
     @Test
     fun `Si le jet contient (4,5,6) et l'autre aussi alors la propriété compareHands renvoi RETHROW`() =
-        assertEquals(RETHROW, FOUR_FIVE_SIX.compareHands(FOUR_FIVE_SIX))
+        assertEquals(RERUN, FOUR_FIVE_SIX.compareHands(FOUR_FIVE_SIX))
 
     @Test
     fun `Si le jet contient (1,2,3) et l'autre (4,5,6) alors la propriété compareHands renvoi LOOSE`() =
@@ -196,7 +196,7 @@ class CeeloUnitTest {
 
     @Test
     fun `Si le jet contient (1,2,3) et l'autre aussi alors la propriété compareHands renvoi RETHROW`() =
-        assertEquals(RETHROW, ONE_TWO_THREE.compareHands(ONE_TWO_THREE))
+        assertEquals(RERUN, ONE_TWO_THREE.compareHands(ONE_TWO_THREE))
 
 
     @Test
@@ -231,12 +231,12 @@ class CeeloUnitTest {
 
     @Test
     fun `Si le jet est un triplet uniforme et l'autre aussi avec la meme face alors la propriété compareHands renvoi RETHROW`() {
-        assertEquals(SIX_SIX_SIX.compareHands(SIX_SIX_SIX), RETHROW)
-        assertEquals(FIVE_FIVE_FIVE.compareHands(FIVE_FIVE_FIVE), RETHROW)
-        assertEquals(FOUR_FOUR_FOUR.compareHands(FOUR_FOUR_FOUR), RETHROW)
-        assertEquals(THREE_THREE_THREE.compareHands(THREE_THREE_THREE), RETHROW)
-        assertEquals(TWO_TWO_TWO.compareHands(TWO_TWO_TWO), RETHROW)
-        assertEquals(ONE_ONE_ONE.compareHands(ONE_ONE_ONE), RETHROW)
+        assertEquals(SIX_SIX_SIX.compareHands(SIX_SIX_SIX), RERUN)
+        assertEquals(FIVE_FIVE_FIVE.compareHands(FIVE_FIVE_FIVE), RERUN)
+        assertEquals(FOUR_FOUR_FOUR.compareHands(FOUR_FOUR_FOUR), RERUN)
+        assertEquals(THREE_THREE_THREE.compareHands(THREE_THREE_THREE), RERUN)
+        assertEquals(TWO_TWO_TWO.compareHands(TWO_TWO_TWO), RERUN)
+        assertEquals(ONE_ONE_ONE.compareHands(ONE_ONE_ONE), RERUN)
     }
 
     //TODO: tester les autres branches de cas pour
@@ -279,7 +279,7 @@ class CeeloUnitTest {
                 if (hands.compareHands(result[index - 1]) == WIN)
                     winnerIndexes[0] = index
                 if (
-                    hands.compareHands(result[index - 1]) == RETHROW
+                    hands.compareHands(result[index - 1]) == RERUN
                     && hands.compareHands(result.first()) == WIN
                 ) winnerIndexes.add(index)
             }

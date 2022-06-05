@@ -4,7 +4,7 @@ import game.ceelo.CeeloDicesHandDomain.compareHands
 import game.ceelo.CeeloGameDomain.firstPlayer
 import game.ceelo.CeeloGameDomain.runDices
 import game.ceelo.CeeloGameDomain.secondPlayer
-import game.ceelo.DiceRunResult.RETHROW
+import game.ceelo.DiceRunResult.RERUN
 import game.ceelo.DiceRunResult.WIN
 
 
@@ -26,7 +26,7 @@ object CeeloPlaygroundDomain {
             )
             if (result == WIN) println("player one : $WIN")
             else println("player two : $WIN")
-        } while (result == RETHROW.apply {
+        } while (result == RERUN.apply {
                 game = launchLocalGame()
             })
     }
