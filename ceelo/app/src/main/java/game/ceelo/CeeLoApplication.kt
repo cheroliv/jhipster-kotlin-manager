@@ -24,7 +24,7 @@ import org.koin.dsl.module
 class CeeLoApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        debug(msg = "$this.onCreate()")
+        Log.d(this::class.java.name, "$this.onCreate()")
         startKoin {
             androidLogger()
             androidContext(this@CeeLoApplication)
@@ -33,17 +33,13 @@ class CeeLoApplication : Application() {
     }
 }
 
-private fun CeeLoApplication.debug(msg: String) = this::class.java.name.run {
-    Log.d(this, msg)
-}
-
 @JvmField
 val ceeloModule = module {
     single<CeeloService> { CeeloServiceInMemory() }
 }
 
-val diceImages: List<Int> by lazy {
-    listOf(
+val diceImages: List<Int>
+    get() = listOf(
         dice_face_one,
         dice_face_two,
         dice_face_three,
@@ -51,28 +47,23 @@ val diceImages: List<Int> by lazy {
         dice_face_five,
         dice_face_six,
     )
-}
 
-fun loadLocalGame(
-    binding: ActivityMainBinding,
+fun ActivityMainBinding.loadLocalGame(
     activity: MainActivity
-): ActivityMainBinding = binding.apply {
+): ActivityMainBinding = apply {
     val diceGameViewModel = ViewModelProvider(activity)
         .get(DiceGameViewModel::class.java)
     diceGameViewModel.diceGame.observe(activity) { game ->
         diceImages.run {
             playerOneUI(
-                activityMainBinding = this@apply,
                 game = game,
-                list = this
+                diceImages = this
             )
             playerTwoUI(
-                activityMainBinding = this@apply,
                 game = game,
-                list = this
+                diceImages = this
             )
         }
-
     }
     //TODO refactor pour avoir un field dans le viewmodel nommé textViewResultPair Pair<result,visibility>
     // on evitera le nested observe
@@ -102,12 +93,10 @@ fun loadLocalGame(
                 val player: List<Int> = this@game!!.first().apply player@{
                     val computer: List<Int> = this@game.secondPlayer().apply computer@{
                         playerOneThrow(
-                            activityMainBinding = binding,
                             list = this@player,
                             diceGameViewModel = this@vm
                         )
                         playerTwoThrow(
-                            activityMainBinding = binding,
                             list = this@computer,
                             diceGameViewModel = this@vm
                         )
@@ -132,115 +121,110 @@ fun loadLocalGame(
             )
         )
     }
-
 }
 
-
-fun playerOneThrow(
-    activityMainBinding: ActivityMainBinding,
+fun ActivityMainBinding.playerOneThrow(
     list: List<Int>,
     diceGameViewModel: DiceGameViewModel
 ) {
-    throwDiceAnimation(
-        diceImage = activityMainBinding.playerOneFirstDiceImageId,
+    runDiceAnimation(
+        diceImage = playerOneFirstDiceImageId,
         diceValue = list.first()
     )
-    throwDiceAnimation(
-        diceImage = activityMainBinding.playerOneMiddleDiceImageId,
+    runDiceAnimation(
+        diceImage = playerOneMiddleDiceImageId,
         diceValue = list.middleDice()
     )
-    throwDiceAnimation(
-        diceImage = activityMainBinding.playerOneLastDiceImageId,
+    runDiceAnimation(
+        diceImage = playerOneLastDiceImageId,
         diceValue = list.last()
     )
     setTextViewResult(
-        textViewResult = activityMainBinding.localPlayerResultText,
+        textViewResult = localPlayerResultText,
         diceResult = diceGameViewModel.playerOneResult.value!!,
         textViewVisibility = diceGameViewModel.resultVisibility.value!!
     )
 }
 
-fun playerTwoThrow(
-    activityMainBinding: ActivityMainBinding,
+fun ActivityMainBinding.playerTwoThrow(
     list: List<Int>,
     diceGameViewModel: DiceGameViewModel
 ) {
-    throwDiceAnimation(
-        diceImage = activityMainBinding.playerTwoFirstDiceImageId,
+    runDiceAnimation(
+        diceImage = playerTwoFirstDiceImageId,
         diceValue = list.first()
     )
-    throwDiceAnimation(
-        diceImage = activityMainBinding.playerTwoMiddleDiceImageId,
+    runDiceAnimation(
+        diceImage = playerTwoMiddleDiceImageId,
         diceValue = list.middleDice()
     )
-    throwDiceAnimation(
-        diceImage = activityMainBinding.playerTwoLastDiceImageId,
+    runDiceAnimation(
+        diceImage = playerTwoLastDiceImageId,
         diceValue = list.last()
     )
     setTextViewResult(
-        textViewResult = activityMainBinding.computerResultText,
+        textViewResult = computerResultText,
         diceResult = diceGameViewModel.playerTwoResult.value!!,
         textViewVisibility = diceGameViewModel.resultVisibility.value!!
     )
 }
 
-fun playerOneUI(
-    activityMainBinding: ActivityMainBinding,
+fun ActivityMainBinding.playerOneUI(
     game: List<List<Int>>,
-    list: List<Int>
+    diceImages: List<Int>
 ) {
-    activityMainBinding.playerOneFirstDiceImageId.setImageResource(
-        list.getDiceImageFromDiceValue(diceValue = game.first().first())
+    playerOneFirstDiceImageId.setImageResource(
+        diceImages.getDiceImageFromDiceValue(diceValue = game.first().first())
     )
-    activityMainBinding.playerOneMiddleDiceImageId.setImageResource(
-        list.getDiceImageFromDiceValue(diceValue = game.first().middleDice())
+    playerOneMiddleDiceImageId.setImageResource(
+        diceImages.getDiceImageFromDiceValue(diceValue = game.first().middleDice())
     )
-    activityMainBinding.playerOneLastDiceImageId.setImageResource(
-        list.getDiceImageFromDiceValue(diceValue = game.first().last())
+    playerOneLastDiceImageId.setImageResource(
+        diceImages.getDiceImageFromDiceValue(diceValue = game.first().last())
     )
 }
 
 
-fun playerTwoUI(
-    activityMainBinding: ActivityMainBinding,
+fun ActivityMainBinding.playerTwoUI(
     game: List<List<Int>>,
-    list: List<Int>
+    diceImages: List<Int>
 ) {
-    activityMainBinding.playerTwoFirstDiceImageId.setImageResource(
-        list.getDiceImageFromDiceValue(
+    playerTwoFirstDiceImageId.setImageResource(
+        diceImages.getDiceImageFromDiceValue(
             diceValue = game.secondPlayer().first()
         )
     )
-    activityMainBinding.playerTwoMiddleDiceImageId.setImageResource(
-        list.getDiceImageFromDiceValue(
+    playerTwoMiddleDiceImageId.setImageResource(
+        diceImages.getDiceImageFromDiceValue(
             diceValue = game.secondPlayer().middleDice()
         )
     )
-    activityMainBinding.playerTwoLastDiceImageId.setImageResource(
-        list.getDiceImageFromDiceValue(
+    playerTwoLastDiceImageId.setImageResource(
+        diceImages.getDiceImageFromDiceValue(
             diceValue = game.secondPlayer().last()
         )
     )
 }
 
-fun throwDiceAnimation(
+fun runDiceAnimation(
     diceImage: ImageView,
-    diceValue: Int
-) = diceImage.apply {
+    diceValue: Int,
+): Unit = diceImage.apply {
     setImageResource(
         diceImages.getDiceImageFromDiceValue(
             diceValue = diceValue
         )
     )
 }.run {
-    startAnimation(RotateAnimation(
-        0f,
-        360f,
-        Animation.RELATIVE_TO_SELF,
-        0.5f,
-        Animation.RELATIVE_TO_SELF,
-        0.5f
-    ).apply { duration = 500 })
+    startAnimation(
+        RotateAnimation(
+            0f,
+            360f,
+            Animation.RELATIVE_TO_SELF,
+            0.5f,
+            Animation.RELATIVE_TO_SELF,
+            0.5f
+        ).apply { duration = 500 })
 }
 
 fun setTextViewResult(

@@ -11,10 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         inflate(layoutInflater).apply {
             setContentView(root)
-            loadLocalGame(
-                binding = this,
-                activity = this@MainActivity
-            )
+            loadLocalGame(activity = this@MainActivity)
         }
     }
 }
