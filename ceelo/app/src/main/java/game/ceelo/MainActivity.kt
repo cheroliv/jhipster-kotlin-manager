@@ -2,6 +2,7 @@ package game.ceelo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import game.ceelo.CeeloController.loadLocalGame
 import game.ceelo.databinding.ActivityMainBinding.inflate
 
 
