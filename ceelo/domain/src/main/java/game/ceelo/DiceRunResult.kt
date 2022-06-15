@@ -1,5 +1,7 @@
 package game.ceelo
 
-enum class DiceRunResult {
-    WIN, LOOSE, RERUN
+sealed class DiceRunResult {
+    object WIN : DiceRunResult()
+    object LOOSE : DiceRunResult()
+    object RERUN : DiceRunResult()
 }

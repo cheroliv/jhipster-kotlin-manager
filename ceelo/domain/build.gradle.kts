@@ -9,7 +9,7 @@ plugins {
 
 dependencies {
     // coroutines
-    implementation(dependencyNotation = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${properties["kotlinx_coroutines_version"]}")
+//    implementation(dependencyNotation = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${properties["kotlinx_coroutines_version"]}")
     // Koin for Kotlin apps
     implementation(dependencyNotation = "io.insert-koin:koin-core:${properties["koin_version"]}")
     testImplementation(dependencyNotation = "org.jetbrains.kotlin:kotlin-test")
