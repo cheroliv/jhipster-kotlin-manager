@@ -87,7 +87,7 @@ dependencies {
     // optional - Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
     // optional - Paging 3 Integration
-    testImplementation "androidx.room:room-paging:2.5.0-alpha01"
+    testImplementation "androidx.room:room-paging:2.5.0-alpha02"
 
     // Lifecycle components
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")

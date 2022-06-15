@@ -17,36 +17,23 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version ("1.6.21") apply (false)
 }
 
-val pathSeparator: String = System.getProperty("file.separator")
-
 tasks.register<Delete>("clean") {
     description = "Delete directory build"
     group = "build"
     delete(rootProject.buildDir)
 }
 
-//tasks.register<DefaulTask>("serve") {
-//    description = "lance le server backend de l'application"
-//    dependsOn("servlet")
-//}
-
-tasks.register<GradleBuild>("servlet") {
-    description = "lance la servlet backend de l'application"
-    buildFile = File("${rootDir.path}${pathSeparator}servlet${pathSeparator}build.gradle")
-    tasks = listOf("bootRun")
-}
-
+/**
+ * groovy dsl version
+ * task serve(type: GradleBuild) {
+ * description = "lance le server backend de l'application"
+ * buildFile = 'backend/build.gradle'
+ * tasks = ['bootRun']
+ * }
+ */
 tasks.register<GradleBuild>("webflux") {
+    val pathSeparator: String = System.getProperty("file.separator")
     description = "lance le webflux backend de l'application"
     buildFile = File("${rootDir.path}${pathSeparator}webflux${pathSeparator}build.gradle")
     tasks = listOf("bootRun")
 }
-
-
-/*
-task serve(type: GradleBuild) {
-    description = "lance le server backend de l'application"
-    //noinspection GrDeprecatedAPIUsage
-    buildFile = 'backend/build.gradle'
-    tasks = ['bootRun']
-} */
