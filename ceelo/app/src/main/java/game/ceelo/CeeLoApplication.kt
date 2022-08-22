@@ -9,6 +9,7 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
 
+
 class CeeLoApplication : Application() {
     override fun onCreate() {
         super.onCreate()
@@ -25,3 +26,4 @@ class CeeLoApplication : Application() {
 val ceeloModule = module {
     single<CeeloService> { CeeloServiceInMemory() }
 }
+

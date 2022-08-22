@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_VARIABLE", "unused")
+
 package game.ceelo
 
 import android.os.Bundle
@@ -10,7 +12,7 @@ class LoginActivity : AppCompatActivity() {
         ActivityLoginBinding.inflate(layoutInflater).apply {
             setContentView(root)
             login.setOnClickListener {
-                @Suppress("UNUSED_VARIABLE") val authService = null
+              val authService = null
                 val authResultIsOk = securityService.login(
                     username.text.toString(),
                     password.text.toString()

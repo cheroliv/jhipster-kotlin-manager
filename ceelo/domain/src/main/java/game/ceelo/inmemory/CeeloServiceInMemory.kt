@@ -12,7 +12,7 @@ val ceeloService: CeeloService by lazy {
 class CeeloServiceInMemory : CeeloService {
     object InMemoryData {
         private val repo: MutableList<List<List<Int>>> by lazy {
-            MutableList(size = 10, init = { mutableListOf(runDices(), runDices()) })
+            MutableList(size = 0, init = { mutableListOf(runDices(), runDices()) })
         }
 
         @JvmStatic

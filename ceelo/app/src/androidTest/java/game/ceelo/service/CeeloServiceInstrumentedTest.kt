@@ -55,11 +55,11 @@ class CeeloServiceInstrumentedTest {
             assertEquals(expected = 2, actual = it.size)
             it.first().run {
                 assertEquals(CEELO_DICE_THROW_SIZE, size)
-                forEach { assert(it in ONE..SIX) }
+                forEach { assert(it in (ONE..SIX)) }
             }
             it.last().run {
                 assertEquals(CEELO_DICE_THROW_SIZE, size)
-                forEach { assert(it in ONE..SIX) }
+                forEach { assert(it in (ONE..SIX)) }
             }
         }
     }

@@ -96,7 +96,7 @@ object CeeloDicesHandDomain {
     fun List<Int>.getDiceImageFromDiceValue(
         diceValue: Int
     ): Int = when (diceValue) {
-        ONE -> first()
+        ONE -> this[ONE - ONE]
         TWO -> this[TWO - ONE]
         THREE -> this[THREE - ONE]
         FOUR -> this[FOUR - ONE]
