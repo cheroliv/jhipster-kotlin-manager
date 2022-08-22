@@ -33,7 +33,7 @@ fun ActivityMainBinding.loadLocalGame(
     val diceGameViewModel = ViewModelProvider(activity).get(DiceGameViewModel::class.java)
     diceGameViewModel.diceGame.observe(activity) { game ->
         diceImages.run {
-            playerOneUI(game, this)
+            playerOneUI(game, this,playersUI.first())
             playerTwoUI(game, this)
         }
     }
@@ -56,7 +56,7 @@ fun ActivityMainBinding.loadLocalGame(
             diceGame.value.apply game@{
                 this@game!!.first().apply player@{
                     this@game.secondPlayer().apply computer@{
-                        playerOneThrow(playersUI.first(), this@player, this@vm)
+                        playerOneThrow(playersUI.first(), this@player, this@vm,resultUI.first())
                         playerTwoThrow(this@computer, this@vm)
                     }
                 }
@@ -77,19 +77,22 @@ fun ActivityMainBinding.loadLocalGame(
 }
 
 fun ActivityMainBinding.playerOneThrow(
-    components: List<ImageView>,
+    playerUI: List<ImageView>,
     list: List<Int>,
-    diceGameViewModel: DiceGameViewModel
-): Unit = mapOf(
-    components.first() to list.first(),
-    components[1] to list.middleDice(),
-    components.last() to list.last()
-).map { runDiceAnimation(it.key, it.value) }.run {
-    setTextViewResult(
-        textViewResult = localPlayerResultText,
-        diceResult = diceGameViewModel.playerOneResult.value!!,
-        textViewVisibility = diceGameViewModel.resultVisibility.value!!
-    )
+    diceGameViewModel: DiceGameViewModel,
+    resultUI: TextView
+): Unit {
+    mapOf(
+        playerUI.first() to list.first(),
+        playerUI[1] to list.middleDice(),
+        playerUI.last() to list.last()
+    ).map { runDiceAnimation(it.key, it.value) }.run {
+        setTextViewResult(
+            textViewResult = resultUI,
+            diceResult = diceGameViewModel.playerOneResult.value!!,
+            textViewVisibility = diceGameViewModel.resultVisibility.value!!
+        )
+    }
 }
 
 
@@ -118,7 +121,8 @@ fun ActivityMainBinding.playerTwoThrow(
 
 fun ActivityMainBinding.playerOneUI(
     game: List<List<Int>>,
-    diceImages: List<Int>
+    diceImages: List<Int>,
+    playerUI: List<ImageView>
 ) {
     playerOneFirstDiceImageId.setImageResource(
         diceImages.getDiceImageFromDiceValue(diceValue = game.first().first())
@@ -129,6 +133,8 @@ fun ActivityMainBinding.playerOneUI(
     playerOneLastDiceImageId.setImageResource(
         diceImages.getDiceImageFromDiceValue(diceValue = game.first().last())
     )
+
+
 }
 
 
