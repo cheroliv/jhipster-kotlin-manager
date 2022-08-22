@@ -7,6 +7,7 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import game.ceelo.CeeloDicesHandDomain.getDiceImageFromDiceValue
 import game.ceelo.CeeloDicesHandDomain.middleDice
@@ -33,7 +34,7 @@ fun ActivityMainBinding.loadLocalGame(
     val diceGameViewModel = ViewModelProvider(activity).get(DiceGameViewModel::class.java)
     diceGameViewModel.diceGame.observe(activity) { game ->
         diceImages.run {
-            playerOneUI(game, this,playersUI.first())
+            playerOneUI(game, this, playersUI.first())
             playerTwoUI(game, this)
         }
     }
@@ -56,7 +57,13 @@ fun ActivityMainBinding.loadLocalGame(
             diceGame.value.apply game@{
                 this@game!!.first().apply player@{
                     this@game.secondPlayer().apply computer@{
-                        playerOneThrow(playersUI.first(), this@player, this@vm,resultUI.first())
+                        playerOneThrow(
+                            playersUI.first(),
+                            this@player,
+                            this@vm,
+                            resultUI.first(),
+                            playerOneResult
+                        )
                         playerTwoThrow(this@computer, this@vm)
                     }
                 }
@@ -80,16 +87,15 @@ fun ActivityMainBinding.playerOneThrow(
     playerUI: List<ImageView>,
     list: List<Int>,
     diceGameViewModel: DiceGameViewModel,
-    resultUI: TextView
+    resultUI: TextView,
+    playerResult: LiveData<DiceRunResult>
 ): Unit {
-    mapOf(
-        playerUI.first() to list.first(),
-        playerUI[1] to list.middleDice(),
-        playerUI.last() to list.last()
-    ).map { runDiceAnimation(it.key, it.value) }.run {
+    playerUI.forEachIndexed { i, view ->
+        runDiceAnimation(view, list[i])
+    }.run {
         setTextViewResult(
             textViewResult = resultUI,
-            diceResult = diceGameViewModel.playerOneResult.value!!,
+            diceResult = playerResult.value!!,
             textViewVisibility = diceGameViewModel.resultVisibility.value!!
         )
     }
