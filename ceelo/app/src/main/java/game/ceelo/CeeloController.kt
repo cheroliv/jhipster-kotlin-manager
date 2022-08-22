@@ -52,24 +52,23 @@ fun ActivityMainBinding.loadLocalGame(
     }
 
     playLocalButton.setOnClickListener {
-        diceGameViewModel.apply vm@{
+        diceGameViewModel.apply {
             onClickPlayButton()
-            diceGame.value.apply game@{
-                this@game!!.first().apply player@{
-                    this@game.secondPlayer().apply computer@{
-                        playerOneThrow(
-                            playersUI.first(),
-                            this@player,
-                            this@vm,
-                            resultUI.first(),
-                            playerOneResult
-                        )
-                        playerTwoThrow(this@computer, this@vm)
+            resultUI.forEachIndexed { i, it ->
+                playerThrow(
+                    playersUI[i],
+                    diceGame.value!![i],
+                    this,
+                    it,
+                    when (i) {
+                        0 -> playerOneResult
+                        else -> playerTwoResult
                     }
-                }
+                )
             }
         }
     }
+
     statsButton.setOnClickListener {
         activity.startActivity(Intent(activity, StatsActivity::class.java))
     }
@@ -83,47 +82,22 @@ fun ActivityMainBinding.loadLocalGame(
     }
 }
 
-fun ActivityMainBinding.playerOneThrow(
+fun ActivityMainBinding.playerThrow(
     playerUI: List<ImageView>,
     list: List<Int>,
     diceGameViewModel: DiceGameViewModel,
     resultUI: TextView,
     playerResult: LiveData<DiceRunResult>
-): Unit {
-    playerUI.forEachIndexed { i, view ->
-        runDiceAnimation(view, list[i])
-    }.run {
-        setTextViewResult(
-            textViewResult = resultUI,
-            diceResult = playerResult.value!!,
-            textViewVisibility = diceGameViewModel.resultVisibility.value!!
-        )
-    }
-}
-
-
-fun ActivityMainBinding.playerTwoThrow(
-    list: List<Int>,
-    diceGameViewModel: DiceGameViewModel
-) {
-    runDiceAnimation(
-        diceImage = playerTwoFirstDiceImageId,
-        diceValue = list.first()
-    )
-    runDiceAnimation(
-        diceImage = playerTwoMiddleDiceImageId,
-        diceValue = list.middleDice()
-    )
-    runDiceAnimation(
-        diceImage = playerTwoLastDiceImageId,
-        diceValue = list.last()
-    )
+) = playerUI.forEachIndexed { i, view ->
+    runDiceAnimation(view, list[i])
+}.apply {
     setTextViewResult(
-        textViewResult = computerResultText,
-        diceResult = diceGameViewModel.playerTwoResult.value!!,
+        textViewResult = resultUI,
+        diceResult = playerResult.value!!,
         textViewVisibility = diceGameViewModel.resultVisibility.value!!
     )
 }
+
 
 fun ActivityMainBinding.playerOneUI(
     game: List<List<Int>>,
@@ -139,8 +113,6 @@ fun ActivityMainBinding.playerOneUI(
     playerOneLastDiceImageId.setImageResource(
         diceImages.getDiceImageFromDiceValue(diceValue = game.first().last())
     )
-
-
 }
 
 
