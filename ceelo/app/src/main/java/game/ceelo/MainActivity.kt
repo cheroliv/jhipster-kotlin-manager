@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         inflate(layoutInflater).apply {
             setContentView(root)
             loadLocalGame(
-                activity = this@MainActivity,
+                mainActivity = this@MainActivity,
                 playersUI = listOf(
                     listOf(
                         playerOneFirstDiceImageId,

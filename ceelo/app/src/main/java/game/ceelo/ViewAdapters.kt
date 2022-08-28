@@ -1,4 +1,4 @@
-package game.ceelo.stats
+package game.ceelo
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater.from
@@ -10,16 +10,13 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import game.ceelo.CeeloDicesHandDomain.compareHands
 import game.ceelo.CeeloGameDomain.firstPlayer
 import game.ceelo.CeeloGameDomain.secondPlayer
-import game.ceelo.GAME_TYPE
-import game.ceelo.PLAYER_ONE_NAME
-import game.ceelo.PLAYER_TWO_NAME
 
-import game.ceelo.R
 import game.ceelo.R.layout.simple_game_row
-import game.ceelo.stats.CeeloAdapter.CeeloViewHolder
+import game.ceelo.CeeloAdapter.CeeloViewHolder
 
-class CeeloAdapter(var games: List<List<List<Int>>>) : Adapter<CeeloViewHolder>() {
-
+class CeeloAdapter(
+    var games: List<List<List<Int>>>
+) : Adapter<CeeloViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

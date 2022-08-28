@@ -1,3 +1,5 @@
+@file:Suppress("RedundantOverride")
+
 package game.ceelo
 
 import android.os.Bundle

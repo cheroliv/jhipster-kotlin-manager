@@ -1,4 +1,4 @@
-package game.ceelo.repository
+package game.ceelo
 
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
