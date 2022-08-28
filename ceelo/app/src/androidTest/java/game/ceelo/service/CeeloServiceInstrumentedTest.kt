@@ -7,7 +7,7 @@ import game.ceelo.CeeloPlaygroundDomain.launchLocalGame
 import game.ceelo.CeeloService
 import game.ceelo.ONE
 import game.ceelo.SIX
-import game.ceelo.inmemory.CeeloServiceInMemory
+import game.ceelo.CeeloServiceInMemory
 import org.junit.runner.RunWith
 import kotlin.test.BeforeTest
 import kotlin.test.Test

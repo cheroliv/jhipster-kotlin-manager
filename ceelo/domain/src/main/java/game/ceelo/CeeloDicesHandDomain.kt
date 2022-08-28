@@ -1,3 +1,5 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package game.ceelo
 
 import game.ceelo.DiceRunResult.*
@@ -16,13 +18,11 @@ object CeeloDicesHandDomain {
     val List<Int>.is123: Boolean get() = containsAll(ONE_TWO_THREE)
 
 
-    @Suppress("MemberVisibilityCanBePrivate")
     fun List<Int>.firstDice(): Int = if (isEmpty())
         throw NoSuchElementException("no first dice found in hand.")
     else first()
 
 
-    @Suppress("MemberVisibilityCanBePrivate")
     fun List<Int>.lastDice(): Int = if (isEmpty())
         throw NoSuchElementException("no last dice found in hand.")
     else last()
@@ -110,7 +110,6 @@ object CeeloDicesHandDomain {
         init = { (ONE..SIX).random() }
     )
 
-    @Suppress("MemberVisibilityCanBePrivate")
     val List<Int>.handCase: Int
         get() = when {
             is456 -> AUTOMATIC_WIN_456_CASE
@@ -141,7 +140,6 @@ object CeeloDicesHandDomain {
             }
         }
 
-    @Suppress("MemberVisibilityCanBePrivate")
     fun List<Int>.handsOnSameCase(
         secondPlayerThrow: List<Int>,
         handCase: Int

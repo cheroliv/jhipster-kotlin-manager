@@ -12,7 +12,7 @@ import game.ceelo.CeeloGameDomain.runDices
 import game.ceelo.CeeloGameDomain.secondPlayer
 import game.ceelo.DiceRunResult
 import game.ceelo.ONE
-import game.ceelo.inmemory.ceeloService
+import game.ceelo.ceeloService
 
 
 //TODO refactor pour avoir un field dans le viewmodel nommé textViewResultPair Pair<result,visibility>

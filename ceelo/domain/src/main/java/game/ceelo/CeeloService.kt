@@ -1,7 +1,9 @@
 @file:Suppress("ObjectPropertyName", "MemberVisibilityCanBePrivate")
 
 package game.ceelo
-
+import game.ceelo.CeeloGameDomain.runDices
+import game.ceelo.CeeloServiceInMemory.InMemoryData.addGame
+import game.ceelo.CeeloServiceInMemory.InMemoryData.getAllGames
 /*
 
 RULES
@@ -30,10 +32,39 @@ If Banker gets 4,5,6 then banker will be able to take Cee Lo bucks from the bank
 If player gets 4,5,6 then player gets the bank along with all Cee Lo bucks. (If two player gets 4,5,6 in the same round then no change. Bank remains with the same person). And new round will start from step 4.
 If banker lost all his money which is in the bank then game will start from step 2.
  */
-interface CeeloService {
+val ceeloService: CeeloService by lazy {
+    CeeloServiceInMemory()
+}
 
+interface CeeloService {
     fun allGames(): List<List<List<Int>>>
     fun saveGame(newGame: List<List<Int>>)
     fun connect()
     fun subscribe()
+}
+
+class CeeloServiceInMemory : CeeloService {
+    object InMemoryData {
+        private val repo: MutableList<List<List<Int>>> by lazy {
+            MutableList(size = 0, init = { mutableListOf(runDices(), runDices()) })
+        }
+
+        @JvmStatic
+        fun getAllGames(): List<List<List<Int>>> = repo
+
+        @JvmStatic
+        fun addGame(game: List<List<Int>>) {
+            repo.add(game)
+        }
+    }
+
+    override fun allGames(): List<List<List<Int>>> = getAllGames()
+    override fun saveGame(newGame: List<List<Int>>) = addGame(newGame)
+    override fun connect() {
+        TODO("Not yet implemented")
+    }
+
+    override fun subscribe() {
+        TODO("Not yet implemented")
+    }
 }
