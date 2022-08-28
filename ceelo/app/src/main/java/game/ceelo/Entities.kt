@@ -2,9 +2,9 @@ package game.ceelo
 
 import java.util.*
 
-class LocalGame
+class LocalGameEntity
 
-data class DicesRun(
+data class DicesRunEntity(
     val diceThrowId: Long,
     val gameId: Long,
     val playerId: Long,
@@ -13,7 +13,7 @@ data class DicesRun(
     val lastDice: Int
 )
 
-data class Game(
+data class GameEntity(
     val gameId: Long,
     val winnerPlayerId: Long,
     val date: Date,

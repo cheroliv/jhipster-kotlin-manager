@@ -1,3 +1,7 @@
+@file:Suppress(
+    "NonAsciiCharacters",
+    "TestFunctionName", "SpellCheckingInspection"
+)
 package game.ceelo
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -9,10 +13,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 
-@Suppress(
-    "NonAsciiCharacters",
-    "TestFunctionName"
-)
+
 @RunWith(AndroidJUnit4::class)
 class CeeloServiceInstrumentedTest {
 
