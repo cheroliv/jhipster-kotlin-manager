@@ -62,6 +62,8 @@ dependencies {
     androidTestImplementation("org.jetbrains.kotlin:kotlin-test")
     androidTestImplementation("org.jetbrains.kotlin:kotlin-test-junit")
     androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$mockito_kotlin_version"
+    androidTestImplementation "org.mockito.kotlin:mockito-kotlin:$mockito_kotlin_version"
 
     // Retrofit
     testImplementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -69,6 +71,7 @@ dependencies {
 
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version"
+    //noinspection GradleDependency
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_version"
 
     // Kotlin
@@ -80,14 +83,15 @@ dependencies {
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
 
     kapt "androidx.room:room-compiler:$room_version"
-//    testAnnotationProcessor "androidx.room:room-compiler:$room_version"
+    testAnnotationProcessor "androidx.room:room-compiler:$room_version"
+    //noinspection GradleDependency
     testImplementation "androidx.room:room-runtime:$room_version"
     // optional - Guava support for Room, including Optional and ListenableFuture
     testImplementation "androidx.room:room-guava:$room_version"
     // optional - Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
     // optional - Paging 3 Integration
-    testImplementation "androidx.room:room-paging:2.5.0-alpha02"
+    testImplementation "androidx.room:room-paging:2.5.0-alpha03"
 
     // Lifecycle components
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
@@ -95,6 +99,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-common-java8:2.5.1")
 
     // Kotlin components
+    //noinspection GradleDependency
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version")
 
     // UI
