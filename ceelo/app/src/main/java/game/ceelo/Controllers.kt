@@ -20,8 +20,8 @@ fun ActivityMainBinding.loadLocalGame(
         .get(DiceGameViewModel::class.java)
 
     diceGameViewModel.diceGame.observe(mainActivity) { game ->
-        playersUI.forEachIndexed { index, it ->
-            playerUI(game[index], diceImages, it)
+        playersUI.mapIndexed { i, it ->
+            playerUI(game[i], diceImages, it)
         }
     }
 
@@ -29,18 +29,14 @@ fun ActivityMainBinding.loadLocalGame(
         diceGameViewModel
             .resultPairList
             .observe(mainActivity) { result ->
-                setTextViewResult(
-                    it,
-                    result[i].first,
-                    result[i].second
-                )
+                setTextViewResult(it, result[i].first, result[i].second)
             }
     }
 
     playLocalButton.setOnClickListener {
         diceGameViewModel.apply {
             onClickPlayButton()
-            resultUI.forEachIndexed { i, it ->
+            resultUI.mapIndexed { i, it ->
                 playerThrow(
                     playersUI[i],
                     diceGame.value!![i],
@@ -56,21 +52,11 @@ fun ActivityMainBinding.loadLocalGame(
     }
 
     statsButton.setOnClickListener {
-        mainActivity.startActivity(
-            Intent(
-                mainActivity,
-                StatsActivity::class.java
-            )
-        )
+        mainActivity.startActivity(Intent(mainActivity, StatsActivity::class.java))
     }
 
     signinButton.setOnClickListener {
-        mainActivity.startActivity(
-            Intent(
-                mainActivity,
-                LoginActivity::class.java
-            )
-        )
+        mainActivity.startActivity(Intent(mainActivity, LoginActivity::class.java))
     }
 }
 
@@ -94,9 +80,9 @@ fun playerThrow(
     runDiceAnimation(view, list[i])
 }.run {
     setTextViewResult(
-        textViewResult = resultUI,
-        diceResult = playerResult,
-        textViewVisibility = diceGameViewModel.resultVisibility.value!!
+        resultUI,
+        playerResult,
+        diceGameViewModel.resultVisibility.value!!
     )
 }
 
@@ -116,15 +102,14 @@ fun runDiceAnimation(
 ): Unit = diceImage.apply {
     setImageResource(diceImages.getDiceImageFromDiceValue(diceValue = diceValue))
 }.run {
-    startAnimation(
-        RotateAnimation(
-            0f,
-            360f,
-            Animation.RELATIVE_TO_SELF,
-            0.5f,
-            Animation.RELATIVE_TO_SELF,
-            0.5f
-        ).apply { duration = 500 })
+    startAnimation(RotateAnimation(
+        0f,
+        360f,
+        Animation.RELATIVE_TO_SELF,
+        0.5f,
+        Animation.RELATIVE_TO_SELF,
+        0.5f
+    ).apply { duration = 500 })
 }
 
 fun setTextViewResult(

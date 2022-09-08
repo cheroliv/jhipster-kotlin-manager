@@ -1,18 +1,16 @@
 package game.ceelo
 
 import android.annotation.SuppressLint
-import android.view.LayoutInflater.from
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import game.ceelo.CeeloAdapter.CeeloViewHolder
 import game.ceelo.CeeloDicesHandDomain.compareHands
 import game.ceelo.CeeloGameDomain.firstPlayer
 import game.ceelo.CeeloGameDomain.secondPlayer
-
-import game.ceelo.R.layout.simple_game_row
-import game.ceelo.CeeloAdapter.CeeloViewHolder
 
 class CeeloAdapter(
     var games: List<List<List<Int>>>
@@ -22,8 +20,8 @@ class CeeloAdapter(
         parent: ViewGroup,
         viewType: Int
     ): CeeloViewHolder = CeeloViewHolder(
-        from(parent.context).inflate(
-            simple_game_row,
+        LayoutInflater.from(parent.context).inflate(
+            R.layout.simple_game_row,
             parent,
             false
         )
@@ -33,20 +31,16 @@ class CeeloAdapter(
     override fun onBindViewHolder(
         holder: CeeloViewHolder,
         position: Int
-    ) {
-        games[position].apply {
-            holder.gameIdText.text = (position + 1).toString()
-            holder.player_one_name_text.text = PLAYER_ONE_NAME
-            holder.player_one_dices_throw_text.text = firstPlayer().toString()
-            holder.player_one_result_text.text = firstPlayer()
-                .compareHands(secondPlayerRun = secondPlayer()).toString()
-            holder.player_one_game_type_text.text = GAME_TYPE
-            holder.player_two_name_text.text = PLAYER_TWO_NAME
-            holder.player_two_dices_throw_text.text = secondPlayer().toString()
-            holder.player_two_result_text.text = secondPlayer()
-                .compareHands(secondPlayerRun = firstPlayer()).toString()
-            holder.player_two_game_type_text.text = GAME_TYPE
-        }
+    ) = games[position].run {
+        holder.gameIdText.text = (position + 1).toString()
+        holder.player_one_name_text.text = PLAYER_ONE_NAME
+        holder.player_one_dices_throw_text.text = firstPlayer().toString()
+        holder.player_one_result_text.text = firstPlayer().compareHands(secondPlayer()).toString()
+        holder.player_one_game_type_text.text = GAME_TYPE
+        holder.player_two_name_text.text = PLAYER_TWO_NAME
+        holder.player_two_dices_throw_text.text = secondPlayer().toString()
+        holder.player_two_result_text.text = secondPlayer().compareHands(firstPlayer()).toString()
+        holder.player_two_game_type_text.text = GAME_TYPE
     }
 
     override fun getItemCount(): Int = games.size
