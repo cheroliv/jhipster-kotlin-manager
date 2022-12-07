@@ -7,6 +7,9 @@ import game.ceelo.databinding.ActivityStatsBinding.inflate
 
 class StatsActivity : AppCompatActivity() {
 
+//    private val ceeloService: CeeloService by inject()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inflate(layoutInflater).apply {

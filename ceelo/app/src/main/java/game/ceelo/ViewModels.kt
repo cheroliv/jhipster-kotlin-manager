@@ -11,10 +11,9 @@ import game.ceelo.CeeloGameDomain.runDices
 import game.ceelo.CeeloGameDomain.secondPlayer
 import game.ceelo.DiceRunResult.*
 
-
 //TODO refactor pour avoir un field dans le viewmodel nommé textViewResultPair Pair<result,visibility>
 // on evitera le nested observe
-class DiceGameViewModel(application: Application) : AndroidViewModel(application) {
+class DiceGameViewModel(application: Application) : AndroidViewModel(application){
     //class DiceGameViewModel : ViewModel() {
 
     private val _resultPair: MutableLiveData<List<Pair<DiceRunResult, Int>>> = MutableLiveData()

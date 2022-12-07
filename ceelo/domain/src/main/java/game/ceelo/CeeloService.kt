@@ -32,9 +32,7 @@ If Banker gets 4,5,6 then banker will be able to take Cee Lo bucks from the bank
 If player gets 4,5,6 then player gets the bank along with all Cee Lo bucks. (If two player gets 4,5,6 in the same round then no change. Bank remains with the same person). And new round will start from step 4.
 If banker lost all his money which is in the bank then game will start from step 2.
  */
-val ceeloService: CeeloService by lazy {
-    CeeloServiceInMemory()
-}
+
 
 interface CeeloService {
     fun allGames(): List<List<List<Int>>>
