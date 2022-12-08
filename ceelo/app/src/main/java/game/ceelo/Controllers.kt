@@ -13,12 +13,13 @@ import game.ceelo.databinding.ActivityMainBinding
 
 fun ActivityMainBinding.loadLocalGame(
     mainActivity: MainActivity,
-    diceGameViewModel: DiceGameViewModel,
+    diceGameViewModel: DiceGameViewModel?,
+    gameViewModel: GameViewModel?,
     playersUI: List<List<ImageView>>,
     resultUI: List<TextView>
 ): ActivityMainBinding = apply {
 
-    diceGameViewModel.diceGame.observe(mainActivity) { game ->
+    diceGameViewModel?.diceGame?.observe(mainActivity) { game ->
         playersUI.mapIndexed { i, it ->
             playerUI(game[i], diceImages, it)
         }
@@ -26,14 +27,14 @@ fun ActivityMainBinding.loadLocalGame(
 
     resultUI.mapIndexed { i, it ->
         diceGameViewModel
-            .resultPairList
-            .observe(mainActivity) { result ->
+            ?.resultPairList
+            ?.observe(mainActivity) { result ->
                 setTextViewResult(it, result[i].first, result[i].second)
             }
     }
 
     playLocalButton.setOnClickListener {
-        diceGameViewModel.apply {
+        diceGameViewModel?.apply {
             onClickPlayButton()
             resultUI.mapIndexed { i, it ->
                 playerThrow(

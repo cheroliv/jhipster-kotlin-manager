@@ -8,7 +8,7 @@ import game.ceelo.databinding.ActivityStatsBinding.inflate
 class StatsActivity : AppCompatActivity() {
 
 //    private val ceeloService: CeeloService by inject()
-private val ceeloService: CeeloService by lazy { ceeloServiceInMem }
+private val ceeloService: CeeloService by lazy { ceeloServiceInMemory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

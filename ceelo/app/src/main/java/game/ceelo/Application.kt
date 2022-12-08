@@ -1,18 +1,20 @@
 package game.ceelo
 
 import android.app.Application
+import androidx.lifecycle.ViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
+internal val ceeloServiceInMemory: CeeloService by lazy {
+    CeeloServiceInMemory()
+}
 
 val ceeloModule = module {
     single<CeeloService> { CeeloServiceInMemory() }
-}
-
-val ceeloServiceInMem: CeeloService by lazy {
-    CeeloServiceInMemory()
+    viewModel{GameViewModel(get())}
 }
 
 class CeeLoApplication : Application() {
