@@ -17,13 +17,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         inflate(layoutInflater).apply {
             setContentView(root)
-//            gameViewModel=this@MainActivity.application.get<KoinContext>().get().get()
             loadLocalGame(
                 mainActivity = this@MainActivity,
-//                null,
                 ViewModelProvider(this@MainActivity)[DiceGameViewModel::class.java],
-//                gameViewModel ,
-                null,
                 playersUI = listOf(
                     listOf(
                         playerOneFirstDiceImageId,

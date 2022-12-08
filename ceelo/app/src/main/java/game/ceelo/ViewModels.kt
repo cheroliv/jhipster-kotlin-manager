@@ -12,7 +12,9 @@ import game.ceelo.CeeloGameDomain.runDices
 import game.ceelo.CeeloGameDomain.secondPlayer
 import game.ceelo.DiceRunResult.*
 
-class GameViewModel(val ceeloService: CeeloService): ViewModel()
+class GameViewModel(val ceeloService: CeeloService) : ViewModel() {
+    fun allGames() = ceeloService.allGames()
+}
 
 class DiceGameViewModel(application: Application) : AndroidViewModel(application) {
     private val ceeloService: CeeloService by lazy { ceeloServiceInMemory }
