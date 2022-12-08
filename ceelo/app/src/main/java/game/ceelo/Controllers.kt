@@ -13,11 +13,10 @@ import game.ceelo.databinding.ActivityMainBinding
 
 fun ActivityMainBinding.loadLocalGame(
     mainActivity: MainActivity,
+    diceGameViewModel: DiceGameViewModel,
     playersUI: List<List<ImageView>>,
     resultUI: List<TextView>
 ): ActivityMainBinding = apply {
-    val diceGameViewModel = ViewModelProvider(mainActivity)
-        .get(DiceGameViewModel::class.java)
 
     diceGameViewModel.diceGame.observe(mainActivity) { game ->
         playersUI.mapIndexed { i, it ->

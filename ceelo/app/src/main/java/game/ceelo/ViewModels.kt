@@ -15,6 +15,7 @@ import game.ceelo.DiceRunResult.*
 // on evitera le nested observe
 class DiceGameViewModel(application: Application) : AndroidViewModel(application){
     //class DiceGameViewModel : ViewModel() {
+    private val ceeloService: CeeloService by lazy { ceeloServiceInMem }
 
     private val _resultPair: MutableLiveData<List<Pair<DiceRunResult, Int>>> = MutableLiveData()
     val resultPairList: LiveData<List<Pair<DiceRunResult, Int>>> = _resultPair
@@ -40,6 +41,8 @@ class DiceGameViewModel(application: Application) : AndroidViewModel(application
     val greeting: LiveData<String> = _greeting
 
     fun onClickPlayButton() {
+
+
         _diceGame.value = listOf(runDices(), runDices())
 
         ceeloService.saveGame(_diceGame.value!!)

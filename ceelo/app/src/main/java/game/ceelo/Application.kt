@@ -7,11 +7,11 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
 
-@JvmField
 val ceeloModule = module {
     single<CeeloService> { CeeloServiceInMemory() }
 }
-val ceeloService: CeeloService by lazy {
+
+val ceeloServiceInMem: CeeloService by lazy {
     CeeloServiceInMemory()
 }
 

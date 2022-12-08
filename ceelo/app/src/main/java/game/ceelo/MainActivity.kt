@@ -2,6 +2,7 @@ package game.ceelo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import game.ceelo.databinding.ActivityMainBinding.inflate
 
 
@@ -13,6 +14,7 @@ class MainActivity : AppCompatActivity() {
             setContentView(root)
             loadLocalGame(
                 mainActivity = this@MainActivity,
+                ViewModelProvider(this@MainActivity)[DiceGameViewModel::class.java],
                 playersUI = listOf(
                     listOf(
                         playerOneFirstDiceImageId,
