@@ -3,17 +3,16 @@ package game.ceelo
 import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
-import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.context.startKoin
+import org.koin.core.module.dsl.bind
+import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
-internal val ceeloServiceInMemory: CeeloService by lazy {
-    CeeloServiceInMemory()
-}
 
 val ceeloModule = module {
-    single<CeeloService> { CeeloServiceInMemory() }
-    viewModel{GameViewModel(get())}
+    singleOf(::CeeloServiceInMemory) { bind<CeeloService>() }
+    viewModelOf(::DiceGameViewModel)
 }
 
 class CeeLoApplication : Application() {

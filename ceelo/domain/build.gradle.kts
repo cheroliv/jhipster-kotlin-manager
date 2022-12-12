@@ -4,7 +4,6 @@ import org.gradle.api.JavaVersion.VERSION_1_8
 plugins {
     kotlin(module = "jvm")
     id("java-library")
-
 }
 
 dependencies {

@@ -1,9 +1,9 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package game.ceelo
 
-import android.app.Application
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,13 +12,7 @@ import game.ceelo.CeeloGameDomain.runDices
 import game.ceelo.CeeloGameDomain.secondPlayer
 import game.ceelo.DiceRunResult.*
 
-class GameViewModel(val ceeloService: CeeloService) : ViewModel() {
-    fun allGames() = ceeloService.allGames()
-}
-
-class DiceGameViewModel(application: Application) : AndroidViewModel(application) {
-    private val ceeloService: CeeloService by lazy { ceeloServiceInMemory }
-
+class DiceGameViewModel(val ceeloService: CeeloService) : ViewModel() {
     private val _resultPair: MutableLiveData<List<Pair<DiceRunResult, Int>>> = MutableLiveData()
     val resultPairList: LiveData<List<Pair<DiceRunResult, Int>>> = _resultPair
 

@@ -2,14 +2,11 @@ package game.ceelo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import game.ceelo.databinding.ActivityMainBinding.inflate
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 
 class MainActivity : AppCompatActivity() {
-
-//    val gameViewModel: GameViewModel by org.koin.androidx.viewmodel.ext.android.viewModel()
-//lateinit var gameViewModel:GameViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +14,7 @@ class MainActivity : AppCompatActivity() {
             setContentView(root)
             loadLocalGame(
                 mainActivity = this@MainActivity,
-                ViewModelProvider(this@MainActivity)[DiceGameViewModel::class.java],
+                getViewModel(),
                 playersUI = listOf(
                     listOf(
                         playerOneFirstDiceImageId,
