@@ -1,6 +1,7 @@
 package game.ceelo
 
 import java.util.*
+import kotlin.collections.List
 
 class LocalGameEntity
 
@@ -14,11 +15,12 @@ data class DicesRunEntity(
 )
 
 data class GameEntity(
-    val gameId: Long,
-    val winnerPlayerId: Long,
+    val gameId: UUID,
+    val winnerPlayerId: UUID,
     val date: Date,
     val isDraw: Boolean,
     val isOffLineGame: Boolean,
+    val playersIds: Set<UUID>
 )
 
 

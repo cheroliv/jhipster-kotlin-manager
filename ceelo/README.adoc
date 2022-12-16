@@ -126,18 +126,7 @@ Si java n'est pas installé, installons le
 [source,bash]
 ----
 curl -s "https://get.sdkman.io" | bash
-sdk i java 17.0.2-oracle
-----
-
-nvm node.js, npm, jhisper et khipster
-[source,bash]
-----
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-nvm install node
-nvm install 14.15.0
-nvm use 14.15.0
-npm install -g generator-jhipster
-npm install -g generator-jhipster-kotlin
+sdk i java 17.0.5-tem
 ----
 
 === Executer le domain metier
@@ -157,7 +146,7 @@ le rapport de test est ici : domain/build/reports/tests/test/index.html
 
 === Executer le backend, depuis le projet parent
 Le backend est un projet independant du multibuild project, +
-mais lançable depuis une tache du projet racine.
+mais executable depuis une tache du projet racine.
 [source,bash]
 ----
 ./gradlew serve
@@ -169,16 +158,9 @@ Si le lancement du back end echoue tapper:
 ./gradlew --stop
 ----
 
-==== Deployer sur heroku
-installer heroku client
-[source,bash]
-----
-sudo snap install heroku --classic
-heroku login
-----
-(TODO : pas fini!) +
+==== Deployer l'API sur GCloud (TODO : pas fini!)
 
-=== Déployer son app mobile sur playstore (TODO)
+=== Déployement continu sur playstore
 
 === Se connecter au back end
 ----
