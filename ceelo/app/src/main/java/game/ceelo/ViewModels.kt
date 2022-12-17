@@ -1,4 +1,7 @@
-@file:Suppress("MemberVisibilityCanBePrivate")
+@file:Suppress(
+    "MemberVisibilityCanBePrivate",
+    "unused"
+)
 
 package game.ceelo
 
@@ -7,15 +10,15 @@ import android.view.View.VISIBLE
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import game.ceelo.CeeloConstant.ONE
-import game.ceelo.CeeloHand.compareHands
-import game.ceelo.CeeloGame.runDices
-import game.ceelo.CeeloGame.secondPlayer
-import game.ceelo.CeeloResult.*
+import game.ceelo.Constant.ONE
+import game.ceelo.Hand.compareHands
+import game.ceelo.Game.runDices
+import game.ceelo.Game.secondPlayer
+import game.ceelo.GameResult.*
 
-class DiceGameViewModel(val ceeloService: CeeloService) : ViewModel() {
-    private val _resultPair: MutableLiveData<List<Pair<CeeloResult, Int>>> = MutableLiveData()
-    val resultPairList: LiveData<List<Pair<CeeloResult, Int>>> = _resultPair
+class DiceGameViewModel(val gameService: GameService) : ViewModel() {
+    private val _resultPair: MutableLiveData<List<Pair<GameResult, Int>>> = MutableLiveData()
+    val resultPairList: LiveData<List<Pair<GameResult, Int>>> = _resultPair
 
     private val _resultVisibility: MutableLiveData<Int> = MutableLiveData()
     val resultVisibility: LiveData<Int> = _resultVisibility
@@ -37,10 +40,10 @@ class DiceGameViewModel(val ceeloService: CeeloService) : ViewModel() {
         //TODO: ici pour utiliser le service room
         _diceGame.value = listOf(runDices(), runDices())
 
-        ceeloService.saveGame(_diceGame.value!!)
+        gameService.saveGame(_diceGame.value!!)
 
         _resultVisibility.value = VISIBLE
-        _games.value = ceeloService.allGames()
+        _games.value = gameService.allGames()
 
         val resultPlayer = _diceGame.value!!.first()
             .compareHands(_diceGame.value!!.secondPlayer())

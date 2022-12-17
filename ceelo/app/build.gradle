@@ -2,12 +2,12 @@ plugins {
     id "com.android.application"
     id "org.jetbrains.kotlin.android"
     id "androidx.navigation.safeargs"
-    id 'kotlin-kapt'
+    id "kotlin-kapt"
 //    id("com.github.triplet.play") version ("3.7.0")
 }
 
 android {
-    namespace 'game.ceelo'
+    namespace "game.ceelo"
     compileSdk 33
 
     defaultConfig {
@@ -32,13 +32,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles(
-                    getDefaultProguardFile('proguard-android-optimize.txt'),
-                    'proguard-rules.pro')
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro")
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility (JavaVersion.VERSION_1_8)
+        targetCompatibility (JavaVersion.VERSION_1_8)
     }
 
     kotlinOptions {
@@ -48,22 +48,22 @@ android {
         viewBinding = true
     }
     packagingOptions {
-        exclude 'META-INF/atomicfu.kotlin_module'
+        exclude ("META-INF/atomicfu.kotlin_module")
     }
 }
 
 dependencies {
 
-    implementation project(path: ":domain")
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation "androidx.appcompat:appcompat:$app_compat_version"
-    implementation "com.google.android.material:material:$material_version"
-    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+    implementation( project(path: ":domain"))
+    implementation ("androidx.core:core-ktx:1.9.0")
+    implementation ("androidx.appcompat:appcompat:$app_compat_version")
+    implementation ("com.google.android.material:material:$material_version")
+    implementation ("androidx.constraintlayout:constraintlayout:$constraint_layout_version")
     androidTestImplementation("org.jetbrains.kotlin:kotlin-test")
     androidTestImplementation("org.jetbrains.kotlin:kotlin-test-junit")
-    androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
-    testImplementation "org.mockito.kotlin:mockito-kotlin:$mockito_kotlin_version"
-    androidTestImplementation "org.mockito.kotlin:mockito-kotlin:$mockito_kotlin_version"
+    androidTestImplementation ("androidx.test.ext:junit:$androidx_junit_version")
+    testImplementation( "org.mockito.kotlin:mockito-kotlin:$mockito_kotlin_version")
+    androidTestImplementation( "org.mockito.kotlin:mockito-kotlin:$mockito_kotlin_version")
 
     // Retrofit
     testImplementation "com.squareup.retrofit2:retrofit:$retrofit_version"

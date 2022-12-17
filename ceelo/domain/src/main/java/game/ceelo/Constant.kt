@@ -1,6 +1,8 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package game.ceelo
 
-object CeeloConstant{
+object Constant{
     const val PLAYER_ONE_NAME = "Player"
     const val PLAYER_TWO_NAME = "Computer"
     const val GAME_TYPE = "LOCAL"

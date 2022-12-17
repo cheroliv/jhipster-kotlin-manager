@@ -2,48 +2,46 @@
 
 package game.ceelo
 
-import game.ceelo.CeeloConstant.AUTOMATIC_LOOSE_123_CASE
-import game.ceelo.CeeloConstant.AUTOMATIC_WIN_456_CASE
-import game.ceelo.CeeloConstant.CEELO_DICE_THROW_SIZE
-import game.ceelo.CeeloConstant.FIVE
-import game.ceelo.CeeloConstant.FIVE_FIVE_FIVE
-import game.ceelo.CeeloConstant.FOUR
-import game.ceelo.CeeloConstant.FOUR_FIVE_SIX
-import game.ceelo.CeeloConstant.FOUR_FOUR_FOUR
-import game.ceelo.CeeloConstant.NOT_A_DOUBLET
-import game.ceelo.CeeloConstant.NOT_A_TRIPLET
-import game.ceelo.CeeloConstant.ONE
-import game.ceelo.CeeloConstant.ONE_ONE_ONE
-import game.ceelo.CeeloConstant.ONE_TWO_THREE
-import game.ceelo.CeeloConstant.OTHER_DICE_RUN_CASE
-import game.ceelo.CeeloConstant.SIX
-import game.ceelo.CeeloConstant.SIX_SIX_SIX
-import game.ceelo.CeeloConstant.STRAIGHT_234_345_CASE
-import game.ceelo.CeeloConstant.STRAIGHT_TRIPLETS
-import game.ceelo.CeeloConstant.THREE
-import game.ceelo.CeeloConstant.THREE_THREE_THREE
-import game.ceelo.CeeloConstant.TWO
-import game.ceelo.CeeloConstant.TWO_TWO_TWO
-import game.ceelo.CeeloConstant.UNIFORM_DOUBLET_CASE
-import game.ceelo.CeeloConstant.UNIFORM_TRIPLETS
-import game.ceelo.CeeloConstant.UNIFORM_TRIPLET_CASE
-import game.ceelo.CeeloGame.randomNumberOfPlayers
-import game.ceelo.CeeloGame.runDices
-import game.ceelo.CeeloHand.compareHands
-import game.ceelo.CeeloHand.handCase
-import game.ceelo.CeeloHand.handsOnSameCase
-import game.ceelo.CeeloHand.is123
-import game.ceelo.CeeloHand.is456
-import game.ceelo.CeeloHand.isStraight
-import game.ceelo.CeeloHand.isUniformDoublet
-import game.ceelo.CeeloHand.isUniformTriplet
-import game.ceelo.CeeloHand.uniformDoubletValue
-import game.ceelo.CeeloHand.uniformTripletValue
-import game.ceelo.CeeloPlayground.launchLocalGame
-import game.ceelo.CeeloPlayground.runConsoleLocalGame
-import game.ceelo.CeeloResult.*
-import game.ceelo.CeeloUnitTest.CeeloServiceInMemory.InMemoryData.addGame
-import game.ceelo.CeeloUnitTest.CeeloServiceInMemory.InMemoryData.getAllGames
+import game.ceelo.Constant.AUTOMATIC_LOOSE_123_CASE
+import game.ceelo.Constant.AUTOMATIC_WIN_456_CASE
+import game.ceelo.Constant.CEELO_DICE_THROW_SIZE
+import game.ceelo.Constant.FIVE
+import game.ceelo.Constant.FIVE_FIVE_FIVE
+import game.ceelo.Constant.FOUR
+import game.ceelo.Constant.FOUR_FIVE_SIX
+import game.ceelo.Constant.FOUR_FOUR_FOUR
+import game.ceelo.Constant.NOT_A_DOUBLET
+import game.ceelo.Constant.NOT_A_TRIPLET
+import game.ceelo.Constant.ONE
+import game.ceelo.Constant.ONE_ONE_ONE
+import game.ceelo.Constant.ONE_TWO_THREE
+import game.ceelo.Constant.OTHER_DICE_RUN_CASE
+import game.ceelo.Constant.SIX
+import game.ceelo.Constant.SIX_SIX_SIX
+import game.ceelo.Constant.STRAIGHT_234_345_CASE
+import game.ceelo.Constant.STRAIGHT_TRIPLETS
+import game.ceelo.Constant.THREE
+import game.ceelo.Constant.THREE_THREE_THREE
+import game.ceelo.Constant.TWO
+import game.ceelo.Constant.TWO_TWO_TWO
+import game.ceelo.Constant.UNIFORM_DOUBLET_CASE
+import game.ceelo.Constant.UNIFORM_TRIPLETS
+import game.ceelo.Constant.UNIFORM_TRIPLET_CASE
+import game.ceelo.Game.randomNumberOfPlayers
+import game.ceelo.Game.runDices
+import game.ceelo.GameResult.*
+import game.ceelo.Hand.compareHands
+import game.ceelo.Hand.handCase
+import game.ceelo.Hand.handsOnSameCase
+import game.ceelo.Hand.is123
+import game.ceelo.Hand.is456
+import game.ceelo.Hand.isStraight
+import game.ceelo.Hand.isUniformDoublet
+import game.ceelo.Hand.isUniformTriplet
+import game.ceelo.Hand.uniformDoubletValue
+import game.ceelo.Hand.uniformTripletValue
+import game.ceelo.Playground.launchLocalGame
+import game.ceelo.Playground.runConsoleLocalGame
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -52,33 +50,7 @@ import kotlin.test.assertFalse
 @Suppress("NonAsciiCharacters")
 class CeeloUnitTest {
 
-    private class CeeloServiceInMemory : CeeloService {
-        object InMemoryData {
-            private val repo: MutableList<List<List<Int>>> by lazy {
-                MutableList(size = 0, init = { mutableListOf(runDices(), runDices()) })
-            }
-
-            @JvmStatic
-            fun getAllGames(): List<List<List<Int>>> = repo
-
-            @JvmStatic
-            fun addGame(game: List<List<Int>>) {
-                repo.add(game)
-            }
-        }
-
-        override fun allGames(): List<List<List<Int>>> = getAllGames()
-        override fun saveGame(newGame: List<List<Int>>) = addGame(newGame)
-
-        override fun connect() {
-            TODO("Not yet implemented")
-        }
-
-        override fun subscribe() {
-            TODO("Not yet implemented")
-        }
-    }
-    //    fun initPlayground(
+//    fun initPlayground(
 //        @Suppress("UNUSED_PARAMETER") howMuchPlayer: Int
 //    ): Playground = Playground(mutableListOf())
 

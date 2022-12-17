@@ -1,14 +1,14 @@
 package game.ceelo
 
-import game.ceelo.CeeloConstant.FIVE
-import game.ceelo.CeeloConstant.FOUR
-import game.ceelo.CeeloConstant.ONE
-import game.ceelo.CeeloConstant.SIX
-import game.ceelo.CeeloConstant.THREE
-import game.ceelo.CeeloConstant.TWO
+import game.ceelo.Constant.FIVE
+import game.ceelo.Constant.FOUR
+import game.ceelo.Constant.ONE
+import game.ceelo.Constant.SIX
+import game.ceelo.Constant.THREE
+import game.ceelo.Constant.TWO
 
 @Suppress("unused")
-object CeeloGame {
+object Game {
     /**
      * un jet de dés au hazard
      */

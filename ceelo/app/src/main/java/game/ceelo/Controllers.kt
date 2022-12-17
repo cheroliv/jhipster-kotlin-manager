@@ -7,7 +7,7 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
-import game.ceelo.CeeloHand.getDiceImageFromDiceValue
+import game.ceelo.Hand.getDiceImageFromDiceValue
 import game.ceelo.databinding.ActivityMainBinding
 
 fun ActivityMainBinding.loadLocalGame(
@@ -73,7 +73,7 @@ fun playerThrow(
     list: List<Int>,
     diceGameViewModel: DiceGameViewModel,
     resultUI: TextView,
-    playerResult: CeeloResult
+    playerResult: GameResult
 ) = playerUI.mapIndexed { i, view ->
     runDiceAnimation(view, list[i])
 }.run {
@@ -112,13 +112,13 @@ fun runDiceAnimation(
 
 fun setTextViewResult(
     textViewResult: TextView,
-    diceResult: CeeloResult,
+    diceResult: GameResult,
     textViewVisibility: Int
 ): TextView = textViewResult.apply {
     visibility = textViewVisibility
     text = when (diceResult) {
-        CeeloResult.WIN -> CeeloResult.WIN.toString()
-        CeeloResult.LOOSE -> CeeloResult.LOOSE.toString()
-        else -> CeeloResult.RERUN.toString()
+        GameResult.WIN -> GameResult.WIN.toString()
+        GameResult.LOOSE -> GameResult.LOOSE.toString()
+        else -> GameResult.RERUN.toString()
     }
 }

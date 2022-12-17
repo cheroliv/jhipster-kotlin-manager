@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
             setContentView(root)
             loadLocalGame(
                 mainActivity = this@MainActivity,
-                getViewModel(),
+                diceGameViewModel = getViewModel(),
                 playersUI = listOf(
                     listOf(
                         playerOneFirstDiceImageId,

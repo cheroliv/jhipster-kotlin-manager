@@ -1,15 +1,15 @@
 package game.ceelo
 
-import game.ceelo.CeeloConstant.TWO
-import game.ceelo.CeeloHand.compareHands
-import game.ceelo.CeeloGame.firstPlayer
-import game.ceelo.CeeloGame.runDices
-import game.ceelo.CeeloGame.secondPlayer
-import game.ceelo.CeeloResult.RERUN
-import game.ceelo.CeeloResult.WIN
+import game.ceelo.Constant.TWO
+import game.ceelo.Hand.compareHands
+import game.ceelo.Game.firstPlayer
+import game.ceelo.Game.runDices
+import game.ceelo.Game.secondPlayer
+import game.ceelo.GameResult.RERUN
+import game.ceelo.GameResult.WIN
 
 
-object CeeloPlayground {
+object Playground {
     fun launchLocalGame(nbPlayers: Int): List<List<Int>> =
         mutableListOf<List<Int>>().apply {
             repeat(nbPlayers) { add(runDices()) }

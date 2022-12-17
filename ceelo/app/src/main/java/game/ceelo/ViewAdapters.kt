@@ -8,12 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import game.ceelo.CeeloAdapter.CeeloViewHolder
-import game.ceelo.CeeloConstant.GAME_TYPE
-import game.ceelo.CeeloConstant.PLAYER_ONE_NAME
-import game.ceelo.CeeloConstant.PLAYER_TWO_NAME
-import game.ceelo.CeeloHand.compareHands
-import game.ceelo.CeeloGame.firstPlayer
-import game.ceelo.CeeloGame.secondPlayer
+import game.ceelo.Constant.GAME_TYPE
+import game.ceelo.Constant.PLAYER_ONE_NAME
+import game.ceelo.Constant.PLAYER_TWO_NAME
+import game.ceelo.Hand.compareHands
+import game.ceelo.Game.firstPlayer
+import game.ceelo.Game.secondPlayer
 
 class CeeloAdapter(
     var games: List<List<List<Int>>>

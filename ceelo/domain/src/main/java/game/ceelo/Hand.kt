@@ -2,30 +2,30 @@
 
 package game.ceelo
 
-import game.ceelo.CeeloConstant.AUTOMATIC_LOOSE_123_CASE
-import game.ceelo.CeeloConstant.AUTOMATIC_WIN_456_CASE
-import game.ceelo.CeeloConstant.FIVE
-import game.ceelo.CeeloConstant.FOUR
-import game.ceelo.CeeloConstant.FOUR_FIVE_SIX
-import game.ceelo.CeeloConstant.NOT_A_DOUBLET
-import game.ceelo.CeeloConstant.NOT_A_TRIPLET
-import game.ceelo.CeeloConstant.ONE
-import game.ceelo.CeeloConstant.ONE_TWO_THREE
-import game.ceelo.CeeloConstant.OTHER_DICE_RUN_CASE
-import game.ceelo.CeeloConstant.SIX
-import game.ceelo.CeeloConstant.STRAIGHT_234_345_CASE
-import game.ceelo.CeeloConstant.STRAIGHT_TRIPLETS
-import game.ceelo.CeeloConstant.THREE
-import game.ceelo.CeeloConstant.THREE_FOUR_FIVE
-import game.ceelo.CeeloConstant.TWO
-import game.ceelo.CeeloConstant.TWO_THREE_FOUR
-import game.ceelo.CeeloConstant.UNIFORM_DOUBLETS
-import game.ceelo.CeeloConstant.UNIFORM_DOUBLET_CASE
-import game.ceelo.CeeloResult.*
-import game.ceelo.CeeloConstant.UNIFORM_TRIPLETS
-import game.ceelo.CeeloConstant.UNIFORM_TRIPLET_CASE
+import game.ceelo.Constant.AUTOMATIC_LOOSE_123_CASE
+import game.ceelo.Constant.AUTOMATIC_WIN_456_CASE
+import game.ceelo.Constant.FIVE
+import game.ceelo.Constant.FOUR
+import game.ceelo.Constant.FOUR_FIVE_SIX
+import game.ceelo.Constant.NOT_A_DOUBLET
+import game.ceelo.Constant.NOT_A_TRIPLET
+import game.ceelo.Constant.ONE
+import game.ceelo.Constant.ONE_TWO_THREE
+import game.ceelo.Constant.OTHER_DICE_RUN_CASE
+import game.ceelo.Constant.SIX
+import game.ceelo.Constant.STRAIGHT_234_345_CASE
+import game.ceelo.Constant.STRAIGHT_TRIPLETS
+import game.ceelo.Constant.THREE
+import game.ceelo.Constant.THREE_FOUR_FIVE
+import game.ceelo.Constant.TWO
+import game.ceelo.Constant.TWO_THREE_FOUR
+import game.ceelo.Constant.UNIFORM_DOUBLETS
+import game.ceelo.Constant.UNIFORM_DOUBLET_CASE
+import game.ceelo.GameResult.*
+import game.ceelo.Constant.UNIFORM_TRIPLETS
+import game.ceelo.Constant.UNIFORM_TRIPLET_CASE
 
-object CeeloHand {
+object Hand {
 
     /**
      * Renvoi le dé du milieu
@@ -139,7 +139,7 @@ object CeeloHand {
      * pour renvoyer un resultat de jeu
      */
     fun List<Int>.compareHands(secondPlayerRun: List<Int>)
-            : CeeloResult =
+            : GameResult =
         handCase.run whichCase@{
             secondPlayerRun.handCase.run otherWhichCase@{
                 return when {
@@ -153,7 +153,7 @@ object CeeloHand {
     fun List<Int>.handsOnSameCase(
         secondPlayerThrow: List<Int>,
         handCase: Int
-    ): CeeloResult = when (handCase) {
+    ): GameResult = when (handCase) {
         AUTOMATIC_WIN_456_CASE -> RERUN
         AUTOMATIC_LOOSE_123_CASE -> RERUN
         STRAIGHT_234_345_CASE -> when {

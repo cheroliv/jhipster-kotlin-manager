@@ -1,9 +1,9 @@
 package game.ceelo
 
-sealed class CeeloResult {
-    object WIN : CeeloResult()
-    object LOOSE : CeeloResult()
-    object RERUN : CeeloResult()
+sealed class GameResult {
+    object WIN : GameResult()
+    object LOOSE : GameResult()
+    object RERUN : GameResult()
 
     override fun toString() = when (this) {
         WIN -> "WIN"

@@ -11,7 +11,7 @@ import org.koin.dsl.module
 
 
 val ceeloModule = module {
-    singleOf(::AndroidCeeloService) { bind<CeeloService>() }
+    singleOf(::GameServiceAndroid) { bind<GameService>() }
     viewModelOf(::DiceGameViewModel)
 }
 
