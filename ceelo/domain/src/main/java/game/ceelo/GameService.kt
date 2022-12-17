@@ -2,7 +2,7 @@
 
 package game.ceelo
 
-/*
+/**
 
 RULES
 

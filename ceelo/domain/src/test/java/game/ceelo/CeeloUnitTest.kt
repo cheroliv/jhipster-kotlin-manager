@@ -78,7 +78,7 @@ class CeeloUnitTest {
 
     @Test
     fun `Si le jet ne contient pas (4,5,6) alors la propriété is456 renvoi false`() {
-        assertFalse(actual = ONE_TWO_THREE.is456)
+        assertFalse(ONE_TWO_THREE.is456)
         UNIFORM_TRIPLETS.forEach { assertFalse(it.is456) }
     }
 
@@ -129,7 +129,7 @@ class CeeloUnitTest {
         assert(listOf(4, 4, 3).isUniformDoublet)
         assert(listOf(5, 5, 2).isUniformDoublet)
         assert(listOf(6, 6, 1).isUniformDoublet)
-        assertFalse(actual = FOUR_FIVE_SIX.isUniformDoublet)
+        assertFalse( FOUR_FIVE_SIX.isUniformDoublet)
         assertFalse(ONE_TWO_THREE.isUniformDoublet)
         UNIFORM_TRIPLETS.forEach { assertFalse(it.isUniformDoublet) }
     }
@@ -239,20 +239,20 @@ class CeeloUnitTest {
 
     @Test
     fun `Si le jet est un triplet uniforme et l'autre aussi avec une face plus faible alors la propriété compareHands renvoi WIN`() {
-        assertEquals(WIN, actual = SIX_SIX_SIX.compareHands(FIVE_FIVE_FIVE))
-        assertEquals(expected = WIN, actual = SIX_SIX_SIX.compareHands(FOUR_FOUR_FOUR))
-        assertEquals(expected = WIN, actual = SIX_SIX_SIX.compareHands(THREE_THREE_THREE))
-        assertEquals(expected = WIN, actual = SIX_SIX_SIX.compareHands(TWO_TWO_TWO))
-        assertEquals(expected = WIN, actual = SIX_SIX_SIX.compareHands(ONE_ONE_ONE))
+        assertEquals(WIN, SIX_SIX_SIX.compareHands(FIVE_FIVE_FIVE))
+        assertEquals( WIN,  SIX_SIX_SIX.compareHands(FOUR_FOUR_FOUR))
+        assertEquals( WIN,  SIX_SIX_SIX.compareHands(THREE_THREE_THREE))
+        assertEquals( WIN,  SIX_SIX_SIX.compareHands(TWO_TWO_TWO))
+        assertEquals( WIN,  SIX_SIX_SIX.compareHands(ONE_ONE_ONE))
     }
 
     @Test
     fun `Si le jet est un triplet uniforme et l'autre aussi avec une face plus forte alors la propriété compareHands renvoi LOOSE`() {
-        assertEquals(expected = LOOSE, actual = ONE_ONE_ONE.compareHands(SIX_SIX_SIX))
-        assertEquals(expected = LOOSE, actual = ONE_ONE_ONE.compareHands(FIVE_FIVE_FIVE))
-        assertEquals(expected = LOOSE, actual = ONE_ONE_ONE.compareHands(FOUR_FOUR_FOUR))
-        assertEquals(expected = LOOSE, actual = ONE_ONE_ONE.compareHands(THREE_THREE_THREE))
-        assertEquals(expected = LOOSE, actual = ONE_ONE_ONE.compareHands(TWO_TWO_TWO))
+        assertEquals( LOOSE,  ONE_ONE_ONE.compareHands(SIX_SIX_SIX))
+        assertEquals( LOOSE,  ONE_ONE_ONE.compareHands(FIVE_FIVE_FIVE))
+        assertEquals( LOOSE,  ONE_ONE_ONE.compareHands(FOUR_FOUR_FOUR))
+        assertEquals( LOOSE,  ONE_ONE_ONE.compareHands(THREE_THREE_THREE))
+        assertEquals( LOOSE,  ONE_ONE_ONE.compareHands(TWO_TWO_TWO))
     }
 
     @Test
