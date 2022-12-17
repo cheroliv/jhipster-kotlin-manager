@@ -2,9 +2,30 @@
 
 package game.ceelo
 
-import game.ceelo.DiceRunResult.*
+import game.ceelo.CeeloConstant.AUTOMATIC_LOOSE_123_CASE
+import game.ceelo.CeeloConstant.AUTOMATIC_WIN_456_CASE
+import game.ceelo.CeeloConstant.FIVE
+import game.ceelo.CeeloConstant.FOUR
+import game.ceelo.CeeloConstant.FOUR_FIVE_SIX
+import game.ceelo.CeeloConstant.NOT_A_DOUBLET
+import game.ceelo.CeeloConstant.NOT_A_TRIPLET
+import game.ceelo.CeeloConstant.ONE
+import game.ceelo.CeeloConstant.ONE_TWO_THREE
+import game.ceelo.CeeloConstant.OTHER_DICE_RUN_CASE
+import game.ceelo.CeeloConstant.SIX
+import game.ceelo.CeeloConstant.STRAIGHT_234_345_CASE
+import game.ceelo.CeeloConstant.STRAIGHT_TRIPLETS
+import game.ceelo.CeeloConstant.THREE
+import game.ceelo.CeeloConstant.THREE_FOUR_FIVE
+import game.ceelo.CeeloConstant.TWO
+import game.ceelo.CeeloConstant.TWO_THREE_FOUR
+import game.ceelo.CeeloConstant.UNIFORM_DOUBLETS
+import game.ceelo.CeeloConstant.UNIFORM_DOUBLET_CASE
+import game.ceelo.CeeloResult.*
+import game.ceelo.CeeloConstant.UNIFORM_TRIPLETS
+import game.ceelo.CeeloConstant.UNIFORM_TRIPLET_CASE
 
-object CeeloDicesHandDomain {
+object CeeloHand {
 
     /**
      * Renvoi le dé du milieu
@@ -28,9 +49,7 @@ object CeeloDicesHandDomain {
     else last()
 
 
-    /**
-     * Est ce un triplet?
-     */
+    /* Est ce un triplet? */
     val List<Int>.isUniformTriplet: Boolean
         get() = UNIFORM_TRIPLETS.map {
             it.firstDice().run {
@@ -105,11 +124,6 @@ object CeeloDicesHandDomain {
         else -> throw Exception("Only six faces is possible!")
     }
 
-    fun initBank(howMuchPlayer: Int): List<Int> = List(
-        size = howMuchPlayer,
-        init = { (ONE..SIX).random() }
-    )
-
     val List<Int>.handCase: Int
         get() = when {
             is456 -> AUTOMATIC_WIN_456_CASE
@@ -125,17 +139,13 @@ object CeeloDicesHandDomain {
      * pour renvoyer un resultat de jeu
      */
     fun List<Int>.compareHands(secondPlayerRun: List<Int>)
-            : DiceRunResult =
+            : CeeloResult =
         handCase.run whichCase@{
-            @Suppress("IMPLICIT_NOTHING_TYPE_ARGUMENT_AGAINST_NOT_NOTHING_EXPECTED_TYPE")
             secondPlayerRun.handCase.run otherWhichCase@{
                 return when {
                     this@whichCase > this@otherWhichCase -> WIN
                     this@whichCase < this@otherWhichCase -> LOOSE
-                    else -> handsOnSameCase(
-                        secondPlayerThrow = secondPlayerRun,
-                        handCase = this@whichCase
-                    )
+                    else -> handsOnSameCase(secondPlayerRun, this@whichCase)
                 }
             }
         }
@@ -143,13 +153,19 @@ object CeeloDicesHandDomain {
     fun List<Int>.handsOnSameCase(
         secondPlayerThrow: List<Int>,
         handCase: Int
-    ): DiceRunResult = when (handCase) {
+    ): CeeloResult = when (handCase) {
         AUTOMATIC_WIN_456_CASE -> RERUN
         AUTOMATIC_LOOSE_123_CASE -> RERUN
         STRAIGHT_234_345_CASE -> when {
-            containsAll(TWO_THREE_FOUR) && secondPlayerThrow.containsAll(TWO_THREE_FOUR) -> RERUN
-            containsAll(THREE_FOUR_FIVE) && secondPlayerThrow.containsAll(THREE_FOUR_FIVE) -> RERUN
-            containsAll(TWO_THREE_FOUR) && secondPlayerThrow.containsAll(THREE_FOUR_FIVE) -> LOOSE
+            containsAll(TWO_THREE_FOUR)
+                    && secondPlayerThrow.containsAll(TWO_THREE_FOUR)
+            -> RERUN
+            containsAll(THREE_FOUR_FIVE)
+                    && secondPlayerThrow.containsAll(THREE_FOUR_FIVE)
+            -> RERUN
+            containsAll(TWO_THREE_FOUR)
+                    && secondPlayerThrow.containsAll(THREE_FOUR_FIVE)
+            -> LOOSE
             else -> WIN
         }
         UNIFORM_TRIPLET_CASE -> when {
@@ -169,3 +185,8 @@ object CeeloDicesHandDomain {
         }
     }
 }
+
+//    fun initBank(howMuchPlayer: Int): List<Int> = List(
+//        size = howMuchPlayer,
+//        init = { (ONE..SIX).random() }
+//    )

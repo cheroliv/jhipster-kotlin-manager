@@ -31,7 +31,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles (
+            proguardFiles(
                     getDefaultProguardFile('proguard-android-optimize.txt'),
                     'proguard-rules.pro')
         }
@@ -82,16 +82,16 @@ dependencies {
     // Testing Navigation
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
 
-    kapt "androidx.room:room-compiler:$room_version"
-    testAnnotationProcessor "androidx.room:room-compiler:$room_version"
+    kapt("androidx.room:room-compiler:$room_version")
+    testAnnotationProcessor("androidx.room:room-compiler:$room_version")
     //noinspection GradleDependency
-    testImplementation "androidx.room:room-runtime:$room_version"
+    implementation("androidx.room:room-runtime:$room_version")
     // optional - Guava support for Room, including Optional and ListenableFuture
-    testImplementation "androidx.room:room-guava:$room_version"
+    implementation("androidx.room:room-guava:$room_version")
     // optional - Test helpers
-    testImplementation "androidx.room:room-testing:$room_version"
+    testImplementation("androidx.room:room-testing:$room_version")
     // optional - Paging 3 Integration
-    testImplementation "androidx.room:room-paging:2.5.0-beta02"
+    implementation("androidx.room:room-paging:$room_version")
 
     // Lifecycle components
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")

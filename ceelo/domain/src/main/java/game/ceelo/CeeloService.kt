@@ -1,9 +1,10 @@
 @file:Suppress("ObjectPropertyName", "MemberVisibilityCanBePrivate")
 
 package game.ceelo
-import game.ceelo.CeeloGameDomain.runDices
-import game.ceelo.CeeloServiceInMemory.InMemoryData.addGame
-import game.ceelo.CeeloServiceInMemory.InMemoryData.getAllGames
+
+import game.ceelo.CeeloService.CeeloServiceInMemory.InMemoryData.addGame
+import game.ceelo.CeeloService.CeeloServiceInMemory.InMemoryData.getAllGames
+
 /*
 
 RULES
@@ -39,30 +40,35 @@ interface CeeloService {
     fun saveGame(newGame: List<List<Int>>)
     fun connect()
     fun subscribe()
-}
 
-class CeeloServiceInMemory : CeeloService {
-    object InMemoryData {
-        private val repo: MutableList<List<List<Int>>> by lazy {
-            MutableList(size = 0, init = { mutableListOf(runDices(), runDices()) })
+    class CeeloServiceInMemory : CeeloService {
+        private object InMemoryData {
+            private val repo: MutableList<List<List<Int>>> by lazy {
+                MutableList(size = 0, init = {
+                    mutableListOf(
+                        CeeloGame.runDices(),
+                        CeeloGame.runDices()
+                    )
+                })
+            }
+
+            @JvmStatic
+            fun getAllGames(): List<List<List<Int>>> = repo
+
+            @JvmStatic
+            fun addGame(game: List<List<Int>>) {
+                repo.add(game)
+            }
         }
 
-        @JvmStatic
-        fun getAllGames(): List<List<List<Int>>> = repo
-
-        @JvmStatic
-        fun addGame(game: List<List<Int>>) {
-            repo.add(game)
+        override fun allGames(): List<List<List<Int>>> = getAllGames()
+        override fun saveGame(newGame: List<List<Int>>) = addGame(newGame)
+        override fun connect() {
+            TODO("Not yet implemented")
         }
-    }
 
-    override fun allGames(): List<List<List<Int>>> = getAllGames()
-    override fun saveGame(newGame: List<List<Int>>) = addGame(newGame)
-    override fun connect() {
-        TODO("Not yet implemented")
-    }
-
-    override fun subscribe() {
-        TODO("Not yet implemented")
+        override fun subscribe() {
+            TODO("Not yet implemented")
+        }
     }
 }

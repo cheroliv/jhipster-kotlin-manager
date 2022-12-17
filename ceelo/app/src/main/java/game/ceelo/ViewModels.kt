@@ -7,14 +7,15 @@ import android.view.View.VISIBLE
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import game.ceelo.CeeloDicesHandDomain.compareHands
-import game.ceelo.CeeloGameDomain.runDices
-import game.ceelo.CeeloGameDomain.secondPlayer
-import game.ceelo.DiceRunResult.*
+import game.ceelo.CeeloConstant.ONE
+import game.ceelo.CeeloHand.compareHands
+import game.ceelo.CeeloGame.runDices
+import game.ceelo.CeeloGame.secondPlayer
+import game.ceelo.CeeloResult.*
 
 class DiceGameViewModel(val ceeloService: CeeloService) : ViewModel() {
-    private val _resultPair: MutableLiveData<List<Pair<DiceRunResult, Int>>> = MutableLiveData()
-    val resultPairList: LiveData<List<Pair<DiceRunResult, Int>>> = _resultPair
+    private val _resultPair: MutableLiveData<List<Pair<CeeloResult, Int>>> = MutableLiveData()
+    val resultPairList: LiveData<List<Pair<CeeloResult, Int>>> = _resultPair
 
     private val _resultVisibility: MutableLiveData<Int> = MutableLiveData()
     val resultVisibility: LiveData<Int> = _resultVisibility
@@ -33,6 +34,7 @@ class DiceGameViewModel(val ceeloService: CeeloService) : ViewModel() {
     val greeting: LiveData<String> = _greeting
 
     fun onClickPlayButton() {
+        //TODO: ici pour utiliser le service room
         _diceGame.value = listOf(runDices(), runDices())
 
         ceeloService.saveGame(_diceGame.value!!)

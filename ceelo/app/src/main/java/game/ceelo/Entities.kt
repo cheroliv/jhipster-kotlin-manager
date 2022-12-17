@@ -1,87 +1,49 @@
 package game.ceelo
 
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import java.util.*
-import kotlin.collections.List
 
-class LocalGameEntity
-
+@Entity(
+    tableName = "DicesRun", indices = [
+        Index(value = ["firstDice"]),
+        Index(value = ["middleDice"]),
+        Index(value = ["lastDice"])
+    ]
+)
 data class DicesRunEntity(
-    val diceThrowId: Long,
-    val gameId: Long,
-    val playerId: Long,
+    @PrimaryKey
+    val diceThrowId: UUID,
+    val gameId: UUID,
+    val playerId: UUID,
     val firstDice: Int,
     val middleDice: Int,
     val lastDice: Int
 )
 
+@Entity(
+    tableName = "Game", indices = [
+        Index("isDraw"),
+        Index("isOffLineGame"),
+    ]
+)
 data class GameEntity(
-    val gameId: UUID,
+    @PrimaryKey
+    val id: UUID,
     val winnerPlayerId: UUID,
     val date: Date,
     val isDraw: Boolean,
     val isOffLineGame: Boolean,
-    val playersIds: Set<UUID>
 )
-
-
-/*
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Index
-import androidx.room.PrimaryKey
-import java.util.*
 
 @Entity(
-    tableName = "user",
-    indices = [
+    tableName = "Player", indices = [
         Index(value = ["login"], unique = true),
-        Index(value = ["email"], unique = true)
     ]
 )
-data class User(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "user_id")
-    val id: Long? = null,
+data class PlayerEntity(
+    @PrimaryKey
+    val id: UUID,
     val login: String,
-    val email: String,
-    @ColumnInfo(name = "first_name")
-    val firstName: String,
-    @ColumnInfo(name = "last_name")
-    val lastName: String,
-    @ColumnInfo(name = "date_of_birth")
-    val dob: Date,
-    val password: String,
 )
- */
-
-
-/*
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Index
-import androidx.room.PrimaryKey
-import java.util.*
-
-@Entity(
-    tableName = "user",
-    indices = [
-        Index(value = ["login"], unique = true),
-        Index(value = ["email"], unique = true)
-    ]
-)
-data class User(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "user_id")
-    val id: Long? = null,
-    val login: String,
-    val email: String,
-    @ColumnInfo(name = "first_name")
-    val firstName: String,
-    @ColumnInfo(name = "last_name")
-    val lastName: String,
-    @ColumnInfo(name = "date_of_birth")
-    val dob: Date,
-    val password: String,
-)
- */
-

@@ -1,29 +1,20 @@
 package game.ceelo
 
-object CeeloGameDomain {
-    @Suppress("unused")
-    fun List<List<Int>>.compareHands(): List<List<Int>> {
-//        var winner = first()
-//        forEachIndexed { index: Int, hand ->
-//            if (index >= ONE) {
-//                val result = hand.compareThrows(this[index - 1])
-//                if (result == WIN) {
-//                    winner = hand
-//                }
-//            }
-//        }
-//        return winner
-        return listOf(listOf(0, 0))
-    }
+import game.ceelo.CeeloConstant.FIVE
+import game.ceelo.CeeloConstant.FOUR
+import game.ceelo.CeeloConstant.ONE
+import game.ceelo.CeeloConstant.SIX
+import game.ceelo.CeeloConstant.THREE
+import game.ceelo.CeeloConstant.TWO
 
+@Suppress("unused")
+object CeeloGame {
     /**
      * un jet de dés au hazard
      */
     fun runDices(): List<Int> = List(size = 3, init = { (ONE..SIX).random() })
 
-    fun randomNumberOfPlayers(): Int {
-        return (TWO..SIX).random()
-    }
+    fun randomNumberOfPlayers(): Int = (TWO..SIX).random()
 
     fun List<List<Int>>.firstPlayer(): List<Int> = if (isEmpty())
         throw NoSuchElementException("first player throw is empty.")
@@ -32,6 +23,7 @@ object CeeloGameDomain {
     fun List<List<Int>>.secondPlayer(): List<Int> = if (isEmpty())
         throw NoSuchElementException("second player throw is empty.")
     else elementAt(index = ONE)
+
 
     fun List<List<Int>>.thirdPlayer(): List<Int> = if (isEmpty())
         throw NoSuchElementException("third player throw is empty.")
@@ -49,3 +41,16 @@ object CeeloGameDomain {
         throw NoSuchElementException("sixth player throw is empty.")
     else elementAt(index = FIVE)
 }
+//    fun List<List<Int>>.compareHands(): List<List<Int>> {
+////        var winner = first()
+////        forEachIndexed { index: Int, hand ->
+////            if (index >= ONE) {
+////                val result = hand.compareThrows(this[index - 1])
+////                if (result == WIN) {
+////                    winner = hand
+////                }
+////            }
+////        }
+////        return winner
+//        return listOf(listOf(0, 0))
+//    }

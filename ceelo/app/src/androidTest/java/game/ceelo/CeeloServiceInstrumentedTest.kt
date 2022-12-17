@@ -1,13 +1,18 @@
 @file:Suppress(
     "NonAsciiCharacters",
-    "TestFunctionName", "SpellCheckingInspection"
+    "TestFunctionName",
+    "SpellCheckingInspection"
 )
 
 package game.ceelo
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import game.ceelo.CeeloGameDomain.runDices
-import game.ceelo.CeeloPlaygroundDomain.launchLocalGame
+import game.ceelo.CeeloConstant.CEELO_DICE_THROW_SIZE
+import game.ceelo.CeeloConstant.ONE
+import game.ceelo.CeeloConstant.SIX
+import game.ceelo.CeeloGame.runDices
+import game.ceelo.CeeloPlayground.launchLocalGame
+import game.ceelo.CeeloService.CeeloServiceInMemory
 import org.junit.runner.RunWith
 import kotlin.test.BeforeTest
 import kotlin.test.Test

@@ -1,14 +1,15 @@
 package game.ceelo
 
-import game.ceelo.CeeloDicesHandDomain.compareHands
-import game.ceelo.CeeloGameDomain.firstPlayer
-import game.ceelo.CeeloGameDomain.runDices
-import game.ceelo.CeeloGameDomain.secondPlayer
-import game.ceelo.DiceRunResult.RERUN
-import game.ceelo.DiceRunResult.WIN
+import game.ceelo.CeeloConstant.TWO
+import game.ceelo.CeeloHand.compareHands
+import game.ceelo.CeeloGame.firstPlayer
+import game.ceelo.CeeloGame.runDices
+import game.ceelo.CeeloGame.secondPlayer
+import game.ceelo.CeeloResult.RERUN
+import game.ceelo.CeeloResult.WIN
 
 
-object CeeloPlaygroundDomain {
+object CeeloPlayground {
     fun launchLocalGame(nbPlayers: Int): List<List<Int>> =
         mutableListOf<List<Int>>().apply {
             repeat(nbPlayers) { add(runDices()) }
@@ -21,11 +22,11 @@ object CeeloPlaygroundDomain {
         do {
             println("player one throw : ${game.firstPlayer()}")
             println("player two throw : ${game.secondPlayer()}")
-            val result = game.firstPlayer().compareHands(
-                secondPlayerRun = game.secondPlayer()
-            )
-            if (result == WIN) println("player one : $WIN")
-            else println("player two : $WIN")
+            val result = game.firstPlayer().compareHands(game.secondPlayer())
+            when (result) {
+                WIN -> println("player one : $WIN")
+                else -> println("player two : $WIN")
+            }
         } while (result == RERUN.apply {
                 game = launchLocalGame()
             })

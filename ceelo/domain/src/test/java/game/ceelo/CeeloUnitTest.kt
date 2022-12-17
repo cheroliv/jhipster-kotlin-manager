@@ -2,36 +2,90 @@
 
 package game.ceelo
 
-import game.ceelo.CeeloDicesHandDomain.compareHands
-import game.ceelo.CeeloDicesHandDomain.handCase
-import game.ceelo.CeeloDicesHandDomain.handsOnSameCase
-import game.ceelo.CeeloDicesHandDomain.is123
-import game.ceelo.CeeloDicesHandDomain.is456
-import game.ceelo.CeeloDicesHandDomain.isStraight
-import game.ceelo.CeeloDicesHandDomain.isUniformDoublet
-import game.ceelo.CeeloDicesHandDomain.isUniformTriplet
-import game.ceelo.CeeloDicesHandDomain.uniformDoubletValue
-import game.ceelo.CeeloDicesHandDomain.uniformTripletValue
-import game.ceelo.CeeloGameDomain.randomNumberOfPlayers
-import game.ceelo.CeeloGameDomain.runDices
-import game.ceelo.CeeloPlaygroundDomain.launchLocalGame
-import game.ceelo.CeeloPlaygroundDomain.runConsoleLocalGame
-import game.ceelo.DiceRunResult.*
+import game.ceelo.CeeloConstant.AUTOMATIC_LOOSE_123_CASE
+import game.ceelo.CeeloConstant.AUTOMATIC_WIN_456_CASE
+import game.ceelo.CeeloConstant.CEELO_DICE_THROW_SIZE
+import game.ceelo.CeeloConstant.FIVE
+import game.ceelo.CeeloConstant.FIVE_FIVE_FIVE
+import game.ceelo.CeeloConstant.FOUR
+import game.ceelo.CeeloConstant.FOUR_FIVE_SIX
+import game.ceelo.CeeloConstant.FOUR_FOUR_FOUR
+import game.ceelo.CeeloConstant.NOT_A_DOUBLET
+import game.ceelo.CeeloConstant.NOT_A_TRIPLET
+import game.ceelo.CeeloConstant.ONE
+import game.ceelo.CeeloConstant.ONE_ONE_ONE
+import game.ceelo.CeeloConstant.ONE_TWO_THREE
+import game.ceelo.CeeloConstant.OTHER_DICE_RUN_CASE
+import game.ceelo.CeeloConstant.SIX
+import game.ceelo.CeeloConstant.SIX_SIX_SIX
+import game.ceelo.CeeloConstant.STRAIGHT_234_345_CASE
+import game.ceelo.CeeloConstant.STRAIGHT_TRIPLETS
+import game.ceelo.CeeloConstant.THREE
+import game.ceelo.CeeloConstant.THREE_THREE_THREE
+import game.ceelo.CeeloConstant.TWO
+import game.ceelo.CeeloConstant.TWO_TWO_TWO
+import game.ceelo.CeeloConstant.UNIFORM_DOUBLET_CASE
+import game.ceelo.CeeloConstant.UNIFORM_TRIPLETS
+import game.ceelo.CeeloConstant.UNIFORM_TRIPLET_CASE
+import game.ceelo.CeeloGame.randomNumberOfPlayers
+import game.ceelo.CeeloGame.runDices
+import game.ceelo.CeeloHand.compareHands
+import game.ceelo.CeeloHand.handCase
+import game.ceelo.CeeloHand.handsOnSameCase
+import game.ceelo.CeeloHand.is123
+import game.ceelo.CeeloHand.is456
+import game.ceelo.CeeloHand.isStraight
+import game.ceelo.CeeloHand.isUniformDoublet
+import game.ceelo.CeeloHand.isUniformTriplet
+import game.ceelo.CeeloHand.uniformDoubletValue
+import game.ceelo.CeeloHand.uniformTripletValue
+import game.ceelo.CeeloPlayground.launchLocalGame
+import game.ceelo.CeeloPlayground.runConsoleLocalGame
+import game.ceelo.CeeloResult.*
+import game.ceelo.CeeloUnitTest.CeeloServiceInMemory.InMemoryData.addGame
+import game.ceelo.CeeloUnitTest.CeeloServiceInMemory.InMemoryData.getAllGames
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 
+
 @Suppress("NonAsciiCharacters")
 class CeeloUnitTest {
+
+    private class CeeloServiceInMemory : CeeloService {
+        object InMemoryData {
+            private val repo: MutableList<List<List<Int>>> by lazy {
+                MutableList(size = 0, init = { mutableListOf(runDices(), runDices()) })
+            }
+
+            @JvmStatic
+            fun getAllGames(): List<List<List<Int>>> = repo
+
+            @JvmStatic
+            fun addGame(game: List<List<Int>>) {
+                repo.add(game)
+            }
+        }
+
+        override fun allGames(): List<List<List<Int>>> = getAllGames()
+        override fun saveGame(newGame: List<List<Int>>) = addGame(newGame)
+
+        override fun connect() {
+            TODO("Not yet implemented")
+        }
+
+        override fun subscribe() {
+            TODO("Not yet implemented")
+        }
+    }
+    //    fun initPlayground(
+//        @Suppress("UNUSED_PARAMETER") howMuchPlayer: Int
+//    ): Playground = Playground(mutableListOf())
 
     @Test
     fun runTestAsMain(): Unit = println("un jet de dés :").also {
         runConsoleLocalGame()
     }
-
-    fun initPlayground(
-        @Suppress("UNUSED_PARAMETER") howMuchPlayer: Int
-    ): Playground = Playground(mutableListOf())
 
     @Test
     fun `Si le jet est correct alors la propriété dicesThrow renvoi un triplet d'entier entre 1 et 6`() =
@@ -202,18 +256,18 @@ class CeeloUnitTest {
     @Test
     fun `Si le jet est un triplet uniforme et l'autre aussi avec une face plus faible alors la méthode handsOnSameCase renvoi WIN`() {
         SIX_SIX_SIX.run {
-            assertEquals(WIN, actual = handsOnSameCase(FIVE_FIVE_FIVE, handCase))
-            assertEquals(WIN, actual = handsOnSameCase(FOUR_FOUR_FOUR, handCase))
-            assertEquals(WIN, actual = handsOnSameCase(THREE_THREE_THREE, handCase))
-            assertEquals(WIN, actual = handsOnSameCase(TWO_TWO_TWO, handCase))
-            assertEquals(WIN, actual = handsOnSameCase(ONE_ONE_ONE, handCase))
+            assertEquals(WIN, handsOnSameCase(FIVE_FIVE_FIVE, handCase))
+            assertEquals(WIN, handsOnSameCase(FOUR_FOUR_FOUR, handCase))
+            assertEquals(WIN, handsOnSameCase(THREE_THREE_THREE, handCase))
+            assertEquals(WIN, handsOnSameCase(TWO_TWO_TWO, handCase))
+            assertEquals(WIN, handsOnSameCase(ONE_ONE_ONE, handCase))
         }
     }
 
 
     @Test
     fun `Si le jet est un triplet uniforme et l'autre aussi avec une face plus faible alors la propriété compareHands renvoi WIN`() {
-        assertEquals(expected = WIN, actual = SIX_SIX_SIX.compareHands(FIVE_FIVE_FIVE))
+        assertEquals(WIN, actual = SIX_SIX_SIX.compareHands(FIVE_FIVE_FIVE))
         assertEquals(expected = WIN, actual = SIX_SIX_SIX.compareHands(FOUR_FOUR_FOUR))
         assertEquals(expected = WIN, actual = SIX_SIX_SIX.compareHands(THREE_THREE_THREE))
         assertEquals(expected = WIN, actual = SIX_SIX_SIX.compareHands(TWO_TWO_TWO))
@@ -273,7 +327,7 @@ class CeeloUnitTest {
         println(result)
         assertEquals(numberOfPlayer, result.size)
 
-        var winnerIndexes: MutableList<Int> = mutableListOf(0)
+        val winnerIndexes: MutableList<Int> = mutableListOf(0)
         result.forEachIndexed { index, hands: List<Int> ->
             if (index > 0) {
                 if (hands.compareHands(result[index - 1]) == WIN)
