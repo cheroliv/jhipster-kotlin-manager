@@ -1,5 +1,12 @@
+*.iml
+.gradle
+.DS_Store
+build
+captures
+.externalNativeBuild
+.cxx
+local.properties
+ceelo.code-workspace
+gradle/wrapper/gradle-wrapper.jar
 /.idea/
-/server/gateway.zip
-/server/ms-run-dice.zip
-/server/ms-stats.zip
-/server/servlet.zip
+/data/

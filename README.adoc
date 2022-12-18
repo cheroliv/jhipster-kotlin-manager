@@ -1,8 +1,6 @@
 = Jeu de Cee Lo
 
-== play.google: https://play.google.com/store/apps/details?id=game.ceelo[game.ceelo]
-
-=== Essayez le cee-lo.
+== Essayez le cee-lo.
 C'est un jeu populaire lors duquel chaque joueur possède trois dés, +
 en général dans une sorte de verre et chaque joueur lance les dés +
 en même temps après avoir parié. +
@@ -26,6 +24,33 @@ et non pas par rapport à la valeur de la paire. +
 Si deux joueurs ont obtenu exactement la même combinaison, ils doivent rejouer. +
   +
 voir aussi : https://en.wikipedia.org/wiki/Cee-lo[wiki cee-lo]
+
+
+== Environement
+
+=== Installer de l'environement de dev
+
+==== curl, sdkman, java 17, android-studio
+
+_curl_
+[source,bash]
+----
+sudo snap remove curl
+sudo apt install curl
+----
+
+_java_
+[source,bash]
+----
+curl -s "https://get.sdkman.io" | bash
+sdk i java 17.0.5-tem
+----
+
+_android-studio_
+[source,bash]
+----
+sudo snap install android-studio --classic
+----
 
 
 === Test Driven Developpement
@@ -107,40 +132,6 @@ Root project 'CeeLoGame' +
 Root project 'CeeLoGame' +
 +--- Project ':app' +
 \--- Project ':domain' +
-Extern Project 'backend'
-
-
-=== Environement
-
-==== Installer de l'environement de dev
-
-===== curl, sdkman, java 17, nvm, node.js, jhipster, khipster
-
-curl
-[source,bash]
-----
-sudo snap remove curl
-sudo apt install curl
-----
-
-java +
-Si java n'est pas installé, installons le
-[source,bash]
-----
-curl -s "https://get.sdkman.io" | bash
-sdk i java 17.0.2-oracle
-----
-
-nvm node.js, npm, jhisper et khipster
-[source,bash]
-----
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-nvm install node
-nvm install 14.15.0
-nvm use 14.15.0
-npm install -g generator-jhipster
-npm install -g generator-jhipster-kotlin
-----
 
 === Executer le domain metier
 le fichier game.ceelo.domain.Ceelo.kt possède une fonction main, +
@@ -156,54 +147,3 @@ cela permet d'exécuter du metier indépendamment de tous frameworks.
 ./gradlew :domain:check
 ----
 le rapport de test est ici : domain/build/reports/tests/test/index.html
-
-=== Executer le backend, depuis le projet parent
-Le backend est un projet independant du multibuild project, +
-mais lançable depuis une tache du projet racine.
-[source,bash]
-----
-./gradlew serve
-----
-En local sur http://localhost:8080[http://localhost:8080] +
-Si le lancement du back end echoue tapper:
-[source,bash]
-----
-./gradlew --stop
-----
-
-==== Deployer sur heroku
-installer heroku client
-[source,bash]
-----
-sudo snap install heroku --classic
-heroku login
-----
-(TODO : pas fini!) +
-
-=== Déployer son app mobile sur playstore (TODO)
-
-=== Se connecter au back end
-----
-curl -X 'POST' \
-  'http://localhost:8080/api/authenticate' \
-  -H 'accept: */*' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "username": "user",
-  "password": "user",
-  "rememberMe": true
-}'
-----
-on récupère notre preuve de connection avec le bearer pour le user "user"
-----
-curl -X 'POST' \
-'http://localhost:8080/api/authenticate' \
--H 'accept: */*' \
--H 'Content-Type: application/json' \
--d '{
-"username": "admin",
-"password": "admin",
-"rememberMe": true
-}'
-----
-on récupère notre preuve de connection avec le bearer pour le user "admin"
