@@ -9,5 +9,12 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="signin">SIGNIN</string>
+    <string name="stats">STATS</string>
+    <string name="computer_result">COMPUTER RESULT</string>
+    <string name="computer">COMPUTER</string>
+    <string name="player_result">PLAYER RESULT</string>
+    <string name="player">PLAYER</string>
+    <string name="play_local">PLAY LOCAL</string>
     <!-- End Strings related to login -->
 </resources>

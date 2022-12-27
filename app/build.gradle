@@ -3,7 +3,7 @@ plugins {
     id "org.jetbrains.kotlin.android"
     id "androidx.navigation.safeargs"
     id "kotlin-kapt"
-//    id("com.github.triplet.play") version ("3.7.0")
+//    id("com.github.triplet.play") version ("3.7.0")//CD
 }
 
 android {
@@ -71,7 +71,6 @@ dependencies {
 
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_version"
-    //noinspection GradleDependency
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_version"
 
     // Kotlin
