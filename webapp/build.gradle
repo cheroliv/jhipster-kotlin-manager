@@ -278,7 +278,7 @@ task cleanResources(type: Delete) {
 }
 
 wrapper {
-    gradleVersion = "7.4.2"
+    gradleVersion = "7.6"
 }
 
 task webapp_test(type: NpmTask, dependsOn: "npm_install") {
