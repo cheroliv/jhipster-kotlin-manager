@@ -17,3 +17,5 @@ dependencyResolutionManagement {
 rootProject.name = "ceelo"
 include (":app")
 include (":domain")
+//project(":rest-api").projectDir = new File(rootDir, "webapp/build.gradle")
+//include (":rest-api")
