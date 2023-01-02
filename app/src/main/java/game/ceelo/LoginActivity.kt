@@ -23,17 +23,7 @@ class LoginActivity : AppCompatActivity() {
     }
 }
 
-interface ISecurityService {
-    fun login(username: String, password: String): Boolean
-}
 
-class SecurityService : ISecurityService {
-    override fun login(username: String, password: String): Boolean {
-        return true
-    }
-}
-
-val securityService: ISecurityService = SecurityService()
 
 /**
  * A generic class that holds a value with its loading status.
@@ -59,3 +49,16 @@ data class LoggedInUser(
     val userId: String,
     val displayName: String
 )
+
+
+interface ISecurityService {
+    fun login(username: String, password: String): Boolean
+}
+
+class SecurityService : ISecurityService {
+    override fun login(username: String, password: String): Boolean {
+        return true
+    }
+}
+
+val securityService: ISecurityService = SecurityService()
