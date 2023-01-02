@@ -17,19 +17,19 @@ class GameActivity : AppCompatActivity() {
                 getViewModel(),
                 playersUI = listOf(
                     listOf(
-                        playerOneFirstDiceImageId,
-                        playerOneMiddleDiceImageId,
-                        playerOneLastDiceImageId
+                        playerOneFirstDice,
+                        playerOneMiddleDice,
+                        playerOneLastDice
                     ),
                     listOf(
-                        playerTwoFirstDiceImageId,
-                        playerTwoMiddleDiceImageId,
-                        playerTwoLastDiceImageId
+                        playerTwoFirstDice,
+                        playerTwoMiddleDice,
+                        playerTwoLastDice
                     )
                 ),
                 resultUI = listOf(
-                    localPlayerResultText,
-                    computerResultText
+                    localPlayerResult,
+                    computerResult
                 )
             )
         }

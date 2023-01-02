@@ -51,7 +51,7 @@ fun ActivityGameBinding.loadLocalGame(
         }
     }
 
-    statsButton.setOnClickListener {
+    resultTableButton.setOnClickListener {
         gameActivity.startActivity(Intent(gameActivity, ResultTableActivity::class.java))
     }
 

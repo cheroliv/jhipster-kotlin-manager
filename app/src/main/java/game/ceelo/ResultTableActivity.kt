@@ -14,9 +14,7 @@ class ResultTableActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         inflate(layoutInflater).apply {
             setContentView(root)
-            backButton.apply {
-                setOnClickListener { finish() }
-            }
+            backButton.apply { setOnClickListener { finish() } }
             resultTable.apply {
                 adapter = ResultsAdapter(get<GameService>().allGames())
                 layoutManager = LinearLayoutManager(this@ResultTableActivity)

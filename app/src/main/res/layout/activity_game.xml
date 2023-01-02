@@ -8,7 +8,7 @@
     tools:context=".GameActivity">
 
     <TextView
-        android:id="@+id/greetingText"
+        android:id="@+id/greeting_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:visibility="visible"
@@ -17,16 +17,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/playLocalButton"
+        android:id="@+id/play_local_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="PLAY LOCAL"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/greetingText" />
+        app:layout_constraintTop_toBottomOf="@+id/greeting_text" />
 
     <ImageView
-        android:id="@+id/playerOneFirstDiceImageId"
+        android:id="@+id/player_one_first_dice"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="8dp"
@@ -36,32 +36,32 @@
         app:srcCompat="@drawable/dice_face_one" />
 
     <ImageView
-        android:id="@+id/playerOneMiddleDiceImageId"
+        android:id="@+id/player_one_middle_dice"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="85dp"
         android:layout_marginEnd="86dp"
         android:contentDescription="TODO"
-        app:layout_constraintBottom_toBottomOf="@+id/playerOneFirstDiceImageId"
-        app:layout_constraintEnd_toStartOf="@+id/playerOneLastDiceImageId"
-        app:layout_constraintStart_toEndOf="@+id/playerOneFirstDiceImageId"
-        app:layout_constraintTop_toTopOf="@+id/playerOneFirstDiceImageId"
+        app:layout_constraintBottom_toBottomOf="@+id/player_one_first_dice"
+        app:layout_constraintEnd_toStartOf="@+id/player_one_last_dice"
+        app:layout_constraintStart_toEndOf="@+id/player_one_first_dice"
+        app:layout_constraintTop_toTopOf="@+id/player_one_first_dice"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/dice_face_one" />
 
     <ImageView
-        android:id="@+id/playerOneLastDiceImageId"
+        android:id="@+id/player_one_last_dice"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:contentDescription="TODO"
-        app:layout_constraintBottom_toBottomOf="@+id/playerOneMiddleDiceImageId"
-        app:layout_constraintEnd_toEndOf="@+id/localPlayerResultText"
-        app:layout_constraintTop_toTopOf="@+id/playerOneMiddleDiceImageId"
+        app:layout_constraintBottom_toBottomOf="@+id/player_one_middle_dice"
+        app:layout_constraintEnd_toEndOf="@+id/local_player_result"
+        app:layout_constraintTop_toTopOf="@+id/player_one_middle_dice"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/dice_face_one" />
 
     <ImageView
-        android:id="@+id/playerTwoFirstDiceImageId"
+        android:id="@+id/player_two_first_dice"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="8dp"
@@ -74,25 +74,25 @@
 
 
     <ImageView
-        android:id="@+id/playerTwoMiddleDiceImageId"
+        android:id="@+id/player_two_middle_dice"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="85dp"
         android:layout_marginEnd="86dp"
-        app:layout_constraintBottom_toBottomOf="@+id/playerTwoFirstDiceImageId"
-        app:layout_constraintEnd_toStartOf="@+id/playerTwoLastDiceImageId"
-        app:layout_constraintStart_toEndOf="@+id/playerTwoFirstDiceImageId"
-        app:layout_constraintTop_toTopOf="@+id/playerTwoFirstDiceImageId"
+        app:layout_constraintBottom_toBottomOf="@+id/player_two_first_dice"
+        app:layout_constraintEnd_toStartOf="@+id/player_two_last_dice"
+        app:layout_constraintStart_toEndOf="@+id/player_two_first_dice"
+        app:layout_constraintTop_toTopOf="@+id/player_two_first_dice"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/dice_face_one" />
 
     <ImageView
-        android:id="@+id/playerTwoLastDiceImageId"
+        android:id="@+id/player_two_last_dice"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        app:layout_constraintBottom_toBottomOf="@+id/playerTwoMiddleDiceImageId"
-        app:layout_constraintEnd_toEndOf="@+id/computerResultText"
-        app:layout_constraintTop_toTopOf="@+id/playerTwoMiddleDiceImageId"
+        app:layout_constraintBottom_toBottomOf="@+id/player_two_middle_dice"
+        app:layout_constraintEnd_toEndOf="@+id/computer_result"
+        app:layout_constraintTop_toTopOf="@+id/player_two_middle_dice"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/dice_face_one" />
 
@@ -101,11 +101,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PLAYER"
-        app:layout_constraintStart_toStartOf="@+id/playLocalButton"
-        app:layout_constraintTop_toBottomOf="@+id/playLocalButton" />
+        app:layout_constraintStart_toStartOf="@+id/play_local_button"
+        app:layout_constraintTop_toBottomOf="@+id/play_local_button" />
 
     <TextView
-        android:id="@+id/localPlayerResultText"
+        android:id="@+id/local_player_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="204dp"
@@ -113,7 +113,7 @@
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="@+id/playLocalButton"
+        app:layout_constraintEnd_toEndOf="@+id/play_local_button"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView" />
 
@@ -123,50 +123,50 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="COMPUTER"
-        app:layout_constraintStart_toStartOf="@+id/playerOneFirstDiceImageId"
-        app:layout_constraintTop_toBottomOf="@+id/playerOneFirstDiceImageId" />
+        app:layout_constraintStart_toStartOf="@+id/player_one_first_dice"
+        app:layout_constraintTop_toBottomOf="@+id/player_one_first_dice" />
 
     <TextView
-        android:id="@+id/computerResultText"
+        android:id="@+id/computer_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="COMPUTER RESULT"
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="@+id/playerOneLastDiceImageId"
+        app:layout_constraintEnd_toEndOf="@+id/player_one_last_dice"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textView3" />
 
     <Button
-        android:id="@+id/statsButton"
+        android:id="@+id/result_table_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="STATS"
-        app:layout_constraintEnd_toEndOf="@+id/playerTwoLastDiceImageId"
+        app:layout_constraintEnd_toEndOf="@+id/player_two_last_dice"
         app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toStartOf="@+id/playerTwoFirstDiceImageId"
-        app:layout_constraintTop_toBottomOf="@+id/playerTwoMiddleDiceImageId" />
+        app:layout_constraintStart_toStartOf="@+id/player_two_first_dice"
+        app:layout_constraintTop_toBottomOf="@+id/player_two_middle_dice" />
 
     <Button
-        android:id="@+id/signinButton"
+        android:id="@+id/signin_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="SIGNIN"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/paramButton"
+        app:layout_constraintEnd_toEndOf="@+id/param_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/paramButton" />
+        app:layout_constraintTop_toBottomOf="@+id/param_button" />
 
     <Button
-        android:id="@+id/paramButton"
+        android:id="@+id/param_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="PARAMETER"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/statsButton"
-        app:layout_constraintStart_toStartOf="@+id/statsButton"
-        app:layout_constraintTop_toBottomOf="@+id/statsButton" />
+        app:layout_constraintEnd_toEndOf="@+id/result_table_button"
+        app:layout_constraintStart_toStartOf="@+id/result_table_button"
+        app:layout_constraintTop_toBottomOf="@+id/result_table_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
