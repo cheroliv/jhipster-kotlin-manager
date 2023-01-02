@@ -18,7 +18,7 @@ class StatsActivity : AppCompatActivity() {
                 setOnClickListener { finish() }
             }
             statsRV.apply {
-                adapter = CeeloAdapter(get<GameService>().allGames())
+                adapter = GamesAdapter(get<GameService>().allGames())
                 layoutManager = LinearLayoutManager(this@StatsActivity)
             }
         }

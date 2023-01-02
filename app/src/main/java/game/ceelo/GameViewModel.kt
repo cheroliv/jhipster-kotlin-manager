@@ -16,7 +16,7 @@ import game.ceelo.Game.runDices
 import game.ceelo.Game.secondPlayer
 import game.ceelo.GameResult.*
 
-class DiceGameViewModel(val gameService: GameService) : ViewModel() {
+class GameViewModel(val gameService: GameService) : ViewModel() {
     private val _resultPair: MutableLiveData<List<Pair<GameResult, Int>>> = MutableLiveData()
     val resultPairList: LiveData<List<Pair<GameResult, Int>>> = _resultPair
 
