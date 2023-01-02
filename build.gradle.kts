@@ -1,7 +1,7 @@
-
-
-import java.lang.System.getProperty
 import java.io.ByteArrayOutputStream
+import java.lang.System.getProperty
+
+/*=================================================================================*/
 
 buildscript {
     repositories {
@@ -11,9 +11,10 @@ buildscript {
     }
     dependencies {
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${properties["nav_version"]}")
-        classpath ("org.jetbrains.kotlin:kotlin-gradle-plugin:${properties["kotlin_version"]}")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${properties["kotlin_version"]}")
     }
 }
+/*=================================================================================*/
 
 plugins {
     id("com.android.application") version ("7.2.1") apply (false)
@@ -22,33 +23,43 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version ("1.7.20") apply (false)
 }
 
+/*=================================================================================*/
+
 tasks.register<Delete>("clean") {
     description = "Delete directory build"
     group = "build"
     delete(rootProject.buildDir)
 }
+/*=================================================================================*/
 
 tasks.register<GradleBuild>("serve") {
-    description = "lance le server backend de l'application"
-    val pathSeparator: String = getProperty("file.separator")
-    buildFile = File("${rootDir.path}${pathSeparator}webapp${pathSeparator}build.gradle")
+    description = "launch ceelo backend web application"
+    buildFile = File(buildString {
+        append(rootDir.path)
+        append(getProperty("file.separator"))
+        append("webapp")
+        append(getProperty("file.separator"))
+        append("build.gradle")
+    })
     tasks = listOf("bootRun")
 }
-
+/*=================================================================================*/
 
 open class GradleStop : Exec() {
-    @Suppress("PropertyName")
-    private val GRADLE_PATH="/.sdkman/candidates/gradle/current/bin/gradle"
     init {
+        description = "Stop any gradle daemons running!"
         workingDir = project.rootDir
         @Suppress("LeakingThis")
-        commandLine("${getProperty("user.home")}${GRADLE_PATH}", "--stop")
+        commandLine(buildString {
+            append(getProperty("user.home"))
+            append("/.sdkman/candidates/gradle/current/bin/gradle")
+        }, "--stop")
         standardOutput = ByteArrayOutputStream()
     }
 }
+/*=================================================================================*/
 
 project.tasks.register<GradleStop>("gradleStop")
 
-project.tasks.withType<GradleStop> {
-    doLast { logger.info(standardOutput.toString()) }
-}
+project.tasks.withType<GradleStop> { doLast { logger.info(standardOutput.toString()) } }
+/*=================================================================================*/
