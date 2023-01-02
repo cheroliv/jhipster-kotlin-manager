@@ -42,11 +42,12 @@ sudo snap remove curl
 sudo apt install curl
 ----
 
-_java_
+_java & gradle_
 [source,bash]
 ----
 curl -s "https://get.sdkman.io" | bash
 sdk i java 17.0.5-tem
+sdk i gradle
 ----
 
 _android-studio_
@@ -150,3 +151,14 @@ cela permet d'exécuter du metier indépendamment de tous frameworks.
 ./gradlew :domain:check
 ----
 le rapport de test est ici : domain/build/reports/tests/test/index.html
+
+== Rest API & backoffice
+
+=== Executer le backend, depuis le projet parent
+
+Le backend est un projet independant du multibuild project executable depuis une tache externe.
+En local sur http://localhost:8080[http://localhost:8080] +
+[source,bash]
+----
+./gradlew -q gradleStop; clear; ./gradlew -q serve;
+----
