@@ -30,16 +30,18 @@ tasks.register<Delete>("clean") {
     group = "build"
     delete(rootProject.buildDir)
 }
-/*=================================================================================*/
 
+/*=================================================================================*/
+//TODO: effacer les dossier webapp avec les sources a ajouter, copier les sources 
+// de webapp-src vers webapp.
+//recuperer build.gradle
+// et le jdl
 tasks.register<GradleBuild>("serve") {
     description = "launch ceelo backend web application"
-    buildFile = File(buildString {
+    dir = File(buildString {
         append(rootDir.path)
         append(getProperty("file.separator"))
         append("webapp")
-        append(getProperty("file.separator"))
-        append("build.gradle")
     })
     tasks = listOf("bootRun")
 }
