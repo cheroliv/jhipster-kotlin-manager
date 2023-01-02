@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CeeLoGame" >
         <activity
-            android:name=".RvCardvActivity"
+            android:name=".ResultCardsActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"

@@ -18,7 +18,7 @@ class ResultsActivity : AppCompatActivity() {
                 setOnClickListener { finish() }
             }
             statsRV.apply {
-                adapter = GamesAdapter(get<GameService>().allGames())
+                adapter = ResultsAdapter(get<GameService>().allGames())
                 layoutManager = LinearLayoutManager(this@ResultsActivity)
             }
         }
