@@ -10,18 +10,16 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 
-val ceeloModule = module {
-    singleOf(::GameServiceAndroid) { bind<GameService>() }
-    viewModelOf(::DiceGameViewModel)
-}
-
 class CeeLoApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
             androidLogger()
             androidContext(this@CeeLoApplication)
-            modules(ceeloModule)
+            modules(module {
+                singleOf(::GameServiceAndroid) { bind<GameService>() }
+                viewModelOf(::DiceGameViewModel)
+            })
         }
     }
 }

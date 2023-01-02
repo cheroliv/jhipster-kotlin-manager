@@ -13,8 +13,8 @@ class MainActivity : AppCompatActivity() {
         inflate(layoutInflater).apply {
             setContentView(root)
             loadLocalGame(
-                mainActivity = this@MainActivity,
-                diceGameViewModel = getViewModel(),
+                this@MainActivity,
+                getViewModel(),
                 playersUI = listOf(
                     listOf(
                         playerOneFirstDiceImageId,
