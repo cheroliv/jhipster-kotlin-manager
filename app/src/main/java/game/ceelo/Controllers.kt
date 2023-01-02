@@ -3,11 +3,13 @@
 package game.ceelo
 
 import android.content.Intent
-import android.view.animation.Animation
+import android.view.animation.Animation.RELATIVE_TO_SELF
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
+import game.ceelo.GameResult.*
 import game.ceelo.Hand.getDiceImageFromDiceValue
+import game.ceelo.R.drawable.*
 import game.ceelo.databinding.ActivityGameBinding
 
 fun ActivityGameBinding.loadLocalGame(
@@ -60,12 +62,12 @@ fun ActivityGameBinding.loadLocalGame(
 
 val diceImages: List<Int>
     get() = listOf(
-        R.drawable.dice_face_one,
-        R.drawable.dice_face_two,
-        R.drawable.dice_face_three,
-        R.drawable.dice_face_four,
-        R.drawable.dice_face_five,
-        R.drawable.dice_face_six,
+        dice_face_one,
+        dice_face_two,
+        dice_face_three,
+        dice_face_four,
+        dice_face_five,
+        dice_face_six,
     )
 
 fun playerThrow(
@@ -103,9 +105,9 @@ fun runDiceAnimation(
     startAnimation(RotateAnimation(
         0f,
         360f,
-        Animation.RELATIVE_TO_SELF,
+        RELATIVE_TO_SELF,
         0.5f,
-        Animation.RELATIVE_TO_SELF,
+        RELATIVE_TO_SELF,
         0.5f
     ).apply { duration = 500 })
 }
@@ -117,8 +119,8 @@ fun setTextViewResult(
 ): TextView = textViewResult.apply {
     visibility = textViewVisibility
     text = when (diceResult) {
-        GameResult.WIN -> GameResult.WIN.toString()
-        GameResult.LOOSE -> GameResult.LOOSE.toString()
-        else -> GameResult.RERUN.toString()
+        WIN -> WIN.toString()
+        LOOSE -> LOOSE.toString()
+        else -> RERUN.toString()
     }
 }
