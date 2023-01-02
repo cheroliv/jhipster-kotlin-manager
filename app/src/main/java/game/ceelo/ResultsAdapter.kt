@@ -13,6 +13,7 @@ import game.ceelo.Constant.PLAYER_TWO_NAME
 import game.ceelo.Game.firstPlayer
 import game.ceelo.Game.secondPlayer
 import game.ceelo.Hand.compareHands
+import game.ceelo.R.id.*
 import game.ceelo.R.layout.simple_game_row
 import game.ceelo.ResultsAdapter.CeeloViewHolder
 
@@ -36,15 +37,15 @@ class ResultsAdapter(
         holder: CeeloViewHolder,
         position: Int
     ) = games[position].run {
-        holder.game_id_text.text = (position + 1).toString()
-        holder.player_one_name_text.text = PLAYER_ONE_NAME
-        holder.player_one_dices_throw_text.text = firstPlayer().toString()
-        holder.player_one_result_text.text = firstPlayer().compareHands(secondPlayer()).toString()
-        holder.player_one_game_type_text.text = GAME_TYPE
-        holder.player_two_name_text.text = PLAYER_TWO_NAME
-        holder.player_two_dices_throw_text.text = secondPlayer().toString()
-        holder.player_two_result_text.text = secondPlayer().compareHands(firstPlayer()).toString()
-        holder.player_two_game_type_text.text = GAME_TYPE
+        holder.game_id.text = (position + 1).toString()
+        holder.player_one_name.text = PLAYER_ONE_NAME
+        holder.player_one_dices_throw.text = firstPlayer().toString()
+        holder.player_one_result.text = firstPlayer().compareHands(secondPlayer()).toString()
+        holder.player_one_game_type.text = GAME_TYPE
+        holder.player_two_name.text = PLAYER_TWO_NAME
+        holder.player_two_dices_throw.text = secondPlayer().toString()
+        holder.player_two_result.text = secondPlayer().compareHands(firstPlayer()).toString()
+        holder.player_two_game_type.text = GAME_TYPE
     }
 
     override fun getItemCount(): Int = games.size
@@ -52,14 +53,14 @@ class ResultsAdapter(
 
     class CeeloViewHolder(
         itemView: View,
-        var game_id_text: TextView = itemView.findViewById(R.id.game_id_text),
-        var player_one_name_text: TextView = itemView.findViewById(R.id.player_one_name_text),
-        var player_one_dices_throw_text: TextView = itemView.findViewById(R.id.player_one_dices_throw_text),
-        var player_one_result_text: TextView = itemView.findViewById(R.id.player_one_result_text),
-        var player_one_game_type_text: TextView = itemView.findViewById(R.id.player_one_game_type_text),
-        var player_two_name_text: TextView = itemView.findViewById(R.id.player_two_name_text),
-        var player_two_dices_throw_text: TextView = itemView.findViewById(R.id.player_two_dices_throw_text),
-        var player_two_result_text: TextView = itemView.findViewById(R.id.player_two_result_text),
-        var player_two_game_type_text: TextView = itemView.findViewById(R.id.player_two_game_type_text),
+        var game_id: TextView = itemView.findViewById(game_id_text),
+        var player_one_name: TextView = itemView.findViewById(player_one_name_text),
+        var player_one_dices_throw: TextView = itemView.findViewById(player_one_dices_throw_text),
+        var player_one_result: TextView = itemView.findViewById(player_one_result_text),
+        var player_one_game_type: TextView = itemView.findViewById(player_one_game_type_text),
+        var player_two_name: TextView = itemView.findViewById(player_two_name_text),
+        var player_two_dices_throw: TextView = itemView.findViewById(player_two_dices_throw_text),
+        var player_two_result: TextView = itemView.findViewById(player_two_result_text),
+        var player_two_game_type: TextView = itemView.findViewById(player_two_game_type_text),
     ) : ViewHolder(itemView)
 }
