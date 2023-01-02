@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import game.ceelo.databinding.ActivityStatsBinding.inflate
 import org.koin.android.ext.android.get
 
-class StatsActivity : AppCompatActivity() {
+class ResultsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +19,7 @@ class StatsActivity : AppCompatActivity() {
             }
             statsRV.apply {
                 adapter = GamesAdapter(get<GameService>().allGames())
-                layoutManager = LinearLayoutManager(this@StatsActivity)
+                layoutManager = LinearLayoutManager(this@ResultsActivity)
             }
         }
     }

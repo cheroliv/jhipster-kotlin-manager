@@ -2,7 +2,7 @@ package game.ceelo
 
 import kotlin.test.*
 
-class MainActivityTest {
+class GameActivityTest {
 
     @BeforeTest
     fun setUp() {

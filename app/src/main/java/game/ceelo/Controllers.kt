@@ -11,13 +11,13 @@ import game.ceelo.Hand.getDiceImageFromDiceValue
 import game.ceelo.databinding.ActivityMainBinding
 
 fun ActivityMainBinding.loadLocalGame(
-    mainActivity: MainActivity,
+    gameActivity: GameActivity,
     gameViewModel: GameViewModel,
     playersUI: List<List<ImageView>>,
     resultUI: List<TextView>
 ): ActivityMainBinding = apply {
 
-    gameViewModel.diceGame.observe(mainActivity) { game ->
+    gameViewModel.diceGame.observe(gameActivity) { game ->
         playersUI.mapIndexed { i, it ->
             playerUI(game[i], diceImages, it)
         }
@@ -26,7 +26,7 @@ fun ActivityMainBinding.loadLocalGame(
     resultUI.mapIndexed { i, it ->
         gameViewModel
             .resultPairList
-            .observe(mainActivity) { result ->
+            .observe(gameActivity) { result ->
                 setTextViewResult(it, result[i].first, result[i].second)
             }
     }
@@ -50,11 +50,11 @@ fun ActivityMainBinding.loadLocalGame(
     }
 
     statsButton.setOnClickListener {
-        mainActivity.startActivity(Intent(mainActivity, StatsActivity::class.java))
+        gameActivity.startActivity(Intent(gameActivity, ResultsActivity::class.java))
     }
 
     signinButton.setOnClickListener {
-        mainActivity.startActivity(Intent(mainActivity, LoginActivity::class.java))
+        gameActivity.startActivity(Intent(gameActivity, LoginActivity::class.java))
     }
 }
 

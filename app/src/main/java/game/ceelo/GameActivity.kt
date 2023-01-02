@@ -6,14 +6,14 @@ import game.ceelo.databinding.ActivityMainBinding.inflate
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 
-class MainActivity : AppCompatActivity() {
+class GameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inflate(layoutInflater).apply {
             setContentView(root)
             loadLocalGame(
-                this@MainActivity,
+                this@GameActivity,
                 getViewModel(),
                 playersUI = listOf(
                     listOf(
