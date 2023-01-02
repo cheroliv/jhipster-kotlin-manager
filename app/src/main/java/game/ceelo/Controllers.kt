@@ -8,14 +8,14 @@ import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
 import game.ceelo.Hand.getDiceImageFromDiceValue
-import game.ceelo.databinding.ActivityMainBinding
+import game.ceelo.databinding.ActivityGameBinding
 
-fun ActivityMainBinding.loadLocalGame(
+fun ActivityGameBinding.loadLocalGame(
     gameActivity: GameActivity,
     gameViewModel: GameViewModel,
     playersUI: List<List<ImageView>>,
     resultUI: List<TextView>
-): ActivityMainBinding = apply {
+) = apply {
 
     gameViewModel.diceGame.observe(gameActivity) { game ->
         playersUI.mapIndexed { i, it ->
@@ -50,7 +50,7 @@ fun ActivityMainBinding.loadLocalGame(
     }
 
     statsButton.setOnClickListener {
-        gameActivity.startActivity(Intent(gameActivity, ResultsActivity::class.java))
+        gameActivity.startActivity(Intent(gameActivity, ResultTableActivity::class.java))
     }
 
     signinButton.setOnClickListener {

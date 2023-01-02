@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".ResultsActivity">
+    tools:context=".ResultTableActivity">
 
     <Button
         android:id="@+id/backButton"
@@ -16,7 +16,7 @@
         android:text="BACK" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/statsRV"
+        android:id="@+id/result_table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp">

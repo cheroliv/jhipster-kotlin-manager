@@ -12,7 +12,7 @@
 
 
     <TextView
-        android:id="@+id/gameIdText"
+        android:id="@+id/game_id_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="game id"
@@ -27,8 +27,8 @@
         android:layout_height="wrap_content"
         android:text="player name"
         android:textSize="14sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/gameIdText"
-        app:layout_constraintStart_toEndOf="@+id/gameIdText" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/game_id_text"
+        app:layout_constraintStart_toEndOf="@+id/game_id_text" />
 
     <TextView
         android:id="@+id/player_one_dices_throw_text"
@@ -70,9 +70,9 @@
 <!--        android:text="game type"-->
 <!--        android:textAlignment="viewEnd"-->
 <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/gameIdText"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/gameIdText"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/gameIdText"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/game_id_text"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/game_id_text"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/game_id_text"-->
 <!--        app:layout_constraintVertical_bias="0.0" />-->
 
 

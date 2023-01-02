@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import game.ceelo.ResultsAdapter.CeeloViewHolder
 import game.ceelo.Constant.GAME_TYPE
 import game.ceelo.Constant.PLAYER_ONE_NAME
 import game.ceelo.Constant.PLAYER_TWO_NAME
-import game.ceelo.Hand.compareHands
 import game.ceelo.Game.firstPlayer
 import game.ceelo.Game.secondPlayer
+import game.ceelo.Hand.compareHands
+import game.ceelo.R.layout.simple_game_row
+import game.ceelo.ResultsAdapter.CeeloViewHolder
 
 class ResultsAdapter(
     var games: List<List<List<Int>>>
@@ -24,7 +25,7 @@ class ResultsAdapter(
         viewType: Int
     ): CeeloViewHolder = CeeloViewHolder(
         LayoutInflater.from(parent.context).inflate(
-            R.layout.simple_game_row,
+            simple_game_row,
             parent,
             false
         )
@@ -35,7 +36,7 @@ class ResultsAdapter(
         holder: CeeloViewHolder,
         position: Int
     ) = games[position].run {
-        holder.gameIdText.text = (position + 1).toString()
+        holder.game_id_text.text = (position + 1).toString()
         holder.player_one_name_text.text = PLAYER_ONE_NAME
         holder.player_one_dices_throw_text.text = firstPlayer().toString()
         holder.player_one_result_text.text = firstPlayer().compareHands(secondPlayer()).toString()
@@ -51,7 +52,7 @@ class ResultsAdapter(
 
     class CeeloViewHolder(
         itemView: View,
-        var gameIdText: TextView = itemView.findViewById(R.id.gameIdText),
+        var game_id_text: TextView = itemView.findViewById(R.id.game_id_text),
         var player_one_name_text: TextView = itemView.findViewById(R.id.player_one_name_text),
         var player_one_dices_throw_text: TextView = itemView.findViewById(R.id.player_one_dices_throw_text),
         var player_one_result_text: TextView = itemView.findViewById(R.id.player_one_result_text),

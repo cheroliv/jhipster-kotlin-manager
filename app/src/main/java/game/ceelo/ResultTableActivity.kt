@@ -5,10 +5,10 @@ package game.ceelo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import game.ceelo.databinding.ActivityStatsBinding.inflate
+import game.ceelo.databinding.ActivityResultTableBinding.inflate
 import org.koin.android.ext.android.get
 
-class ResultsActivity : AppCompatActivity() {
+class ResultTableActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,9 +17,9 @@ class ResultsActivity : AppCompatActivity() {
             backButton.apply {
                 setOnClickListener { finish() }
             }
-            statsRV.apply {
+            resultTable.apply {
                 adapter = ResultsAdapter(get<GameService>().allGames())
-                layoutManager = LinearLayoutManager(this@ResultsActivity)
+                layoutManager = LinearLayoutManager(this@ResultTableActivity)
             }
         }
     }
