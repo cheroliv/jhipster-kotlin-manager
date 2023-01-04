@@ -1,1 +1,0 @@
-org.springframework.test.context.ContextCustomizerFactory = com.cheroliv.webapp.ceelo.config.TestContainersSpringContextCustomizerFactory

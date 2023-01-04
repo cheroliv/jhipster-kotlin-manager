@@ -32,14 +32,48 @@ tasks.register<Delete>("clean") {
 }
 
 /*=================================================================================*/
-//save source: sauve les sources de webapp dans webapp-src
-//import source: copie les sources de webapp-src vers webapp
-//TODO: effacer les dossier webapp avec les sources a ajouter, copier les sources 
-// de webapp-src vers webapp.
-//recuperer build.gradle
-// et le jdl
-//TODO: task qui sauve les fichiers de webapps dans webapp-src
+
+tasks.register<Copy>("exportWebappSource") {
+    group = "webbap"
+    description = "copy sources from webapp into webapp-src"
+    doFirst{
+        from(layout.projectDirectory.file("webapp/build.gradle"))
+        into(layout.projectDirectory.dir("webapp-src"))
+
+        from(layout.projectDirectory.file("webapp/settings.gradle"))
+        into(layout.projectDirectory.dir("webapp-src"))
+
+        from(layout.projectDirectory.file("webapp/ceelo.jdl"))
+        into(layout.projectDirectory.dir("webapp-src"))
+
+        from(layout.projectDirectory.dir("webapp/src/main/kotlin"))
+        into(layout.projectDirectory.dir("webapp-src/main/kotlin"))
+    }
+}
+
+tasks.register<Copy>("syncWebappSource") {
+    group = "webbap"
+    description = "copy sources from webapp-src into webapp"
+    doFirst{
+        from(layout.projectDirectory.file("webapp-src/build.gradle"))
+        into(layout.projectDirectory.dir("webapp"))
+
+        from(layout.projectDirectory.file("webapp-src/settings.gradle"))
+        into(layout.projectDirectory.dir("webapp"))
+
+        from(layout.projectDirectory.file("webapp-src/ceelo.jdl"))
+        into(layout.projectDirectory.dir("webapp"))
+
+    }
+}
+tasks.register("jdlWebappSource") {
+    group = "webbap"
+    description = ""
+}
+/*=================================================================================*/
+
 tasks.register<GradleBuild>("serve") {
+    group = "webapp"
     description = "launch ceelo backend web application"
     dir = File(buildString {
         append(rootDir.path)
@@ -50,6 +84,17 @@ tasks.register<GradleBuild>("serve") {
 }
 /*=================================================================================*/
 
+tasks.register<GradleBuild>("checkWebapp") {
+    group = "webapp"
+    description = "launch ceelo backend web application"
+    dir = File(buildString {
+        append(rootDir.path)
+        append(getProperty("file.separator"))
+        append("webapp")
+    })
+    tasks = listOf("check")
+}
+/*=================================================================================*/
 open class GradleStop : Exec() {
     init {
         description = "Stop any gradle daemons running!"
@@ -64,7 +109,11 @@ open class GradleStop : Exec() {
 }
 /*=================================================================================*/
 
-project.tasks.register<GradleStop>("gradleStop")
+project.tasks.register<GradleStop>("gradleStop") {
+    group = "webapp"
+    description = "use system gradle to launch gradle --stop task, to kill webapp process"
+    doLast { logger.info(standardOutput.toString()) }
+}
 
-project.tasks.withType<GradleStop> { doLast { logger.info(standardOutput.toString()) } }
+//project.tasks.withType<GradleStop> { doLast { logger.info(standardOutput.toString()) } }
 /*=================================================================================*/

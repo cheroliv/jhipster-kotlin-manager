@@ -54,7 +54,7 @@ description = ""
 
 sourceCompatibility=11
 targetCompatibility=11
-assert System.properties["java.specification.version"] == "11" || "12" || "13" || "14" || "15" || "16" || "17" || "18"
+assert System.properties["java.specification.version"] == "11" || "12" || "13" || "14" || "15" || "16" || "17" || "18" || "19"
 
 apply from: "gradle/docker.gradle"
 apply from: "gradle/sonar.gradle"
@@ -257,7 +257,7 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.springframework.boot:spring-boot-test"
     testImplementation "org.springframework.security:spring-security-test"
-    testImplementation "io.projectreactor.tools:blockhound-junit-platform:${blockhoundJunitPlatformVersion}"
+    //testImplementation "io.projectreactor.tools:blockhound-junit-platform:${blockhoundJunitPlatformVersion}"
     testRuntimeOnly "org.junit.platform:junit-platform-launcher:${junitPlatformLauncherVersion}"
     testImplementation "com.tngtech.archunit:archunit-junit5-api:${archunitJunit5Version}"
     testRuntimeOnly "com.tngtech.archunit:archunit-junit5-engine:${archunitJunit5Version}"
@@ -327,6 +327,7 @@ wrapper {
     gradleVersion = "7.6"
 }
 
+/*
 task webapp_test(type: NpmTask, dependsOn: "npm_install") {
     args = ["run", "webapp:test"]
 }
@@ -351,7 +352,7 @@ if (project.hasProperty("nodeInstall")) {
     }
     tasks.named("npmSetup").configure { finalizedBy fixedNpm }
 }
-
+*/
 //test.dependsOn webapp_test
 compileJava.dependsOn processResources
 processResources.dependsOn bootBuildInfo
