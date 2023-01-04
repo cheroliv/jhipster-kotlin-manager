@@ -1,9 +1,12 @@
 import java.io.ByteArrayOutputStream
 import java.lang.System.getProperty
+import java.util.*
 
 /*=================================================================================*/
 
 buildscript {
+    val jacksonVersion = "2.14.1"
+
     repositories {
         google()
         gradlePluginPortal()
@@ -12,6 +15,10 @@ buildscript {
     dependencies {
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${properties["nav_version"]}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${properties["kotlin_version"]}")
+        classpath("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
+        classpath("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion")
+        classpath("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+
     }
 }
 /*=================================================================================*/
@@ -33,44 +40,60 @@ tasks.register<Delete>("clean") {
 
 /*=================================================================================*/
 
+fun Copy.syncSrc(
+    path: String,
+    from: String,
+    into: String
+) {
+    from(when {
+        layout
+            .projectDirectory
+            .dir(from)
+            .asFileTree
+            .first { it.name == path }
+            .isDirectory -> layout.projectDirectory.dir(from).dir(path)
+        else -> layout
+            .projectDirectory
+            .dir(from)
+            .file(path)
+    })
+    into(layout.projectDirectory.dir(into))
+}
+/*=================================================================================*/
+
 tasks.register<Copy>("exportWebappSource") {
     group = "webbap"
     description = "copy sources from webapp into webapp-src"
-    doFirst{
-        from(layout.projectDirectory.file("webapp/build.gradle"))
-        into(layout.projectDirectory.dir("webapp-src"))
 
-        from(layout.projectDirectory.file("webapp/settings.gradle"))
-        into(layout.projectDirectory.dir("webapp-src"))
-
-        from(layout.projectDirectory.file("webapp/ceelo.jdl"))
-        into(layout.projectDirectory.dir("webapp-src"))
-
-        from(layout.projectDirectory.dir("webapp/src/main/kotlin"))
-        into(layout.projectDirectory.dir("webapp-src/main/kotlin"))
+    doFirst {
+        StringTokenizer(properties["webapp_src"].toString(), ",")
+            .toList()
+            .forEach { syncSrc(it as String, "webapp", "webapp-src") }
     }
 }
+
+/*=================================================================================*/
 
 tasks.register<Copy>("syncWebappSource") {
     group = "webbap"
     description = "copy sources from webapp-src into webapp"
-    doFirst{
-        from(layout.projectDirectory.file("webapp-src/build.gradle"))
-        into(layout.projectDirectory.dir("webapp"))
 
-        from(layout.projectDirectory.file("webapp-src/settings.gradle"))
-        into(layout.projectDirectory.dir("webapp"))
-
-        from(layout.projectDirectory.file("webapp-src/ceelo.jdl"))
-        into(layout.projectDirectory.dir("webapp"))
-
+    doFirst {
+        StringTokenizer(properties["webapp_src"] as String, ",")
+            .iterator()
+            .forEach { syncSrc(it as String, "webapp-src", "webapp") }
     }
 }
-tasks.register("jdlWebappSource") {
-    group = "webbap"
-    description = ""
+
+tasks.register("foo"){
+    doLast{
+        StringTokenizer(properties["webapp_src"] as String, ",")
+            .iterator()
+            .forEach (::println)
+    }
 }
 /*=================================================================================*/
+
 
 tasks.register<GradleBuild>("serve") {
     group = "webapp"
@@ -114,6 +137,4 @@ project.tasks.register<GradleStop>("gradleStop") {
     description = "use system gradle to launch gradle --stop task, to kill webapp process"
     doLast { logger.info(standardOutput.toString()) }
 }
-
-//project.tasks.withType<GradleStop> { doLast { logger.info(standardOutput.toString()) } }
 /*=================================================================================*/
