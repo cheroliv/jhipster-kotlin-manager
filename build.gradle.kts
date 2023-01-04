@@ -31,13 +31,48 @@ plugins {
 }
 
 /*=================================================================================*/
-
-tasks.register<Delete>("clean") {
-    description = "Delete directory build"
-    group = "build"
-    delete(rootProject.buildDir)
+tasks.register<GradleBuild>("serve") {
+    group = "webapp"
+    description = "launch ceelo backend web application"
+    dir = File(buildString {
+        append(rootDir.path)
+        append(getProperty("file.separator"))
+        append("webapp")
+    })
+    tasks = listOf("bootRun")
 }
+/*=================================================================================*/
 
+tasks.register<GradleBuild>("checkWebapp") {
+    group = "webapp"
+    description = "launch ceelo backend web application"
+    dir = File(buildString {
+        append(rootDir.path)
+        append(getProperty("file.separator"))
+        append("webapp")
+    })
+    tasks = listOf("check")
+}
+/*=================================================================================*/
+open class GradleStop : Exec() {
+    init {
+        description = "Stop any gradle daemons running!"
+        workingDir = project.rootDir
+        @Suppress("LeakingThis")
+        commandLine(buildString {
+            append(getProperty("user.home"))
+            append("/.sdkman/candidates/gradle/current/bin/gradle")
+        }, "--stop")
+        standardOutput = ByteArrayOutputStream()
+    }
+}
+/*=================================================================================*/
+
+project.tasks.register<GradleStop>("gradleStop") {
+    group = "webapp"
+    description = "use system gradle to launch gradle --stop task, to kill webapp process"
+    doLast { logger.info(standardOutput.toString()) }
+}
 /*=================================================================================*/
 
 fun Copy.syncSrc(
@@ -85,48 +120,9 @@ tasks.register<Copy>("syncWebappSource") {
     }
 }
 /*=================================================================================*/
-
-
-tasks.register<GradleBuild>("serve") {
-    group = "webapp"
-    description = "launch ceelo backend web application"
-    dir = File(buildString {
-        append(rootDir.path)
-        append(getProperty("file.separator"))
-        append("webapp")
-    })
-    tasks = listOf("bootRun")
-}
-/*=================================================================================*/
-
-tasks.register<GradleBuild>("checkWebapp") {
-    group = "webapp"
-    description = "launch ceelo backend web application"
-    dir = File(buildString {
-        append(rootDir.path)
-        append(getProperty("file.separator"))
-        append("webapp")
-    })
-    tasks = listOf("check")
-}
-/*=================================================================================*/
-open class GradleStop : Exec() {
-    init {
-        description = "Stop any gradle daemons running!"
-        workingDir = project.rootDir
-        @Suppress("LeakingThis")
-        commandLine(buildString {
-            append(getProperty("user.home"))
-            append("/.sdkman/candidates/gradle/current/bin/gradle")
-        }, "--stop")
-        standardOutput = ByteArrayOutputStream()
-    }
-}
-/*=================================================================================*/
-
-project.tasks.register<GradleStop>("gradleStop") {
-    group = "webapp"
-    description = "use system gradle to launch gradle --stop task, to kill webapp process"
-    doLast { logger.info(standardOutput.toString()) }
+tasks.register<Delete>("clean") {
+    description = "Delete directory build"
+    group = "build"
+    delete(rootProject.buildDir)
 }
 /*=================================================================================*/
