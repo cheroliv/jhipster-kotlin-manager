@@ -3,17 +3,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 buildscript {
     repositories {
         gradlePluginPortal()
-        google()
-        mavenCentral()
-        maven{url "https://maven.pkg.jetbrains.space/public/p/compose/dev"}
-        maven{url "https://repo.spring.io/milestone"}
-        maven{url "https://repo.spring.io/snapshot"}
     }
     dependencies {
         //jhipster-needle-gradle-buildscript-dependency - JHipster will add additional gradle build script plugins here
-	classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
-        classpath("com.google.cloud.tools:appengine-gradle-plugin:2.4.5")
-
+        //classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
     }
 }
 
@@ -37,7 +30,6 @@ plugins {
     id ("org.jetbrains.kotlin.plugin.allopen") version ("1.8.0")
     id ("org.jetbrains.kotlin.plugin.noarg") version ("1.8.0")
     id ("org.jetbrains.kotlin.plugin.serialization") version ("1.8.0")
-    id ("com.google.cloud.tools.appengine") version ("2.4.5")
 }
 
 
@@ -155,7 +147,7 @@ task cucumberTest(type: Test) {
     reports.html.enabled = false
 }
 
-//check.dependsOn cucumberTest
+check.dependsOn cucumberTest
 
 check.dependsOn integrationTest
 task testReport(type: TestReport) {
@@ -205,12 +197,7 @@ repositories {
     // mavenLocal()
     mavenCentral()
     //jhipster-needle-gradle-repositories - JHipster will add additional repositories
-    google()
-    maven{url "https://repo.spring.io/milestone"}
-    maven{url "https://repo.spring.io/snapshot"}
-    maven{url "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/bootstrap/"}
-    maven{url "https://maven.pkg.jetbrains.space/public/p/compose/dev"}
-    maven{url "https://jitpack.io"}
+google()
 }
 
 dependencies {
@@ -293,18 +280,19 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinx_serialization_json_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:${properties["kotlinx_serialization_json.version"]}")
     // Kotlin Tests
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("io.projectreactor:reactor-test")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:$mockito_kotlin_version")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:${properties["mockito_kotlin_version"]}")
     // Mocking
-    testImplementation("io.mockk:mockk:$mockk_version")
-    testImplementation("com.github.tomakehurst:wiremock-jre8:$wiremock_version")
-    testImplementation("com.ninja-squad:springmockk:$springmockk_version")
+    testImplementation("io.mockk:mockk:${properties["mockk.version"]}")
+    testImplementation("com.github.tomakehurst:wiremock-jre8:${properties["wiremock.version"]}")
+    testImplementation("com.ninja-squad:springmockk:${properties["springmockk.version"]}")
     //jackson mapping (json/xml)
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
 }
 
 if (project.hasProperty("gae")) {
@@ -352,6 +340,6 @@ if (project.hasProperty("nodeInstall")) {
     tasks.named("npmSetup").configure { finalizedBy fixedNpm }
 }
 
-//test.dependsOn webapp_test
+test.dependsOn webapp_test
 compileJava.dependsOn processResources
 processResources.dependsOn bootBuildInfo

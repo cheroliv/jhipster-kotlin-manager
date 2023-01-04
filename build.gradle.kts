@@ -32,10 +32,13 @@ tasks.register<Delete>("clean") {
 }
 
 /*=================================================================================*/
+//save source: sauve les sources de webapp dans webapp-src
+//import source: copie les sources de webapp-src vers webapp
 //TODO: effacer les dossier webapp avec les sources a ajouter, copier les sources 
 // de webapp-src vers webapp.
 //recuperer build.gradle
 // et le jdl
+//TODO: task qui sauve les fichiers de webapps dans webapp-src
 tasks.register<GradleBuild>("serve") {
     description = "launch ceelo backend web application"
     dir = File(buildString {
