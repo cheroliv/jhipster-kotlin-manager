@@ -84,14 +84,6 @@ tasks.register<Copy>("syncWebappSource") {
             .forEach { syncSrc(it as String, "webapp-src", "webapp") }
     }
 }
-
-tasks.register("foo"){
-    doLast{
-        StringTokenizer(properties["webapp_src"] as String, ",")
-            .iterator()
-            .forEach (::println)
-    }
-}
 /*=================================================================================*/
 
 
