@@ -1,6 +1,11 @@
+import Build_gradle.Constants.JDL_FILE
+import Build_gradle.Constants.WEBAPP
+import Build_gradle.Constants.WEBAPP_SRC
 import java.io.ByteArrayOutputStream
 import java.lang.System.getProperty
 import java.util.*
+import kotlin.text.Charsets.UTF_8
+
 
 /*=================================================================================*/
 
@@ -28,27 +33,32 @@ plugins {
     id("org.jetbrains.kotlin.android") version ("1.7.20") apply (false)
     id("org.jetbrains.kotlin.jvm") version ("1.7.20") apply (false)
 }
-
+/*=================================================================================*/
+object Constants {
+    const val WEBAPP = "webapp"
+    const val WEBAPP_SRC = "webapp_src"
+    const val JDL_FILE = "ceelo.jdl"
+}
 /*=================================================================================*/
 tasks.register<GradleBuild>("serve") {
-    group = "webapp"
+    group = WEBAPP
     description = "launch ceelo backend web application"
     dir = File(buildString {
         append(rootDir.path)
         append(getProperty("file.separator"))
-        append("webapp")
+        append(WEBAPP)
     })
     tasks = listOf("bootRun")
 }
 /*=================================================================================*/
 
 tasks.register<GradleBuild>("checkWebapp") {
-    group = "webapp"
+    group = WEBAPP
     description = "launch ceelo backend web application"
     dir = File(buildString {
         append(rootDir.path)
         append(getProperty("file.separator"))
-        append("webapp")
+        append(WEBAPP)
     })
     tasks = listOf("check")
 }
@@ -68,13 +78,24 @@ open class GradleStop : Exec() {
 /*=================================================================================*/
 
 project.tasks.register<GradleStop>("gradleStop") {
-    group = "webapp"
+    group = WEBAPP
     description = "use system gradle to launch gradle --stop task, to kill webapp process"
     doLast { logger.info(standardOutput.toString()) }
 }
+
 /*=================================================================================*/
 
-fun Copy.syncSrc(
+
+tasks.register("displayWebappSrc") {
+    doFirst {
+        webappSrc
+            .reduce { acc, s -> "$acc\n\t$s" }
+            .run { println("$WEBAPP_SRC: $this\n") }
+    }
+}
+/*=================================================================================*/
+
+fun Copy.move(
     path: String,
     from: String,
     into: String
@@ -95,49 +116,48 @@ fun Copy.syncSrc(
 }
 /*=================================================================================*/
 
-tasks.register<Copy>("exportWebappSource") {
-    group = "webbap"
-    description = "copy sources from webapp into webapp-src"
+val webappSrc: List<String> by lazy {
+    StringTokenizer(properties[WEBAPP_SRC].toString(), ",")
+        .toList()
+        .map { it.toString() }
+}
+/*=================================================================================*/
 
-    doFirst {
-        StringTokenizer(properties["webapp_src"].toString(), ",")
-            .toList()
-            .forEach {
-                syncSrc(
-                    it.toString(),
-                    "webapp",
-                    "webapp-src"
-                )
-            }
-    }
+tasks.register<Copy>("exportWebappSource") {
+    group = WEBAPP
+    description = "copy sources from webapp into webapp-src"
+    doFirst { webappSrc.forEach { move(it, WEBAPP, WEBAPP_SRC) } }
 }
 
 /*=================================================================================*/
 
 tasks.register<Copy>("syncWebappSource") {
-    group = "webbap"
+    group = WEBAPP
     description = "copy sources from webapp-src into webapp"
-
-    doFirst {
-        StringTokenizer(properties["webapp_src"].toString(), ",")
-            .toList()
-            .forEach {
-                syncSrc(
-                    it.toString(),
-                    "webapp-src",
-                    "webapp"
-                )
-            }
-    }
+    doFirst { webappSrc.forEach { move(it, WEBAPP_SRC, WEBAPP) } }
 }
+
 /*=================================================================================*/
+
 tasks.register("jdl") {
-    doFirst {
-        StringTokenizer(properties["webapp_src"].toString(), ",")
-            .toList()
-            .reduce { acc, s -> "$acc\n\t$s" }
-            .run { println("webapp_src: $this") }
+    fun displayJdl() {
+        projectDir
+            .listFiles()
+            ?.first { it.name == WEBAPP }
+            ?.listFiles()
+            ?.first { it.name == JDL_FILE }
+            ?.readText(UTF_8)
+            .run { println("$WEBAPP/$JDL_FILE:\n$this") }
     }
+    //export
+//    dependsOn("exportWebappSource")
+    doFirst {
+        displayJdl()
+        //cmdline
+    }
+    //sync
+//    finalizedBy("syncWebappSource")
+
 }
 /*=================================================================================*/
 tasks.register<Delete>("clean") {
