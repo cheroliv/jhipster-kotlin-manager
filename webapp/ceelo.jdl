@@ -13,7 +13,7 @@ application {
     creationTimestamp 1672599040468
     databaseType sql
     devDatabaseType h2Memory
-    dtoSuffix DTO
+    dtoSuffix Dto
     enableGradleEnterprise false
     enableHibernateCache false
     enableSwaggerCodegen false
@@ -36,7 +36,6 @@ application {
     serviceDiscoveryType no
     skipClient false
     skipUserManagement false
-    testFrameworks [cucumber]
     websocket false
     withAdminUi true
   }

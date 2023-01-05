@@ -7,8 +7,8 @@ import com.cheroliv.webapp.ceelo.repository.AuthorityRepository;
 import com.cheroliv.webapp.ceelo.repository.UserRepository;
 import com.cheroliv.webapp.ceelo.security.AuthoritiesConstants;
 import com.cheroliv.webapp.ceelo.security.SecurityUtils;
-import com.cheroliv.webapp.ceelo.service.dto.AdminUserDTO;
-import com.cheroliv.webapp.ceelo.service.dto.UserDTO;
+import com.cheroliv.webapp.ceelo.service.dto.AdminUserDto;
+import com.cheroliv.webapp.ceelo.service.dto.UserDto;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -91,7 +91,7 @@ public class UserService {
     }
 
     @Transactional
-    public Mono<User> registerUser(AdminUserDTO userDTO, String password) {
+    public Mono<User> registerUser(AdminUserDto userDTO, String password) {
         return userRepository
             .findOneByLogin(userDTO.getLogin().toLowerCase())
             .flatMap(existingUser -> {
@@ -144,7 +144,7 @@ public class UserService {
     }
 
     @Transactional
-    public Mono<User> createUser(AdminUserDTO userDTO) {
+    public Mono<User> createUser(AdminUserDto userDTO) {
         User user = new User();
         user.setLogin(userDTO.getLogin().toLowerCase());
         user.setFirstName(userDTO.getFirstName());
@@ -183,7 +183,7 @@ public class UserService {
      * @return updated user.
      */
     @Transactional
-    public Mono<AdminUserDTO> updateUser(AdminUserDTO userDTO) {
+    public Mono<AdminUserDto> updateUser(AdminUserDto userDTO) {
         return userRepository
             .findById(userDTO.getId())
             .flatMap(user -> {
@@ -207,7 +207,7 @@ public class UserService {
             })
             .flatMap(this::saveUser)
             .doOnNext(user -> log.debug("Changed Information for User: {}", user))
-            .map(AdminUserDTO::new);
+            .map(AdminUserDto::new);
     }
 
     @Transactional
@@ -292,13 +292,13 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public Flux<AdminUserDTO> getAllManagedUsers(Pageable pageable) {
-        return userRepository.findAllWithAuthorities(pageable).map(AdminUserDTO::new);
+    public Flux<AdminUserDto> getAllManagedUsers(Pageable pageable) {
+        return userRepository.findAllWithAuthorities(pageable).map(AdminUserDto::new);
     }
 
     @Transactional(readOnly = true)
-    public Flux<UserDTO> getAllPublicUsers(Pageable pageable) {
-        return userRepository.findAllByIdNotNullAndActivatedIsTrue(pageable).map(UserDTO::new);
+    public Flux<UserDto> getAllPublicUsers(Pageable pageable) {
+        return userRepository.findAllByIdNotNullAndActivatedIsTrue(pageable).map(UserDto::new);
     }
 
     @Transactional(readOnly = true)

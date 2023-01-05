@@ -1,7 +1,7 @@
 package com.cheroliv.webapp.ceelo.web.rest;
 
 import com.cheroliv.webapp.ceelo.service.UserService;
-import com.cheroliv.webapp.ceelo.service.dto.UserDTO;
+import com.cheroliv.webapp.ceelo.service.dto.UserDto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -45,7 +45,7 @@ public class PublicUserResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body all users.
      */
     @GetMapping("/users")
-    public Mono<ResponseEntity<Flux<UserDTO>>> getAllPublicUsers(
+    public Mono<ResponseEntity<Flux<UserDto>>> getAllPublicUsers(
         ServerHttpRequest request,
         @org.springdoc.api.annotations.ParameterObject Pageable pageable
     ) {

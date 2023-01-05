@@ -10,7 +10,7 @@ import com.cheroliv.webapp.ceelo.repository.AuthorityRepository;
 import com.cheroliv.webapp.ceelo.repository.EntityManager;
 import com.cheroliv.webapp.ceelo.repository.UserRepository;
 import com.cheroliv.webapp.ceelo.security.AuthoritiesConstants;
-import com.cheroliv.webapp.ceelo.service.dto.AdminUserDTO;
+import com.cheroliv.webapp.ceelo.service.dto.AdminUserDto;
 import com.cheroliv.webapp.ceelo.service.mapper.UserMapper;
 import com.cheroliv.webapp.ceelo.web.rest.vm.ManagedUserVM;
 import java.time.Instant;
@@ -262,7 +262,7 @@ class UserResourceIT {
             .block();
 
         // Get all the users
-        AdminUserDTO foundUser = webTestClient
+        AdminUserDto foundUser = webTestClient
             .get()
             .uri("/api/admin/users?sort=id,desc")
             .accept(MediaType.APPLICATION_JSON)
@@ -271,7 +271,7 @@ class UserResourceIT {
             .isOk()
             .expectHeader()
             .contentType(MediaType.APPLICATION_JSON)
-            .returnResult(AdminUserDTO.class)
+            .returnResult(AdminUserDto.class)
             .getResponseBody()
             .blockFirst();
 
@@ -544,7 +544,7 @@ class UserResourceIT {
 
     @Test
     void testUserDTOtoUser() {
-        AdminUserDTO userDTO = new AdminUserDTO();
+        AdminUserDto userDTO = new AdminUserDto();
         userDTO.setId(DEFAULT_ID);
         userDTO.setLogin(DEFAULT_LOGIN);
         userDTO.setFirstName(DEFAULT_FIRSTNAME);
@@ -586,7 +586,7 @@ class UserResourceIT {
         authorities.add(authority);
         user.setAuthorities(authorities);
 
-        AdminUserDTO userDTO = userMapper.userToAdminUserDTO(user);
+        AdminUserDto userDTO = userMapper.userToAdminUserDTO(user);
 
         assertThat(userDTO.getId()).isEqualTo(DEFAULT_ID);
         assertThat(userDTO.getLogin()).isEqualTo(DEFAULT_LOGIN);

@@ -5,7 +5,6 @@ import java.util.*
 /*=================================================================================*/
 
 buildscript {
-    val jacksonVersion = "2.14.1"
 
     repositories {
         google()
@@ -15,9 +14,9 @@ buildscript {
     dependencies {
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${properties["nav_version"]}")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${properties["kotlin_version"]}")
-        classpath("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
-        classpath("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion")
-        classpath("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
+        classpath("com.fasterxml.jackson.module:jackson-module-kotlin:${properties["jackson_version"]}")
+        classpath("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${properties["jackson_version"]}")
+        classpath("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${properties["jackson_version"]}")
 
     }
 }
@@ -103,7 +102,13 @@ tasks.register<Copy>("exportWebappSource") {
     doFirst {
         StringTokenizer(properties["webapp_src"].toString(), ",")
             .toList()
-            .forEach { syncSrc(it as String, "webapp", "webapp-src") }
+            .forEach {
+                syncSrc(
+                    it.toString(),
+                    "webapp",
+                    "webapp-src"
+                )
+            }
     }
 }
 
@@ -114,15 +119,30 @@ tasks.register<Copy>("syncWebappSource") {
     description = "copy sources from webapp-src into webapp"
 
     doFirst {
-        StringTokenizer(properties["webapp_src"] as String, ",")
-            .iterator()
-            .forEach { syncSrc(it as String, "webapp-src", "webapp") }
+        StringTokenizer(properties["webapp_src"].toString(), ",")
+            .toList()
+            .forEach {
+                syncSrc(
+                    it.toString(),
+                    "webapp-src",
+                    "webapp"
+                )
+            }
+    }
+}
+/*=================================================================================*/
+tasks.register("jdl") {
+    doFirst {
+        StringTokenizer(properties["webapp_src"].toString(), ",")
+            .toList()
+            .reduce { acc, s -> "$acc\n\t$s" }
+            .run { println("webapp_src: $this") }
     }
 }
 /*=================================================================================*/
 tasks.register<Delete>("clean") {
     description = "Delete directory build"
     group = "build"
-    delete(rootProject.buildDir)
+    doLast { delete(rootProject.buildDir) }
 }
 /*=================================================================================*/

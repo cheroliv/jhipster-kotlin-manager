@@ -10,9 +10,9 @@ import com.cheroliv.webapp.ceelo.repository.AuthorityRepository;
 import com.cheroliv.webapp.ceelo.repository.UserRepository;
 import com.cheroliv.webapp.ceelo.security.AuthoritiesConstants;
 import com.cheroliv.webapp.ceelo.service.UserService;
-import com.cheroliv.webapp.ceelo.service.dto.AdminUserDTO;
+import com.cheroliv.webapp.ceelo.service.dto.AdminUserDto;
 import com.cheroliv.webapp.ceelo.service.dto.PasswordChangeDTO;
-import com.cheroliv.webapp.ceelo.service.dto.UserDTO;
+import com.cheroliv.webapp.ceelo.service.dto.UserDto;
 import com.cheroliv.webapp.ceelo.web.rest.vm.KeyAndPasswordVM;
 import com.cheroliv.webapp.ceelo.web.rest.vm.ManagedUserVM;
 import java.time.Instant;
@@ -84,7 +84,7 @@ class AccountResourceIT {
         Set<String> authorities = new HashSet<>();
         authorities.add(AuthoritiesConstants.ADMIN);
 
-        AdminUserDTO user = new AdminUserDTO();
+        AdminUserDto user = new AdminUserDto();
         user.setLogin(TEST_USER_LOGIN);
         user.setFirstName("john");
         user.setLastName("doe");
@@ -404,7 +404,7 @@ class AccountResourceIT {
         assertThat(testUser4.get().getEmail()).isEqualTo("test-register-duplicate-email@example.com");
 
         testUser4.get().setActivated(true);
-        userService.updateUser((new AdminUserDTO(testUser4.get()))).block();
+        userService.updateUser((new AdminUserDto(testUser4.get()))).block();
 
         // Register 4th (already activated) user
         accountWebTestClient
@@ -486,7 +486,7 @@ class AccountResourceIT {
         user.setCreatedBy(Constants.SYSTEM);
         userRepository.save(user).block();
 
-        AdminUserDTO userDTO = new AdminUserDTO();
+        AdminUserDto userDTO = new AdminUserDto();
         userDTO.setLogin("not-used");
         userDTO.setFirstName("firstname");
         userDTO.setLastName("lastname");
@@ -528,7 +528,7 @@ class AccountResourceIT {
 
         userRepository.save(user).block();
 
-        AdminUserDTO userDTO = new AdminUserDTO();
+        AdminUserDto userDTO = new AdminUserDto();
         userDTO.setLogin("not-used");
         userDTO.setFirstName("firstname");
         userDTO.setLastName("lastname");
@@ -570,7 +570,7 @@ class AccountResourceIT {
 
         userRepository.save(anotherUser).block();
 
-        AdminUserDTO userDTO = new AdminUserDTO();
+        AdminUserDto userDTO = new AdminUserDto();
         userDTO.setLogin("not-used");
         userDTO.setFirstName("firstname");
         userDTO.setLastName("lastname");
@@ -604,7 +604,7 @@ class AccountResourceIT {
         user.setCreatedBy(Constants.SYSTEM);
         userRepository.save(user).block();
 
-        AdminUserDTO userDTO = new AdminUserDTO();
+        AdminUserDto userDTO = new AdminUserDto();
         userDTO.setLogin("not-used");
         userDTO.setFirstName("firstname");
         userDTO.setLastName("lastname");

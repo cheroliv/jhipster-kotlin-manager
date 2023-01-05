@@ -16,7 +16,6 @@ buildscript {
 
     }
 }
-
 plugins {
     id "java"
     id "maven-publish"
@@ -40,13 +39,6 @@ plugins {
     id ("com.google.cloud.tools.appengine") version ("2.4.5")
 }
 
-
-tasks.withType(KotlinCompile) {
-  kotlinOptions {
-    freeCompilerArgs = ['-Xjsr305=strict']
-  }
-}
-
 group = "com.cheroliv.webapp.ceelo"
 version = "0.0.1-SNAPSHOT"
 
@@ -54,7 +46,7 @@ description = ""
 
 sourceCompatibility=11
 targetCompatibility=11
-assert System.properties["java.specification.version"] == "11" || "12" || "13" || "14" || "15" || "16" || "17" || "18" || "19"
+assert System.properties["java.specification.version"] == "11" || "12" || "13" || "14" || "15" || "16" || "17" || "18"|| "19"
 
 apply from: "gradle/docker.gradle"
 apply from: "gradle/sonar.gradle"
@@ -132,31 +124,6 @@ modernizer {
 
 
 
-task consoleLauncherTest(type: JavaExec) {
-    dependsOn(testClasses)
-    String cucumberReportsDir = file("$buildDir/reports/tests")
-    outputs.dir(reportsDir)
-    classpath = sourceSets["test"].runtimeClasspath
-    main = "org.junit.platform.console.ConsoleLauncher"
-    args("--scan-classpath")
-    args("--include-engine", "cucumber")
-    args("--reports-dir", cucumberReportsDir)
-}
-
-task cucumberTest(type: Test) {
-    dependsOn(consoleLauncherTest)
-    description = "Execute cucumber BDD tests."
-    group = "verification"
-    include "**/*CucumberIT*"
-
-    // uncomment if the tests reports are not generated
-    // see https://github.com/jhipster/generator-jhipster/pull/2771 and https://github.com/jhipster/generator-jhipster/pull/4484
-    // ignoreFailures true
-    reports.html.enabled = false
-}
-
-//check.dependsOn cucumberTest
-
 check.dependsOn integrationTest
 task testReport(type: TestReport) {
     destinationDir = file("$buildDir/reports/tests")
@@ -166,11 +133,6 @@ task testReport(type: TestReport) {
 task integrationTestReport(type: TestReport) {
     destinationDir = file("$buildDir/reports/tests")
     reportOn integrationTest
-}
-
-task cucumberTestReport(type: TestReport) {
-    destinationDir = file("$buildDir/reports/tests")
-    reportOn cucumberTest
 }
 
 
@@ -257,8 +219,8 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.springframework.boot:spring-boot-test"
     testImplementation "org.springframework.security:spring-security-test"
-    //testImplementation "io.projectreactor.tools:blockhound-junit-platform:${blockhoundJunitPlatformVersion}"
-    testRuntimeOnly "org.junit.platform:junit-platform-launcher:${junitPlatformLauncherVersion}"
+    testImplementation "io.projectreactor.tools:blockhound-junit-platform:${blockhoundJunitPlatformVersion}"
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:${junitPlatformLauncherVersion}'
     testImplementation "com.tngtech.archunit:archunit-junit5-api:${archunitJunit5Version}"
     testRuntimeOnly "com.tngtech.archunit:archunit-junit5-engine:${archunitJunit5Version}"
     implementation "org.zalando:problem-spring-webflux"
@@ -272,11 +234,6 @@ dependencies {
     }
     implementation "io.micrometer:micrometer-registry-prometheus"
     implementation "io.dropwizard.metrics:metrics-core"
-    testImplementation "io.cucumber:cucumber-junit-platform-engine"
-    testImplementation "io.cucumber:cucumber-java"
-    testImplementation "io.cucumber:cucumber-spring"
-    testImplementation "org.junit.platform:junit-platform-console"
-    testImplementation "org.testng:testng"
     liquibaseRuntime sourceSets.main.compileClasspath
     OperatingSystem os = org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.getCurrentOperatingSystem();
     Architecture arch = org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.getCurrentArchitecture();
@@ -324,10 +281,9 @@ task cleanResources(type: Delete) {
 }
 
 wrapper {
-    gradleVersion = "7.6"
+    gradleVersion = "7.4.2"
 }
 
-/*
 task webapp_test(type: NpmTask, dependsOn: "npm_install") {
     args = ["run", "webapp:test"]
 }
@@ -352,7 +308,7 @@ if (project.hasProperty("nodeInstall")) {
     }
     tasks.named("npmSetup").configure { finalizedBy fixedNpm }
 }
-*/
+
 //test.dependsOn webapp_test
 compileJava.dependsOn processResources
 processResources.dependsOn bootBuildInfo

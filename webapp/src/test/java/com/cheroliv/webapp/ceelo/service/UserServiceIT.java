@@ -6,7 +6,7 @@ import com.cheroliv.webapp.ceelo.IntegrationTest;
 import com.cheroliv.webapp.ceelo.config.Constants;
 import com.cheroliv.webapp.ceelo.domain.User;
 import com.cheroliv.webapp.ceelo.repository.UserRepository;
-import com.cheroliv.webapp.ceelo.service.dto.AdminUserDTO;
+import com.cheroliv.webapp.ceelo.service.dto.AdminUserDto;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;

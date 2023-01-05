@@ -4,7 +4,7 @@ import com.cheroliv.webapp.ceelo.repository.UserRepository;
 import com.cheroliv.webapp.ceelo.security.SecurityUtils;
 import com.cheroliv.webapp.ceelo.service.MailService;
 import com.cheroliv.webapp.ceelo.service.UserService;
-import com.cheroliv.webapp.ceelo.service.dto.AdminUserDTO;
+import com.cheroliv.webapp.ceelo.service.dto.AdminUserDto;
 import com.cheroliv.webapp.ceelo.service.dto.PasswordChangeDTO;
 import com.cheroliv.webapp.ceelo.web.rest.errors.*;
 import com.cheroliv.webapp.ceelo.web.rest.vm.KeyAndPasswordVM;
@@ -98,10 +98,10 @@ public class AccountResource {
      * @throws RuntimeException {@code 500 (Internal Server Error)} if the user couldn't be returned.
      */
     @GetMapping("/account")
-    public Mono<AdminUserDTO> getAccount() {
+    public Mono<AdminUserDto> getAccount() {
         return userService
             .getUserWithAuthorities()
-            .map(AdminUserDTO::new)
+            .map(AdminUserDto::new)
             .switchIfEmpty(Mono.error(new AccountResourceException("User could not be found")));
     }
 
@@ -113,7 +113,7 @@ public class AccountResource {
      * @throws RuntimeException {@code 500 (Internal Server Error)} if the user login wasn't found.
      */
     @PostMapping("/account")
-    public Mono<Void> saveAccount(@Valid @RequestBody AdminUserDTO userDTO) {
+    public Mono<Void> saveAccount(@Valid @RequestBody AdminUserDto userDTO) {
         return SecurityUtils
             .getCurrentUserLogin()
             .switchIfEmpty(Mono.error(new AccountResourceException("Current user login not found")))

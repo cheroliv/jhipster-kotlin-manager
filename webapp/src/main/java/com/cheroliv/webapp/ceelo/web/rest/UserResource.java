@@ -6,7 +6,7 @@ import com.cheroliv.webapp.ceelo.repository.UserRepository;
 import com.cheroliv.webapp.ceelo.security.AuthoritiesConstants;
 import com.cheroliv.webapp.ceelo.service.MailService;
 import com.cheroliv.webapp.ceelo.service.UserService;
-import com.cheroliv.webapp.ceelo.service.dto.AdminUserDTO;
+import com.cheroliv.webapp.ceelo.service.dto.AdminUserDto;
 import com.cheroliv.webapp.ceelo.web.rest.errors.BadRequestAlertException;
 import com.cheroliv.webapp.ceelo.web.rest.errors.EmailAlreadyUsedException;
 import com.cheroliv.webapp.ceelo.web.rest.errors.LoginAlreadyUsedException;
@@ -110,7 +110,7 @@ public class UserResource {
      */
     @PostMapping("/users")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public Mono<ResponseEntity<User>> createUser(@Valid @RequestBody AdminUserDTO userDTO) {
+    public Mono<ResponseEntity<User>> createUser(@Valid @RequestBody AdminUserDto userDTO) {
         log.debug("REST request to save User : {}", userDTO);
 
         if (userDTO.getId() != null) {
@@ -156,7 +156,7 @@ public class UserResource {
      */
     @PutMapping("/users")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public Mono<ResponseEntity<AdminUserDTO>> updateUser(@Valid @RequestBody AdminUserDTO userDTO) {
+    public Mono<ResponseEntity<AdminUserDto>> updateUser(@Valid @RequestBody AdminUserDto userDTO) {
         log.debug("REST request to update User : {}", userDTO);
         return userRepository
             .findOneByEmailIgnoreCase(userDTO.getEmail())
@@ -194,7 +194,7 @@ public class UserResource {
      */
     @GetMapping("/users")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public Mono<ResponseEntity<Flux<AdminUserDTO>>> getAllUsers(
+    public Mono<ResponseEntity<Flux<AdminUserDto>>> getAllUsers(
         @org.springdoc.api.annotations.ParameterObject ServerHttpRequest request,
         @org.springdoc.api.annotations.ParameterObject Pageable pageable
     ) {
@@ -222,11 +222,11 @@ public class UserResource {
      */
     @GetMapping("/users/{login}")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public Mono<AdminUserDTO> getUser(@PathVariable String login) {
+    public Mono<AdminUserDto> getUser(@PathVariable String login) {
         log.debug("REST request to get User : {}", login);
         return userService
             .getUserWithAuthoritiesByLogin(login)
-            .map(AdminUserDTO::new)
+            .map(AdminUserDto::new)
             .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)));
     }
 

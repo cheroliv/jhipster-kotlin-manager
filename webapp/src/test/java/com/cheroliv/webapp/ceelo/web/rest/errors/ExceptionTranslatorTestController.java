@@ -18,7 +18,7 @@ public class ExceptionTranslatorTestController {
     }
 
     @PostMapping("/method-argument")
-    public void methodArgument(@Valid @RequestBody TestDTO testDTO) {}
+    public void methodArgument(@Valid @RequestBody TestDto testDto) {}
 
     @GetMapping("/missing-servlet-request-part")
     public void missingServletRequestPartException(@RequestPart String part) {}
@@ -46,7 +46,7 @@ public class ExceptionTranslatorTestController {
         throw new RuntimeException();
     }
 
-    public static class TestDTO {
+    public static class TestDto {
 
         @NotNull(message = "must not be null")
         private String test;

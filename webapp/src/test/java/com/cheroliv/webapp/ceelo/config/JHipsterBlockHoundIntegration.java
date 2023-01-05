@@ -1,5 +1,5 @@
 package com.cheroliv.webapp.ceelo.config;
-/*
+
 import reactor.blockhound.BlockHound;
 import reactor.blockhound.integration.BlockHoundIntegration;
 
@@ -15,4 +15,3 @@ public class JHipsterBlockHoundIntegration implements BlockHoundIntegration {
         builder.allowBlockingCallsInside("com.cheroliv.webapp.ceelo.security.DomainUserDetailsService", "createSpringSecurityUser");
     }
 }
-*/

@@ -8,7 +8,7 @@ import com.cheroliv.webapp.ceelo.domain.User;
 import com.cheroliv.webapp.ceelo.repository.EntityManager;
 import com.cheroliv.webapp.ceelo.repository.UserRepository;
 import com.cheroliv.webapp.ceelo.security.AuthoritiesConstants;
-import com.cheroliv.webapp.ceelo.service.dto.UserDTO;
+import com.cheroliv.webapp.ceelo.service.dto.UserDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +49,7 @@ class PublicUserResourceIT {
         userRepository.save(user).block();
 
         // Get all the users
-        UserDTO foundUser = webTestClient
+        UserDto foundUser = webTestClient
             .get()
             .uri("/api/users?sort=id,desc")
             .accept(MediaType.APPLICATION_JSON)
@@ -58,7 +58,7 @@ class PublicUserResourceIT {
             .isOk()
             .expectHeader()
             .contentType(MediaType.APPLICATION_JSON)
-            .returnResult(UserDTO.class)
+            .returnResult(UserDto.class)
             .getResponseBody()
             .blockFirst();
 
