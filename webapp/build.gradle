@@ -1,4 +1,5 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import static org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.getCurrentArchitecture
+import static org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.getCurrentOperatingSystem
 
 buildscript {
     repositories {
@@ -11,7 +12,8 @@ buildscript {
     }
     dependencies {
         //jhipster-needle-gradle-buildscript-dependency - JHipster will add additional gradle build script plugins here
-	classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
+        //noinspection DifferentKotlinGradleVersion
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
         classpath("com.google.cloud.tools:appengine-gradle-plugin:2.4.5")
 
     }
@@ -220,7 +222,7 @@ dependencies {
     testImplementation "org.springframework.boot:spring-boot-test"
     testImplementation "org.springframework.security:spring-security-test"
     testImplementation "io.projectreactor.tools:blockhound-junit-platform:${blockhoundJunitPlatformVersion}"
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:${junitPlatformLauncherVersion}'
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher:${junitPlatformLauncherVersion}"
     testImplementation "com.tngtech.archunit:archunit-junit5-api:${archunitJunit5Version}"
     testRuntimeOnly "com.tngtech.archunit:archunit-junit5-engine:${archunitJunit5Version}"
     implementation "org.zalando:problem-spring-webflux"
@@ -235,8 +237,8 @@ dependencies {
     implementation "io.micrometer:micrometer-registry-prometheus"
     implementation "io.dropwizard.metrics:metrics-core"
     liquibaseRuntime sourceSets.main.compileClasspath
-    OperatingSystem os = org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.getCurrentOperatingSystem();
-    Architecture arch = org.gradle.nativeplatform.platform.internal.DefaultNativePlatform.getCurrentArchitecture();
+    OperatingSystem os = getCurrentOperatingSystem()
+    Architecture arch = getCurrentArchitecture()
     if (os.isMacOsX() && !arch.isAmd64()) {
         implementation("io.netty:netty-resolver-dns-native-macos") {
             artifact {
