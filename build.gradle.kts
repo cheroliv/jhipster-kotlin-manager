@@ -1,6 +1,7 @@
 import Build_gradle.Constants.JDL_FILE
 import Build_gradle.Constants.WEBAPP
 import Build_gradle.Constants.WEBAPP_SRC
+import Build_gradle.Constants.sep
 import java.io.ByteArrayOutputStream
 import java.lang.System.getProperty
 import java.util.*
@@ -38,6 +39,7 @@ object Constants {
     const val WEBAPP = "webapp"
     const val WEBAPP_SRC = "webapp_src"
     const val JDL_FILE = "ceelo.jdl"
+    val sep: String = getProperty("file.separator")
 }
 /*=================================================================================*/
 tasks.register<GradleBuild>("serve") {
@@ -45,7 +47,7 @@ tasks.register<GradleBuild>("serve") {
     description = "launch ceelo backend web application"
     dir = File(buildString {
         append(rootDir.path)
-        append(getProperty("file.separator"))
+        append(sep)
         append(WEBAPP)
     })
     tasks = listOf("bootRun")
@@ -57,7 +59,7 @@ tasks.register<GradleBuild>("checkWebapp") {
     description = "launch ceelo backend web application"
     dir = File(buildString {
         append(rootDir.path)
-        append(getProperty("file.separator"))
+        append(sep)
         append(WEBAPP)
     })
     tasks = listOf("check")
@@ -84,8 +86,6 @@ project.tasks.register<GradleStop>("gradleStop") {
 }
 
 /*=================================================================================*/
-
-
 tasks.register("displayWebappSrc") {
     doFirst {
         webappSrc
@@ -94,7 +94,6 @@ tasks.register("displayWebappSrc") {
     }
 }
 /*=================================================================================*/
-
 fun Copy.move(
     path: String,
     from: String,
@@ -115,6 +114,7 @@ fun Copy.move(
     into(layout.projectDirectory.dir(into))
 }
 /*=================================================================================*/
+
 
 val webappSrc: List<String> by lazy {
     StringTokenizer(properties[WEBAPP_SRC].toString(), ",")
