@@ -23,7 +23,7 @@ buildscript {
         classpath("com.fasterxml.jackson.module:jackson-module-kotlin:${properties["jackson_version"]}")
         classpath("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${properties["jackson_version"]}")
         classpath("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${properties["jackson_version"]}")
-        classpath("com.github.triplet.gradle:play-publisher:3.7.0")
+        classpath("com.github.triplet.gradle:play-publisher:${properties["publisher_version"]}")
     }
 }
 /*=================================================================================*/

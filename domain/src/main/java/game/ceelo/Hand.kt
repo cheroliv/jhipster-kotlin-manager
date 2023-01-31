@@ -21,9 +21,9 @@ import game.ceelo.Constant.TWO
 import game.ceelo.Constant.TWO_THREE_FOUR
 import game.ceelo.Constant.UNIFORM_DOUBLETS
 import game.ceelo.Constant.UNIFORM_DOUBLET_CASE
-import game.ceelo.GameResult.*
 import game.ceelo.Constant.UNIFORM_TRIPLETS
 import game.ceelo.Constant.UNIFORM_TRIPLET_CASE
+import game.ceelo.GameResult.*
 
 object Hand {
 
@@ -141,6 +141,7 @@ object Hand {
     fun List<Int>.compareHands(secondPlayerRun: List<Int>)
             : GameResult =
         handCase.run whichCase@{
+            @Suppress("IMPLICIT_NOTHING_TYPE_ARGUMENT_AGAINST_NOT_NOTHING_EXPECTED_TYPE")
             secondPlayerRun.handCase.run otherWhichCase@{
                 return when {
                     this@whichCase > this@otherWhichCase -> WIN
@@ -149,41 +150,34 @@ object Hand {
                 }
             }
         }
-
+//TODO: RERUN [5,2,4][6,1,4] make biggest dice win
     fun List<Int>.handsOnSameCase(
         secondPlayerThrow: List<Int>,
         handCase: Int
-    ): GameResult = when (handCase) {
-        AUTOMATIC_WIN_456_CASE -> RERUN
-        AUTOMATIC_LOOSE_123_CASE -> RERUN
-        STRAIGHT_234_345_CASE -> when {
-            containsAll(TWO_THREE_FOUR)
-                    && secondPlayerThrow.containsAll(TWO_THREE_FOUR)
-            -> RERUN
-            containsAll(THREE_FOUR_FIVE)
-                    && secondPlayerThrow.containsAll(THREE_FOUR_FIVE)
-            -> RERUN
-            containsAll(TWO_THREE_FOUR)
-                    && secondPlayerThrow.containsAll(THREE_FOUR_FIVE)
-            -> LOOSE
-            else -> WIN
-        }
-        UNIFORM_TRIPLET_CASE -> when {
-            uniformTripletValue > secondPlayerThrow.uniformTripletValue -> WIN
-            uniformTripletValue < secondPlayerThrow.uniformTripletValue -> LOOSE
-            else -> RERUN
-        }
-        UNIFORM_DOUBLET_CASE -> when {
-            uniformDoubletValue > secondPlayerThrow.uniformDoubletValue -> WIN
-            uniformDoubletValue < secondPlayerThrow.uniformDoubletValue -> LOOSE
-            else -> RERUN
-        }
-        else -> when {
-            sum() > secondPlayerThrow.sum() -> WIN
-            sum() < secondPlayerThrow.sum() -> LOOSE
-            else -> RERUN
-        }
-    }
+    ): GameResult = if (handCase == AUTOMATIC_WIN_456_CASE) RERUN
+    else if (handCase == AUTOMATIC_LOOSE_123_CASE) RERUN
+    else if (handCase == STRAIGHT_234_345_CASE) {
+        if (containsAll(TWO_THREE_FOUR)
+            && secondPlayerThrow.containsAll(TWO_THREE_FOUR)
+        ) RERUN
+        else if (containsAll(THREE_FOUR_FIVE)
+            && secondPlayerThrow.containsAll(THREE_FOUR_FIVE)
+        ) RERUN
+        else if (containsAll(TWO_THREE_FOUR)
+            && secondPlayerThrow.containsAll(THREE_FOUR_FIVE)
+        ) LOOSE
+        else WIN
+    } else if (handCase == UNIFORM_TRIPLET_CASE) {
+        if (uniformTripletValue > secondPlayerThrow.uniformTripletValue) WIN
+        else if (uniformTripletValue < secondPlayerThrow.uniformTripletValue) LOOSE
+        else RERUN
+    } else if (handCase == UNIFORM_DOUBLET_CASE) {
+        if (uniformDoubletValue > secondPlayerThrow.uniformDoubletValue) WIN
+        else if (uniformDoubletValue < secondPlayerThrow.uniformDoubletValue) LOOSE
+        else RERUN
+    } else if (sum() > secondPlayerThrow.sum()) WIN
+    else if (sum() < secondPlayerThrow.sum()) LOOSE
+    else RERUN
 }
 
 //    fun initBank(howMuchPlayer: Int): List<Int> = List(
