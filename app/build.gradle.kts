@@ -20,7 +20,6 @@ android {
         targetSdk = 33
         versionCode = 11
         versionName = "0.0.11"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             mapOf(
@@ -44,17 +43,14 @@ android {
         sourceCompatibility = VERSION_1_8
         targetCompatibility = VERSION_1_8
     }
-
     kotlinOptions { jvmTarget = VERSION_1_8.toString() }
     viewBinding { android.buildFeatures.viewBinding = true }
-    packagingOptions {
-        resources.excludes.add("META-INF/atomicfu.kotlin_module")
-    }
+    packagingOptions { resources.excludes.add("META-INF/atomicfu.kotlin_module") }
 }
 
 dependencies {
     implementation(project(":domain"))
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:${properties["androidx_core_version"]}")
     implementation("androidx.appcompat:appcompat:${properties["app_compat_version"]}")
     implementation("com.google.android.material:material:${properties["material_version"]}")
     implementation("androidx.constraintlayout:constraintlayout:${properties["constraint_layout_version"]}")
@@ -92,9 +88,9 @@ dependencies {
     implementation("androidx.room:room-paging:${properties["room_version"]}")
 
     // Lifecycle components
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-common-java8:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${properties["androidx_lifecycle_version"]}")//androidx_lifecycle_version
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${properties["androidx_lifecycle_version"]}")
+    implementation("androidx.lifecycle:lifecycle-common-java8:${properties["androidx_lifecycle_version"]}")
 
     // Kotlin components
     //noinspection GradleDependency
