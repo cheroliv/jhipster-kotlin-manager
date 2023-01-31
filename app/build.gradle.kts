@@ -108,7 +108,7 @@ dependencies {
     // Testing
     androidTestImplementation("androidx.arch.core:core-testing:${properties["androidx_arch_core_version"]}")
     androidTestImplementation("androidx.test.espresso:espresso-core:${properties["espresso_version"]}") {
-        exclude(group = "com.android.support", module = "support-annotations")
+        exclude("com.android.support", "support-annotations")
     }
     androidTestImplementation("androidx.test.ext:junit:${properties["androidx_junit_version"]}")
 
