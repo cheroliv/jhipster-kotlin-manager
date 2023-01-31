@@ -1,4 +1,4 @@
-object Deps {
+object AndroidDeps {
     val implementations = mapOf<String, String?>("androidx.core:core-ktx:" to "androidx_core_version")
     val androidTestImplementations = mapOf<String, String?>("org.jetbrains.kotlin:kotlin-test" to null)
     val testImplementations = mapOf<String, String?>("org.mockito.kotlin:mockito-kotlin:" to "mockito_kotlin_version")

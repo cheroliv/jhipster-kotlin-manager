@@ -7,10 +7,10 @@ import AppConfig.minSdkVersion
 import AppConfig.proguardFile
 import AppConfig.proguardRules
 import AppConfig.targetSdkVersion
-import Deps.androidTestImplementations
-import Deps.implementations
-import Deps.kapts
-import Deps.testImplementations
+import AndroidDeps.androidTestImplementations
+import AndroidDeps.implementations
+import AndroidDeps.kapts
+import AndroidDeps.testImplementations
 import org.gradle.api.JavaVersion.VERSION_1_8
 
 plugins {
