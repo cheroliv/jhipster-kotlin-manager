@@ -8,6 +8,7 @@ import AppConfig.proguardFile
 import AppConfig.proguardRules
 import AppConfig.targetSdkVersion
 import AndroidDeps.androidTestImplementations
+import AndroidDeps.annotationProcessors
 import AndroidDeps.implementations
 import AndroidDeps.kapts
 import AndroidDeps.testAnnotationProcessors
@@ -55,25 +56,26 @@ android {
     packagingOptions { resources.excludes.add("META-INF/atomicfu.kotlin_module") }
 }
 
+fun Map.Entry<String,String?>.dep():String = "${key}${if (value == null) "" else properties[value]}"
 
 fun DependencyHandlerScope.dependence() {
-    implementation(project(":domain"))
-    implementations.forEach { implementation("${it.key}${properties[it.value]}") }
-    testImplementations.forEach { testImplementation("${it.key}${properties[it.value]}") }
+    implementations.forEach { implementation(it.dep()) }
+    testImplementations.forEach { testImplementation(it.dep()) }
     androidTestImplementations.forEach {
-        if (it.key == "androidx.test.espresso:espresso-core") androidTestImplementation("${it.key}${properties[it.value]}") {
+        if (it.key == "androidx.test.espresso:espresso-core") androidTestImplementation(it.dep()) {
             exclude("com.android.support", "support-annotations")
         }
-        else androidTestImplementation("${it.key}${properties[it.value]}")
+        else androidTestImplementation(it.dep())
     }
-    kapts.forEach { kapt("${it.key}${properties[it.value]}") }
-    testAnnotationProcessors.forEach { testAnnotationProcessor("${it.key}${properties[it.value]}") }
+    kapts.forEach { kapt(it.dep()) }
+    annotationProcessors.forEach { annotationProcessor(it.dep()) }
+    testAnnotationProcessors.forEach { testAnnotationProcessor(it.dep()) }
 }
 
 
 dependencies {
-    dependence()
-    
+    implementation(project(":domain"))
+//    dependence()
     implementation("androidx.core:core-ktx:${properties["androidx_core_version"]}")
     implementation("androidx.appcompat:appcompat:${properties["app_compat_version"]}")
     implementation("com.google.android.material:material:${properties["material_version"]}")

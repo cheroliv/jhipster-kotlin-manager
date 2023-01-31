@@ -1,12 +1,14 @@
 
-
 object AndroidDeps {
     private const val ROOM_VERSION = "room_version"
-    val implementations = mapOf<String, String?>("androidx.core:core-ktx:" to "androidx_core_version")
-    val androidTestImplementations = mapOf<String, String?>("org.jetbrains.kotlin:kotlin-test" to null)
-    val testImplementations = mapOf<String, String?>("org.mockito.kotlin:mockito-kotlin:" to "mockito_kotlin_version")
+    private const val ANDROIDX_CORE_VERSION = "androidx_core_version"
+    private const val MOCKITO_KOTLIN_VERSION = "mockito_kotlin_version"
+
     val kapts = mapOf<String, String?>("androidx.room:room-compiler:" to ROOM_VERSION)
-    val testAnnotationProcessors=mapOf<String, String?>("androidx.room:room-compiler:" to ROOM_VERSION)
+    val annotationProcessors = mapOf<String, String?>()
+    val testAnnotationProcessors = mapOf<String, String?>(
+        "androidx.room:room-compiler:" to ROOM_VERSION
+    )
 /*
     implementation("androidx.appcompat:appcompat:${properties["app_compat_version"]}")
     implementation("com.google.android.material:material:${properties["material_version"]}")
@@ -29,8 +31,11 @@ object AndroidDeps {
     implementation("io.insert-koin:koin-android:${properties["koin_android_version"]}")
     implementation("io.insert-koin:koin-androidx-workmanager:${properties["koin_android_version"]}")
     implementation("io.insert-koin:koin-androidx-navigation:${properties["koin_android_version"]}")
-
-
+*/
+    val implementations = mapOf<String, String?>(
+        "androidx.core:core-ktx:" to ANDROIDX_CORE_VERSION
+    )
+/*
     androidTestImplementation("org.jetbrains.kotlin:kotlin-test")
     androidTestImplementation("org.jetbrains.kotlin:kotlin-test-junit")
     androidTestImplementation("androidx.test.ext:junit:${properties["androidx_junit_version"]}")
@@ -43,8 +48,11 @@ object AndroidDeps {
     androidTestImplementation("androidx.test.ext:junit:${properties["androidx_junit_version"]}")
     androidTestImplementation("io.insert-koin:koin-test-junit4:${properties["koin_version"]}")
     androidTestImplementation("io.insert-koin:koin-test:${properties["koin_version"]}")
-
-
+*/
+    val androidTestImplementations = mapOf<String, String?>(
+        "org.jetbrains.kotlin:kotlin-test" to null
+    )
+/*
     testImplementation("org.mockito.kotlin:mockito-kotlin:${properties["mockito_kotlin_version"]}")
     testImplementation("com.squareup.retrofit2:retrofit:${properties["retrofit_version"]}")
     testImplementation("com.squareup.retrofit2:converter-moshi:${properties["retrofit_version"]}")
@@ -52,5 +60,7 @@ object AndroidDeps {
     testImplementation("io.insert-koin:koin-test:${properties["koin_version"]}")
     testImplementation("io.insert-koin:koin-test-junit4:${properties["koin_version"]}")
  */
+    val testImplementations = mapOf<String, String?>(
+        "org.mockito.kotlin:mockito-kotlin:" to MOCKITO_KOTLIN_VERSION
+    )
 }
-
