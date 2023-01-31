@@ -4,6 +4,8 @@ import AppConfig.currentVersionCode
 import AppConfig.currentVersionName
 import AppConfig.minSdkVersion
 import AppConfig.appId
+import AppConfig.proguardFile
+import AppConfig.proguardRules
 import AppConfig.targetSdkVersion
 import org.gradle.api.JavaVersion.VERSION_1_8
 
@@ -18,7 +20,6 @@ plugins {
 android {
     namespace = appId
     compileSdk = currentCompileSdk
-
     defaultConfig {
         applicationId = appId
         minSdk = minSdkVersion
@@ -34,14 +35,10 @@ android {
             ).forEach { annotationProcessorOptions.arguments[it.key] = it.value }
         }
     }
-
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile(proguardFile), proguardRules)
         }
     }
     compileOptions {

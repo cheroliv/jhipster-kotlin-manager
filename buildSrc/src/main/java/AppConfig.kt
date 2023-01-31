@@ -6,4 +6,6 @@ object AppConfig {
     const val currentVersionName = "0.0.11"
     const val appId = "game.ceelo"
     const val androidTestInstrumentation = "androidx.test.runner.AndroidJUnitRunner"
+    const val proguardFile = "proguard-android-optimize.txt"
+    const val proguardRules = "proguard-rules.pro"
 }
