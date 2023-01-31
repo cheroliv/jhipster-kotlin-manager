@@ -1,12 +1,16 @@
 import AppConfig.androidTestInstrumentation
+import AppConfig.appId
 import AppConfig.currentCompileSdk
 import AppConfig.currentVersionCode
 import AppConfig.currentVersionName
 import AppConfig.minSdkVersion
-import AppConfig.appId
 import AppConfig.proguardFile
 import AppConfig.proguardRules
 import AppConfig.targetSdkVersion
+import Deps.androidTestImplementations
+import Deps.implementations
+import Deps.kapts
+import Deps.testImplementations
 import org.gradle.api.JavaVersion.VERSION_1_8
 
 plugins {
@@ -50,8 +54,24 @@ android {
     packagingOptions { resources.excludes.add("META-INF/atomicfu.kotlin_module") }
 }
 
+
+fun DependencyHandlerScope.dependence() {
+    implementations.forEach { implementation("${it.key}${properties[it.value]}") }
+    testImplementations.forEach { testImplementation("${it.key}${properties[it.value]}") }
+    androidTestImplementations.forEach {
+        if (it.key == "androidx.test.espresso:espresso-core") androidTestImplementation("${it.key}${properties[it.value]}") {
+            exclude("com.android.support", "support-annotations")
+        }
+        else androidTestImplementation("${it.key}${properties[it.value]}")
+    }
+    kapts.forEach { kapt("${it.key}${properties[it.value]}") }
+}
+
+
 dependencies {
+
     implementation(project(":domain"))
+    dependence()
     implementation("androidx.core:core-ktx:${properties["androidx_core_version"]}")
     implementation("androidx.appcompat:appcompat:${properties["app_compat_version"]}")
     implementation("com.google.android.material:material:${properties["material_version"]}")
