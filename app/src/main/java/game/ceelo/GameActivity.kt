@@ -27,10 +27,7 @@ class GameActivity : AppCompatActivity() {
                         playerTwoLastDice
                     )
                 ),
-                resultUI = listOf(
-                    localPlayerResult,
-                    computerResult
-                )
+                resultUI = listOf(localPlayerResult, computerResult)
             )
         }
     }
