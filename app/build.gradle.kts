@@ -10,6 +10,7 @@ import AppConfig.targetSdkVersion
 import AndroidDeps.androidTestImplementations
 import AndroidDeps.implementations
 import AndroidDeps.kapts
+import AndroidDeps.testAnnotationProcessors
 import AndroidDeps.testImplementations
 import org.gradle.api.JavaVersion.VERSION_1_8
 
@@ -56,6 +57,7 @@ android {
 
 
 fun DependencyHandlerScope.dependence() {
+    implementation(project(":domain"))
     implementations.forEach { implementation("${it.key}${properties[it.value]}") }
     testImplementations.forEach { testImplementation("${it.key}${properties[it.value]}") }
     androidTestImplementations.forEach {
@@ -65,12 +67,13 @@ fun DependencyHandlerScope.dependence() {
         else androidTestImplementation("${it.key}${properties[it.value]}")
     }
     kapts.forEach { kapt("${it.key}${properties[it.value]}") }
+    testAnnotationProcessors.forEach { testAnnotationProcessor("${it.key}${properties[it.value]}") }
 }
 
 
 dependencies {
-    implementation(project(":domain"))
     dependence()
+    
     implementation("androidx.core:core-ktx:${properties["androidx_core_version"]}")
     implementation("androidx.appcompat:appcompat:${properties["app_compat_version"]}")
     implementation("com.google.android.material:material:${properties["material_version"]}")

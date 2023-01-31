@@ -1,13 +1,13 @@
+
+
 object AndroidDeps {
+    private const val ROOM_VERSION = "room_version"
     val implementations = mapOf<String, String?>("androidx.core:core-ktx:" to "androidx_core_version")
     val androidTestImplementations = mapOf<String, String?>("org.jetbrains.kotlin:kotlin-test" to null)
     val testImplementations = mapOf<String, String?>("org.mockito.kotlin:mockito-kotlin:" to "mockito_kotlin_version")
-    val kapts = mapOf<String, String?>("androidx.room:room-compiler:" to "room_version")
+    val kapts = mapOf<String, String?>("androidx.room:room-compiler:" to ROOM_VERSION)
+    val testAnnotationProcessors=mapOf<String, String?>("androidx.room:room-compiler:" to ROOM_VERSION)
 /*
-    kapt("androidx.room:room-compiler:${properties["room_version"]}")
-
-    testAnnotationProcessor("androidx.room:room-compiler:${properties["room_version"]}")
-
     implementation("androidx.appcompat:appcompat:${properties["app_compat_version"]}")
     implementation("com.google.android.material:material:${properties["material_version"]}")
     implementation("androidx.constraintlayout:constraintlayout:${properties["constraint_layout_version"]}")
