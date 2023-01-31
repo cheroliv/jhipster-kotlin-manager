@@ -69,7 +69,6 @@ fun DependencyHandlerScope.dependence() {
 
 
 dependencies {
-
     implementation(project(":domain"))
     dependence()
     implementation("androidx.core:core-ktx:${properties["androidx_core_version"]}")
