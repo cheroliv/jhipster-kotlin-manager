@@ -1,12 +1,9 @@
 object AppConfig {
-    const val compileSdk = 30
-    const val minSdk = 21
-    const val targetSdk = 30
-    const val versionCode = 1
-    const val versionName = "1.0.0"
-    const val buildToolsVersion = "29.0.3"
-
+    const val currentCompileSdk = 33
+    const val minSdkVersion = 23
+    const val targetSdkVersion = 33
+    const val currentVersionCode = 11
+    const val currentVersionName = "0.0.11"
+    const val appId = "game.ceelo"
     const val androidTestInstrumentation = "androidx.test.runner.AndroidJUnitRunner"
-    const val proguardConsumerRules =  "consumer-rules.pro"
-    const val dimension = "environment"
 }

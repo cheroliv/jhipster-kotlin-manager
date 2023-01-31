@@ -1,27 +1,31 @@
+import AppConfig.androidTestInstrumentation
+import AppConfig.currentCompileSdk
+import AppConfig.currentVersionCode
+import AppConfig.currentVersionName
+import AppConfig.minSdkVersion
+import AppConfig.appId
+import AppConfig.targetSdkVersion
 import org.gradle.api.JavaVersion.VERSION_1_8
-//import org.gradle.kotlin.dsl.`kotlin-dsl`
 
 plugins {
     kotlin("android")
-    kotlin("android.extensions")
     id("com.android.application")
     id("androidx.navigation.safeargs")
     id("kotlin-kapt")
     id("com.github.triplet.play")
-//    `kotlin-dsl`
 }
 
 android {
-    namespace = "game.ceelo"
-    compileSdk = 33
+    namespace = appId
+    compileSdk = currentCompileSdk
 
     defaultConfig {
-        applicationId = "game.ceelo"
-        minSdk = 23
-        targetSdk = 33
-        versionCode = 11
-        versionName = "0.0.11"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        applicationId = appId
+        minSdk = minSdkVersion
+        targetSdk = targetSdkVersion
+        versionCode = currentVersionCode
+        versionName = currentVersionName
+        testInstrumentationRunner = androidTestInstrumentation
         javaCompileOptions {
             mapOf(
                 "room.schemaLocation" to "$projectDir/schemas",
@@ -102,9 +106,9 @@ dependencies {
     implementation("com.google.android.material:material:${properties["material_version"]}")
 
     // Testing
-    androidTestImplementation ("androidx.arch.core:core-testing:${properties["androidx_arch_core_version"]}")
+    androidTestImplementation("androidx.arch.core:core-testing:${properties["androidx_arch_core_version"]}")
     androidTestImplementation("androidx.test.espresso:espresso-core:${properties["espresso_version"]}") {
-        exclude (group= "com.android.support", module= "support-annotations")
+        exclude(group = "com.android.support", module = "support-annotations")
     }
     androidTestImplementation("androidx.test.ext:junit:${properties["androidx_junit_version"]}")
 

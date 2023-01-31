@@ -1,7 +1,7 @@
-import Build_gradle.Constants.JDL_FILE
-import Build_gradle.Constants.WEBAPP
-import Build_gradle.Constants.WEBAPP_SRC
-import Build_gradle.Constants.sep
+import Constants.JDL_FILE
+import Constants.WEBAPP
+import Constants.WEBAPP_SRC
+import Constants.sep
 import java.io.ByteArrayOutputStream
 import java.lang.System.getProperty
 import java.util.*
@@ -29,18 +29,39 @@ buildscript {
 /*=================================================================================*/
 
 plugins {
-    id("com.android.application") version ("7.2.1") apply (false)
-    id("com.android.library") version ("7.3.1") apply (false)
-    id("org.jetbrains.kotlin.android") version ("1.7.20") apply (false)
-    id("org.jetbrains.kotlin.jvm") version ("1.7.20") apply (false)
+    id("com.android.application") version Versions.android_app_version apply (false)
+    id("com.android.library") version Versions.android_lib_version apply (false)
+    id("org.jetbrains.kotlin.android") version Versions.kotlin_version apply (false)
+    id("org.jetbrains.kotlin.jvm") version Versions.kotlin_version apply (false)
 }
 /*=================================================================================*/
-object Constants {
-    const val WEBAPP = "webapp"
-    const val WEBAPP_SRC = "webapp_src"
-    const val JDL_FILE = "ceelo.jdl"
-    val sep: String = getProperty("file.separator")
+tasks.register<Delete>("clean") {
+    description = "Delete directory build"
+    group = "build"
+    doLast { delete(rootProject.buildDir) }
 }
+/*=================================================================================*/
+open class GradleStop : Exec() {
+    init {
+        description = "Stop any gradle daemons running!"
+        workingDir = project.rootDir
+        @Suppress("LeakingThis")
+        commandLine(buildString {
+            append(getProperty("user.home"))
+            append("/.sdkman/candidates/gradle/current/bin/gradle")
+        }, "--stop")
+        standardOutput = ByteArrayOutputStream()
+    }
+}
+/*=================================================================================*/
+
+project.tasks.register<GradleStop>("gradleStop") {
+    group = WEBAPP
+    description = "use system gradle to launch gradle --stop task, to kill webapp process"
+    doLast { logger.info(standardOutput.toString()) }
+}
+
+
 /*=================================================================================*/
 tasks.register<GradleBuild>("serve") {
     group = WEBAPP
@@ -65,26 +86,11 @@ tasks.register<GradleBuild>("checkWebapp") {
     tasks = listOf("check")
 }
 /*=================================================================================*/
-open class GradleStop : Exec() {
-    init {
-        description = "Stop any gradle daemons running!"
-        workingDir = project.rootDir
-        @Suppress("LeakingThis")
-        commandLine(buildString {
-            append(getProperty("user.home"))
-            append("/.sdkman/candidates/gradle/current/bin/gradle")
-        }, "--stop")
-        standardOutput = ByteArrayOutputStream()
-    }
+val webappSrc: List<String> by lazy {
+    StringTokenizer(properties[WEBAPP_SRC].toString(), ",")
+        .toList()
+        .map { it.toString() }
 }
-/*=================================================================================*/
-
-project.tasks.register<GradleStop>("gradleStop") {
-    group = WEBAPP
-    description = "use system gradle to launch gradle --stop task, to kill webapp process"
-    doLast { logger.info(standardOutput.toString()) }
-}
-
 /*=================================================================================*/
 tasks.register("displayWebappSrc") {
     doFirst {
@@ -113,14 +119,7 @@ fun Copy.move(
     })
     into(layout.projectDirectory.dir(into))
 }
-/*=================================================================================*/
 
-
-val webappSrc: List<String> by lazy {
-    StringTokenizer(properties[WEBAPP_SRC].toString(), ",")
-        .toList()
-        .map { it.toString() }
-}
 /*=================================================================================*/
 
 tasks.register<Copy>("exportWebappSource") {
@@ -147,7 +146,7 @@ tasks.register("jdl") {
             ?.listFiles()
             ?.first { it.name == JDL_FILE }
             ?.readText(UTF_8)
-            .run { println("$WEBAPP/$JDL_FILE:\n$this") }
+            .run { println("$WEBAPP$sep$JDL_FILE:\n$this") }
     }
     //export
 //    dependsOn("exportWebappSource")
@@ -157,12 +156,6 @@ tasks.register("jdl") {
     }
     //sync
 //    finalizedBy("syncWebappSource")
+}
 
-}
-/*=================================================================================*/
-tasks.register<Delete>("clean") {
-    description = "Delete directory build"
-    group = "build"
-    doLast { delete(rootProject.buildDir) }
-}
 /*=================================================================================*/
