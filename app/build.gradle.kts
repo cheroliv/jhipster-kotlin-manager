@@ -2,8 +2,9 @@ import org.gradle.api.JavaVersion.VERSION_1_8
 //import org.gradle.kotlin.dsl.`kotlin-dsl`
 
 plugins {
+    kotlin("android")
+    kotlin("android.extensions")
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs")
     id("kotlin-kapt")
     id("com.github.triplet.play")
