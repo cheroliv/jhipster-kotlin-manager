@@ -56,9 +56,15 @@ android {
     packagingOptions { resources.excludes.add("META-INF/atomicfu.kotlin_module") }
 }
 
-fun Map.Entry<String,String?>.dep():String = "${key}${if (value == null) "" else properties[value]}"
+fun Map.Entry<String,String?>.dep() = "$key${
+    when (value) {
+        null -> ""
+        else -> properties[value]
+    }
+}"
 
 fun DependencyHandlerScope.dependence() {
+    implementation(project(":domain"))
     implementations.forEach { implementation(it.dep()) }
     testImplementations.forEach { testImplementation(it.dep()) }
     androidTestImplementations.forEach {
