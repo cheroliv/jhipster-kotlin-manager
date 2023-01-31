@@ -18,7 +18,6 @@ fun ActivityGameBinding.loadLocalGame(
     playersUI: List<List<ImageView>>,
     resultUI: List<TextView>
 ) = apply {
-
     gameViewModel.diceGame.observe(gameActivity) { game ->
         playersUI.mapIndexed { i, it ->
             playerUI(game[i], diceImages, it)
@@ -60,7 +59,7 @@ fun ActivityGameBinding.loadLocalGame(
     }
 }
 
-val diceImages: List<Int>
+val diceImages
     get() = listOf(
         dice_face_one,
         dice_face_two,
@@ -99,7 +98,7 @@ fun playerUI(
 fun runDiceAnimation(
     diceImage: ImageView,
     diceValue: Int,
-): Unit = diceImage.apply {
+) = diceImage.apply {
     setImageResource(diceImages.getDiceImageFromDiceValue(diceValue))
 }.run {
     startAnimation(RotateAnimation(
@@ -116,11 +115,9 @@ fun setTextViewResult(
     textViewResult: TextView,
     diceResult: GameResult,
     textViewVisibility: Int
-): TextView = textViewResult.apply {
+) = textViewResult.apply {
     visibility = textViewVisibility
-    text = when (diceResult) {
-        WIN -> WIN.toString()
-        LOOSE -> LOOSE.toString()
-        else -> RERUN.toString()
-    }
+    text = if (diceResult == WIN) WIN.toString()
+    else if (diceResult == LOOSE) LOOSE.toString()
+    else RERUN.toString()
 }

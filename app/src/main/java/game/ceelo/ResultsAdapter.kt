@@ -37,18 +37,21 @@ class ResultsAdapter(
         holder: CeeloViewHolder,
         position: Int
     ) = games[position].run {
-        holder.game_id.text = (position + 1).toString()
-        holder.player_one_name.text = PLAYER_ONE_NAME
-        holder.player_one_dices_throw.text = firstPlayer().toString()
-        holder.player_one_result.text = firstPlayer().compareHands(secondPlayer()).toString()
-        holder.player_one_game_type.text = GAME_TYPE
-        holder.player_two_name.text = PLAYER_TWO_NAME
-        holder.player_two_dices_throw.text = secondPlayer().toString()
-        holder.player_two_result.text = secondPlayer().compareHands(firstPlayer()).toString()
-        holder.player_two_game_type.text = GAME_TYPE
+        holder.run {
+            game_id.text = (position + 1).toString()
+            player_one_name.text = PLAYER_ONE_NAME
+            player_one_dices_throw.text = firstPlayer().toString()
+            player_one_result.text = firstPlayer().compareHands(secondPlayer()).toString()
+            player_one_game_type.text = GAME_TYPE
+            player_two_name.text = PLAYER_TWO_NAME
+            player_two_dices_throw.text = secondPlayer().toString()
+            player_two_result.text = secondPlayer().compareHands(firstPlayer()).toString()
+            player_two_game_type.text = GAME_TYPE
+        }
+
     }
 
-    override fun getItemCount(): Int = games.size
+    override fun getItemCount() = games.size
 
 
     class CeeloViewHolder(

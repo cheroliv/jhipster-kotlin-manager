@@ -11,10 +11,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import game.ceelo.Constant.ONE
-import game.ceelo.Hand.compareHands
 import game.ceelo.Game.runDices
 import game.ceelo.Game.secondPlayer
 import game.ceelo.GameResult.*
+import game.ceelo.Hand.compareHands
 
 class GameViewModel(val gameService: GameService) : ViewModel() {
     private val _resultPair: MutableLiveData<List<Pair<GameResult, Int>>> = MutableLiveData()
@@ -45,25 +45,26 @@ class GameViewModel(val gameService: GameService) : ViewModel() {
         _resultVisibility.value = VISIBLE
         _games.value = gameService.allGames()
 
-        val resultPlayer = _diceGame.value!!.first()
-            .compareHands(_diceGame.value!!.secondPlayer())
+        val resultPlayer = _diceGame
+            .value!!
+            .first()
+            .compareHands(
+                _diceGame
+                    .value!!
+                    .secondPlayer()
+            )
 
         _resultPair.value = listOf(
             Pair(
-                resultPlayer, when (resultPlayer) {
-                    WIN, RERUN -> VISIBLE
-                    else -> GONE
-                }
+                resultPlayer,
+                if (resultPlayer == WIN || resultPlayer == RERUN) VISIBLE
+                else GONE
             ),
             Pair(
-                when (resultPlayer) {
-                    WIN -> LOOSE
-                    LOOSE -> WIN
-                    else -> RERUN
-                }, when (resultPlayer) {
-                    LOOSE, RERUN -> VISIBLE
-                    else -> GONE
-                }
+                if (resultPlayer == WIN) LOOSE
+                else if (resultPlayer == LOOSE) WIN
+                else RERUN, if (resultPlayer == LOOSE || resultPlayer == RERUN) VISIBLE
+                else GONE
             )
         )
     }
