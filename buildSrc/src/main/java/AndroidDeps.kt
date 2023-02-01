@@ -1,10 +1,11 @@
 import Versions.kotlin_version
+import DomainDeps.KOIN_VERSION
 
 object AndroidDeps {
     private const val ROOM_VERSION = "room_version"
     private const val ANDROIDX_CORE_VERSION = "androidx_core_version"
     private const val MOCKITO_KOTLIN_VERSION = "mockito_kotlin_version"
-    private const val KOIN_VERSION = "koin_version"
+
     const val NAV_VERSION = "nav_version"
     private const val KOIN_ANDROID_VERSION = "koin_android_version"
     private const val RETROFIT_VERSION = "retrofit_version"
@@ -46,9 +47,9 @@ object AndroidDeps {
         "io.insert-koin:koin-androidx-navigation" to KOIN_ANDROID_VERSION,
     )
     val androidTestImplementations:Map<String, String?> = mapOf(
-        "org.jetbrains.kotlin:kotlin-test" to null,
-        "org.jetbrains.kotlin:kotlin-test" to null,
-        "org.jetbrains.kotlin:kotlin-test-junit" to null,
+        "org.jetbrains.kotlin:kotlin-test" to "",
+        "org.jetbrains.kotlin:kotlin-test" to "",
+        "org.jetbrains.kotlin:kotlin-test-junit" to "",
         "androidx.test.ext:junit" to ANDROIDX_JUNIT_VERSION,
         "org.mockito.kotlin:mockito-kotlin" to MOCKITO_KOTLIN_VERSION,
         "androidx.navigation:navigation-testing" to NAV_VERSION,

@@ -7,13 +7,13 @@ plugins {
 }
 
 dependencies {
-    // coroutines
-//    implementation( "org.jetbrains.kotlinx:kotlinx-coroutines-core:${properties["kotlinx_coroutines_version"]}")
-    implementation("io.insert-koin:koin-core:${properties["koin_version"]}")
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
-    testImplementation("io.insert-koin:koin-test:${properties["koin_version"]}")
-    testImplementation("io.insert-koin:koin-test-junit4:${properties["koin_version"]}")
+    DomainDeps.implementations.forEach { implementation(it.toDependency()) }
+    DomainDeps.testImplementations.forEach { testImplementation(it.toDependency()) }
+}
+
+fun Map.Entry<String, String?>.toDependency() = key + when (value) {
+    "" -> ""
+    else -> ":${properties[value]}"
 }
 
 java {

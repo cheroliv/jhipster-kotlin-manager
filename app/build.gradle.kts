@@ -14,7 +14,7 @@ import AndroidDeps.kapts
 import AndroidDeps.testAnnotationProcessors
 import AndroidDeps.testImplementations
 import org.gradle.api.JavaVersion.VERSION_1_8
-
+/*=================================================================================*/
 plugins {
     kotlin("android")
     id("com.android.application")
@@ -22,7 +22,33 @@ plugins {
     id("kotlin-kapt")
     id("com.github.triplet.play")
 }
-
+/*=================================================================================*/
+dependencies {
+    implementation(project(":domain"))
+    androidDependencies()
+}
+/*=================================================================================*/
+fun DependencyHandlerScope.androidDependencies() {
+    implementations.forEach { implementation(it.toDependency()) }
+    testImplementations.forEach { testImplementation(it.toDependency()) }
+    androidTestImplementations.forEach {
+        when (it.key) {
+            "androidx.test.espresso:espresso-core" -> androidTestImplementation(it.toDependency()) {
+                exclude("com.android.support", "support-annotations")
+            }
+            else -> androidTestImplementation(it.toDependency())
+        }
+    }
+    kapts.forEach { kapt(it.toDependency()) }
+    annotationProcessors.forEach { annotationProcessor(it.toDependency()) }
+    testAnnotationProcessors.forEach { testAnnotationProcessor(it.toDependency()) }
+}
+/*=================================================================================*/
+fun Map.Entry<String,String?>.toDependency() = key + when (value) {
+    "" -> ""
+    else -> ":${properties[value]}"
+}
+/*=================================================================================*/
 android {
     namespace = appId
     compileSdk = currentCompileSdk
@@ -55,29 +81,8 @@ android {
     viewBinding { android.buildFeatures.viewBinding = true }
     packagingOptions { resources.excludes.add("META-INF/atomicfu.kotlin_module") }
 }
+/*=================================================================================*/
 
-fun Map.Entry<String,String?>.toDependency() = key + when (value) {
-    null -> ""
-    else -> ":${properties[value]}"
-}
 
-fun DependencyHandlerScope.androidDependencies() {
-    implementations.forEach { implementation(it.toDependency()) }
-    testImplementations.forEach { testImplementation(it.toDependency()) }
-    androidTestImplementations.forEach {
-        when (it.key) {
-            "androidx.test.espresso:espresso-core" -> androidTestImplementation(it.toDependency()) {
-                exclude("com.android.support", "support-annotations")
-            }
-            else -> androidTestImplementation(it.toDependency())
-        }
-    }
-    kapts.forEach { kapt(it.toDependency()) }
-    annotationProcessors.forEach { annotationProcessor(it.toDependency()) }
-    testAnnotationProcessors.forEach { testAnnotationProcessor(it.toDependency()) }
-}
 
-dependencies {
-    implementation(project(":domain"))
-    androidDependencies()
-}
+
