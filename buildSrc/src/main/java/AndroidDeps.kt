@@ -5,7 +5,7 @@ object AndroidDeps {
     private const val ANDROIDX_CORE_VERSION = "androidx_core_version"
     private const val MOCKITO_KOTLIN_VERSION = "mockito_kotlin_version"
     private const val KOIN_VERSION = "koin_version"
-    private const val NAV_VERSION = "nav_version"
+    const val NAV_VERSION = "nav_version"
     private const val KOIN_ANDROID_VERSION = "koin_android_version"
     private const val RETROFIT_VERSION = "retrofit_version"
     private const val MATERIAL_VERSION = "material_version"

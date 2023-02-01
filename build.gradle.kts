@@ -10,13 +10,11 @@ import kotlin.text.Charsets.UTF_8
 
 /*=================================================================================*/
 buildscript {
-
     repositories {
         google()
         gradlePluginPortal()
         mavenCentral()
     }
-
     dependencies { BuildDeps.buildDeps.forEach { classpath("${it.key}:${properties[it.value]}") } }
 }
 
@@ -105,7 +103,10 @@ fun Copy.move(
             .dir(from)
             .asFileTree
             .first { it.name == path }
-            .isDirectory -> layout.projectDirectory.dir(from).dir(path)
+            .isDirectory -> layout
+            .projectDirectory
+            .dir(from)
+            .dir(path)
         else -> layout
             .projectDirectory
             .dir(from)
