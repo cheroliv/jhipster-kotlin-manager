@@ -15,7 +15,11 @@ buildscript {
         gradlePluginPortal()
         mavenCentral()
     }
-    dependencies { BuildDeps.buildDeps.forEach { classpath("${it.key}:${properties[it.value]}") } }
+    dependencies {
+        BuildDeps
+            .buildDependencies
+            .forEach { classpath("${it.key}:${properties[it.value]}") }
+    }
 }
 
 /*=================================================================================*/

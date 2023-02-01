@@ -56,29 +56,29 @@ android {
     packagingOptions { resources.excludes.add("META-INF/atomicfu.kotlin_module") }
 }
 
-fun Map.Entry<String,String?>.dep() = key + when (value) {
+fun Map.Entry<String,String?>.toDependency() = key + when (value) {
     null -> ""
     else -> ":${properties[value]}"
 }
 
-fun DependencyHandlerScope.dependence() {
-    implementations.forEach { implementation(it.dep()) }
-    testImplementations.forEach { testImplementation(it.dep()) }
+fun DependencyHandlerScope.androidDependencies() {
+    implementations.forEach { implementation(it.toDependency()) }
+    testImplementations.forEach { testImplementation(it.toDependency()) }
     androidTestImplementations.forEach {
         when (it.key) {
-            "androidx.test.espresso:espresso-core" -> androidTestImplementation(it.dep()) {
+            "androidx.test.espresso:espresso-core" -> androidTestImplementation(it.toDependency()) {
                 exclude("com.android.support", "support-annotations")
             }
-            else -> androidTestImplementation(it.dep())
+            else -> androidTestImplementation(it.toDependency())
         }
     }
-    kapts.forEach { kapt(it.dep()) }
-    annotationProcessors.forEach { annotationProcessor(it.dep()) }
-    testAnnotationProcessors.forEach { testAnnotationProcessor(it.dep()) }
+    kapts.forEach { kapt(it.toDependency()) }
+    annotationProcessors.forEach { annotationProcessor(it.toDependency()) }
+    testAnnotationProcessors.forEach { testAnnotationProcessor(it.toDependency()) }
 }
 
 
 dependencies {
     implementation(project(":domain"))
-    dependence()
+    androidDependencies()
 }
