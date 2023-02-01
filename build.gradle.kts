@@ -9,7 +9,6 @@ import kotlin.text.Charsets.UTF_8
 
 
 /*=================================================================================*/
-
 buildscript {
 
     repositories {
@@ -17,15 +16,10 @@ buildscript {
         gradlePluginPortal()
         mavenCentral()
     }
-    dependencies {
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${properties["nav_version"]}")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${properties["kotlin_version"]}")
-        classpath("com.fasterxml.jackson.module:jackson-module-kotlin:${properties["jackson_version"]}")
-        classpath("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:${properties["jackson_version"]}")
-        classpath("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${properties["jackson_version"]}")
-        classpath("com.github.triplet.gradle:play-publisher:${properties["publisher_version"]}")
-    }
+
+    dependencies { BuildDeps.buildDeps.forEach { classpath("${it.key}:${properties[it.value]}") } }
 }
+
 /*=================================================================================*/
 
 plugins {
