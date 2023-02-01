@@ -77,7 +77,6 @@ fun DependencyHandlerScope.androidDependencies() {
     testAnnotationProcessors.forEach { testAnnotationProcessor(it.toDependency()) }
 }
 
-
 dependencies {
     implementation(project(":domain"))
     androidDependencies()
