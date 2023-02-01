@@ -50,14 +50,11 @@ open class GradleStop : Exec() {
     }
 }
 /*=================================================================================*/
-
 project.tasks.register<GradleStop>("gradleStop") {
     group = WEBAPP
     description = "use system gradle to launch gradle --stop task, to kill webapp process"
     doLast { logger.info(standardOutput.toString()) }
 }
-
-
 /*=================================================================================*/
 tasks.register<GradleBuild>("serve") {
     group = WEBAPP
@@ -70,7 +67,6 @@ tasks.register<GradleBuild>("serve") {
     tasks = listOf("bootRun")
 }
 /*=================================================================================*/
-
 tasks.register<GradleBuild>("checkWebapp") {
     group = WEBAPP
     description = "launch ceelo backend web application"
@@ -156,5 +152,4 @@ tasks.register("jdl") {
     //sync
 //    finalizedBy("syncWebappSource")
 }
-
 /*=================================================================================*/

@@ -45,28 +45,58 @@ class GameViewModel(val gameService: GameService) : ViewModel() {
         _resultVisibility.value = VISIBLE
         _games.value = gameService.allGames()
 
-        val resultPlayer = _diceGame
+//        val resultPlayer = _diceGame
+//            .value!!
+//            .first()
+//            .compareHands(
+//                _diceGame
+//                    .value!!
+//                    .secondPlayer()
+//            )
+//
+//        _resultPair.value = listOf(
+//            Pair(
+//                resultPlayer,
+//                if (resultPlayer == WIN || resultPlayer == RERUN) VISIBLE
+//                else GONE
+//            ),
+//            Pair(
+//                if (resultPlayer == WIN) LOOSE
+//                else if (resultPlayer == LOOSE) WIN
+//                else RERUN, if (resultPlayer == LOOSE || resultPlayer == RERUN) VISIBLE
+//                else GONE
+//            )
+//        )
+
+
+        _resultPair.value = _diceGame
             .value!!
             .first()
             .compareHands(
                 _diceGame
                     .value!!
                     .secondPlayer()
-            )
-
-        _resultPair.value = listOf(
-            Pair(
-                resultPlayer,
-                if (resultPlayer == WIN || resultPlayer == RERUN) VISIBLE
-                else GONE
-            ),
-            Pair(
-                if (resultPlayer == WIN) LOOSE
-                else if (resultPlayer == LOOSE) WIN
-                else RERUN, if (resultPlayer == LOOSE || resultPlayer == RERUN) VISIBLE
-                else GONE
-            )
-        )
+            ).run {
+                listOf(
+                    Pair(
+                        this,
+                        when {
+                            this == WIN || this == RERUN -> VISIBLE
+                            else -> GONE
+                        }
+                    ),
+                    Pair(
+                        when {
+                            this == WIN -> LOOSE
+                            this == LOOSE -> WIN
+                            else -> RERUN
+                        }, when {
+                            this == LOOSE || this == RERUN -> VISIBLE
+                            else -> GONE
+                        }
+                    )
+                )
+            }
     }
 
     fun onClickSignInButton() {

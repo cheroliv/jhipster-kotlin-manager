@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import game.ceelo.databinding.ActivityGameBinding.inflate
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-
 class GameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -21,7 +21,7 @@ object AndroidDeps {
     val annotationProcessors = mapOf<String, String?>()
     val testAnnotationProcessors =
         mapOf<String, String?>("androidx.room:room-compiler" to ROOM_VERSION)
-    val implementations = mapOf<String, String?>(
+    val implementations: Map<String, String?> = mapOf(
         "androidx.core:core-ktx" to ANDROIDX_CORE_VERSION,
         "androidx.appcompat:appcompat" to APP_COMPAT_VERSION,
         "com.google.android.material:material" to MATERIAL_VERSION,
@@ -45,7 +45,7 @@ object AndroidDeps {
         "io.insert-koin:koin-androidx-workmanager" to KOIN_ANDROID_VERSION,
         "io.insert-koin:koin-androidx-navigation" to KOIN_ANDROID_VERSION,
     )
-    val androidTestImplementations = mapOf(
+    val androidTestImplementations:Map<String, String?> = mapOf(
         "org.jetbrains.kotlin:kotlin-test" to null,
         "org.jetbrains.kotlin:kotlin-test" to null,
         "org.jetbrains.kotlin:kotlin-test-junit" to null,
