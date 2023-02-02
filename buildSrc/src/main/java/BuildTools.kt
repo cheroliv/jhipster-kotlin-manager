@@ -10,6 +10,7 @@ import Constants.WEBAPP
 import Constants.WEBAPP_SRC
 import Constants.sep
 import Constants.BLANK
+import Constants.DELIM
 import Deps.annotationProcessor
 import Deps.implementation
 import Deps.kapt
@@ -23,11 +24,13 @@ import java.io.File
 import java.util.*
 import kotlin.text.Charsets.UTF_8
 
+
 object BuildTools {
+
     /*=================================================================================*/
     @JvmStatic
     val Project.webAppSrc
-        get() = StringTokenizer(properties[WEBAPP_SRC].toString(), ",")
+        get() = StringTokenizer(properties[WEBAPP_SRC].toString(), DELIM)
             .toList()
             .map { it.toString() }
 
@@ -87,52 +90,48 @@ object BuildTools {
                 }
             }
         }
-
-
-
-
-        androidDeps.forEach {
-            dependencies.add(
-                implementation,
-                dependency(it)
-            )
-        }
-        testDeps.forEach {
-            dependencies.add(
-                testImplementation,
-                dependency(it)
-            )
-        }
-        androidTestDeps.forEach {
-            when (it.key) {
-                "androidx.test.espresso:espresso-core" -> dependencies.add(
-                    androidTestImplementation,
-                    dependency(it)
-                ) {
-                    exclude(
-                        "com.android.support",
-                        "support-annotations"
-                    )
-                }
-                else -> dependencies.add(
-                    androidTestImplementation,
-                    dependency(it)
-                )
-            }
-        }
-        kaptDeps.forEach { dependencies.add(kapt, dependency(it)) }
-        annotationProcessorDeps.forEach {
-            dependencies.add(
-                annotationProcessor,
-                dependency(it)
-            )
-        }
-        testAnnotationProcessorDeps.forEach {
-            dependencies.add(
-                testAnnotationProcessor,
-                dependency(it)
-            )
-        }
+//        androidDeps.forEach {
+//            dependencies.add(
+//                implementation,
+//                dependency(it)
+//            )
+//        }
+//        testDeps.forEach {
+//            dependencies.add(
+//                testImplementation,
+//                dependency(it)
+//            )
+//        }
+//        androidTestDeps.forEach {
+//            when (it.key) {
+//                "androidx.test.espresso:espresso-core" -> dependencies.add(
+//                    androidTestImplementation,
+//                    dependency(it)
+//                ) {
+//                    exclude(
+//                        "com.android.support",
+//                        "support-annotations"
+//                    )
+//                }
+//                else -> dependencies.add(
+//                    androidTestImplementation,
+//                    dependency(it)
+//                )
+//            }
+//        }
+//        kaptDeps.forEach { dependencies.add(kapt, dependency(it)) }
+//        annotationProcessorDeps.forEach {
+//            dependencies.add(
+//                annotationProcessor,
+//                dependency(it)
+//            )
+//        }
+//        testAnnotationProcessorDeps.forEach {
+//            dependencies.add(
+//                testAnnotationProcessor,
+//                dependency(it)
+//            )
+//        }
     }
 
     /*=================================================================================*/

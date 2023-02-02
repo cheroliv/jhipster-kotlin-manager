@@ -7,4 +7,5 @@ object Constants {
     @JvmStatic
     val sep: String by lazy { getProperty("file.separator") }
     const val BLANK = ""
+    const val DELIM = ","
 }
