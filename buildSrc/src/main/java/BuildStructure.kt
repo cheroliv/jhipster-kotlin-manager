@@ -9,7 +9,7 @@ import Constants.JDL_FILE
 import Constants.WEBAPP
 import Constants.WEBAPP_SRC
 import Constants.sep
-import DomainDeps.BLANK
+import Constants.BLANK
 import DomainDeps.annotationProcessor
 import DomainDeps.implementation
 import DomainDeps.kapt

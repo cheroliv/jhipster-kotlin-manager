@@ -6,4 +6,5 @@ object Constants {
     const val JDL_FILE = "ceelo.jdl"
     @JvmStatic
     val sep: String by lazy { getProperty("file.separator") }
+    const val BLANK = ""
 }

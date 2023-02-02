@@ -1,7 +1,7 @@
 @file:Suppress("MemberVisibilityCanBePrivate")
 
 import BuildDeps.KOTLIN_VERSION
-import DomainDeps.BLANK
+import Constants.BLANK
 import DomainDeps.KOIN_VERSION
 
 object AndroidDeps {
