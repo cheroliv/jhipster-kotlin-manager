@@ -8,12 +8,12 @@ object DomainDeps {
     const val BLANK = ""
 
     @JvmStatic
-    val implementations: Map<String, String?> by lazy {
+    val domainDeps: Map<String, String?> by lazy {
         mapOf("io.insert-koin:koin-core" to KOIN_VERSION)
     }
 
     @JvmStatic
-    val testImplementations: Map<String, String?> by lazy {
+    val domainTestDeps: Map<String, String?> by lazy {
         mapOf(
             "org.jetbrains.kotlin:kotlin-test" to BLANK,
             "org.jetbrains.kotlin:kotlin-test-junit" to BLANK,

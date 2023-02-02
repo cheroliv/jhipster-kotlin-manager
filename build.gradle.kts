@@ -99,10 +99,16 @@ tasks.register("displayWebappSrc") {
 tasks.register("printDependencies") {
     description = "printDependencies"
     group = "build"
+    doFirst { println("\t${project.name} dependencies") }
     doLast {
-        println("printDependencies")
-        BuildDeps.buildDependencies
-            .forEach { println("${it.key}:${properties[it.value]}") }
+        mapOf(
+            "buildDependencies:" to BuildDeps.buildDependencies,
+            "domainDeps:" to DomainDeps.domainDeps,
+            "domainTestDeps:" to DomainDeps.domainTestDeps,
+        ).forEach { module ->
+            println(module.key)
+            module.value.forEach { println("${it.key}:${properties[it.value]}") }
+        }
     }
 }
 /*=================================================================================*/

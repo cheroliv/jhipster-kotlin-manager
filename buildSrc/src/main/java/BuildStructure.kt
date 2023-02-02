@@ -9,6 +9,7 @@ import Constants.JDL_FILE
 import Constants.WEBAPP
 import Constants.WEBAPP_SRC
 import Constants.sep
+import DomainDeps.BLANK
 import DomainDeps.annotationProcessor
 import DomainDeps.implementation
 import DomainDeps.kapt
@@ -57,8 +58,8 @@ object BuildStructure {
     @JvmStatic
     fun Project.dependency(entry: Map.Entry<String, String?>): String = entry.run {
         key + when (value) {
-            null -> ""
-            "" -> ""
+            null -> BLANK
+            BLANK -> BLANK
             else -> ":${properties[value]}"
         }
     }
