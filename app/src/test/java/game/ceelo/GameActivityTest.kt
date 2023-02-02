@@ -14,7 +14,7 @@ class GameActivityTest {
         println("${this::class.java.simpleName}.tearDown()")
     }
 
-    @kotlin.test.Test
+    @Test
     fun onCreate() {
         println("${this::class.java.simpleName}.onCreate()")
     }

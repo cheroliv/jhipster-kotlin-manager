@@ -63,7 +63,8 @@ class GameViewModel(val gameService: GameService) : ViewModel() {
                             this == WIN -> LOOSE
                             this == LOOSE -> WIN
                             else -> RERUN
-                        }, when {
+                        },
+                        when {
                             this == LOOSE || this == RERUN -> VISIBLE
                             else -> GONE
                         }

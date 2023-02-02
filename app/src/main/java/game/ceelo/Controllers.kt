@@ -24,11 +24,11 @@ fun ActivityGameBinding.loadLocalGame(
         }
     }
 
-    resultUI.mapIndexed { i, it ->
+    resultUI.mapIndexed { i, view ->
         gameViewModel
             .resultPairList
             .observe(gameActivity) { result ->
-                setTextViewResult(it, result[i].first, result[i].second)
+                setTextViewResult(view, result[i].first, result[i].second)
             }
     }
 
@@ -117,7 +117,9 @@ fun setTextViewResult(
     textViewVisibility: Int
 ) = textViewResult.apply {
     visibility = textViewVisibility
-    text = if (diceResult == WIN) WIN.toString()
-    else if (diceResult == LOOSE) LOOSE.toString()
-    else RERUN.toString()
+    text = when (diceResult) {
+        WIN -> WIN.toString()
+        LOOSE -> LOOSE.toString()
+        else -> RERUN.toString()
+    }
 }
