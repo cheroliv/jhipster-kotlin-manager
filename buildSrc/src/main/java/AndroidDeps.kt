@@ -1,6 +1,6 @@
+import BuildDeps.KOTLIN_VERSION
 import DomainDeps.BLANK
 import DomainDeps.KOIN_VERSION
-import Versions.kotlin_version
 
 object AndroidDeps {
     const val androidTestImplementation = "androidTestImplementation"
@@ -52,7 +52,7 @@ object AndroidDeps {
             "androidx.lifecycle:lifecycle-viewmodel-ktx" to ANDROIDX_LIFECYCLE_VERSION,
             "androidx.lifecycle:lifecycle-livedata-ktx" to ANDROIDX_LIFECYCLE_VERSION,
             "androidx.lifecycle:lifecycle-common-java8" to ANDROIDX_LIFECYCLE_VERSION,
-            "org.jetbrains.kotlin:kotlin-stdlib-jdk7" to kotlin_version,
+            "org.jetbrains.kotlin:kotlin-stdlib-jdk7" to KOTLIN_VERSION,
             "androidx.constraintlayout:constraintlayout" to CONSTRAINT_LAYOUT_VERSION,
             "com.google.android.material:material" to MATERIAL_VERSION,
             "io.insert-koin:koin-core" to KOIN_VERSION,

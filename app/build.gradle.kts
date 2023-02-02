@@ -8,6 +8,7 @@ import AppConfig.proguardFile
 import AppConfig.proguardRules
 import AppConfig.targetSdkVersion
 import org.gradle.api.JavaVersion.VERSION_1_8
+import BuildStructure.androidDependencies
 
 /*=================================================================================*/
 plugins {

@@ -1,7 +1,9 @@
 import Constants.WEBAPP
 import Constants.WEBAPP_SRC
 import Constants.sep
-
+import BuildStructure.displayJdl
+import BuildStructure.webAppSrc
+import BuildStructure.move
 
 /*=================================================================================*/
 buildscript {
@@ -11,8 +13,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        BuildDeps
-            .buildDependencies
+        BuildDeps.buildDependencies
             .forEach { classpath("${it.key}:${properties[it.value]}") }
     }
 }
@@ -98,6 +99,10 @@ tasks.register("jdl") {
 tasks.register("printDependencies") {
     description = "printDependencies"
     group = "build"
-    doLast { println("printDependencies") }
+    doLast {
+        println("printDependencies")
+        BuildDeps.buildDependencies
+            .forEach { println("${it.key}:${properties[it.value]}") }
+    }
 }
 /*=================================================================================*/

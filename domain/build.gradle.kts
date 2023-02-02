@@ -1,5 +1,8 @@
 import org.gradle.api.JavaVersion.VERSION_11
 import org.gradle.api.JavaVersion.VERSION_1_8
+import BuildStructure.dependency
+import DomainDeps.implementations
+import DomainDeps.testImplementations
 
 plugins {
     kotlin("jvm")
@@ -7,8 +10,8 @@ plugins {
 }
 
 dependencies {
-    DomainDeps.implementations.forEach { implementation(dependency(it)) }
-    DomainDeps.testImplementations.forEach { testImplementation(dependency(it)) }
+    implementations.forEach { implementation(dependency(it)) }
+    testImplementations.forEach { testImplementation(dependency(it)) }
 }
 
 java {
