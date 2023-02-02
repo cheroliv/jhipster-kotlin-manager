@@ -3,19 +3,18 @@
 import BuildDeps.KOTLIN_VERSION
 import Constants.BLANK
 import DomainDeps.KOIN_VERSION
-import DomainDeps.annotationProcessor
-import DomainDeps.implementation
-import DomainDeps.kapt
-import DomainDeps.testAnnotationProcessor
-import DomainDeps.testImplementation
 
 object AppDeps {
     const val androidTestImplementation = "androidTestImplementation"
+    const val implementation = "implementation"
+    const val testImplementation = "testImplementation"
+    const val kapt = "kapt"
+    const val annotationProcessor = "annotationProcessor"
+    const val testAnnotationProcessor = "testAnnotationProcessor"
 
     const val ROOM_VERSION = "room_version"
     const val ANDROIDX_CORE_VERSION = "androidx_core_version"
     const val MOCKITO_KOTLIN_VERSION = "mockito_kotlin_version"
-
     const val NAV_VERSION = "nav_version"
     const val KOIN_ANDROID_VERSION = "koin_android_version"
     const val RETROFIT_VERSION = "retrofit_version"
@@ -27,6 +26,8 @@ object AppDeps {
     const val ANDROIDX_ARCH_CORE_VERSION = "androidx_arch_core_version"
     const val APP_COMPAT_VERSION = "app_compat_version"
     const val KOTLINX_COROUTINES_VERSION = "kotlinx_coroutines_version"
+
+
 
     @JvmStatic
     val appModules by lazy {

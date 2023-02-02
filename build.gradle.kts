@@ -6,7 +6,7 @@ import BuildTools.move
 import BuildTools.webAppSrc
 import Constants.WEBAPP
 import Constants.WEBAPP_SRC
-import Constants.sep
+import BuildTools.sep
 import DomainDeps.domainDeps
 import DomainDeps.domainTestDeps
 
@@ -84,17 +84,6 @@ tasks.register<Copy>("syncWebappSource") {
     }
 }
 /*=================================================================================*/
-tasks.register("jdl") {
-    //export
-//    dependsOn("exportWebappSource")
-    doFirst {
-        projectDir.displayJdl()
-        //cmdline
-    }
-    //sync
-//    finalizedBy("syncWebappSource")
-}
-/*=================================================================================*/
 tasks.register("printWebappSrc") {
     description = "print webapp sources"
     group = WEBAPP
@@ -113,7 +102,7 @@ tasks.register("printDependencies") {
         mutableMapOf(
             "buildDependencies" to buildDependencies,
             "domainDeps" to domainDeps,
-            "domainTestDeps" to domainTestDeps
+            "domainTestDeps" to domainTestDeps,
         ).apply { putAll(appModules) }
             .forEach { module ->
                 if (module.value.isNotEmpty()) {
@@ -123,5 +112,18 @@ tasks.register("printDependencies") {
                 }
             }
     }
+}
+/*=================================================================================*/
+tasks.register("jdl") {
+    group = WEBAPP
+    description = "launch jdl source generator"
+    //export
+//    dependsOn("exportWebappSource")
+    doFirst {
+        projectDir.displayJdl()
+        //cmdline
+    }
+    //sync
+//    finalizedBy("syncWebappSource")
 }
 /*=================================================================================*/

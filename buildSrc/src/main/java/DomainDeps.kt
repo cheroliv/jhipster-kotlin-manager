@@ -1,11 +1,7 @@
 import Constants.BLANK
 
 object DomainDeps {
-    const val implementation = "implementation"
-    const val testImplementation = "testImplementation"
-    const val kapt = "kapt"
-    const val annotationProcessor = "annotationProcessor"
-    const val testAnnotationProcessor = "testAnnotationProcessor"
+
     const val KOIN_VERSION = "koin_version"
 
     @JvmStatic
