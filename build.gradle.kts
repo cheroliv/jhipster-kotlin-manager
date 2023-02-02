@@ -91,6 +91,8 @@ tasks.register("jdl") {
 }
 /*=================================================================================*/
 tasks.register("displayWebappSrc") {
+    description = "displayWebappSrc"
+    group = WEBAPP
     doFirst {
         webAppSrc
             .reduce { acc, s -> "$acc\n\t$s" }
@@ -100,14 +102,16 @@ tasks.register("displayWebappSrc") {
 /*=================================================================================*/
 tasks.register("printDependencies") {
     description = "printDependencies"
-    group = "build"
-    doFirst { println("\t${project.name} dependencies") }
+    group = WEBAPP
+    doFirst { println("${project.name} dependencies:") }
     doLast {
-        mapOf(
-            "buildDependencies:" to BuildDeps.buildDependencies,
-            "domainDeps:" to DomainDeps.domainDeps,
-            "domainTestDeps:" to DomainDeps.domainTestDeps,
-        ).forEach { module ->
+        mutableMapOf(
+            "buildDependencies" to BuildDeps.buildDependencies,
+            "domainDeps" to DomainDeps.domainDeps,
+            "domainTestDeps" to DomainDeps.domainTestDeps
+        ).apply {
+            putAll(AndroidDeps.androidModules)
+        }.forEach { module ->
             println(module.key)
             module.value.forEach { println(dependency(it)) }
             println()
