@@ -7,6 +7,7 @@ import AndroidDeps.testAnnotationProcessors
 import AndroidDeps.testImplementations
 import Constants.WEBAPP_SRC
 import DomainDeps.annotationProcessor
+import DomainDeps.implementation
 import DomainDeps.kapt
 import DomainDeps.testAnnotationProcessor
 import DomainDeps.testImplementation
@@ -14,13 +15,14 @@ import org.gradle.api.Project
 import org.gradle.api.tasks.Copy
 import org.gradle.kotlin.dsl.add
 import org.gradle.kotlin.dsl.exclude
-import java.util.StringTokenizer
+import java.util.*
 
 /*=================================================================================*/
-fun Project.webAppSrc():List<String> =
+fun Project.webAppSrc(): List<String> =
     StringTokenizer(properties[WEBAPP_SRC].toString(), ",")
         .toList()
         .map { it.toString() }
+
 /*=================================================================================*/
 fun Copy.move(
     path: String,
@@ -44,14 +46,21 @@ fun Copy.move(
     })
     into(project.layout.projectDirectory.dir(into))
 }
+
 /*=================================================================================*/
 fun Map.Entry<String, String?>.toDependency(project: Project) = key + when (value) {
     "" -> ""
     else -> ":${project.properties[value]}"
 }
+
 /*=================================================================================*/
 fun Project.androidDependencies() {
-    implementations.forEach { dependencies.add(DomainDeps.implementation, it.toDependency(this)) }
+    implementations.forEach {
+        dependencies.add(
+            implementation,
+            it.toDependency(this)
+        )
+    }
     testImplementations.forEach {
         dependencies.add(
             testImplementation,
@@ -64,9 +73,15 @@ fun Project.androidDependencies() {
                 androidTestImplementation,
                 it.toDependency(this)
             ) {
-                exclude("com.android.support", "support-annotations")
+                exclude(
+                    "com.android.support",
+                    "support-annotations"
+                )
             }
-            else -> dependencies.add(androidTestImplementation, it.toDependency(this))
+            else -> dependencies.add(
+                androidTestImplementation,
+                it.toDependency(this)
+            )
         }
     }
     kapts.forEach { dependencies.add(kapt, it.toDependency(this)) }
