@@ -1,3 +1,9 @@
+import AndroidDeps.androidTestImplementations
+import AndroidDeps.annotationProcessors
+import AndroidDeps.implementations
+import AndroidDeps.kapts
+import AndroidDeps.testAnnotationProcessors
+import AndroidDeps.testImplementations
 import AppConfig.androidTestInstrumentation
 import AppConfig.appId
 import AppConfig.currentCompileSdk
@@ -7,13 +13,10 @@ import AppConfig.minSdkVersion
 import AppConfig.proguardFile
 import AppConfig.proguardRules
 import AppConfig.targetSdkVersion
-import AndroidDeps.androidTestImplementations
-import AndroidDeps.annotationProcessors
-import AndroidDeps.implementations
-import AndroidDeps.kapts
-import AndroidDeps.testAnnotationProcessors
-import AndroidDeps.testImplementations
+import DomainDeps.toDependency
 import org.gradle.api.JavaVersion.VERSION_1_8
+import AndroidDeps.androidDependencies
+
 /*=================================================================================*/
 plugins {
     kotlin("android")
@@ -28,27 +31,27 @@ dependencies {
     androidDependencies()
 }
 /*=================================================================================*/
-fun DependencyHandlerScope.androidDependencies() {
-    implementations.forEach { implementation(it.toDependency()) }
-    testImplementations.forEach { testImplementation(it.toDependency()) }
-    androidTestImplementations.forEach {
-        when (it.key) {
-            "androidx.test.espresso:espresso-core" -> androidTestImplementation(it.toDependency()) {
-                exclude("com.android.support", "support-annotations")
-            }
-            else -> androidTestImplementation(it.toDependency())
-        }
-    }
-    kapts.forEach { kapt(it.toDependency()) }
-    annotationProcessors.forEach { annotationProcessor(it.toDependency()) }
-    testAnnotationProcessors.forEach { testAnnotationProcessor(it.toDependency()) }
-}
+//fun Project.androidDependencies() {
+//    implementations.forEach { dependencies.add("implementation", it.toDependency(this)) }
+//    testImplementations.forEach { dependencies.add("testImplementation", it.toDependency(this)) }
+//    androidTestImplementations.forEach {
+//        when (it.key) {
+//            "androidx.test.espresso:espresso-core" -> dependencies.add(
+//                "androidTestImplementation",
+//                it.toDependency(this)
+//            ) {
+//                exclude("com.android.support", "support-annotations")
+//            }
+//            else -> dependencies.add("androidTestImplementation", it.toDependency(this))
+//        }
+//    }
+//    kapts.forEach { dependencies.kapt(it.toDependency(this)) }
+//    annotationProcessors.forEach { dependencies.annotationProcessor(it.toDependency(this)) }
+//    testAnnotationProcessors.forEach { dependencies.testAnnotationProcessor(it.toDependency(this)) }
+//}
 /*=================================================================================*/
-fun Map.Entry<String,String?>.toDependency() = key + when (value) {
-    "" -> ""
-    else -> ":${properties[value]}"
-}
-/*=================================================================================*/
+
+
 android {
     namespace = appId
     compileSdk = currentCompileSdk

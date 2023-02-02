@@ -1,4 +1,11 @@
+import org.gradle.api.Project
+
 object DomainDeps {
+    const val implementation = "implementation"
+    const val testImplementation = "testImplementation"
+    const val kapt = "kapt"
+    const val annotationProcessor = "annotationProcessor"
+    const val testAnnotationProcessor = "testAnnotationProcessor"
     const val KOIN_VERSION = "koin_version"
     const val BLANK = ""
 
@@ -16,4 +23,12 @@ object DomainDeps {
             "io.insert-koin:koin-test-junit4" to KOIN_VERSION,
         )
     }
+
+    /*=================================================================================*/
+    fun Map.Entry<String, String?>.toDependency(project: Project) = key + when (value) {
+        "" -> ""
+        else -> ":${project.properties[value]}"
+    }
+    /*=================================================================================*/
+
 }
