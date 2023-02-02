@@ -1,3 +1,5 @@
+import AndroidDeps.androidModules
+import BuildDeps.buildDependencies
 import BuildTools.dependency
 import BuildTools.displayJdl
 import BuildTools.move
@@ -5,6 +7,8 @@ import BuildTools.webAppSrc
 import Constants.WEBAPP
 import Constants.WEBAPP_SRC
 import Constants.sep
+import DomainDeps.domainDeps
+import DomainDeps.domainTestDeps
 
 
 /*=================================================================================*/
@@ -90,8 +94,8 @@ tasks.register("jdl") {
 //    finalizedBy("syncWebappSource")
 }
 /*=================================================================================*/
-tasks.register("displayWebappSrc") {
-    description = "displayWebappSrc"
+tasks.register("printWebappSrc") {
+    description = "print webapp sources"
     group = WEBAPP
     doFirst {
         webAppSrc
@@ -101,19 +105,20 @@ tasks.register("displayWebappSrc") {
 }
 /*=================================================================================*/
 tasks.register("printDependencies") {
-    description = "printDependencies"
+    description = "print project dependencies"
     group = WEBAPP
-    doFirst { println("${project.name} dependencies:") }
+    doFirst { println("${project.name} dependencies") }
     doLast {
         mutableMapOf(
-            "buildDependencies" to BuildDeps.buildDependencies,
-            "domainDeps" to DomainDeps.domainDeps,
-            "domainTestDeps" to DomainDeps.domainTestDeps
+            "buildDependencies" to buildDependencies,
+            "domainDeps" to domainDeps,
+            "domainTestDeps" to domainTestDeps
         ).apply {
-            putAll(AndroidDeps.androidModules)
+            putAll(androidModules)
         }.forEach { module ->
-            println(module.key)
-            module.value.forEach { println(dependency(it)) }
+            println("${module.key}:")
+//            if(!module.value.empty())
+                module.value.forEach { println(dependency(it)) }
             println()
         }
     }
