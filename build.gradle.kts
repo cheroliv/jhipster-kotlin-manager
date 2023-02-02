@@ -39,8 +39,6 @@ tasks.register<Delete>("clean") {
 }
 /*=================================================================================*/
 project.tasks.register<GradleStop>("gradleStop") {
-    group = WEBAPP
-    description = "use system gradle to launch gradle --stop task, to kill webapp process"
     doLast { logger.info(standardOutput.toString()) }
 }
 /*=================================================================================*/
