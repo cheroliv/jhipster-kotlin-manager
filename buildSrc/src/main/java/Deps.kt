@@ -1,6 +1,6 @@
 import Constants.BLANK
 
-object DomainDeps {
+object Deps {
     const val implementation = "implementation"
     const val testImplementation = "testImplementation"
     const val kapt = "kapt"
@@ -22,4 +22,5 @@ object DomainDeps {
             "io.insert-koin:koin-test-junit4" to KOIN_VERSION,
         )
     }
+
 }

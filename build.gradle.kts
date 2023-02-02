@@ -1,7 +1,7 @@
-import BuildStructure.dependency
-import BuildStructure.displayJdl
-import BuildStructure.move
-import BuildStructure.webAppSrc
+import BuildTools.dependency
+import BuildTools.displayJdl
+import BuildTools.move
+import BuildTools.webAppSrc
 import Constants.WEBAPP
 import Constants.WEBAPP_SRC
 import Constants.sep
@@ -105,8 +105,8 @@ tasks.register("printDependencies") {
     doLast {
         mapOf(
             "buildDependencies:" to BuildDeps.buildDependencies,
-            "domainDeps:" to DomainDeps.domainDeps,
-            "domainTestDeps:" to DomainDeps.domainTestDeps,
+            "domainDeps:" to Deps.domainDeps,
+            "domainTestDeps:" to Deps.domainTestDeps,
         ).forEach { module ->
             println(module.key)
             module.value.forEach { println(dependency(it)) }

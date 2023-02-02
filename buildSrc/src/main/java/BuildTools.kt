@@ -1,7 +1,7 @@
 import AndroidDeps.androidTestImplementation
 import AndroidDeps.androidTestDeps
-import AndroidDeps.annotationProcessors
-import AndroidDeps.deps
+import AndroidDeps.annotationProcessorDeps
+import AndroidDeps.androidDeps
 import AndroidDeps.kaptDeps
 import AndroidDeps.testAnnotationProcessorDeps
 import AndroidDeps.testDeps
@@ -10,11 +10,11 @@ import Constants.WEBAPP
 import Constants.WEBAPP_SRC
 import Constants.sep
 import Constants.BLANK
-import DomainDeps.annotationProcessor
-import DomainDeps.implementation
-import DomainDeps.kapt
-import DomainDeps.testAnnotationProcessor
-import DomainDeps.testImplementation
+import Deps.annotationProcessor
+import Deps.implementation
+import Deps.kapt
+import Deps.testAnnotationProcessor
+import Deps.testImplementation
 import org.gradle.api.Project
 import org.gradle.api.tasks.Copy
 import org.gradle.kotlin.dsl.add
@@ -23,13 +23,14 @@ import java.io.File
 import java.util.*
 import kotlin.text.Charsets.UTF_8
 
-object BuildStructure {
+object BuildTools {
     /*=================================================================================*/
     @JvmStatic
     val Project.webAppSrc
         get() = StringTokenizer(properties[WEBAPP_SRC].toString(), ",")
             .toList()
             .map { it.toString() }
+
     /*=================================================================================*/
     @JvmStatic
     fun Copy.move(
@@ -54,19 +55,43 @@ object BuildStructure {
         })
         into(project.layout.projectDirectory.dir(into))
     }
+
     /*=================================================================================*/
     @JvmStatic
-    fun Project.dependency(entry: Map.Entry<String, String?>): String = entry.run {
+    fun Project.dependency(entry: Map.Entry<String, String?>) = entry.run {
         key + when (value) {
             null -> BLANK
             BLANK -> BLANK
             else -> ":${properties[value]}"
         }
     }
+
     /*=================================================================================*/
     @JvmStatic
     fun Project.androidDependencies() {
-        deps.forEach {
+        mapOf(
+            implementation to androidDeps,
+            testImplementation to testDeps,
+            androidTestImplementation to androidTestDeps,
+            kapt to kaptDeps,
+            annotationProcessor to annotationProcessorDeps,
+            testAnnotationProcessor to testAnnotationProcessorDeps,
+        ).forEach { module ->
+            module.value.forEach {
+                when (it.key) {
+                    "androidx.test.espresso:espresso-core" ->
+                        dependencies.add(module.key, dependency(it)) {
+                            exclude("com.android.support", "support-annotations")
+                        }
+                    else -> dependencies.add(module.key, dependency(it))
+                }
+            }
+        }
+
+
+
+
+        androidDeps.forEach {
             dependencies.add(
                 implementation,
                 dependency(it)
@@ -96,7 +121,7 @@ object BuildStructure {
             }
         }
         kaptDeps.forEach { dependencies.add(kapt, dependency(it)) }
-        annotationProcessors.forEach {
+        annotationProcessorDeps.forEach {
             dependencies.add(
                 annotationProcessor,
                 dependency(it)
@@ -109,6 +134,7 @@ object BuildStructure {
             )
         }
     }
+
     /*=================================================================================*/
     @JvmStatic
     fun File.displayJdl() {
