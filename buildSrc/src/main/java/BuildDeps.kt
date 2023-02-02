@@ -2,7 +2,6 @@
 
 import AppDeps.NAV_VERSION
 
-
 object BuildDeps {
     const val JACKSON_VERSION = "jackson_version"
     const val PUBLISHER_VERSION = "publisher_version"

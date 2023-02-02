@@ -1,31 +1,29 @@
-@file:Suppress("MemberVisibilityCanBePrivate")
-
 import BuildDeps.KOTLIN_VERSION
 import Constants.BLANK
 import DomainDeps.KOIN_VERSION
 
 object AppDeps {
-    const val androidTestImplementation = "androidTestImplementation"
-    const val implementation = "implementation"
-    const val testImplementation = "testImplementation"
-    const val kapt = "kapt"
-    const val annotationProcessor = "annotationProcessor"
-    const val testAnnotationProcessor = "testAnnotationProcessor"
+    private const val androidTestImplementation = "androidTestImplementation"
+    private const val implementation = "implementation"
+    private const val testImplementation = "testImplementation"
+    private const val kapt = "kapt"
+    private const val annotationProcessor = "annotationProcessor"
+    private const val testAnnotationProcessor = "testAnnotationProcessor"
 
-    const val ROOM_VERSION = "room_version"
-    const val ANDROIDX_CORE_VERSION = "androidx_core_version"
-    const val MOCKITO_KOTLIN_VERSION = "mockito_kotlin_version"
-    const val NAV_VERSION = "nav_version"
-    const val KOIN_ANDROID_VERSION = "koin_android_version"
-    const val RETROFIT_VERSION = "retrofit_version"
-    const val MATERIAL_VERSION = "material_version"
-    const val ESPRESSO_VERSION = "espresso_version"
-    const val ANDROIDX_LIFECYCLE_VERSION = "androidx_lifecycle_version"
-    const val ANDROIDX_JUNIT_VERSION = "androidx_junit_version"
-    const val CONSTRAINT_LAYOUT_VERSION = "constraint_layout_version"
-    const val ANDROIDX_ARCH_CORE_VERSION = "androidx_arch_core_version"
-    const val APP_COMPAT_VERSION = "app_compat_version"
-    const val KOTLINX_COROUTINES_VERSION = "kotlinx_coroutines_version"
+    private const val ROOM_VERSION = "room_version"
+    private const val ANDROIDX_CORE_VERSION = "androidx_core_version"
+    private const val MOCKITO_KOTLIN_VERSION = "mockito_kotlin_version"
+    internal const val NAV_VERSION = "nav_version"
+    private const val KOIN_ANDROID_VERSION = "koin_android_version"
+    private const val RETROFIT_VERSION = "retrofit_version"
+    private const val MATERIAL_VERSION = "material_version"
+    private const val ESPRESSO_VERSION = "espresso_version"
+    private const val ANDROIDX_LIFECYCLE_VERSION = "androidx_lifecycle_version"
+    private const val ANDROIDX_JUNIT_VERSION = "androidx_junit_version"
+    private const val CONSTRAINT_LAYOUT_VERSION = "constraint_layout_version"
+    private const val ANDROIDX_ARCH_CORE_VERSION = "androidx_arch_core_version"
+    private const val APP_COMPAT_VERSION = "app_compat_version"
+    private const val KOTLINX_COROUTINES_VERSION = "kotlinx_coroutines_version"
 
 
 
