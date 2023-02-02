@@ -1,9 +1,11 @@
+import BuildStructure.dependency
+import BuildStructure.displayJdl
+import BuildStructure.move
+import BuildStructure.webAppSrc
 import Constants.WEBAPP
 import Constants.WEBAPP_SRC
 import Constants.sep
-import BuildStructure.displayJdl
-import BuildStructure.webAppSrc
-import BuildStructure.move
+
 
 /*=================================================================================*/
 buildscript {
@@ -107,7 +109,8 @@ tasks.register("printDependencies") {
             "domainTestDeps:" to DomainDeps.domainTestDeps,
         ).forEach { module ->
             println(module.key)
-            module.value.forEach { println("${it.key}:${properties[it.value]}") }
+            module.value.forEach { println(dependency(it)) }
+            println()
         }
     }
 }

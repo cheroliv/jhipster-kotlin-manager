@@ -24,20 +24,20 @@ object AndroidDeps {
     const val KOTLINX_COROUTINES_VERSION = "kotlinx_coroutines_version"
 
     @JvmStatic
-    val kaptDeps: Map<String, String?> by lazy {
+    val kaptDeps by lazy {
         mapOf("androidx.room:room-compiler" to ROOM_VERSION)
     }
 
     @JvmStatic
-    val annotationProcessors: Map<String, String?> by lazy { emptyMap() }
+    val annotationProcessors by lazy { emptyMap<String, String>() }
 
     @JvmStatic
-    val testAnnotationProcessorDeps: Map<String, String?> by lazy {
+    val testAnnotationProcessorDeps by lazy {
         mapOf("androidx.room:room-compiler" to ROOM_VERSION)
     }
 
     @JvmStatic
-    val deps: Map<String, String?> by lazy {
+    val deps by lazy {
         mapOf(
             "androidx.core:core-ktx" to ANDROIDX_CORE_VERSION,
             "androidx.appcompat:appcompat" to APP_COMPAT_VERSION,
