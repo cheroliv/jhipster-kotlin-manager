@@ -1,3 +1,4 @@
+import DomainDeps.BLANK
 import Versions.kotlin_version
 import DomainDeps.KOIN_VERSION
 
@@ -47,9 +48,9 @@ object AndroidDeps {
         "io.insert-koin:koin-androidx-navigation" to KOIN_ANDROID_VERSION,
     )
     val androidTestImplementations:Map<String, String?> = mapOf(
-        "org.jetbrains.kotlin:kotlin-test" to "",
-        "org.jetbrains.kotlin:kotlin-test" to "",
-        "org.jetbrains.kotlin:kotlin-test-junit" to "",
+        "org.jetbrains.kotlin:kotlin-test" to BLANK,
+        "org.jetbrains.kotlin:kotlin-test" to BLANK,
+        "org.jetbrains.kotlin:kotlin-test-junit" to BLANK,
         "androidx.test.ext:junit" to ANDROIDX_JUNIT_VERSION,
         "org.mockito.kotlin:mockito-kotlin" to MOCKITO_KOTLIN_VERSION,
         "androidx.navigation:navigation-testing" to NAV_VERSION,
