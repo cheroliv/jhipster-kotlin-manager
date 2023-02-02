@@ -59,14 +59,6 @@ tasks.register<GradleBuild>("checkWebapp") {
     tasks = listOf("check")
 }
 /*=================================================================================*/
-tasks.register("displayWebappSrc") {
-    doFirst {
-        webAppSrc
-            .reduce { acc, s -> "$acc\n\t$s" }
-            .run { println("$WEBAPP_SRC: $this\n") }
-    }
-}
-/*=================================================================================*/
 tasks.register<Copy>("exportWebappSource") {
     group = WEBAPP
     description = "copy sources from webapp into webapp-src"
@@ -94,6 +86,14 @@ tasks.register("jdl") {
     }
     //sync
 //    finalizedBy("syncWebappSource")
+}
+/*=================================================================================*/
+tasks.register("displayWebappSrc") {
+    doFirst {
+        webAppSrc
+            .reduce { acc, s -> "$acc\n\t$s" }
+            .run { println("$WEBAPP_SRC: $this\n") }
+    }
 }
 /*=================================================================================*/
 tasks.register("printDependencies") {
