@@ -1,5 +1,3 @@
-import org.gradle.api.Project
-
 object DomainDeps {
     const val implementation = "implementation"
     const val testImplementation = "testImplementation"

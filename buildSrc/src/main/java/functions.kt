@@ -5,7 +5,10 @@ import AndroidDeps.implementations
 import AndroidDeps.kapts
 import AndroidDeps.testAnnotationProcessors
 import AndroidDeps.testImplementations
+import Constants.JDL_FILE
+import Constants.WEBAPP
 import Constants.WEBAPP_SRC
+import Constants.sep
 import DomainDeps.annotationProcessor
 import DomainDeps.implementation
 import DomainDeps.kapt
@@ -15,11 +18,13 @@ import org.gradle.api.Project
 import org.gradle.api.tasks.Copy
 import org.gradle.kotlin.dsl.add
 import org.gradle.kotlin.dsl.exclude
+import java.io.File
 import java.util.*
+import kotlin.text.Charsets.UTF_8
 
 /*=================================================================================*/
-fun Project.webAppSrc(): List<String> =
-    StringTokenizer(properties[WEBAPP_SRC].toString(), ",")
+val Project.webAppSrc
+    get() = StringTokenizer(properties[WEBAPP_SRC].toString(), ",")
         .toList()
         .map { it.toString() }
 
@@ -48,30 +53,31 @@ fun Copy.move(
 }
 
 /*=================================================================================*/
-fun Map.Entry<String, String?>.toDependency(project: Project) = key + when (value) {
-    "" -> ""
-    else -> ":${project.properties[value]}"
+fun Project.dependency(entry: Map.Entry<String, String?>): String = entry.run {
+    key + when (value) {
+        ""  -> ""
+        else -> ":${properties[value]}"
+    }
 }
-
 /*=================================================================================*/
 fun Project.androidDependencies() {
     implementations.forEach {
         dependencies.add(
             implementation,
-            it.toDependency(this)
+            dependency(it)
         )
     }
     testImplementations.forEach {
         dependencies.add(
             testImplementation,
-            it.toDependency(this)
+            dependency(it)
         )
     }
     androidTestImplementations.forEach {
         when (it.key) {
             "androidx.test.espresso:espresso-core" -> dependencies.add(
                 androidTestImplementation,
-                it.toDependency(this)
+                dependency(it)
             ) {
                 exclude(
                     "com.android.support",
@@ -80,22 +86,31 @@ fun Project.androidDependencies() {
             }
             else -> dependencies.add(
                 androidTestImplementation,
-                it.toDependency(this)
+                dependency(it)
             )
         }
     }
-    kapts.forEach { dependencies.add(kapt, it.toDependency(this)) }
+    kapts.forEach { dependencies.add(kapt, dependency(it)) }
     annotationProcessors.forEach {
         dependencies.add(
             annotationProcessor,
-            it.toDependency(this)
+            dependency(it)
         )
     }
     testAnnotationProcessors.forEach {
         dependencies.add(
             testAnnotationProcessor,
-            it.toDependency(this)
+            dependency(it)
         )
     }
+}
+/*=================================================================================*/
+fun File.displayJdl() {
+    listFiles()
+        ?.first { it.name == WEBAPP }
+        ?.listFiles()
+        ?.first { it.name == JDL_FILE }
+        ?.readText(UTF_8)
+        .run { println("$WEBAPP$sep$JDL_FILE:\n$this") }
 }
 /*=================================================================================*/

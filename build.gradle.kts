@@ -1,8 +1,6 @@
-import Constants.JDL_FILE
 import Constants.WEBAPP
 import Constants.WEBAPP_SRC
 import Constants.sep
-import kotlin.text.Charsets.UTF_8
 
 
 /*=================================================================================*/
@@ -18,16 +16,13 @@ buildscript {
             .forEach { classpath("${it.key}:${properties[it.value]}") }
     }
 }
-
 /*=================================================================================*/
-
 plugins {
     id("com.android.application") version Versions.android_app_version apply false
     id("com.android.library") version Versions.android_lib_version apply false
     id("org.jetbrains.kotlin.android") version Versions.kotlin_version apply false
     id("org.jetbrains.kotlin.jvm") version Versions.kotlin_version apply false
 }
-
 /*=================================================================================*/
 tasks.register<Delete>("clean") {
     description = "Delete directory build"
@@ -62,61 +57,44 @@ tasks.register<GradleBuild>("checkWebapp") {
     })
     tasks = listOf("check")
 }
-
 /*=================================================================================*/
 tasks.register("displayWebappSrc") {
     doFirst {
-        webAppSrc()
+        webAppSrc
             .reduce { acc, s -> "$acc\n\t$s" }
             .run { println("$WEBAPP_SRC: $this\n") }
     }
 }
-
 /*=================================================================================*/
-
 tasks.register<Copy>("exportWebappSource") {
     group = WEBAPP
     description = "copy sources from webapp into webapp-src"
     doFirst {
-        webAppSrc()
+        webAppSrc
             .forEach { move(it, WEBAPP, WEBAPP_SRC) }
     }
 }
-
 /*=================================================================================*/
-
 tasks.register<Copy>("syncWebappSource") {
     group = WEBAPP
     description = "copy sources from webapp-src into webapp"
     doFirst {
-        webAppSrc()
+        webAppSrc
             .forEach { move(it, WEBAPP_SRC, WEBAPP) }
     }
 }
-
 /*=================================================================================*/
-fun displayJdl() {
-    projectDir
-        .listFiles()
-        ?.first { it.name == WEBAPP }
-        ?.listFiles()
-        ?.first { it.name == JDL_FILE }
-        ?.readText(UTF_8)
-        .run { println("$WEBAPP$sep$JDL_FILE:\n$this") }
-}
 tasks.register("jdl") {
-
     //export
 //    dependsOn("exportWebappSource")
     doFirst {
-        displayJdl()
+        projectDir.displayJdl()
         //cmdline
     }
     //sync
 //    finalizedBy("syncWebappSource")
 }
 /*=================================================================================*/
-
 tasks.register("printDependencies") {
     description = "printDependencies"
     group = "build"

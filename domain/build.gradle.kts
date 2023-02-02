@@ -7,8 +7,8 @@ plugins {
 }
 
 dependencies {
-    DomainDeps.implementations.forEach { implementation(it.toDependency(project)) }
-    DomainDeps.testImplementations.forEach { testImplementation(it.toDependency(project)) }
+    DomainDeps.implementations.forEach { implementation(dependency(it)) }
+    DomainDeps.testImplementations.forEach { testImplementation(dependency(it)) }
 }
 
 java {

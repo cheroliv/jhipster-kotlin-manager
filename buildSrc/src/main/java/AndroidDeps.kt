@@ -2,7 +2,6 @@ import DomainDeps.BLANK
 import DomainDeps.KOIN_VERSION
 import Versions.kotlin_version
 
-
 object AndroidDeps {
     const val androidTestImplementation = "androidTestImplementation"
 
