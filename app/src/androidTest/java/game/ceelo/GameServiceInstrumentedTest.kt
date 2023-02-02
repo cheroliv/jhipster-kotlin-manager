@@ -20,7 +20,7 @@ import kotlin.test.assertEquals
 
 @RunWith(AndroidJUnit4::class)
 class GameServiceInstrumentedTest {
-    private val gameService: GameService by lazy { GameServiceInMemory() }
+    private val gameService: GameService by lazy { GameServiceAndroid() }
 
     @BeforeTest
     fun initService() {
