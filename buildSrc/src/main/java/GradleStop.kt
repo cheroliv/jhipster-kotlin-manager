@@ -5,7 +5,6 @@ import org.gradle.api.tasks.Exec
 import java.io.ByteArrayOutputStream
 
 open class GradleStop : Exec() {
-
     init {
         group = WEBAPP
         description = "Stop any gradle daemons running!"+"\n"+
