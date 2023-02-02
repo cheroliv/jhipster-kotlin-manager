@@ -5,6 +5,7 @@ import AndroidDeps.implementations
 import AndroidDeps.kapts
 import AndroidDeps.testAnnotationProcessors
 import AndroidDeps.testImplementations
+import Constants.WEBAPP_SRC
 import DomainDeps.annotationProcessor
 import DomainDeps.kapt
 import DomainDeps.testAnnotationProcessor
@@ -13,8 +14,9 @@ import org.gradle.api.Project
 import org.gradle.api.tasks.Copy
 import org.gradle.kotlin.dsl.add
 import org.gradle.kotlin.dsl.exclude
-/*=================================================================================*/
+import java.util.StringTokenizer
 
+/*=================================================================================*/
 fun Copy.move(
     path: String,
     from: String,
@@ -78,4 +80,9 @@ fun Project.androidDependencies() {
         )
     }
 }
+/*=================================================================================*/
+fun Project.webAppSrc():List<String> =
+    StringTokenizer(properties[WEBAPP_SRC].toString(), ",")
+        .toList()
+        .map { it.toString() }
 /*=================================================================================*/
