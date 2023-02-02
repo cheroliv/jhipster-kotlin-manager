@@ -23,12 +23,4 @@ object DomainDeps {
             "io.insert-koin:koin-test-junit4" to KOIN_VERSION,
         )
     }
-
-    /*=================================================================================*/
-    fun Map.Entry<String, String?>.toDependency(project: Project) = key + when (value) {
-        "" -> ""
-        else -> ":${project.properties[value]}"
-    }
-    /*=================================================================================*/
-
 }

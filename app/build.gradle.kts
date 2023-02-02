@@ -1,9 +1,3 @@
-import AndroidDeps.androidTestImplementations
-import AndroidDeps.annotationProcessors
-import AndroidDeps.implementations
-import AndroidDeps.kapts
-import AndroidDeps.testAnnotationProcessors
-import AndroidDeps.testImplementations
 import AppConfig.androidTestInstrumentation
 import AppConfig.appId
 import AppConfig.currentCompileSdk
@@ -13,9 +7,7 @@ import AppConfig.minSdkVersion
 import AppConfig.proguardFile
 import AppConfig.proguardRules
 import AppConfig.targetSdkVersion
-import DomainDeps.toDependency
 import org.gradle.api.JavaVersion.VERSION_1_8
-import AndroidDeps.androidDependencies
 
 /*=================================================================================*/
 plugins {
@@ -31,26 +23,6 @@ dependencies {
     androidDependencies()
 }
 /*=================================================================================*/
-//fun Project.androidDependencies() {
-//    implementations.forEach { dependencies.add("implementation", it.toDependency(this)) }
-//    testImplementations.forEach { dependencies.add("testImplementation", it.toDependency(this)) }
-//    androidTestImplementations.forEach {
-//        when (it.key) {
-//            "androidx.test.espresso:espresso-core" -> dependencies.add(
-//                "androidTestImplementation",
-//                it.toDependency(this)
-//            ) {
-//                exclude("com.android.support", "support-annotations")
-//            }
-//            else -> dependencies.add("androidTestImplementation", it.toDependency(this))
-//        }
-//    }
-//    kapts.forEach { dependencies.kapt(it.toDependency(this)) }
-//    annotationProcessors.forEach { dependencies.annotationProcessor(it.toDependency(this)) }
-//    testAnnotationProcessors.forEach { dependencies.testAnnotationProcessor(it.toDependency(this)) }
-//}
-/*=================================================================================*/
-
 
 android {
     namespace = appId
@@ -85,7 +57,3 @@ android {
     packagingOptions { resources.excludes.add("META-INF/atomicfu.kotlin_module") }
 }
 /*=================================================================================*/
-
-
-
-

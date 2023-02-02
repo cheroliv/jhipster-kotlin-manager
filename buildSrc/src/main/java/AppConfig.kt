@@ -9,3 +9,4 @@ object AppConfig {
     const val proguardFile = "proguard-android-optimize.txt"
     const val proguardRules = "proguard-rules.pro"
 }
+

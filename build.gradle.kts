@@ -2,8 +2,6 @@ import Constants.JDL_FILE
 import Constants.WEBAPP
 import Constants.WEBAPP_SRC
 import Constants.sep
-import java.io.ByteArrayOutputStream
-import java.lang.System.getProperty
 import java.util.*
 import kotlin.text.Charsets.UTF_8
 
@@ -31,23 +29,16 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version Versions.kotlin_version apply false
 }
 /*=================================================================================*/
+val webappSrc: List<String> by lazy {
+    StringTokenizer(properties[WEBAPP_SRC].toString(), ",")
+        .toList()
+        .map { it.toString() }
+}
+/*=================================================================================*/
 tasks.register<Delete>("clean") {
     description = "Delete directory build"
     group = "build"
     doLast { delete(rootProject.buildDir) }
-}
-/*=================================================================================*/
-open class GradleStop : Exec() {
-    init {
-        description = "Stop any gradle daemons running!"
-        workingDir = project.rootDir
-        @Suppress("LeakingThis")
-        commandLine(buildString {
-            append(getProperty("user.home"))
-            append("/.sdkman/candidates/gradle/current/bin/gradle")
-        }, "--stop")
-        standardOutput = ByteArrayOutputStream()
-    }
 }
 /*=================================================================================*/
 project.tasks.register<GradleStop>("gradleStop") {
@@ -77,12 +68,7 @@ tasks.register<GradleBuild>("checkWebapp") {
     })
     tasks = listOf("check")
 }
-/*=================================================================================*/
-val webappSrc: List<String> by lazy {
-    StringTokenizer(properties[WEBAPP_SRC].toString(), ",")
-        .toList()
-        .map { it.toString() }
-}
+
 /*=================================================================================*/
 tasks.register("displayWebappSrc") {
     doFirst {
@@ -90,29 +76,6 @@ tasks.register("displayWebappSrc") {
             .reduce { acc, s -> "$acc\n\t$s" }
             .run { println("$WEBAPP_SRC: $this\n") }
     }
-}
-/*=================================================================================*/
-fun Copy.move(
-    path: String,
-    from: String,
-    into: String
-) {
-    from(when {
-        layout
-            .projectDirectory
-            .dir(from)
-            .asFileTree
-            .first { it.name == path }
-            .isDirectory -> layout
-            .projectDirectory
-            .dir(from)
-            .dir(path)
-        else -> layout
-            .projectDirectory
-            .dir(from)
-            .file(path)
-    })
-    into(layout.projectDirectory.dir(into))
 }
 
 /*=================================================================================*/
@@ -151,5 +114,12 @@ tasks.register("jdl") {
     }
     //sync
 //    finalizedBy("syncWebappSource")
+}
+/*=================================================================================*/
+
+tasks.register("printDependencies") {
+    description = "printDependencies"
+    group = "build"
+    doLast { println("printDependencies")}
 }
 /*=================================================================================*/

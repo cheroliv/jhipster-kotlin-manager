@@ -1,19 +1,10 @@
 import DomainDeps.BLANK
 import DomainDeps.KOIN_VERSION
-import DomainDeps.annotationProcessor
-import DomainDeps.implementation
-import DomainDeps.kapt
-import DomainDeps.testAnnotationProcessor
-import DomainDeps.testImplementation
-import DomainDeps.toDependency
 import Versions.kotlin_version
-import org.gradle.api.Project
-import org.gradle.kotlin.dsl.add
-import org.gradle.kotlin.dsl.exclude
 
 
 object AndroidDeps {
-    private const val androidTestImplementation = "androidTestImplementation"
+    const val androidTestImplementation = "androidTestImplementation"
 
     private const val ROOM_VERSION = "room_version"
     private const val ANDROIDX_CORE_VERSION = "androidx_core_version"
@@ -101,41 +92,4 @@ object AndroidDeps {
             "io.insert-koin:koin-test-junit4" to KOIN_VERSION,
         )
     }
-/*=================================================================================*/
-
-    fun Project.androidDependencies() {
-        implementations.forEach { dependencies.add(implementation, it.toDependency(this)) }
-        testImplementations.forEach {
-            dependencies.add(
-                testImplementation,
-                it.toDependency(this)
-            )
-        }
-        androidTestImplementations.forEach {
-            when (it.key) {
-                "androidx.test.espresso:espresso-core" -> dependencies.add(
-                    androidTestImplementation,
-                    it.toDependency(this)
-                ) {
-                    exclude("com.android.support", "support-annotations")
-                }
-                else -> dependencies.add(androidTestImplementation, it.toDependency(this))
-            }
-        }
-        kapts.forEach { dependencies.add(kapt, it.toDependency(this)) }
-        annotationProcessors.forEach {
-            dependencies.add(
-                annotationProcessor,
-                it.toDependency(this)
-            )
-        }
-        testAnnotationProcessors.forEach {
-            dependencies.add(
-                testAnnotationProcessor,
-                it.toDependency(this)
-            )
-        }
-
-    }
-/*=================================================================================*/
 }
