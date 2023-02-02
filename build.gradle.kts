@@ -1,4 +1,4 @@
-import AndroidDeps.androidModules
+import AppDeps.appModules
 import BuildDeps.buildDependencies
 import BuildTools.dependency
 import BuildTools.displayJdl
@@ -114,7 +114,7 @@ tasks.register("printDependencies") {
             "buildDependencies" to buildDependencies,
             "domainDeps" to domainDeps,
             "domainTestDeps" to domainTestDeps
-        ).apply { putAll(androidModules) }
+        ).apply { putAll(appModules) }
             .forEach { module ->
                 if (module.value.isNotEmpty()) {
                     println("${module.key}:")

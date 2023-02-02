@@ -1,14 +1,12 @@
-import AndroidDeps.androidModules
+import AppDeps.appModules
 import Constants.JDL_FILE
 import Constants.WEBAPP
 import Constants.WEBAPP_SRC
 import Constants.sep
 import Constants.BLANK
 import Constants.DELIM
-import groovy.lang.Closure
 import org.gradle.api.Project
 import org.gradle.api.tasks.Copy
-import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
 import org.gradle.kotlin.dsl.add
 import org.gradle.kotlin.dsl.exclude
 import java.io.File
@@ -63,7 +61,7 @@ object BuildTools {
     /*=================================================================================*/
     @JvmStatic
     fun Project.androidDependencies() {
-        androidModules.forEach { module ->
+        appModules.forEach { module ->
             module.value.forEach {
                 when (it.key) {
                     "androidx.test.espresso:espresso-core" ->

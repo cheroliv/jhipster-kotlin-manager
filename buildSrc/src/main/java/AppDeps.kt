@@ -9,7 +9,7 @@ import DomainDeps.kapt
 import DomainDeps.testAnnotationProcessor
 import DomainDeps.testImplementation
 
-object AndroidDeps {
+object AppDeps {
     const val androidTestImplementation = "androidTestImplementation"
 
     const val ROOM_VERSION = "room_version"
@@ -29,7 +29,7 @@ object AndroidDeps {
     const val KOTLINX_COROUTINES_VERSION = "kotlinx_coroutines_version"
 
     @JvmStatic
-    val androidModules by lazy {
+    val appModules by lazy {
         mapOf(
             implementation to androidDeps,
             testImplementation to testDeps,
@@ -82,7 +82,7 @@ object AndroidDeps {
     }
 
     @JvmStatic
-    val androidTestDeps: Map<String, String?> by lazy {
+    val androidTestDeps by lazy {
         mapOf(
             "org.jetbrains.kotlin:kotlin-test" to BLANK,
             "org.jetbrains.kotlin:kotlin-test" to BLANK,
@@ -100,7 +100,7 @@ object AndroidDeps {
 
     @JvmStatic
     val testDeps by lazy {
-        mapOf<String, String?>(
+        mapOf(
             "org.mockito.kotlin:mockito-kotlin" to MOCKITO_KOTLIN_VERSION,
             "org.mockito.kotlin:mockito-kotlin" to MOCKITO_KOTLIN_VERSION,
             "com.squareup.retrofit2:retrofit" to RETROFIT_VERSION,

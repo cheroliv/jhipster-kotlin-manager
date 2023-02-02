@@ -1,6 +1,6 @@
 @file:Suppress("MemberVisibilityCanBePrivate")
 
-import AndroidDeps.NAV_VERSION
+import AppDeps.NAV_VERSION
 
 
 object BuildDeps {
@@ -10,7 +10,7 @@ object BuildDeps {
 
     @JvmStatic
     val buildDependencies by lazy {
-        mapOf<String, String?>(
+        mapOf(
             "org.jetbrains.kotlin:kotlin-gradle-plugin" to KOTLIN_VERSION,
             "androidx.navigation:navigation-safe-args-gradle-plugin" to NAV_VERSION,
             "com.fasterxml.jackson.module:jackson-module-kotlin" to JACKSON_VERSION,
