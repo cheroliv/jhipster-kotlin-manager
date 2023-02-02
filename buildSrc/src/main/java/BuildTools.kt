@@ -1,21 +1,10 @@
-import AndroidDeps.androidTestImplementation
-import AndroidDeps.androidTestDeps
-import AndroidDeps.annotationProcessorDeps
-import AndroidDeps.androidDeps
-import AndroidDeps.kaptDeps
-import AndroidDeps.testAnnotationProcessorDeps
-import AndroidDeps.testDeps
+import AndroidDeps.androidModules
 import Constants.JDL_FILE
 import Constants.WEBAPP
 import Constants.WEBAPP_SRC
 import Constants.sep
 import Constants.BLANK
 import Constants.DELIM
-import Deps.annotationProcessor
-import Deps.implementation
-import Deps.kapt
-import Deps.testAnnotationProcessor
-import Deps.testImplementation
 import org.gradle.api.Project
 import org.gradle.api.tasks.Copy
 import org.gradle.kotlin.dsl.add
@@ -58,7 +47,6 @@ object BuildTools {
         })
         into(project.layout.projectDirectory.dir(into))
     }
-
     /*=================================================================================*/
     @JvmStatic
     fun Project.dependency(entry: Map.Entry<String, String?>) = entry.run {
@@ -68,18 +56,10 @@ object BuildTools {
             else -> ":${properties[value]}"
         }
     }
-
     /*=================================================================================*/
     @JvmStatic
     fun Project.androidDependencies() {
-        mapOf(
-            implementation to androidDeps,
-            testImplementation to testDeps,
-            androidTestImplementation to androidTestDeps,
-            kapt to kaptDeps,
-            annotationProcessor to annotationProcessorDeps,
-            testAnnotationProcessor to testAnnotationProcessorDeps,
-        ).forEach { module ->
+        androidModules.forEach { module ->
             module.value.forEach {
                 when (it.key) {
                     "androidx.test.espresso:espresso-core" ->
@@ -90,50 +70,7 @@ object BuildTools {
                 }
             }
         }
-//        androidDeps.forEach {
-//            dependencies.add(
-//                implementation,
-//                dependency(it)
-//            )
-//        }
-//        testDeps.forEach {
-//            dependencies.add(
-//                testImplementation,
-//                dependency(it)
-//            )
-//        }
-//        androidTestDeps.forEach {
-//            when (it.key) {
-//                "androidx.test.espresso:espresso-core" -> dependencies.add(
-//                    androidTestImplementation,
-//                    dependency(it)
-//                ) {
-//                    exclude(
-//                        "com.android.support",
-//                        "support-annotations"
-//                    )
-//                }
-//                else -> dependencies.add(
-//                    androidTestImplementation,
-//                    dependency(it)
-//                )
-//            }
-//        }
-//        kaptDeps.forEach { dependencies.add(kapt, dependency(it)) }
-//        annotationProcessorDeps.forEach {
-//            dependencies.add(
-//                annotationProcessor,
-//                dependency(it)
-//            )
-//        }
-//        testAnnotationProcessorDeps.forEach {
-//            dependencies.add(
-//                testAnnotationProcessor,
-//                dependency(it)
-//            )
-//        }
     }
-
     /*=================================================================================*/
     @JvmStatic
     fun File.displayJdl() {

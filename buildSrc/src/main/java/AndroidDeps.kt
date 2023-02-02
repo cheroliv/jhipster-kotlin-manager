@@ -2,7 +2,12 @@
 
 import BuildDeps.KOTLIN_VERSION
 import Constants.BLANK
-import Deps.KOIN_VERSION
+import DomainDeps.KOIN_VERSION
+import DomainDeps.annotationProcessor
+import DomainDeps.implementation
+import DomainDeps.kapt
+import DomainDeps.testAnnotationProcessor
+import DomainDeps.testImplementation
 
 object AndroidDeps {
     const val androidTestImplementation = "androidTestImplementation"
@@ -23,7 +28,17 @@ object AndroidDeps {
     const val APP_COMPAT_VERSION = "app_compat_version"
     const val KOTLINX_COROUTINES_VERSION = "kotlinx_coroutines_version"
 
-
+    @JvmStatic
+    val androidModules by lazy {
+        mapOf(
+            implementation to androidDeps,
+            testImplementation to testDeps,
+            androidTestImplementation to androidTestDeps,
+            kapt to kaptDeps,
+            annotationProcessor to annotationProcessorDeps,
+            testAnnotationProcessor to testAnnotationProcessorDeps,
+        )
+    }
 
     @JvmStatic
     val kaptDeps by lazy {

@@ -1,8 +1,8 @@
 import org.gradle.api.JavaVersion.VERSION_11
 import org.gradle.api.JavaVersion.VERSION_1_8
 import BuildTools.dependency
-import Deps.domainDeps
-import Deps.domainTestDeps
+import DomainDeps.domainDeps
+import DomainDeps.domainTestDeps
 
 plugins {
     kotlin("jvm")

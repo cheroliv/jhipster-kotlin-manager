@@ -105,8 +105,8 @@ tasks.register("printDependencies") {
     doLast {
         mapOf(
             "buildDependencies:" to BuildDeps.buildDependencies,
-            "domainDeps:" to Deps.domainDeps,
-            "domainTestDeps:" to Deps.domainTestDeps,
+            "domainDeps:" to DomainDeps.domainDeps,
+            "domainTestDeps:" to DomainDeps.domainTestDeps,
         ).forEach { module ->
             println(module.key)
             module.value.forEach { println(dependency(it)) }
