@@ -19,6 +19,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
+        @Suppress("RemoveRedundantQualifierName")
         BuildDeps.buildDependencies
             .forEach { classpath("${it.key}:${properties[it.value]}") }
     }
@@ -113,14 +114,14 @@ tasks.register("printDependencies") {
             "buildDependencies" to buildDependencies,
             "domainDeps" to domainDeps,
             "domainTestDeps" to domainTestDeps
-        ).apply {
-            putAll(androidModules)
-        }.forEach { module ->
-            println("${module.key}:")
-//            if(!module.value.empty())
-                module.value.forEach { println(dependency(it)) }
-            println()
-        }
+        ).apply { putAll(androidModules) }
+            .forEach { module ->
+                if (module.value.isNotEmpty()) {
+                    println("${module.key}:")
+                    module.value.forEach { println(dependency(it)) }
+                    println()
+                }
+            }
     }
 }
 /*=================================================================================*/
