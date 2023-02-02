@@ -1,9 +1,11 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 import AndroidDeps.NAV_VERSION
 
 
 object BuildDeps {
-    private const val JACKSON_VERSION = "jackson_version"
-    private const val PUBLISHER_VERSION = "publisher_version"
+    const val JACKSON_VERSION = "jackson_version"
+    const val PUBLISHER_VERSION = "publisher_version"
     const val KOTLIN_VERSION = "kotlin_version"
 
     @JvmStatic
