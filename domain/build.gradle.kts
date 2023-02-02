@@ -15,4 +15,3 @@ java {
     sourceCompatibility = VERSION_1_8
     targetCompatibility = VERSION_11
 }
-

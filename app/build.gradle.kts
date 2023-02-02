@@ -23,7 +23,6 @@ dependencies {
     androidDependencies()
 }
 /*=================================================================================*/
-
 android {
     namespace = appId
     compileSdk = currentCompileSdk
