@@ -24,7 +24,7 @@ object AndroidDeps {
     const val KOTLINX_COROUTINES_VERSION = "kotlinx_coroutines_version"
 
     @JvmStatic
-    val kapts: Map<String, String?> by lazy {
+    val kaptDeps: Map<String, String?> by lazy {
         mapOf("androidx.room:room-compiler" to ROOM_VERSION)
     }
 
@@ -32,12 +32,12 @@ object AndroidDeps {
     val annotationProcessors: Map<String, String?> by lazy { emptyMap() }
 
     @JvmStatic
-    val testAnnotationProcessors: Map<String, String?> by lazy {
+    val testAnnotationProcessorDeps: Map<String, String?> by lazy {
         mapOf("androidx.room:room-compiler" to ROOM_VERSION)
     }
 
     @JvmStatic
-    val implementations: Map<String, String?> by lazy {
+    val deps: Map<String, String?> by lazy {
         mapOf(
             "androidx.core:core-ktx" to ANDROIDX_CORE_VERSION,
             "androidx.appcompat:appcompat" to APP_COMPAT_VERSION,
@@ -65,7 +65,7 @@ object AndroidDeps {
     }
 
     @JvmStatic
-    val androidTestImplementations: Map<String, String?> by lazy {
+    val androidTestDeps: Map<String, String?> by lazy {
         mapOf(
             "org.jetbrains.kotlin:kotlin-test" to BLANK,
             "org.jetbrains.kotlin:kotlin-test" to BLANK,
@@ -82,7 +82,7 @@ object AndroidDeps {
     }
 
     @JvmStatic
-    val testImplementations by lazy {
+    val testDeps by lazy {
         mapOf<String, String?>(
             "org.mockito.kotlin:mockito-kotlin" to MOCKITO_KOTLIN_VERSION,
             "org.mockito.kotlin:mockito-kotlin" to MOCKITO_KOTLIN_VERSION,

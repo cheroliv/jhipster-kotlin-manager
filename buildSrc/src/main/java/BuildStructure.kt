@@ -1,10 +1,10 @@
 import AndroidDeps.androidTestImplementation
-import AndroidDeps.androidTestImplementations
+import AndroidDeps.androidTestDeps
 import AndroidDeps.annotationProcessors
-import AndroidDeps.implementations
-import AndroidDeps.kapts
-import AndroidDeps.testAnnotationProcessors
-import AndroidDeps.testImplementations
+import AndroidDeps.deps
+import AndroidDeps.kaptDeps
+import AndroidDeps.testAnnotationProcessorDeps
+import AndroidDeps.testDeps
 import Constants.JDL_FILE
 import Constants.WEBAPP
 import Constants.WEBAPP_SRC
@@ -65,19 +65,19 @@ object BuildStructure {
     /*=================================================================================*/
     @JvmStatic
     fun Project.androidDependencies() {
-        implementations.forEach {
+        deps.forEach {
             dependencies.add(
                 implementation,
                 dependency(it)
             )
         }
-        testImplementations.forEach {
+        testDeps.forEach {
             dependencies.add(
                 testImplementation,
                 dependency(it)
             )
         }
-        androidTestImplementations.forEach {
+        androidTestDeps.forEach {
             when (it.key) {
                 "androidx.test.espresso:espresso-core" -> dependencies.add(
                     androidTestImplementation,
@@ -94,14 +94,14 @@ object BuildStructure {
                 )
             }
         }
-        kapts.forEach { dependencies.add(kapt, dependency(it)) }
+        kaptDeps.forEach { dependencies.add(kapt, dependency(it)) }
         annotationProcessors.forEach {
             dependencies.add(
                 annotationProcessor,
                 dependency(it)
             )
         }
-        testAnnotationProcessors.forEach {
+        testAnnotationProcessorDeps.forEach {
             dependencies.add(
                 testAnnotationProcessor,
                 dependency(it)
