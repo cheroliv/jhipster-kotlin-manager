@@ -17,6 +17,11 @@ import org.gradle.kotlin.dsl.exclude
 import java.util.StringTokenizer
 
 /*=================================================================================*/
+fun Project.webAppSrc():List<String> =
+    StringTokenizer(properties[WEBAPP_SRC].toString(), ",")
+        .toList()
+        .map { it.toString() }
+/*=================================================================================*/
 fun Copy.move(
     path: String,
     from: String,
@@ -40,13 +45,11 @@ fun Copy.move(
     into(project.layout.projectDirectory.dir(into))
 }
 /*=================================================================================*/
-
 fun Map.Entry<String, String?>.toDependency(project: Project) = key + when (value) {
     "" -> ""
     else -> ":${project.properties[value]}"
 }
 /*=================================================================================*/
-
 fun Project.androidDependencies() {
     implementations.forEach { dependencies.add(DomainDeps.implementation, it.toDependency(this)) }
     testImplementations.forEach {
@@ -80,9 +83,4 @@ fun Project.androidDependencies() {
         )
     }
 }
-/*=================================================================================*/
-fun Project.webAppSrc():List<String> =
-    StringTokenizer(properties[WEBAPP_SRC].toString(), ",")
-        .toList()
-        .map { it.toString() }
 /*=================================================================================*/
