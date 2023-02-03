@@ -26,8 +26,8 @@ buildscript {
 }
 /*=================================================================================*/
 plugins {
-    kotlin("android") version Versions.kotlin_version apply false
     kotlin("jvm") version Versions.kotlin_version apply false
+    kotlin("android") version Versions.kotlin_version apply false
     id("com.android.application") version Versions.android_app_version apply false
     id("com.android.library") version Versions.android_lib_version apply false
 }
@@ -118,6 +118,9 @@ tasks.register("jdl") {
     //export
 //    dependsOn("exportWebappSource")
     doFirst {
+        //TODO: backup webapp dans webapp.tar avant export
+    }
+    doLast {
         projectDir.displayJdl()
         //cmdline
     }
