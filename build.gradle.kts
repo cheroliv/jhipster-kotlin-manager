@@ -26,10 +26,10 @@ buildscript {
 }
 /*=================================================================================*/
 plugins {
+    kotlin("android") version Versions.kotlin_version apply false
+    kotlin("jvm") version Versions.kotlin_version apply false
     id("com.android.application") version Versions.android_app_version apply false
     id("com.android.library") version Versions.android_lib_version apply false
-    id("org.jetbrains.kotlin.android") version Versions.kotlin_version apply false
-    id("org.jetbrains.kotlin.jvm") version Versions.kotlin_version apply false
 }
 /*=================================================================================*/
 tasks.register<Delete>("clean") {
