@@ -3,10 +3,10 @@ import BuildDeps.buildDependencies
 import BuildTools.dependency
 import BuildTools.displayJdl
 import BuildTools.move
+import BuildTools.sep
 import BuildTools.webAppSrc
 import Constants.WEBAPP
 import Constants.WEBAPP_SRC
-import BuildTools.sep
 import DomainDeps.domainDeps
 import DomainDeps.domainTestDeps
 
@@ -79,6 +79,31 @@ tasks.register<Copy>("syncWebappSource") {
     doFirst {
         webAppSrc
             .forEach { move(it, WEBAPP_SRC, WEBAPP) }
+    }
+}
+/*=================================================================================*/
+tasks.register<Tar>("tarWebapp") {
+    dependsOn("moveWebappNpm")
+    group = WEBAPP
+    description = "tar webapp"
+    doFirst {
+        archiveFileName.set("webapp.tar")
+        destinationDirectory.set(File("${rootDir.absolutePath}$sep$WEBAPP_SRC"))
+        setOf(
+            "build",
+            "target",
+            "node_modules"
+        ).forEach { dir -> exclude { it.name == dir } }
+    }
+}
+/*=================================================================================*/
+tasks.register("moveWebappNpm") {
+    doLast {
+        ant.withGroovyBuilder {
+            "move"(
+                "webapp/node_modules" to "$rootDir/webapp-src/node_modules",
+            )
+        }
     }
 }
 /*=================================================================================*/
