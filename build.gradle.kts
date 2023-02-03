@@ -45,29 +45,37 @@ project.tasks.register<GradleStop>("gradleStop") {
 tasks.register<GradleBuild>("serve") {
     group = WEBAPP
     description = "launch ceelo backend web application"
-    dir = File(buildString {
-        append(rootDir.path)
-        append(sep)
-        append(WEBAPP)
-    })
-    tasks = listOf("bootRun")
+    doFirst {
+        dir = File(buildString {
+            append(rootDir.path)
+            append(sep)
+            append(WEBAPP)
+        })
+    }
+    doLast {
+        tasks = listOf("bootRun")
+    }
 }
 /*=================================================================================*/
 tasks.register<GradleBuild>("checkWebapp") {
     group = WEBAPP
     description = "launch ceelo backend web application"
-    dir = File(buildString {
-        append(rootDir.path)
-        append(sep)
-        append(WEBAPP)
-    })
-    tasks = listOf("check")
+    doFirst {
+        dir = File(buildString {
+            append(rootDir.path)
+            append(sep)
+            append(WEBAPP)
+        })
+    }
+    doLast {
+        tasks = listOf("check")
+    }
 }
 /*=================================================================================*/
 tasks.register<Copy>("exportWebappSource") {
     group = WEBAPP
     description = "copy sources from webapp into webapp-src"
-    doFirst {
+    doLast {
         webAppSrc
             .forEach { move(it, WEBAPP, WEBAPP_SRC) }
     }
@@ -76,7 +84,7 @@ tasks.register<Copy>("exportWebappSource") {
 tasks.register<Copy>("syncWebappSource") {
     group = WEBAPP
     description = "copy sources from webapp-src into webapp"
-    doFirst {
+    doLast {
         webAppSrc
             .forEach { move(it, WEBAPP_SRC, WEBAPP) }
     }
@@ -86,7 +94,7 @@ tasks.register<Tar>("tarWebapp") {
     dependsOn("moveWebappNpm")
     group = WEBAPP
     description = "tar webapp"
-    doFirst {
+    doLast {
         archiveFileName.set("webapp.tar")
         destinationDirectory.set(File("${rootDir.absolutePath}$sep$WEBAPP_SRC"))
         setOf(
@@ -97,7 +105,7 @@ tasks.register<Tar>("tarWebapp") {
     }
 }
 /*=================================================================================*/
-tasks.register("moveWebappNpm") {
+tasks.register("moveWebappNode") {
     doLast {
         ant.withGroovyBuilder {
             "move"(
@@ -110,7 +118,7 @@ tasks.register("moveWebappNpm") {
 tasks.register("printWebappSrc") {
     description = "print webapp sources"
     group = WEBAPP
-    doFirst {
+    doLast {
         webAppSrc
             .reduce { acc, s -> "$acc\n\t$s" }
             .run { println("$WEBAPP_SRC: $this\n") }
@@ -137,6 +145,11 @@ tasks.register("printDependencies") {
     }
 }
 /*=================================================================================*/
+val sqlQueries="""SELECT * FROM JHI_AUTHORITY;
+SELECT * FROM JHI_USER;
+SELECT * FROM JHI_USER_AUTHORITY;
+SELECT * FROM INFORMATION_SCHEMA.COLUMNS ;"""
+
 tasks.register("jdl") {
     group = WEBAPP
     description = "launch jdl source generator"
