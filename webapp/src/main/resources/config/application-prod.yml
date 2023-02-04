@@ -17,7 +17,7 @@ logging:
   level:
     ROOT: INFO
     tech.jhipster: INFO
-    com.cheroliv.ceelo.webapp: INFO
+    ceelo.webapp: INFO
 
 management:
   metrics:
