@@ -87,7 +87,7 @@ object BuildTools {
 
     /*=================================================================================*/
     @JvmStatic
-    private val Project.jdl: File
+    private val Project.jdlFile: File
         get() = File(buildString {
             listOf(
                 rootDir.path,
@@ -100,7 +100,7 @@ object BuildTools {
     /*=================================================================================*/
     @JvmStatic
     fun Project.jdl():Unit{
-        jdl.apply {
+        jdlFile.apply {
             when {
                 exists() -> {
                     println(path)
