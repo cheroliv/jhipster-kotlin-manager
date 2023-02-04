@@ -92,7 +92,7 @@ eclipse {
 defaultTasks "bootRun"
 
 springBoot {
-    mainClass = "com.cheroliv.webapp.ceelo.CeeloApp"
+    mainClass = "ceelo.webapp.CeeloApp"
 }
 
 test {

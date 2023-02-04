@@ -101,7 +101,7 @@ object BuildTools {
     /*=================================================================================*/
     @JvmStatic
     fun Project.jdl(): Unit {
-        jdlFile.apply {
+        jdlFile.run {
             when {
                 exists() -> {
                     println(path)
