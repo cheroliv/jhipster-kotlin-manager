@@ -163,12 +163,6 @@ repositories {
     // mavenLocal()
     mavenCentral()
     //jhipster-needle-gradle-repositories - JHipster will add additional repositories
-    google()
-    maven { url "https://repo.spring.io/milestone" }
-    maven { url "https://repo.spring.io/snapshot" }
-    maven { url "https://maven.pkg.jetbrains.space/kotlin/p/kotlin/bootstrap/" }
-    maven { url "https://maven.pkg.jetbrains.space/public/p/compose/dev" }
-    maven { url "https://jitpack.io" }
 }
 
 dependencies {

@@ -1,2 +1,5 @@
 #!/usr/bin/env bash
-./gradlew -q gradleStop; clear; ./gradlew -q serve;
+
+./gradlew -q gradleStop;
+clear;
+./gradlew -q serve;

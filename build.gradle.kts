@@ -153,14 +153,16 @@ SELECT * FROM INFORMATION_SCHEMA.COLUMNS ;"""
 tasks.register("jdl") {
     group = WEBAPP
     description = "launch jdl source generator"
-    //export
-//    dependsOn("exportWebappSource")
+    dependsOn("exportWebappSource").run { println("export")}
     doFirst {
-        //TODO: backup webapp dans webapp.tar avant export
+        println("TODO: backup webapp dans webapp.tar avant export")
     }
     doLast {
-        projectDir.displayJdl()
-        //cmdline
+//        projectDir.displayJdl()
+//        rootDir.displayJdl()
+        println("cmdline")
+        println(rootDir.path)
+//        rootDir.
     }
     //sync
 //    finalizedBy("syncWebappSource")
