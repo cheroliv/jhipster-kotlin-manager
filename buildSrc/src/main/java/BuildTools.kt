@@ -43,6 +43,7 @@ object BuildTools {
                 .projectDirectory
                 .dir(from)
                 .dir(path)
+
             else -> project
                 .layout
                 .projectDirectory
@@ -77,6 +78,7 @@ object BuildTools {
                         dependencies.add(module.key, dependency(it)) {
                             exclude("com.android.support", "support-annotations")
                         }
+
                     else -> dependencies.add(module.key, dependency(it))
                 }
             }
@@ -85,13 +87,23 @@ object BuildTools {
 
     /*=================================================================================*/
     @JvmStatic
-    fun File.displayJdl() {
-        listFiles()
-            ?.first { it.name == WEBAPP }
-            ?.listFiles()
-            ?.first { it.name == JDL_FILE }
-            ?.readText(UTF_8)
-            .run { println("$WEBAPP$sep$JDL_FILE:\n$this") }
-    }
+    val Project.jdl: File
+        get() = File(buildString {
+            listOf(
+                rootDir.path,
+                sep,
+                WEBAPP,
+                sep,
+                JDL_FILE,
+            ).forEach { append(it) }
+        }).apply {
+            when {
+                exists() -> {
+                    println(path)
+                    println(readText(UTF_8))
+                }
+                else -> println("jdl file does not exists: $path")
+            }
+        }
 }
 /*=================================================================================*/

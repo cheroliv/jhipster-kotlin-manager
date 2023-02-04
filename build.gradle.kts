@@ -1,7 +1,7 @@
 import AppDeps.appModules
 import BuildDeps.buildDependencies
 import BuildTools.dependency
-import BuildTools.displayJdl
+import BuildTools.jdl
 import BuildTools.move
 import BuildTools.sep
 import BuildTools.webAppSrc
@@ -153,16 +153,13 @@ SELECT * FROM INFORMATION_SCHEMA.COLUMNS ;"""
 tasks.register("jdl") {
     group = WEBAPP
     description = "launch jdl source generator"
-    dependsOn("exportWebappSource").run { println("export")}
+//    dependsOn("exportWebappSource").run { println("export")}
     doFirst {
         println("TODO: backup webapp dans webapp.tar avant export")
     }
     doLast {
-//        projectDir.displayJdl()
-//        rootDir.displayJdl()
         println("cmdline")
-        println(rootDir.path)
-//        rootDir.
+        jdl
     }
     //sync
 //    finalizedBy("syncWebappSource")
