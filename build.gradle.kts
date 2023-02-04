@@ -159,7 +159,7 @@ tasks.register("jdl") {
     }
     doLast {
         println("cmdline")
-        jdl
+        jdl()
     }
     //sync
 //    finalizedBy("syncWebappSource")
