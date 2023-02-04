@@ -87,7 +87,7 @@ object BuildTools {
 
     /*=================================================================================*/
     @JvmStatic
-    private val Project.jdlFile: File
+    val Project.jdlFile
         get() = File(buildString {
             listOf(
                 rootDir.path,
@@ -101,26 +101,13 @@ object BuildTools {
     /*=================================================================================*/
     @JvmStatic
     fun Project.jdl(): Unit {
-        // copie
         jdlFile.apply {
             when {
                 exists() -> {
                     println(path)
                     println(readText(UTF_8))
-                    /*
-                    //    dependsOn("exportWebappSource").run { println("export")}
-                        doFirst {
-                            println("TODO: backup webapp dans webapp.tar avant export")
-                        }
-                        doLast {
-                            println("cmdline")
-                            jdl()
-                        }
-                        //sync
-                    //    finalizedBy("syncWebappSource")
-                    */
+                    println("cmdline")
                 }
-
                 else -> println("jdl file does not exists: $path")
             }
         }

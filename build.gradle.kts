@@ -72,9 +72,20 @@ tasks.register<GradleBuild>("checkWebapp") {
     }
 }
 /*=================================================================================*/
+tasks.register("moveWebappNode") {
+    doLast {
+        ant.withGroovyBuilder {
+            "move"(
+                "webapp/node_modules" to "$rootDir/webapp-src/node_modules",
+            )
+        }
+    }
+}
+/*=================================================================================*/
 tasks.register<Copy>("exportWebappSource") {
     group = WEBAPP
     description = "copy sources from webapp into webapp-src"
+    dependsOn("moveWebappNode")
     doLast {
         webAppSrc
             .forEach { move(it, WEBAPP, WEBAPP_SRC) }
@@ -102,16 +113,6 @@ tasks.register<Tar>("tarWebapp") {
             "target",
             "node_modules"
         ).forEach { dir -> exclude { it.name == dir } }
-    }
-}
-/*=================================================================================*/
-tasks.register("moveWebappNode") {
-    doLast {
-        ant.withGroovyBuilder {
-            "move"(
-                "webapp/node_modules" to "$rootDir/webapp-src/node_modules",
-            )
-        }
     }
 }
 /*=================================================================================*/
@@ -150,18 +151,20 @@ SELECT * FROM JHI_USER;
 SELECT * FROM JHI_USER_AUTHORITY;
 SELECT * FROM INFORMATION_SCHEMA.COLUMNS ;"""
 
-tasks.register("jdl") {
+tasks.register<Exec>("jdl") {
     group = WEBAPP
     description = "launch jdl source generator"
-//    dependsOn("exportWebappSource").run { println("export")}
-    doFirst {
-        println("TODO: backup webapp dans webapp.tar avant export")
-    }
+//    dependsOn("exportWebappSource","nvmAdjust").run { println("export")}
+
     doLast {
+        //delete webapp
+        //create webapp
+        //copier ceelo.jdl
+        //copier yo-rc.json?
         println("cmdline")
+        commandLine("jhipster",)
         jdl()
     }
-    //sync
 //    finalizedBy("syncWebappSource")
 }
 /*=================================================================================*/
