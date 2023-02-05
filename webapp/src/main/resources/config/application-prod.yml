@@ -17,7 +17,7 @@ logging:
   level:
     ROOT: INFO
     tech.jhipster: INFO
-    ceelo.webapp: INFO
+    ceelo: INFO
 
 management:
   metrics:
@@ -92,7 +92,7 @@ jhipster:
         # - In the JHipster Registry (which includes a Spring Cloud Config server)
         # - In a separate `application-prod.yml` file, in the same folder as your executable JAR file
         # - In the `JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET` environment variable
-        base64-secret: YmJjNTU1ZGE2ZTMxNTdiNmJmNmE2MDI5NGQ2NTczNzNmN2MzZjM4MGQ1YjY1Yzk5ZTlmN2M4ZDBjYzA2ZTdhY2Y4M2FkZmQ0OTBkMzZkZmIzMDUyZDI4NWZjZWZiYzVkMjE3ZjgzYTA0NmJjZGI5ZjA3YWIwNWRiN2Q5MmQwNTA=
+        base64-secret: MDFjMDkzNGFiNjdkNWY0ZTg2OGZlOTAzNmM5MjAyNGNiMWFjNDdkNjA0ZDMxNTI4YTg4MWYxMDUwNWUzNWUyZTVlODA3NDRhZDdiZGY2YjJhZTY4M2JhZGE2MTVkOWRlYTE1NzMyZTQ1MGIxNTIzYTU0ZWFjNDljNWI4NGMyMDY=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000

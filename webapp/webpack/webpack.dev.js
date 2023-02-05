@@ -5,6 +5,7 @@ const SimpleProgressWebpackPlugin = require('simple-progress-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 const path = require('path');
 const sass = require('sass');
+const postcssRTLCSS = require('postcss-rtlcss');
 
 const utils = require('./utils.js');
 const commonConfig = require('./webpack.common.js');
@@ -33,6 +34,11 @@ module.exports = async options =>
             'css-loader',
             {
               loader: 'postcss-loader',
+              options: {
+                postcssOptions: {
+                  plugins: [postcssRTLCSS()],
+                },
+              },
             },
             {
               loader: 'sass-loader',

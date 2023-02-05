@@ -73,7 +73,7 @@ tasks.register<Exec>("jdl") {
 //copier yo-rc.json?
     group = WEBAPP
     description = "launch jdl source generator"
-    standardOutput = java.io.ByteArrayOutputStream()
+    standardOutput = ByteArrayOutputStream()
     jdlFile.run jdl@{
         workingDir = this@jdl.parentFile
         commandLine(

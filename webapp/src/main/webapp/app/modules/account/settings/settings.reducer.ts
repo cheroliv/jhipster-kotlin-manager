@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { Storage } from 'react-jhipster';
+import { isRTL } from 'app/config/translation';
 import { getSession } from 'app/shared/reducers/authentication';
 import { AppThunk } from 'app/config/store';
 import { serializeAxiosError } from 'app/shared/reducers/reducer.utils';
@@ -24,6 +25,8 @@ export const saveAccountSettings: (account: any) => AppThunk = account => async 
   if (Storage.session.get(`locale`)) {
     Storage.session.remove(`locale`);
   }
+
+  document.querySelector('html').setAttribute('dir', isRTL(account.langKey) ? 'rtl' : 'ltr');
 
   dispatch(getSession());
 };

@@ -1,12 +1,12 @@
+entity Player {
+    id UUID
+    login String required
+}
+
 entity Game {
   id UUID
   winnerPlayerId UUID required
   date LocalDate required
-}
-
-entity Player {
-    id UUID
-    login String required
 }
 
 entity DicesRun {

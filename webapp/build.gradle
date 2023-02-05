@@ -24,7 +24,7 @@ plugins {
     //jhipster-needle-gradle-plugins - JHipster will add additional gradle plugins here
 }
 
-group = "ceelo.webapp"
+group = "ceelo"
 version = "0.0.1-SNAPSHOT"
 
 description = ""
@@ -80,7 +80,7 @@ eclipse {
 defaultTasks "bootRun"
 
 springBoot {
-    mainClass = "ceelo.webapp.CeeloApp"
+    mainClass = "ceelo.CeeloApp"
 }
 
 test {

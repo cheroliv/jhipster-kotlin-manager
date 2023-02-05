@@ -5,6 +5,7 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const sass = require('sass');
+const postcssRTLCSS = require('postcss-rtlcss');
 
 const utils = require('./utils.js');
 const commonConfig = require('./webpack.common.js');
@@ -37,6 +38,11 @@ module.exports = async () =>
             'css-loader',
             {
               loader: 'postcss-loader',
+              options: {
+                postcssOptions: {
+                  plugins: [postcssRTLCSS()],
+                },
+              },
             },
             {
               loader: 'sass-loader',
