@@ -154,20 +154,23 @@ SELECT * FROM JHI_USER_AUTHORITY;
 SELECT * FROM INFORMATION_SCHEMA.COLUMNS ;"""
 
 tasks.register<Exec>("jdl") {
+    //delete webapp
+    //create webapp
+    //copier ceelo.jdl
+    //copier yo-rc.json?
     group = WEBAPP
     description = "launch jdl source generator"
-//    dependsOn("exportWebappSource","nvmAdjust").run { println("export")}
     standardOutput = ByteArrayOutputStream()
-    workingDir = jdlFile.parentFile
-    commandLine("jhipster", "jdl", jdlFile.name, "--force")
-
-    doLast {
-        //delete webapp
-        //create webapp
-        //copier ceelo.jdl
-        //copier yo-rc.json?
-//        jdl()
+    jdlFile.run jdl@{
+        workingDir = this@jdl.parentFile
+        commandLine(
+            "jhipster",
+            "jdl",
+            this@jdl.name,
+            "--force"
+        )
     }
+//    dependsOn("exportWebappSource","nvmAdjust")
 //    finalizedBy("syncWebappSource")
 }
 /*=================================================================================*/

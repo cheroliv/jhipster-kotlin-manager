@@ -96,12 +96,7 @@ object BuildTools {
                 sep,
                 JDL_FILE,
             ).forEach { append(it) }
-        })
-
-    /*=================================================================================*/
-    @JvmStatic
-    fun Project.jdl(): Unit {
-        jdlFile.run {
+        }).apply {
             when {
                 exists() -> {
                     println(path)
@@ -111,6 +106,5 @@ object BuildTools {
                 else -> println("jdl file does not exists: $path")
             }
         }
-    }
     /*=================================================================================*/
 }
