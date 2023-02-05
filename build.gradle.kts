@@ -148,11 +148,6 @@ tasks.register("printDependencies") {
     }
 }
 /*=================================================================================*/
-val sqlQueries = """SELECT * FROM JHI_AUTHORITY;
-SELECT * FROM JHI_USER;
-SELECT * FROM JHI_USER_AUTHORITY;
-SELECT * FROM INFORMATION_SCHEMA.COLUMNS ;"""
-
 tasks.register<Exec>("jdl") {
     //delete webapp
     //create webapp
