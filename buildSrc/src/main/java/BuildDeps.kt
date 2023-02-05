@@ -8,7 +8,7 @@ object BuildDeps {
     const val KOTLIN_VERSION = "kotlin_version"
 
     @JvmStatic
-    val buildDependencies by lazy {
+    val buildDependencies: Map<String, String> by lazy {
         mapOf(
             "org.jetbrains.kotlin:kotlin-gradle-plugin" to KOTLIN_VERSION,
             "androidx.navigation:navigation-safe-args-gradle-plugin" to NAV_VERSION,

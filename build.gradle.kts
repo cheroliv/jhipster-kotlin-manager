@@ -1,16 +1,14 @@
 import AppDeps.appModules
 import BuildDeps.buildDependencies
 import BuildTools.dependency
-import BuildTools.move
-import BuildTools.sep
+import BuildTools.jdlFile
 import BuildTools.webAppSrc
-import Constants.JDL_FILE
 import Constants.WEBAPP
 import Constants.WEBAPP_SRC
 import DomainDeps.domainDeps
 import DomainDeps.domainTestDeps
 import java.io.ByteArrayOutputStream
-import BuildTools.jdlFile
+import java.lang.System.getProperty
 
 
 /*=================================================================================*/
@@ -40,122 +38,42 @@ tasks.register<Delete>("clean") {
     doLast { delete(rootProject.buildDir) }
 }
 /*=================================================================================*/
-project.tasks.register<GradleStop>("gradleStop") {
+project.tasks.register<Exec>("gradleStop") {
+    group = WEBAPP
+    description = "Stop any gradle daemons running!" + "\n" +
+            "use system gradle to launch gradle --stop task, to kill webapp process"
+    workingDir = rootDir
+    standardOutput = ByteArrayOutputStream()
+    @Suppress("LeakingThis")
+    commandLine(buildString {
+        append(getProperty("user.home"))
+        append("/.sdkman/candidates/gradle/current/bin/gradle")
+    }, "--stop")
     doLast { logger.info(standardOutput.toString()) }
 }
 /*=================================================================================*/
 tasks.register<GradleBuild>("serve") {
     group = WEBAPP
     description = "launch ceelo backend web application"
-    doFirst {
-        dir = File(buildString {
-            append(rootDir.path)
-            append(sep)
-            append(WEBAPP)
-        })
-    }
-    doLast {
-        tasks = listOf("bootRun")
-    }
+    dir = jdlFile.parentFile
+    tasks = listOf(":bootRun")
 }
 /*=================================================================================*/
 tasks.register<GradleBuild>("checkWebapp") {
     group = WEBAPP
     description = "launch ceelo backend web application"
-    doFirst {
-        dir = File(buildString {
-            append(rootDir.path)
-            append(sep)
-            append(WEBAPP)
-        })
-    }
-    doLast {
-        tasks = listOf("check")
-    }
-}
-/*=================================================================================*/
-tasks.register("moveWebappNode") {
-    doLast {
-        ant.withGroovyBuilder {
-            "move"(
-                "webapp/node_modules" to "$rootDir/webapp-src/node_modules",
-            )
-        }
-    }
-}
-/*=================================================================================*/
-tasks.register<Copy>("exportWebappSource") {
-    group = WEBAPP
-    description = "copy sources from webapp into webapp-src"
-    dependsOn("moveWebappNode")
-    doLast {
-        webAppSrc
-            .forEach { move(it, WEBAPP, WEBAPP_SRC) }
-    }
-}
-/*=================================================================================*/
-tasks.register<Copy>("syncWebappSource") {
-    group = WEBAPP
-    description = "copy sources from webapp-src into webapp"
-    doLast {
-        webAppSrc
-            .forEach { move(it, WEBAPP_SRC, WEBAPP) }
-    }
-}
-/*=================================================================================*/
-tasks.register<Tar>("tarWebapp") {
-    dependsOn("moveWebappNpm")
-    group = WEBAPP
-    description = "tar webapp"
-    doLast {
-        archiveFileName.set("webapp.tar")
-        destinationDirectory.set(File("${rootDir.absolutePath}$sep$WEBAPP_SRC"))
-        setOf(
-            "build",
-            "target",
-            "node_modules"
-        ).forEach { dir -> exclude { it.name == dir } }
-    }
-}
-/*=================================================================================*/
-tasks.register("printWebappSrc") {
-    description = "print webapp sources"
-    group = WEBAPP
-    doLast {
-        webAppSrc
-            .reduce { acc, s -> "$acc\n\t$s" }
-            .run { println("$WEBAPP_SRC: $this\n") }
-    }
-}
-/*=================================================================================*/
-tasks.register("printDependencies") {
-    description = "print project dependencies"
-    group = WEBAPP
-    doFirst { println("${project.name} dependencies") }
-    doLast {
-        mutableMapOf(
-            "buildDependencies" to buildDependencies,
-            "domainDeps" to domainDeps,
-            "domainTestDeps" to domainTestDeps,
-        ).apply { putAll(appModules) }
-            .forEach { module ->
-                if (module.value.isNotEmpty()) {
-                    println("${module.key}:")
-                    module.value.forEach { println(dependency(it)) }
-                    println()
-                }
-            }
-    }
+    dir = jdlFile.parentFile
+    tasks = listOf(":check")
 }
 /*=================================================================================*/
 tasks.register<Exec>("jdl") {
-    //delete webapp
-    //create webapp
-    //copier ceelo.jdl
-    //copier yo-rc.json?
+//delete webapp
+//create webapp
+//copier ceelo.jdl
+//copier yo-rc.json?
     group = WEBAPP
     description = "launch jdl source generator"
-    standardOutput = ByteArrayOutputStream()
+    standardOutput = java.io.ByteArrayOutputStream()
     jdlFile.run jdl@{
         workingDir = this@jdl.parentFile
         commandLine(
@@ -165,7 +83,10 @@ tasks.register<Exec>("jdl") {
             "--force"
         )
     }
-//    dependsOn("exportWebappSource","nvmAdjust")
-//    finalizedBy("syncWebappSource")
+//   doFirst { dependsOn("exportWebappSource","nvmAdjust")
+//   webAppSrc.forEach { copysrc(it, WEBAPP, WEBAPP_SRC) }}
+//   doLast { finalizedBy("syncWebappSource")
+//   webAppSrc.forEach { copysrc(it, WEBAPP_SRC, WEBAPP) }}
 }
+
 /*=================================================================================*/

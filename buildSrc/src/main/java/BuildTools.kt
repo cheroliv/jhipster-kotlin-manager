@@ -27,7 +27,7 @@ object BuildTools {
 
     /*=================================================================================*/
     @JvmStatic
-    fun Copy.move(
+    fun Copy.copysrc(
         path: String,
         from: String,
         into: String
@@ -99,9 +99,9 @@ object BuildTools {
         }).apply {
             when {
                 exists() -> {
-                    println(path)
-                    println(readText(UTF_8))
-                    println("cmdline")
+//                    println(path)
+//                    println(readText(UTF_8))
+//                    println("cmdline")
                 }
                 else -> println("jdl file does not exists: $path")
             }
