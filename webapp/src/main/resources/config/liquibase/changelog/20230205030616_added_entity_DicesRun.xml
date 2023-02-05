@@ -9,7 +9,7 @@
     <!--
         Added the entity DicesRun.
     -->
-    <changeSet id="20230205011839-1" author="jhipster">
+    <changeSet id="20230205030616-1" author="jhipster">
         <createTable tableName="dices_run">
             <column name="id" type="${uuidType}">
                 <constraints primaryKey="true" nullable="false"/>
@@ -43,7 +43,7 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20230205011839-1-data" author="jhipster" context="faker">
+    <changeSet id="20230205030616-1-data" author="jhipster" context="faker">
         <loadData
                   file="config/liquibase/fake-data/dices_run.csv"
                   separator=";"

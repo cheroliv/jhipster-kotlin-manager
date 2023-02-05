@@ -4,7 +4,6 @@ buildscript {
     }
     dependencies {
         //jhipster-needle-gradle-buildscript-dependency - JHipster will add additional gradle build script plugins here
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0")
     }
 }
 
@@ -225,23 +224,6 @@ dependencies {
         }
     }
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
-    //Kotlin lib: jdk8, reflexion, coroutines
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinx_serialization_json_version")
-    // Kotlin Tests
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testImplementation("io.projectreactor:reactor-test")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:$mockito_kotlin_version")
-    // Mocking
-    testImplementation("io.mockk:mockk:$mockk_version")
-    testImplementation("com.github.tomakehurst:wiremock-jre8:$wiremock_version")
-    testImplementation("com.ninja-squad:springmockk:$springmockk_version")
-    //jackson mapping (json/xml)
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 }
 
 if (project.hasProperty("gae")) {
