@@ -151,7 +151,7 @@ SELECT * FROM JHI_USER;
 SELECT * FROM JHI_USER_AUTHORITY;
 SELECT * FROM INFORMATION_SCHEMA.COLUMNS ;"""
 
-tasks.register<Exec>("jdl") {
+tasks.register<Exec>("jhipster") {
     group = WEBAPP
     description = "launch jdl source generator"
 //    dependsOn("exportWebappSource","nvmAdjust").run { println("export")}
@@ -162,7 +162,7 @@ tasks.register<Exec>("jdl") {
         //copier ceelo.jdl
         //copier yo-rc.json?
         println("cmdline")
-        commandLine("jhipster",)
+        // commandLine("jhipster")
         jdl()
     }
 //    finalizedBy("syncWebappSource")
