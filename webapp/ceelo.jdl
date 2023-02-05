@@ -1,0 +1,19 @@
+entity Game {
+  id UUID
+  winnerPlayerId UUID
+  date LocaleDate
+}
+
+entity Player {
+    id UUID
+    login String
+}
+
+entity DicesRun {
+    id UUID
+    gameId UUID
+    playerId UUID
+    firstDice Integer
+    middleDice Integer
+    lastDice Integer
+}
