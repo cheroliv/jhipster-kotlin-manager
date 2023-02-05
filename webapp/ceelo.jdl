@@ -1,19 +1,19 @@
 entity Game {
   id UUID
-  winnerPlayerId UUID
-  date LocaleDate
+  winnerPlayerId UUID required
+  date LocalDate required
 }
 
 entity Player {
     id UUID
-    login String
+    login String required
 }
 
 entity DicesRun {
     id UUID
-    gameId UUID
-    playerId UUID
-    firstDice Integer
-    middleDice Integer
-    lastDice Integer
+    gameId UUID required
+    playerId UUID required
+    firstDice Integer min(1) max(6)
+    middleDice Integer min(1) max(6)
+    lastDice Integer min(1) max(6)
 }

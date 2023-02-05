@@ -1,0 +1,28 @@
+{
+  "ceeloApp": {
+    "dicesRun": {
+      "home": {
+        "title": "DicesRuns",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Dices Run",
+        "createOrEditLabel": "Créer ou éditer un Dices Run",
+        "notFound": "Aucun Dices Run trouvé"
+      },
+      "created": "Un nouveau Dices Run a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Dices Run avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Dices Run avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Dices Run {{ id }} ?"
+      },
+      "detail": {
+        "title": "Dices Run"
+      },
+      "id": "Id",
+      "gameId": "Game Id",
+      "playerId": "Player Id",
+      "firstDice": "First Dice",
+      "middleDice": "Middle Dice",
+      "lastDice": "Last Dice"
+    }
+  }
+}

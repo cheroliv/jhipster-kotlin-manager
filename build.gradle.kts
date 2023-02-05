@@ -1,14 +1,16 @@
 import AppDeps.appModules
 import BuildDeps.buildDependencies
 import BuildTools.dependency
-import BuildTools.jdl
 import BuildTools.move
 import BuildTools.sep
 import BuildTools.webAppSrc
+import Constants.JDL_FILE
 import Constants.WEBAPP
 import Constants.WEBAPP_SRC
 import DomainDeps.domainDeps
 import DomainDeps.domainTestDeps
+import java.io.ByteArrayOutputStream
+import BuildTools.jdlFile
 
 
 /*=================================================================================*/
@@ -146,24 +148,25 @@ tasks.register("printDependencies") {
     }
 }
 /*=================================================================================*/
-val sqlQueries="""SELECT * FROM JHI_AUTHORITY;
+val sqlQueries = """SELECT * FROM JHI_AUTHORITY;
 SELECT * FROM JHI_USER;
 SELECT * FROM JHI_USER_AUTHORITY;
 SELECT * FROM INFORMATION_SCHEMA.COLUMNS ;"""
 
-tasks.register<Exec>("jhipster") {
+tasks.register<Exec>("jdl") {
     group = WEBAPP
     description = "launch jdl source generator"
 //    dependsOn("exportWebappSource","nvmAdjust").run { println("export")}
+    standardOutput = ByteArrayOutputStream()
+    workingDir = jdlFile.parentFile
+    commandLine("jhipster", "jdl", jdlFile.name, "--force")
 
     doLast {
         //delete webapp
         //create webapp
         //copier ceelo.jdl
         //copier yo-rc.json?
-        println("cmdline")
-        // commandLine("jhipster")
-        jdl()
+//        jdl()
     }
 //    finalizedBy("syncWebappSource")
 }

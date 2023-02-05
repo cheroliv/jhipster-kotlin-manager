@@ -1,0 +1,51 @@
+{
+  "applications": "*",
+  "changelogDate": "20230205011839",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "dices_run",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "UUID"
+    },
+    {
+      "fieldName": "gameId",
+      "fieldType": "UUID",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "playerId",
+      "fieldType": "UUID",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "firstDice",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "6",
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "middleDice",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "6",
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "lastDice",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["min", "max"],
+      "fieldValidateRulesMax": "6",
+      "fieldValidateRulesMin": "1"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "DicesRun",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}
