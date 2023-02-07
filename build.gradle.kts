@@ -79,3 +79,5 @@ tasks.register<Exec>("jdl") {
 //   webAppSrc.forEach { copysrc(it, WEBAPP_SRC, WEBAPP) }}
 }
 /*=================================================================================*/
+//TODO: task : regenerate project from .yo-rc
+/*=================================================================================*/
