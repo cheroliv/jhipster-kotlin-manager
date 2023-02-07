@@ -24,10 +24,10 @@ sdk i java 17.0.5-tem
 sdk i gradle
 ----
 
-_android-studio_
+_intellij-idea-community_
 [source,bash]
 ----
-sudo snap install android-studio --classic
+sudo snap install intellij-idea-community --classic
 ----
 
 == Rest API & backoffice
