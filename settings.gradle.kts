@@ -16,6 +16,4 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "ceelo"
-include (":app")
-include (":domain")
+rootProject.name = "jhipster-kotlin-manager"

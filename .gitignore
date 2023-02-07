@@ -10,3 +10,5 @@ ceelo.code-workspace
 gradle/wrapper/gradle-wrapper.jar
 /.idea/
 /data/
+webapp.tar
+jhipster-kotlin-manager.code-workspace
